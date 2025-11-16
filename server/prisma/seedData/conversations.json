@@ -1,0 +1,15 @@
+[
+  {
+    "id": "conv_1",
+    "buyerId": "user_2",
+    "sellerId": "user_1",
+    "lastPropertyId": "prop_1",
+    "buyerLastReadAt": "2024-11-15T14:30:00Z",
+    "sellerLastReadAt": "2024-11-15T14:00:00Z",
+    "buyerUnreadCount": 0,
+    "sellerUnreadCount": 1,
+    "lastMessageAt": "2024-11-15T14:30:00Z",
+    "totalMessages": 8,
+    "keepIndefinitely": false
+  }
+]

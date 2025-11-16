@@ -1,0 +1,10 @@
+[
+  {
+    "roleId": "role_user",
+    "permissionId": "perm_properties_create"
+  },
+  {
+    "roleId": "role_admin",
+    "permissionId": "perm_admin_full"
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "wilayaId": "16",
+    "propertyType": "APARTMENT_F3",
+    "transactionType": "SALE",
+    "minPrice": 5000000000,
+    "maxPrice": 10000000000,
+    "searchCount": 342,
+    "lastSearchedAt": "2024-11-15T18:00:00Z",
+    "cacheExpiresAt": "2024-11-15T19:00:00Z",
+    "cacheTTL": 3600
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "search_1",
+    "userId": "user_2",
+    "name": "F3 Alger Centre < 7M DZD",
+    "criteria": {
+      "wilayaId": "16",
+      "propertyType": ["APARTMENT_F3"],
+      "transactionType": "SALE",
+      "maxPrice": 7000000000,
+      "minBedrooms": 2
+    },
+    "notifyByEmail": true,
+    "notifyInApp": true,
+    "isActive": true,
+    "matchCount": 3,
+    "lastMatchedAt": "2024-11-14T08:30:00Z",
+    "lastNotifiedAt": "2024-11-14T08:35:00Z"
+  }
+]

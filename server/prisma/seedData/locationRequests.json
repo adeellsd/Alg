@@ -1,0 +1,14 @@
+[
+  {
+    "propertyId": "prop_1",
+    "requesterId": "user_2",
+    "ownerId": "user_1",
+    "message": "Bonjour, je suis sérieusement intéressé. Puis-je avoir l'adresse exacte?",
+    "status": "APPROVED",
+    "approvedAt": "2024-11-14T14:00:00Z",
+    "expiresAt": "2024-11-15T14:00:00Z",
+    "viewedAt": "2024-11-14T15:00:00Z",
+    "viewCount": 3,
+    "createdAt": "2024-11-14T12:00:00Z"
+  }
+]

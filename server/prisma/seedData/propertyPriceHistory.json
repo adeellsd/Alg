@@ -1,0 +1,12 @@
+[
+  {
+    "propertyId": "prop_1",
+    "oldPrice": 9000000000,
+    "newPrice": 8500000000,
+    "changePercent": -5.56,
+    "changedBy": "user_1",
+    "notificationsSent": 12,
+    "notifiedAt": "2024-11-10T14:30:00Z",
+    "createdAt": "2024-11-10T10:00:00Z"
+  }
+]

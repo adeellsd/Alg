@@ -1,0 +1,22 @@
+[
+  {
+    "propertyId": "prop_1",
+    "date": "2024-11-15",
+    "totalViews": 85,
+    "uniqueVisitors": 62,
+    "avgDuration": 145,
+    "bounceRate": 32.5,
+    "conversions": 3,
+    "sourceBreakdown": {
+      "direct": 25,
+      "google": 30,
+      "boost": 20,
+      "social": 10
+    },
+    "deviceBreakdown": {
+      "mobile": 50,
+      "desktop": 30,
+      "tablet": 5
+    }
+  }
+]

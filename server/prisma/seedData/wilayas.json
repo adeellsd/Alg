@@ -1,0 +1,22 @@
+[
+  {
+    "code": "16",
+    "name": "Alger",
+    "nameAr": "الجزائر",
+    "nameFr": "Alger",
+    "latitude": "36.753768",
+    "longitude": "3.058756",
+    "population": 3915811,
+    "area": 809
+  },
+  {
+    "code": "31",
+    "name": "Oran",
+    "nameAr": "وهران",
+    "nameFr": "Oran",
+    "latitude": "35.696111",
+    "longitude": "-0.633333",
+    "population": 1584607,
+    "area": 2121
+  }
+]

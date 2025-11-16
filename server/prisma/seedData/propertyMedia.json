@@ -1,0 +1,33 @@
+[
+  {
+    "propertyId": "prop_1",
+    "mediaType": "IMAGE",
+    "url": "https://cdn.rentalg.dz/properties/prop1/image1.jpg",
+    "thumbnailUrl": "https://cdn.rentalg.dz/properties/prop1/thumb_image1.jpg",
+    "mediumUrl": "https://cdn.rentalg.dz/properties/prop1/medium_image1.jpg",
+    "largeUrl": "https://cdn.rentalg.dz/properties/prop1/large_image1.jpg",
+    "blurhash": "LKO2?V%2Tw=w]~RBVZRi};RPxuwH",
+    "dominantColor": "#3b82f6",
+    "width": 1920,
+    "height": 1080,
+    "format": "jpeg",
+    "sizeBytes": 245678,
+    "altText": "Salon moderne avec vue mer",
+    "displayOrder": 0,
+    "isPrimary": true
+  },
+  {
+    "propertyId": "prop_1",
+    "mediaType": "VIDEO",
+    "videoPlatform": "TIKTOK",
+    "url": "https://tiktok.com/@rentalg/video/123456",
+    "videoEmbedUrl": "https://www.tiktok.com/embed/v2/123456",
+    "thumbnailUrl": "https://cdn.rentalg.dz/properties/prop1/video_thumb.jpg",
+    "duration": 45,
+    "width": 1080,
+    "height": 1920,
+    "format": "mp4",
+    "displayOrder": 1,
+    "isPrimary": false
+  }
+]

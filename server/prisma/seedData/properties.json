@@ -1,0 +1,42 @@
+[
+  {
+    "id": "prop_1",
+    "userId": "user_1",
+    "title": "Appartement F4 Hydra",
+    "description": "Magnifique F4 de 120m²",
+    "propertyType": "APARTMENT_F4",
+    "transactionType": "SALE",
+    "status": "ACTIVE",
+    "priceAmount": "8500000000",
+    "surfaceArea": 120,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "wilaya": "16",
+    "commune": "1601",
+    "quartier": "Centre Hydra",
+    "exactLatitude": "36.746841",
+    "exactLongitude": "3.053701",
+    "showExactLocation": false,
+    "slug": "appartement-f4-hydra-8500m"
+  },
+  {
+    "id": "prop_2",
+    "userId": "user_2",
+    "title": "Villa Oran",
+    "description": "Spacieuse villa avec piscine",
+    "propertyType": "VILLA",
+    "transactionType": "RENT",
+    "status": "ACTIVE",
+    "priceAmount": "150000",
+    "surfaceArea": 300,
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "wilaya": "31",
+    "commune": "3101",
+    "quartier": "Les Fleurs",
+    "exactLatitude": "35.699739",
+    "exactLongitude": "-0.633718",
+    "showExactLocation": true,
+    "slug": "villa-oran-150k"
+  }
+]

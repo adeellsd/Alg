@@ -1,0 +1,13 @@
+[
+  {
+    "conversationId": "conv_1",
+    "propertyId": "prop_1",
+    "ownerId": "user_1",
+    "reviewerId": "user_2",
+    "rating": 5,
+    "comment": "Très professionnel, réactif et honnête. Annonce conforme.",
+    "tags": ["Réactif", "Sérieux", "Annonce conforme"],
+    "helpfulCount": 3,
+    "createdAt": "2024-11-15T16:00:00Z"
+  }
+]

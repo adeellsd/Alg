@@ -1,0 +1,14 @@
+[
+  {
+    "id": "perm_properties_create",
+    "code": "properties.create",
+    "description": "Créer des annonces",
+    "category": "properties"
+  },
+  {
+    "id": "perm_admin_full",
+    "code": "admin.full",
+    "description": "Accès admin complet",
+    "category": "admin"
+  }
+]

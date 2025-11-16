@@ -1,0 +1,14 @@
+[
+  {
+    "id": "role_user",
+    "name": "USER",
+    "description": "Utilisateur standard",
+    "isSystem": true
+  },
+  {
+    "id": "role_admin",
+    "name": "ADMIN",
+    "description": "Administrateur",
+    "isSystem": true
+  }
+]

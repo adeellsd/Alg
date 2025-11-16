@@ -1,0 +1,23 @@
+[
+  {
+    "tier": "TIER_1_EN_AVANT",
+    "pricePerWeek": "50000",
+    "pricePerMonth": "180000",
+    "features": ["Position en avant", "Badge bleu"],
+    "isActive": true
+  },
+  {
+    "tier": "TIER_2_PREMIUM",
+    "pricePerWeek": "100000",
+    "pricePerMonth": "360000",
+    "features": ["Top résultats", "Badge doré"],
+    "isActive": true
+  },
+  {
+    "tier": "TIER_3_ULTRA",
+    "pricePerWeek": "200000",
+    "pricePerMonth": "720000",
+    "features": ["Carousel homepage", "Badge violet"],
+    "isActive": true
+  }
+]

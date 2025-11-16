@@ -1,0 +1,22 @@
+[
+  {
+    "conversationId": "conv_1",
+    "senderId": "user_2",
+    "receiverId": "user_1",
+    "propertyId": "prop_1",
+    "content": "Bonjour, est-ce que l'appartement est toujours disponible?",
+    "status": "READ",
+    "readAt": "2024-11-14T10:15:00Z",
+    "createdAt": "2024-11-14T10:00:00Z"
+  },
+  {
+    "conversationId": "conv_1",
+    "senderId": "user_1",
+    "receiverId": "user_2",
+    "propertyId": "prop_1",
+    "content": "Oui, toujours disponible! Voulez-vous le visiter?",
+    "status": "READ",
+    "readAt": "2024-11-14T11:00:00Z",
+    "createdAt": "2024-11-14T10:30:00Z"
+  }
+]

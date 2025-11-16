@@ -1,0 +1,27 @@
+[
+  {
+    "id": "user_1",
+    "cognitoId": "cognito_test_1",
+    "email": "ahmed@test.dz",
+    "phone": "+213555123456",
+    "emailVerified": true,
+    "phoneVerified": true,
+    "firstName": "Ahmed",
+    "lastName": "Benali",
+    "accountTier": "PRO",
+    "status": "ACTIVE",
+    "proActivatedAt": "2024-01-15T10:00:00Z",
+    "proExpiresAt": "2025-01-15T10:00:00Z"
+  },
+  {
+    "id": "user_2",
+    "cognitoId": "cognito_test_2",
+    "email": "fatima@test.dz",
+    "phone": "+213770234567",
+    "emailVerified": true,
+    "firstName": "Fatima",
+    "lastName": "Khelifi",
+    "accountTier": "FREE",
+    "status": "ACTIVE"
+  }
+]
