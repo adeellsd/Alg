@@ -43,3 +43,34 @@ export const settingsSchema = z.object({
 });
 
 export type SettingsFormData = z.infer<typeof settingsSchema>;
+
+// Authentication schemas
+export const signinSchema = z.object({
+  email: z.string().email("Adresse email invalide"),
+  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
+  rememberMe: z.boolean().optional(),
+});
+
+export type SigninFormData = z.infer<typeof signinSchema>;
+
+export const signupSchema = z.object({
+  name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
+  email: z.string().email("Adresse email invalide"),
+  password: z.string()
+    .min(8, "Le mot de passe doit contenir au moins 8 caractères")
+    .regex(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule")
+    .regex(/[a-z]/, "Le mot de passe doit contenir au moins une minuscule")
+    .regex(/[0-9]/, "Le mot de passe doit contenir au moins un chiffre"),
+  confirmPassword: z.string(),
+  role: z.enum(["tenant", "manager"], {
+    required_error: "Veuillez sélectionner un rôle",
+  }),
+  acceptTerms: z.boolean().refine((val) => val === true, {
+    message: "Vous devez accepter les conditions d'utilisation",
+  }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Les mots de passe ne correspondent pas",
+  path: ["confirmPassword"],
+});
+
+export type SignupFormData = z.infer<typeof signupSchema>;
