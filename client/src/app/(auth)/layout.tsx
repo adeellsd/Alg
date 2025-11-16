@@ -13,7 +13,7 @@ export default function AuthLayout({
 
       {/* Home button */}
       <Link
-        href="/"
+        href="/landing"
         className="absolute top-6 left-6 z-10 flex items-center gap-2 px-4 py-2 rounded-lg glass hover:glass-strong transition-all duration-300 group"
       >
         <HomeIcon className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors" />

@@ -11,8 +11,8 @@ import {
   Mail,
   Lock,
   User,
-  Home,
-  Building2,
+  UserCircle,
+  Briefcase,
   ArrowRight,
   Check,
 } from "lucide-react";
@@ -40,12 +40,12 @@ export default function SignUpPage() {
       email: "",
       password: "",
       confirmPassword: "",
-      role: undefined,
+      accountType: undefined,
       acceptTerms: false,
     },
   });
 
-  const selectedRole = watch("role");
+  const selectedAccountType = watch("accountType");
   const acceptTerms = watch("acceptTerms");
 
   const onSubmit = async (data: SignupFormData) => {
@@ -191,54 +191,54 @@ export default function SignUpPage() {
             )}
           </div>
 
-          {/* Role Selection */}
+          {/* Account Type Selection */}
           <div className="space-y-2">
             <Label className="text-gray-700 dark:text-gray-300">
-              Je suis un(e)
+              Type de compte
             </Label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                onClick={() => setValue("role", "tenant")}
+                onClick={() => setValue("accountType", "individual")}
                 className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all duration-300 ${
-                  selectedRole === "tenant"
+                  selectedAccountType === "individual"
                     ? "border-green-600 bg-green-50 dark:bg-green-900/20"
                     : "border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 hover:border-gray-300 dark:hover:border-gray-600"
                 }`}
               >
-                {selectedRole === "tenant" && (
+                {selectedAccountType === "individual" && (
                   <div className="absolute top-2 right-2 w-5 h-5 bg-green-600 rounded-full flex items-center justify-center">
                     <Check className="w-3 h-3 text-white" />
                   </div>
                 )}
-                <Home className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                <UserCircle className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Locataire
+                  Particulier
                 </span>
               </button>
 
               <button
                 type="button"
-                onClick={() => setValue("role", "manager")}
+                onClick={() => setValue("accountType", "professional")}
                 className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all duration-300 ${
-                  selectedRole === "manager"
+                  selectedAccountType === "professional"
                     ? "border-green-600 bg-green-50 dark:bg-green-900/20"
                     : "border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 hover:border-gray-300 dark:hover:border-gray-600"
                 }`}
               >
-                {selectedRole === "manager" && (
+                {selectedAccountType === "professional" && (
                   <div className="absolute top-2 right-2 w-5 h-5 bg-green-600 rounded-full flex items-center justify-center">
                     <Check className="w-3 h-3 text-white" />
                   </div>
                 )}
-                <Building2 className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                <Briefcase className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Propriétaire
+                  Professionnel
                 </span>
               </button>
             </div>
-            {errors.role && (
-              <p className="text-sm text-red-500">{errors.role.message}</p>
+            {errors.accountType && (
+              <p className="text-sm text-red-500">{errors.accountType.message}</p>
             )}
           </div>
 

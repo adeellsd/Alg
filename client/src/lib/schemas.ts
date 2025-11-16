@@ -62,8 +62,8 @@ export const signupSchema = z.object({
     .regex(/[a-z]/, "Le mot de passe doit contenir au moins une minuscule")
     .regex(/[0-9]/, "Le mot de passe doit contenir au moins un chiffre"),
   confirmPassword: z.string(),
-  role: z.enum(["tenant", "manager"], {
-    required_error: "Veuillez sélectionner un rôle",
+  accountType: z.enum(["individual", "professional"], {
+    required_error: "Veuillez sélectionner un type de compte",
   }),
   acceptTerms: z.boolean().refine((val) => val === true, {
     message: "Vous devez accepter les conditions d'utilisation",
