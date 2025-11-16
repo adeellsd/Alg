@@ -94,10 +94,11 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className='h-full'>
-        <Authenticator>
-
+        <Authenticator
+            components={componenets}
+            formFields={formFields}
+        >
             {() => <>{children}</>}
-
         </Authenticator>
     </div>
   );
