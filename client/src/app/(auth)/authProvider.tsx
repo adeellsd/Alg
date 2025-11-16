@@ -10,13 +10,13 @@ import Footer from '@/components/ui/Footer';
 Amplify.configure({
     Auth: {
         Cognito: {
-            userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID || process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID!,
-            userPoolClientId: process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID || process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_CLIENT_ID!,
+            userPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID!,
+            userPoolClientId: process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_CLIENT_ID!,
         },
     },
 });
 
-const componenets = {
+const components = {
     Header() {
         return (
             <View className='mt-4 mb-7'>
