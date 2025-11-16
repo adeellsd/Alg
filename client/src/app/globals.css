@@ -485,85 +485,201 @@
 }
 
 /* ========================================
-   AWS AMPLIFY AUTHENTICATOR STYLES (du tuto)
-   Personnalisés avec le thème Alger
+   AWS AMPLIFY AUTHENTICATOR STYLES
+   Personnalisés avec le thème Alger Vintage
    ======================================== */
 
 [data-amplify-authenticator] {
   --amplify-components-button-primary-background-color: var(--color-blue-electric);
   --amplify-components-button-primary-hover-background-color: var(--color-blue-deep);
-  --amplify-components-button-border-radius: var(--radius);
-  --amplify-components-fieldcontrol-border-radius: var(--radius);
+  --amplify-components-button-border-radius: 0.875rem;
+  --amplify-components-fieldcontrol-border-radius: 0.875rem;
+  --amplify-components-fieldcontrol-focus-border-color: var(--color-blue-electric);
+  --amplify-components-fieldcontrol-border-color: rgb(229 231 235);
+  --amplify-fonts-default-variable: 'Inter', sans-serif;
 }
 
 [data-amplify-authenticator][data-variation="default"] {
   height: 100%;
-  padding: 2rem !important;
+  padding: 0 !important;
 }
 
 [data-amplify-authenticator] [data-amplify-router] {
   border: none !important;
   box-shadow: none !important;
-  max-width: 400px !important;
+  background: transparent !important;
+  max-width: 450px !important;
   margin: 0 auto;
 }
 
 [data-amplify-authenticator] [data-amplify-container] {
-  border-radius: var(--radius);
-  padding: 2rem !important;
-  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 1.25rem !important;
+  padding: 2.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-amplify-authenticator] [data-amplify-container] {
+    background: rgba(17, 24, 39, 0.8) !important;
+    border: 1px solid rgba(75, 85, 99, 0.3) !important;
+  }
 }
 
 [data-amplify-authenticator] [data-amplify-form] {
   padding: 0 !important;
+  gap: 1.25rem;
 }
 
 [data-amplify-authenticator] .amplify-tabs__list {
-  display: none;
+  display: none !important;
 }
 
+/* Buttons */
 [data-amplify-authenticator] .amplify-button--primary {
   width: 100%;
-  height: 2.75rem;
-  margin-top: 1rem;
-  background-color: var(--color-blue-electric) !important;
+  height: 2.75rem !important;
+  margin-top: 0.5rem;
+  background: linear-gradient(to right, var(--color-blue-electric), #0369A1) !important;
   color: var(--color-white) !important;
-  font-weight: 500;
-  font-size: var(--font-size-sm);
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  border-radius: 0.875rem !important;
+  border: none !important;
+  box-shadow: 0 10px 15px -3px rgba(8, 145, 178, 0.3) !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
 }
 
-[data-amplify-authenticator] .amplify-button--primary:hover {
-  background-color: var(--color-blue-deep) !important;
+[data-amplify-authenticator] .amplify-button--primary:hover:not(:disabled) {
+  background: linear-gradient(to right, #0369A1, #075985) !important;
+  box-shadow: 0 20px 25px -5px rgba(8, 145, 178, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+[data-amplify-authenticator] .amplify-button--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-amplify-authenticator] .amplify-button--link {
+  color: var(--color-blue-electric) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+}
+
+[data-amplify-authenticator] .amplify-button--link:hover {
+  color: var(--color-blue-deep) !important;
+}
+
+/* Input fields */
+[data-amplify-authenticator] .amplify-input,
+[data-amplify-authenticator] .amplify-select {
+  height: 2.75rem !important;
+  border-radius: 0.875rem !important;
+  border: 1px solid rgb(229 231 235) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.875rem !important;
+  padding: 0 1rem !important;
+  transition: all 0.2s ease !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-amplify-authenticator] .amplify-input,
+  [data-amplify-authenticator] .amplify-select {
+    background: rgba(31, 41, 55, 0.5) !important;
+    border-color: rgb(75 85 99) !important;
+    color: rgb(243 244 246) !important;
+  }
+}
+
+[data-amplify-authenticator] .amplify-input:focus,
+[data-amplify-authenticator] .amplify-select:focus {
+  border-color: var(--color-blue-electric) !important;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1) !important;
+  outline: none !important;
 }
 
 [data-amplify-authenticator] .amplify-field-group__control {
-  border-color: var(--color-input);
+  border-color: transparent !important;
 }
 
-[data-amplify-authenticator] .amplify-field-group__control:focus-within {
-  border-color: var(--color-ring) !important;
-  box-shadow: 0 0 0 1px var(--color-ring) !important;
-}
-
-[data-amplify-authenticator] .amplify-field__show-password {
-  color: var(--color-muted-foreground);
-}
-
+/* Labels */
 [data-amplify-authenticator] .amplify-label {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-foreground);
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  color: rgb(55 65 81) !important;
+  margin-bottom: 0.5rem !important;
 }
 
-[data-amplify-authenticator] .amplify-select {
-  border-color: var(--color-input);
-  border-radius: var(--radius);
-  height: 2.5rem;
-  font-size: var(--font-size-sm);
+@media (prefers-color-scheme: dark) {
+  [data-amplify-authenticator] .amplify-label {
+    color: rgb(229 231 235) !important;
+  }
 }
 
+/* Error messages */
 [data-amplify-authenticator] .amplify-text--error {
-  color: var(--color-error);
+  color: #DC2626 !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.25rem !important;
+}
+
+/* Password visibility toggle */
+[data-amplify-authenticator] .amplify-field__show-password {
+  color: rgb(107 114 128) !important;
+  cursor: pointer;
+}
+
+[data-amplify-authenticator] .amplify-field__show-password:hover {
+  color: rgb(55 65 81) !important;
+}
+
+/* Fieldset */
+[data-amplify-authenticator] .amplify-fieldset {
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Loading state */
+[data-amplify-authenticator] .amplify-loader {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  border-top-color: white !important;
+}
+
+/* Alert messages */
+[data-amplify-authenticator] .amplify-alert {
+  border-radius: 0.875rem !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: rgb(239 68 68) !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+[data-amplify-authenticator] .amplify-alert__body {
+  color: #DC2626 !important;
+  font-size: 0.875rem !important;
+}
+
+/* Divider */
+[data-amplify-authenticator] .amplify-divider {
+  margin: 1.5rem 0 !important;
+}
+
+[data-amplify-authenticator] .amplify-divider__label {
+  color: rgb(107 114 128) !important;
+  font-size: 0.875rem !important;
+}
+
+/* Confirmation code input */
+[data-amplify-authenticator] input[name="confirmation_code"] {
+  text-align: center;
+  letter-spacing: 0.1em;
+  font-size: 1.25rem !important;
+  font-weight: 600;
 }
 
 /* ========================================
