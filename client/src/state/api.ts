@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { fetchAuthSession, getCurrentUser } from "@reduxjs/toolkit/query/react";        z
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import type { PARTICULIER, PROFESSIONNEL } from "@/types/prismaTypes";
 
 export const api = createApi({
@@ -29,8 +29,8 @@ export const api = createApi({
 
             const userRole = idToken?.payload["custom:role"] as string;
 
-            const endpoint = 
-              userRole === "pro" ?
+            const endpoint =
+              userRole === "Pro" ?
                 `/pro/${user.userId}` : `/particulier/${user.userId}`;
 
               let userDetailsResponse = await fetchWithBQ(endpoint);  
