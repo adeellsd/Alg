@@ -154,8 +154,8 @@ export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
 
 
 export const AccountTier: {
-  FREE: 'FREE',
-  PRO: 'PRO'
+  PARTICULIER: 'PARTICULIER',
+  PROFESSIONNEL: 'PROFESSIONNEL'
 };
 
 export type AccountTier = (typeof AccountTier)[keyof typeof AccountTier]

@@ -39,8 +39,8 @@ enum AccountStatus {
 }
 
 enum AccountTier {
-  FREE
-  PRO
+  PARTICULIER
+  PROFESSIONNEL
 }
 
 enum PropertyType {
@@ -237,7 +237,7 @@ model User {
   avatar    String?
 
   // ===== ACCOUNT =====
-  accountTier AccountTier   @default(FREE)
+  accountTier AccountTier   @default(PARTICULIER)
   status      AccountStatus @default(PENDING_VERIFICATION)
 
   // ===== PRO =====

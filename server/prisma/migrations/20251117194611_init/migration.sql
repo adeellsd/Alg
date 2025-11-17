@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "postgis";
 CREATE TYPE "AccountStatus" AS ENUM ('ACTIVE', 'SUSPENDED', 'PENDING_VERIFICATION', 'BANNED');
 
 -- CreateEnum
-CREATE TYPE "AccountTier" AS ENUM ('FREE', 'PRO');
+CREATE TYPE "AccountTier" AS ENUM ('PARTICULIER', 'PROFESSIONEL');
 
 -- CreateEnum
 CREATE TYPE "PropertyType" AS ENUM ('APARTMENT_F1', 'APARTMENT_F2', 'APARTMENT_F3', 'APARTMENT_F4', 'APARTMENT_F5_PLUS', 'VILLA', 'DUPLEX', 'STUDIO', 'TERRAIN_CONSTRUCTIBLE', 'TERRAIN_AGRICOLE', 'LOCAL_COMMERCIAL', 'BUREAU', 'GARAGE_BOX', 'FERME', 'OTHER');
@@ -74,7 +74,7 @@ CREATE TABLE "users" (
     "firstName" TEXT,
     "lastName" TEXT,
     "avatar" TEXT,
-    "accountTier" "AccountTier" NOT NULL DEFAULT 'FREE',
+    "accountTier" "AccountTier" NOT NULL DEFAULT 'PARTICULIER',
     "status" "AccountStatus" NOT NULL DEFAULT 'PENDING_VERIFICATION',
     "proActivatedAt" TIMESTAMP(3),
     "proExpiresAt" TIMESTAMP(3),

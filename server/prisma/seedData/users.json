@@ -8,7 +8,7 @@
     "phoneVerified": true,
     "firstName": "Ahmed",
     "lastName": "Benali",
-    "accountTier": "PRO",
+    "accountTier": "PROFESSIONNEL",
     "status": "ACTIVE",
     "proActivatedAt": "2024-01-15T10:00:00Z",
     "proExpiresAt": "2025-01-15T10:00:00Z"
@@ -21,7 +21,7 @@
     "emailVerified": true,
     "firstName": "Fatima",
     "lastName": "Khelifi",
-    "accountTier": "FREE",
+    "accountTier": "PARTICULIER",
     "status": "ACTIVE"
   }
 ]

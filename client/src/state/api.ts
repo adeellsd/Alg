@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { fetchAuthSession, getCurrentUser } from "@reduxjs/toolkit/query/react";        z
+import type { PARTICULIER, PROFESSIONNEL } from "@/types/prismaTypes";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -17,7 +19,6 @@ export const api = createApi({
   tagTypes: [],
   endpoints: (build) => ({
     getAuthUser: build.query<User, void>({
-      query: () => ({
         queryFn: async (_, _queryApi, _extractOptions, fetchWithBQ) => {
           try {
             const session = await fetchAuthSession(); // Assume this function fetches the current auth session
@@ -37,20 +38,18 @@ export const api = createApi({
               // If user doesn't exist, create them
 
               return {
-                data: 
-                  cognitoInfo: userDetailsResponse.data as Particulier | Professionnel,
+                data: {
+                  cognitoInfo: { ...user},
+                  userInfo: userDetailsResponse.data as PARTICULIER | PROFESSIONNEL,
                   userRole
-              }
-
-          } catch (error) {
-            return (error: any) {
-              return { error: error.message || "Failed to fetch user data"
-            };
-          }  
-
+                }
+              };
+          } catch (error: any) {
+              return { error: error.message || "Failed to fetch user data" };
+          }
+        },
       }),
     }),
-  }),
 });
 
 export const {} = api;
