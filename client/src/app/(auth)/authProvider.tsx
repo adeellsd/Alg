@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Amplify } from 'aws-amplify';
-import { Authenticator } from '@aws-amplify/ui-react';
 import { Authenticator, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { PassThrough } from 'stream';
-import { View } from 'lucide-react';
-import Footer from '@/components/ui/Footer';
+import { View } from '@aws-amplify/ui-react';
+import { RadioGroupField, Radio } from '@aws-amplify/ui-react';
+import { useRouter, usePathname } from 'next/navigation';
+
 
 Amplify.configure({
     Auth: {
@@ -17,7 +17,7 @@ Amplify.configure({
     },
 });
 
-const componenets = {
+const components = {
     Header() {
         return (
             <View className='mt-4 mb-7'>
@@ -38,7 +38,7 @@ const componenets = {
             return (
                 <View className='text-center mt-4'>
                     <p className='text-muted-foregrouned'>
-                        Don@t have an account?{' '}
+                        Don&apos;t have an account?{' '}
                     
                         <button onClick={toSignUp} className='text-primary hover:underline bg-transparent border-0 p-0'>Sign Up</button>
                     </p>
@@ -46,8 +46,41 @@ const componenets = {
         );
         },
     },
-};
+    SignUp: {
+        FormFields() {
+            const { validationErrors, isValid } = useAuthenticator();
+            
+            return (
+                <>
+                    <Authenticator.SignUp.FormFields />
+                    <RadioGroupField 
+                        legend="Role" 
+                        name="custom:role" 
+                        errorMessage={validationErrors["custom:role"]} 
+                        hasError={!!validationErrors["custom:role"]} 
+                        isRequired>
 
+                            <Radio value="Particulier">Particulier</Radio>
+                            <Radio value="Pro">Professionel</Radio>
+                    </RadioGroupField>
+                </>
+            );
+        },
+
+        Footer() {
+            const { toSignIn } = useAuthenticator();
+            return (
+                <View className='text-center mt-4'>
+                    <p className='text-muted-foregrouned'>
+                        Already have an account?{' '}
+                    
+                        <button onClick={toSignIn} className='text-primary hover:underline bg-transparent border-0 p-0'>Sign In</button>
+                    </p>
+                </View>
+        );
+        },
+    },
+};
 
 const formFields = {
     signIn: {
@@ -76,13 +109,13 @@ const formFields = {
             label: 'Email',
         },
         password: {
-            order: 3,
+            order: 4,
             placeholder: 'Create a password',
             isRequired: true,
             label: 'Password',
         },
         confirm_password: {
-            order: 4,
+            order: 5,
             placeholder: 'Confirm your password',
             isRequired: true,
             label: 'Confirm Password',
@@ -90,12 +123,30 @@ const formFields = {
     },
 };
 
+
 const Auth = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthenticator((context) => [context.user]);
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  const isAuthPage = pathname.match('/^\/(signin|singup)$/');
+  const isDashboardPage = pathname.startsWith('/manager') || pathname.startsWith('/pro');
+
+  useEffect(() => {
+    if (user && isAuthPage) {
+        // Redirect authenticated users away from auth pages
+        router.push('/');
+    }
+  }, [user, isAuthPage, router]);
+
+  // Allow access to auth pages if not authenticated
+    if (!user && !isDashboardPage) {
+        return <>{children}</>;
+    }
 
   return (
     <div className='h-full'>
-        <Authenticator>
+        <Authenticator initialState={pathname.includes('signup') ? 'signUp' : 'signIn'} components={components} formFields={formFields}>
 
             {() => <>{children}</>}
 

@@ -1,5 +1,9 @@
-import { redirect } from "next/navigation";
+import Image from "next/image";
 
 export default function Home() {
-  redirect("/landing");
+  return (
+    <div>
+      WESH YKHO
+    </div>
+  );
 }
