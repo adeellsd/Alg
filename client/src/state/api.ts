@@ -1,13 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { fetchAuthSession, getCurrentUser } from "@reduxjs/toolkit/query/react";        z
-import type { PARTICULIER, PROFESSIONNEL } from "@/types/prismaTypes";
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+import type { User } from "@/types/prismaTypes";
+
+// Interface pour la réponse de getAuthUser
+interface AuthUserResponse {
+  cognitoInfo: any;
+  userInfo: User;
+  userRole: string;
+}
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     prepareHeaders: async (headers) => {
-      
-      const session = await fetchAuthSession(); 
+
+      const session = await fetchAuthSession();
       const {idToken} = session.tokens ?? {};
       if (idToken) {
         headers.set("Authorization", `Bearer ${idToken}`);
@@ -18,7 +25,7 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: [],
   endpoints: (build) => ({
-    getAuthUser: build.query<User, void>({
+    getAuthUser: build.query<AuthUserResponse, void>({
         queryFn: async (_, _queryApi, _extractOptions, fetchWithBQ) => {
           try {
             const session = await fetchAuthSession(); // Assume this function fetches the current auth session
@@ -29,8 +36,8 @@ export const api = createApi({
 
             const userRole = idToken?.payload["custom:role"] as string;
 
-            const endpoint = 
-              userRole === "pro" ?
+            const endpoint =
+              userRole === "Pro" ?
                 `/pro/${user.userId}` : `/particulier/${user.userId}`;
 
               let userDetailsResponse = await fetchWithBQ(endpoint);  
@@ -40,7 +47,7 @@ export const api = createApi({
               return {
                 data: {
                   cognitoInfo: { ...user},
-                  userInfo: userDetailsResponse.data as PARTICULIER | PROFESSIONNEL,
+                  userInfo: userDetailsResponse.data as User,
                   userRole
                 }
               };
@@ -52,4 +59,4 @@ export const api = createApi({
     }),
 });
 
-export const {} = api;
+export const { useGetAuthUserQuery } = api;
