@@ -147,6 +147,66 @@ function transformItem(modelName: string, item: any): any {
         transformed.publicLongitude = parseFloat(item.exactLongitude) + lonOffset;
       }
     }
+
+    // ===== MIGRATION AMENITIES (NOUVEAU v6) =====
+    const amenitiesToConnect: string[] = [];
+
+    if (item.hasElevator) amenitiesToConnect.push("Ascenseur");
+    if (item.hasBalcony) amenitiesToConnect.push("Balcon");
+    if (item.hasTerrace) amenitiesToConnect.push("Terrasse");
+    if (item.hasCellar) amenitiesToConnect.push("Cave");
+    if (item.hasParking) amenitiesToConnect.push("Parking");
+    if (item.hasGarage) amenitiesToConnect.push("Garage");
+    if (item.hasGarden) amenitiesToConnect.push("Jardin");
+    if (item.hasPool) amenitiesToConnect.push("Piscine");
+    if (item.hasAirConditioning) amenitiesToConnect.push("Climatisation");
+    if (item.hasEquippedKitchen) amenitiesToConnect.push("Cuisine équipée");
+    if (item.isFurnished) amenitiesToConnect.push("Meublé");
+    if (item.hasInternet) amenitiesToConnect.push("Internet");
+    if (item.hasCityGas) amenitiesToConnect.push("Gaz de ville");
+    if (item.hasWater) amenitiesToConnect.push("Eau");
+    if (item.hasElectricity) amenitiesToConnect.push("Électricité");
+    if (item.hasGuard) amenitiesToConnect.push("Gardien");
+    if (item.hasIntercom) amenitiesToConnect.push("Interphone");
+    if (item.hasAlarm) amenitiesToConnect.push("Alarme");
+    if (item.hasElectricGate) amenitiesToConnect.push("Portail électrique");
+    if (item.hasCCTV) amenitiesToConnect.push("Vidéosurveillance");
+    
+    if (item.heatingType === "CENTRAL" || item.heatingType === "BOTH") amenitiesToConnect.push("Chauffage Central");
+    if (item.heatingType === "INDIVIDUAL" || item.heatingType === "BOTH") amenitiesToConnect.push("Chauffage Individuel");
+
+    if (amenitiesToConnect.length > 0) {
+      transformed.amenities = {
+        create: amenitiesToConnect.map(name => ({
+          amenity: {
+            connect: { name }
+          }
+        }))
+      };
+    }
+
+    // PROTECTION : Supprimer les anciens champs booléens de l'objet avant insertion
+    delete transformed.hasElevator;
+    delete transformed.hasBalcony;
+    delete transformed.hasTerrace;
+    delete transformed.hasCellar;
+    delete transformed.hasParking;
+    delete transformed.hasGarage;
+    delete transformed.hasGarden;
+    delete transformed.hasPool;
+    delete transformed.hasAirConditioning;
+    delete transformed.heatingType;
+    delete transformed.hasEquippedKitchen;
+    delete transformed.isFurnished;
+    delete transformed.hasInternet;
+    delete transformed.hasCityGas;
+    delete transformed.hasWater;
+    delete transformed.hasElectricity;
+    delete transformed.hasGuard;
+    delete transformed.hasIntercom;
+    delete transformed.hasAlarm;
+    delete transformed.hasElectricGate;
+    delete transformed.hasCCTV;
   }
 
   // ===== PROPERTY MEDIA (NOUVEAU v6) =====
@@ -154,6 +214,22 @@ function transformItem(modelName: string, item: any): any {
     if (item.propertyId && idMappings.property[item.propertyId]) {
       transformed.propertyId = idMappings.property[item.propertyId];
     }
+
+    // Initialiser les nouveaux champs s'ils manquent dans le JSON
+    if (transformed.order === undefined && item.displayOrder !== undefined) {
+      transformed.order = item.displayOrder;
+    } else if (transformed.order === undefined) {
+      transformed.order = 0;
+    }
+
+    if (transformed.isThumbnail === undefined && item.isPrimary !== undefined) {
+      transformed.isThumbnail = item.isPrimary;
+    } else if (transformed.isThumbnail === undefined) {
+      transformed.isThumbnail = false;
+    }
+
+    delete transformed.displayOrder;
+    delete transformed.isPrimary;
 
     // Transform flat data to JSON structure
     if (item.mediaType === "IMAGE" && item.url) {
@@ -248,6 +324,11 @@ function transformItem(modelName: string, item: any): any {
   if (modelName === "SavedSearch") {
     if (item.userId && idMappings.user[item.userId]) {
       transformed.userId = idMappings.user[item.userId];
+    }
+    // Migration criteria -> filters
+    if (item.criteria) {
+      transformed.filters = item.criteria;
+      delete transformed.criteria;
     }
   }
 
@@ -472,6 +553,7 @@ async function main() {
     { model: "Commune", file: "communes.json" },
     { model: "Role", file: "roles.json" },
     { model: "Permission", file: "permissions.json" },
+    { model: "Amenity", file: "amenities.json" }, // NOUVEAU v6
 
     // ===== BOOST PRICING (NOUVEAU v6) =====
     { model: "BoostPricing", file: "boostPricing.json" },

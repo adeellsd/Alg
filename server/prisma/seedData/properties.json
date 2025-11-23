@@ -17,7 +17,11 @@
     "exactLatitude": "36.746841",
     "exactLongitude": "3.053701",
     "showExactLocation": false,
-    "slug": "appartement-f4-hydra-8500m"
+    "slug": "appartement-f4-hydra-8500m",
+    "hasElevator": true,
+    "hasParking": true,
+    "hasIntercom": true,
+    "heatingType": "CENTRAL"
   },
   {
     "id": "prop_2",
@@ -37,6 +41,11 @@
     "exactLatitude": "35.699739",
     "exactLongitude": "-0.633718",
     "showExactLocation": true,
-    "slug": "villa-oran-150k"
+    "slug": "villa-oran-150k",
+    "hasPool": true,
+    "hasGarden": true,
+    "hasGarage": true,
+    "hasAirConditioning": true,
+    "isFurnished": true
   }
 ]

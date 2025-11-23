@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "postgis";
 CREATE TYPE "AccountStatus" AS ENUM ('ACTIVE', 'SUSPENDED', 'PENDING_VERIFICATION', 'BANNED');
 
 -- CreateEnum
-CREATE TYPE "AccountTier" AS ENUM ('PARTICULIER', 'PROFESSIONEL');
+CREATE TYPE "AccountTier" AS ENUM ('PARTICULIER', 'PROFESSIONNEL');
 
 -- CreateEnum
 CREATE TYPE "PropertyType" AS ENUM ('APARTMENT_F1', 'APARTMENT_F2', 'APARTMENT_F3', 'APARTMENT_F4', 'APARTMENT_F5_PLUS', 'VILLA', 'DUPLEX', 'STUDIO', 'TERRAIN_CONSTRUCTIBLE', 'TERRAIN_AGRICOLE', 'LOCAL_COMMERCIAL', 'BUREAU', 'GARAGE_BOX', 'FERME', 'OTHER');
@@ -180,27 +180,6 @@ CREATE TABLE "properties" (
     "totalFloors" INTEGER,
     "buildingAge" INTEGER,
     "constructionYear" INTEGER,
-    "hasElevator" BOOLEAN NOT NULL DEFAULT false,
-    "hasBalcony" BOOLEAN NOT NULL DEFAULT false,
-    "hasTerrace" BOOLEAN NOT NULL DEFAULT false,
-    "hasCellar" BOOLEAN NOT NULL DEFAULT false,
-    "hasParking" BOOLEAN NOT NULL DEFAULT false,
-    "hasGarage" BOOLEAN NOT NULL DEFAULT false,
-    "hasGarden" BOOLEAN NOT NULL DEFAULT false,
-    "hasPool" BOOLEAN NOT NULL DEFAULT false,
-    "hasAirConditioning" BOOLEAN NOT NULL DEFAULT false,
-    "heatingType" "HeatingType" NOT NULL DEFAULT 'NONE',
-    "hasEquippedKitchen" BOOLEAN NOT NULL DEFAULT false,
-    "isFurnished" BOOLEAN NOT NULL DEFAULT false,
-    "hasInternet" BOOLEAN NOT NULL DEFAULT false,
-    "hasCityGas" BOOLEAN NOT NULL DEFAULT false,
-    "hasWater" BOOLEAN NOT NULL DEFAULT true,
-    "hasElectricity" BOOLEAN NOT NULL DEFAULT true,
-    "hasGuard" BOOLEAN NOT NULL DEFAULT false,
-    "hasIntercom" BOOLEAN NOT NULL DEFAULT false,
-    "hasAlarm" BOOLEAN NOT NULL DEFAULT false,
-    "hasElectricGate" BOOLEAN NOT NULL DEFAULT false,
-    "hasCCTV" BOOLEAN NOT NULL DEFAULT false,
     "viewType" "ViewType" NOT NULL DEFAULT 'NONE',
     "distanceToSchool" INTEGER,
     "distanceToTransport" INTEGER,
@@ -266,11 +245,43 @@ CREATE TABLE "property_media" (
     "mediaType" "MediaType" NOT NULL,
     "imageData" JSONB,
     "videoData" JSONB,
-    "displayOrder" INTEGER NOT NULL DEFAULT 0,
-    "isPrimary" BOOLEAN NOT NULL DEFAULT false,
+    "order" INTEGER NOT NULL DEFAULT 0,
+    "isThumbnail" BOOLEAN NOT NULL DEFAULT false,
     "deletedAt" TIMESTAMP(3),
 
     CONSTRAINT "property_media_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "amenities" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "icon" TEXT,
+
+    CONSTRAINT "amenities_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "amenities_on_properties" (
+    "propertyId" TEXT NOT NULL,
+    "amenityId" TEXT NOT NULL,
+    "assignedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "amenities_on_properties_pkey" PRIMARY KEY ("propertyId","amenityId")
+);
+
+-- CreateTable
+CREATE TABLE "seasonal_rates" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "propertyId" TEXT NOT NULL,
+    "startDate" TIMESTAMP(3) NOT NULL,
+    "endDate" TIMESTAMP(3) NOT NULL,
+    "dailyRate" DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT "seasonal_rates_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -354,10 +365,11 @@ CREATE TABLE "saved_searches" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
     "name" VARCHAR(100) NOT NULL,
-    "criteria" JSONB NOT NULL,
+    "filters" JSONB NOT NULL,
     "notifyByEmail" BOOLEAN NOT NULL DEFAULT true,
     "notifyInApp" BOOLEAN NOT NULL DEFAULT true,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "lastCheckedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastMatchedAt" TIMESTAMP(3),
     "matchCount" INTEGER NOT NULL DEFAULT 0,
     "lastNotifiedAt" TIMESTAMP(3),
@@ -728,13 +740,31 @@ CREATE INDEX "property_media_propertyId_idx" ON "property_media"("propertyId");
 CREATE INDEX "property_media_mediaType_idx" ON "property_media"("mediaType");
 
 -- CreateIndex
-CREATE INDEX "property_media_displayOrder_idx" ON "property_media"("displayOrder");
+CREATE INDEX "property_media_order_idx" ON "property_media"("order");
 
 -- CreateIndex
-CREATE INDEX "property_media_isPrimary_idx" ON "property_media"("isPrimary");
+CREATE INDEX "property_media_isThumbnail_idx" ON "property_media"("isThumbnail");
 
 -- CreateIndex
 CREATE INDEX "property_media_deletedAt_idx" ON "property_media"("deletedAt");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "amenities_name_key" ON "amenities"("name");
+
+-- CreateIndex
+CREATE INDEX "amenities_category_idx" ON "amenities"("category");
+
+-- CreateIndex
+CREATE INDEX "amenities_on_properties_propertyId_idx" ON "amenities_on_properties"("propertyId");
+
+-- CreateIndex
+CREATE INDEX "amenities_on_properties_amenityId_idx" ON "amenities_on_properties"("amenityId");
+
+-- CreateIndex
+CREATE INDEX "seasonal_rates_propertyId_idx" ON "seasonal_rates"("propertyId");
+
+-- CreateIndex
+CREATE INDEX "seasonal_rates_startDate_endDate_idx" ON "seasonal_rates"("startDate", "endDate");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "boost_pricing_tier_key" ON "boost_pricing"("tier");
@@ -809,7 +839,7 @@ CREATE INDEX "saved_searches_isActive_idx" ON "saved_searches"("isActive");
 CREATE INDEX "saved_searches_userId_isActive_idx" ON "saved_searches"("userId", "isActive");
 
 -- CreateIndex
-CREATE INDEX "saved_searches_lastMatchedAt_idx" ON "saved_searches"("lastMatchedAt");
+CREATE INDEX "saved_searches_lastCheckedAt_idx" ON "saved_searches"("lastCheckedAt");
 
 -- CreateIndex
 CREATE INDEX "saved_search_matches_savedSearchId_idx" ON "saved_search_matches"("savedSearchId");
@@ -1035,6 +1065,15 @@ ALTER TABLE "property_price_history" ADD CONSTRAINT "property_price_history_prop
 
 -- AddForeignKey
 ALTER TABLE "property_media" ADD CONSTRAINT "property_media_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "properties"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "amenities_on_properties" ADD CONSTRAINT "amenities_on_properties_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "properties"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "amenities_on_properties" ADD CONSTRAINT "amenities_on_properties_amenityId_fkey" FOREIGN KEY ("amenityId") REFERENCES "amenities"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "seasonal_rates" ADD CONSTRAINT "seasonal_rates_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "properties"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "property_boosts" ADD CONSTRAINT "property_boosts_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "properties"("id") ON DELETE CASCADE ON UPDATE CASCADE;

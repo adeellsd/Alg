@@ -54,6 +54,21 @@ export type PropertyPriceHistory = $Result.DefaultSelection<Prisma.$PropertyPric
  */
 export type PropertyMedia = $Result.DefaultSelection<Prisma.$PropertyMediaPayload>
 /**
+ * Model Amenity
+ * 
+ */
+export type Amenity = $Result.DefaultSelection<Prisma.$AmenityPayload>
+/**
+ * Model AmenitiesOnProperties
+ * 
+ */
+export type AmenitiesOnProperties = $Result.DefaultSelection<Prisma.$AmenitiesOnPropertiesPayload>
+/**
+ * Model SeasonalRate
+ * 
+ */
+export type SeasonalRate = $Result.DefaultSelection<Prisma.$SeasonalRatePayload>
+/**
  * Model BoostPricing
  * 
  */
@@ -664,6 +679,36 @@ export class PrismaClient<
     * ```
     */
   get propertyMedia(): Prisma.PropertyMediaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.amenity`: Exposes CRUD operations for the **Amenity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Amenities
+    * const amenities = await prisma.amenity.findMany()
+    * ```
+    */
+  get amenity(): Prisma.AmenityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.amenitiesOnProperties`: Exposes CRUD operations for the **AmenitiesOnProperties** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AmenitiesOnProperties
+    * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findMany()
+    * ```
+    */
+  get amenitiesOnProperties(): Prisma.AmenitiesOnPropertiesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.seasonalRate`: Exposes CRUD operations for the **SeasonalRate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SeasonalRates
+    * const seasonalRates = await prisma.seasonalRate.findMany()
+    * ```
+    */
+  get seasonalRate(): Prisma.SeasonalRateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.boostPricing`: Exposes CRUD operations for the **BoostPricing** model.
@@ -1283,6 +1328,9 @@ export namespace Prisma {
     Property: 'Property',
     PropertyPriceHistory: 'PropertyPriceHistory',
     PropertyMedia: 'PropertyMedia',
+    Amenity: 'Amenity',
+    AmenitiesOnProperties: 'AmenitiesOnProperties',
+    SeasonalRate: 'SeasonalRate',
     BoostPricing: 'BoostPricing',
     PropertyBoost: 'PropertyBoost',
     LocationRequest: 'LocationRequest',
@@ -1318,7 +1366,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "role" | "userRole" | "permission" | "rolePermission" | "property" | "propertyPriceHistory" | "propertyMedia" | "boostPricing" | "propertyBoost" | "locationRequest" | "favorite" | "savedSearch" | "savedSearchMatch" | "conversation" | "message" | "review" | "report" | "payment" | "notification" | "propertyViewStats" | "propertyViewDetail" | "popularSearch" | "wilaya" | "commune"
+      modelProps: "user" | "role" | "userRole" | "permission" | "rolePermission" | "property" | "propertyPriceHistory" | "propertyMedia" | "amenity" | "amenitiesOnProperties" | "seasonalRate" | "boostPricing" | "propertyBoost" | "locationRequest" | "favorite" | "savedSearch" | "savedSearchMatch" | "conversation" | "message" | "review" | "report" | "payment" | "notification" | "propertyViewStats" | "propertyViewDetail" | "popularSearch" | "wilaya" | "commune"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1911,6 +1959,228 @@ export namespace Prisma {
           count: {
             args: Prisma.PropertyMediaCountArgs<ExtArgs>
             result: $Utils.Optional<PropertyMediaCountAggregateOutputType> | number
+          }
+        }
+      }
+      Amenity: {
+        payload: Prisma.$AmenityPayload<ExtArgs>
+        fields: Prisma.AmenityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AmenityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AmenityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>
+          }
+          findFirst: {
+            args: Prisma.AmenityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AmenityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>
+          }
+          findMany: {
+            args: Prisma.AmenityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>[]
+          }
+          create: {
+            args: Prisma.AmenityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>
+          }
+          createMany: {
+            args: Prisma.AmenityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AmenityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>[]
+          }
+          delete: {
+            args: Prisma.AmenityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>
+          }
+          update: {
+            args: Prisma.AmenityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>
+          }
+          deleteMany: {
+            args: Prisma.AmenityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AmenityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AmenityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>[]
+          }
+          upsert: {
+            args: Prisma.AmenityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenityPayload>
+          }
+          aggregate: {
+            args: Prisma.AmenityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAmenity>
+          }
+          groupBy: {
+            args: Prisma.AmenityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AmenityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AmenityCountArgs<ExtArgs>
+            result: $Utils.Optional<AmenityCountAggregateOutputType> | number
+          }
+        }
+      }
+      AmenitiesOnProperties: {
+        payload: Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>
+        fields: Prisma.AmenitiesOnPropertiesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AmenitiesOnPropertiesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AmenitiesOnPropertiesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>
+          }
+          findFirst: {
+            args: Prisma.AmenitiesOnPropertiesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AmenitiesOnPropertiesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>
+          }
+          findMany: {
+            args: Prisma.AmenitiesOnPropertiesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>[]
+          }
+          create: {
+            args: Prisma.AmenitiesOnPropertiesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>
+          }
+          createMany: {
+            args: Prisma.AmenitiesOnPropertiesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AmenitiesOnPropertiesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>[]
+          }
+          delete: {
+            args: Prisma.AmenitiesOnPropertiesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>
+          }
+          update: {
+            args: Prisma.AmenitiesOnPropertiesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>
+          }
+          deleteMany: {
+            args: Prisma.AmenitiesOnPropertiesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AmenitiesOnPropertiesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AmenitiesOnPropertiesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>[]
+          }
+          upsert: {
+            args: Prisma.AmenitiesOnPropertiesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AmenitiesOnPropertiesPayload>
+          }
+          aggregate: {
+            args: Prisma.AmenitiesOnPropertiesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAmenitiesOnProperties>
+          }
+          groupBy: {
+            args: Prisma.AmenitiesOnPropertiesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AmenitiesOnPropertiesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AmenitiesOnPropertiesCountArgs<ExtArgs>
+            result: $Utils.Optional<AmenitiesOnPropertiesCountAggregateOutputType> | number
+          }
+        }
+      }
+      SeasonalRate: {
+        payload: Prisma.$SeasonalRatePayload<ExtArgs>
+        fields: Prisma.SeasonalRateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeasonalRateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeasonalRateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>
+          }
+          findFirst: {
+            args: Prisma.SeasonalRateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeasonalRateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>
+          }
+          findMany: {
+            args: Prisma.SeasonalRateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>[]
+          }
+          create: {
+            args: Prisma.SeasonalRateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>
+          }
+          createMany: {
+            args: Prisma.SeasonalRateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SeasonalRateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>[]
+          }
+          delete: {
+            args: Prisma.SeasonalRateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>
+          }
+          update: {
+            args: Prisma.SeasonalRateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>
+          }
+          deleteMany: {
+            args: Prisma.SeasonalRateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeasonalRateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SeasonalRateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>[]
+          }
+          upsert: {
+            args: Prisma.SeasonalRateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeasonalRatePayload>
+          }
+          aggregate: {
+            args: Prisma.SeasonalRateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeasonalRate>
+          }
+          groupBy: {
+            args: Prisma.SeasonalRateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeasonalRateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeasonalRateCountArgs<ExtArgs>
+            result: $Utils.Optional<SeasonalRateCountAggregateOutputType> | number
           }
         }
       }
@@ -3276,6 +3546,9 @@ export namespace Prisma {
     property?: PropertyOmit
     propertyPriceHistory?: PropertyPriceHistoryOmit
     propertyMedia?: PropertyMediaOmit
+    amenity?: AmenityOmit
+    amenitiesOnProperties?: AmenitiesOnPropertiesOmit
+    seasonalRate?: SeasonalRateOmit
     boostPricing?: BoostPricingOmit
     propertyBoost?: PropertyBoostOmit
     locationRequest?: LocationRequestOmit
@@ -3628,6 +3901,8 @@ export namespace Prisma {
    */
 
   export type PropertyCountOutputType = {
+    amenities: number
+    seasonalRates: number
     media: number
     favorites: number
     savedSearchMatches: number
@@ -3641,6 +3916,8 @@ export namespace Prisma {
   }
 
   export type PropertyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    amenities?: boolean | PropertyCountOutputTypeCountAmenitiesArgs
+    seasonalRates?: boolean | PropertyCountOutputTypeCountSeasonalRatesArgs
     media?: boolean | PropertyCountOutputTypeCountMediaArgs
     favorites?: boolean | PropertyCountOutputTypeCountFavoritesArgs
     savedSearchMatches?: boolean | PropertyCountOutputTypeCountSavedSearchMatchesArgs
@@ -3662,6 +3939,20 @@ export namespace Prisma {
      * Select specific fields to fetch from the PropertyCountOutputType
      */
     select?: PropertyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PropertyCountOutputType without action
+   */
+  export type PropertyCountOutputTypeCountAmenitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AmenitiesOnPropertiesWhereInput
+  }
+
+  /**
+   * PropertyCountOutputType without action
+   */
+  export type PropertyCountOutputTypeCountSeasonalRatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeasonalRateWhereInput
   }
 
   /**
@@ -3732,6 +4023,37 @@ export namespace Prisma {
    */
   export type PropertyCountOutputTypeCountLocationRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LocationRequestWhereInput
+  }
+
+
+  /**
+   * Count Type AmenityCountOutputType
+   */
+
+  export type AmenityCountOutputType = {
+    properties: number
+  }
+
+  export type AmenityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    properties?: boolean | AmenityCountOutputTypeCountPropertiesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AmenityCountOutputType without action
+   */
+  export type AmenityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenityCountOutputType
+     */
+    select?: AmenityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AmenityCountOutputType without action
+   */
+  export type AmenityCountOutputTypeCountPropertiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AmenitiesOnPropertiesWhereInput
   }
 
 
@@ -10409,27 +10731,6 @@ export namespace Prisma {
     totalFloors: number | null
     buildingAge: number | null
     constructionYear: number | null
-    hasElevator: boolean | null
-    hasBalcony: boolean | null
-    hasTerrace: boolean | null
-    hasCellar: boolean | null
-    hasParking: boolean | null
-    hasGarage: boolean | null
-    hasGarden: boolean | null
-    hasPool: boolean | null
-    hasAirConditioning: boolean | null
-    heatingType: $Enums.HeatingType | null
-    hasEquippedKitchen: boolean | null
-    isFurnished: boolean | null
-    hasInternet: boolean | null
-    hasCityGas: boolean | null
-    hasWater: boolean | null
-    hasElectricity: boolean | null
-    hasGuard: boolean | null
-    hasIntercom: boolean | null
-    hasAlarm: boolean | null
-    hasElectricGate: boolean | null
-    hasCCTV: boolean | null
     viewType: $Enums.ViewType | null
     distanceToSchool: number | null
     distanceToTransport: number | null
@@ -10493,27 +10794,6 @@ export namespace Prisma {
     totalFloors: number | null
     buildingAge: number | null
     constructionYear: number | null
-    hasElevator: boolean | null
-    hasBalcony: boolean | null
-    hasTerrace: boolean | null
-    hasCellar: boolean | null
-    hasParking: boolean | null
-    hasGarage: boolean | null
-    hasGarden: boolean | null
-    hasPool: boolean | null
-    hasAirConditioning: boolean | null
-    heatingType: $Enums.HeatingType | null
-    hasEquippedKitchen: boolean | null
-    isFurnished: boolean | null
-    hasInternet: boolean | null
-    hasCityGas: boolean | null
-    hasWater: boolean | null
-    hasElectricity: boolean | null
-    hasGuard: boolean | null
-    hasIntercom: boolean | null
-    hasAlarm: boolean | null
-    hasElectricGate: boolean | null
-    hasCCTV: boolean | null
     viewType: $Enums.ViewType | null
     distanceToSchool: number | null
     distanceToTransport: number | null
@@ -10577,27 +10857,6 @@ export namespace Prisma {
     totalFloors: number
     buildingAge: number
     constructionYear: number
-    hasElevator: number
-    hasBalcony: number
-    hasTerrace: number
-    hasCellar: number
-    hasParking: number
-    hasGarage: number
-    hasGarden: number
-    hasPool: number
-    hasAirConditioning: number
-    heatingType: number
-    hasEquippedKitchen: number
-    isFurnished: number
-    hasInternet: number
-    hasCityGas: number
-    hasWater: number
-    hasElectricity: number
-    hasGuard: number
-    hasIntercom: number
-    hasAlarm: number
-    hasElectricGate: number
-    hasCCTV: number
     viewType: number
     distanceToSchool: number
     distanceToTransport: number
@@ -10726,27 +10985,6 @@ export namespace Prisma {
     totalFloors?: true
     buildingAge?: true
     constructionYear?: true
-    hasElevator?: true
-    hasBalcony?: true
-    hasTerrace?: true
-    hasCellar?: true
-    hasParking?: true
-    hasGarage?: true
-    hasGarden?: true
-    hasPool?: true
-    hasAirConditioning?: true
-    heatingType?: true
-    hasEquippedKitchen?: true
-    isFurnished?: true
-    hasInternet?: true
-    hasCityGas?: true
-    hasWater?: true
-    hasElectricity?: true
-    hasGuard?: true
-    hasIntercom?: true
-    hasAlarm?: true
-    hasElectricGate?: true
-    hasCCTV?: true
     viewType?: true
     distanceToSchool?: true
     distanceToTransport?: true
@@ -10810,27 +11048,6 @@ export namespace Prisma {
     totalFloors?: true
     buildingAge?: true
     constructionYear?: true
-    hasElevator?: true
-    hasBalcony?: true
-    hasTerrace?: true
-    hasCellar?: true
-    hasParking?: true
-    hasGarage?: true
-    hasGarden?: true
-    hasPool?: true
-    hasAirConditioning?: true
-    heatingType?: true
-    hasEquippedKitchen?: true
-    isFurnished?: true
-    hasInternet?: true
-    hasCityGas?: true
-    hasWater?: true
-    hasElectricity?: true
-    hasGuard?: true
-    hasIntercom?: true
-    hasAlarm?: true
-    hasElectricGate?: true
-    hasCCTV?: true
     viewType?: true
     distanceToSchool?: true
     distanceToTransport?: true
@@ -10894,27 +11111,6 @@ export namespace Prisma {
     totalFloors?: true
     buildingAge?: true
     constructionYear?: true
-    hasElevator?: true
-    hasBalcony?: true
-    hasTerrace?: true
-    hasCellar?: true
-    hasParking?: true
-    hasGarage?: true
-    hasGarden?: true
-    hasPool?: true
-    hasAirConditioning?: true
-    heatingType?: true
-    hasEquippedKitchen?: true
-    isFurnished?: true
-    hasInternet?: true
-    hasCityGas?: true
-    hasWater?: true
-    hasElectricity?: true
-    hasGuard?: true
-    hasIntercom?: true
-    hasAlarm?: true
-    hasElectricGate?: true
-    hasCCTV?: true
     viewType?: true
     distanceToSchool?: true
     distanceToTransport?: true
@@ -11066,27 +11262,6 @@ export namespace Prisma {
     totalFloors: number | null
     buildingAge: number | null
     constructionYear: number | null
-    hasElevator: boolean
-    hasBalcony: boolean
-    hasTerrace: boolean
-    hasCellar: boolean
-    hasParking: boolean
-    hasGarage: boolean
-    hasGarden: boolean
-    hasPool: boolean
-    hasAirConditioning: boolean
-    heatingType: $Enums.HeatingType
-    hasEquippedKitchen: boolean
-    isFurnished: boolean
-    hasInternet: boolean
-    hasCityGas: boolean
-    hasWater: boolean
-    hasElectricity: boolean
-    hasGuard: boolean
-    hasIntercom: boolean
-    hasAlarm: boolean
-    hasElectricGate: boolean
-    hasCCTV: boolean
     viewType: $Enums.ViewType
     distanceToSchool: number | null
     distanceToTransport: number | null
@@ -11170,27 +11345,6 @@ export namespace Prisma {
     totalFloors?: boolean
     buildingAge?: boolean
     constructionYear?: boolean
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: boolean
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: boolean
     distanceToSchool?: boolean
     distanceToTransport?: boolean
@@ -11229,6 +11383,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    amenities?: boolean | Property$amenitiesArgs<ExtArgs>
+    seasonalRates?: boolean | Property$seasonalRatesArgs<ExtArgs>
     wilaya?: boolean | WilayaDefaultArgs<ExtArgs>
     commune?: boolean | Property$communeArgs<ExtArgs>
     media?: boolean | Property$mediaArgs<ExtArgs>
@@ -11270,27 +11426,6 @@ export namespace Prisma {
     totalFloors?: boolean
     buildingAge?: boolean
     constructionYear?: boolean
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: boolean
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: boolean
     distanceToSchool?: boolean
     distanceToTransport?: boolean
@@ -11358,27 +11493,6 @@ export namespace Prisma {
     totalFloors?: boolean
     buildingAge?: boolean
     constructionYear?: boolean
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: boolean
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: boolean
     distanceToSchool?: boolean
     distanceToTransport?: boolean
@@ -11446,27 +11560,6 @@ export namespace Prisma {
     totalFloors?: boolean
     buildingAge?: boolean
     constructionYear?: boolean
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: boolean
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: boolean
     distanceToSchool?: boolean
     distanceToTransport?: boolean
@@ -11506,9 +11599,11 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type PropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "title" | "description" | "propertyType" | "transactionType" | "status" | "priceAmount" | "priceNegotiable" | "minRentDuration" | "rentDeposit" | "surfaceArea" | "landArea" | "totalRooms" | "bedrooms" | "bathrooms" | "kitchens" | "livingRooms" | "floor" | "totalFloors" | "buildingAge" | "constructionYear" | "hasElevator" | "hasBalcony" | "hasTerrace" | "hasCellar" | "hasParking" | "hasGarage" | "hasGarden" | "hasPool" | "hasAirConditioning" | "heatingType" | "hasEquippedKitchen" | "isFurnished" | "hasInternet" | "hasCityGas" | "hasWater" | "hasElectricity" | "hasGuard" | "hasIntercom" | "hasAlarm" | "hasElectricGate" | "hasCCTV" | "viewType" | "distanceToSchool" | "distanceToTransport" | "distanceToShops" | "distanceToMosque" | "distanceToHospital" | "hasLivretFoncier" | "hasActeVente" | "hasPermisConstruction" | "arePapersComplete" | "customFeatures" | "wilayaId" | "communeId" | "quartier" | "fullAddress" | "postalCode" | "exactLatitude" | "exactLongitude" | "publicLatitude" | "publicLongitude" | "showExactLocation" | "privacyRadiusMeters" | "locationInputMode" | "mapboxPlaceId" | "viewsCount" | "favoritesCount" | "contactsCount" | "sharesCount" | "slug" | "metaTitle" | "metaDescription" | "moderatedAt" | "moderatedBy" | "rejectionReason" | "expiresAt" | "isExpired" | "deletedAt", ExtArgs["result"]["property"]>
+  export type PropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "title" | "description" | "propertyType" | "transactionType" | "status" | "priceAmount" | "priceNegotiable" | "minRentDuration" | "rentDeposit" | "surfaceArea" | "landArea" | "totalRooms" | "bedrooms" | "bathrooms" | "kitchens" | "livingRooms" | "floor" | "totalFloors" | "buildingAge" | "constructionYear" | "viewType" | "distanceToSchool" | "distanceToTransport" | "distanceToShops" | "distanceToMosque" | "distanceToHospital" | "hasLivretFoncier" | "hasActeVente" | "hasPermisConstruction" | "arePapersComplete" | "customFeatures" | "wilayaId" | "communeId" | "quartier" | "fullAddress" | "postalCode" | "exactLatitude" | "exactLongitude" | "publicLatitude" | "publicLongitude" | "showExactLocation" | "privacyRadiusMeters" | "locationInputMode" | "mapboxPlaceId" | "viewsCount" | "favoritesCount" | "contactsCount" | "sharesCount" | "slug" | "metaTitle" | "metaDescription" | "moderatedAt" | "moderatedBy" | "rejectionReason" | "expiresAt" | "isExpired" | "deletedAt", ExtArgs["result"]["property"]>
   export type PropertyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    amenities?: boolean | Property$amenitiesArgs<ExtArgs>
+    seasonalRates?: boolean | Property$seasonalRatesArgs<ExtArgs>
     wilaya?: boolean | WilayaDefaultArgs<ExtArgs>
     commune?: boolean | Property$communeArgs<ExtArgs>
     media?: boolean | Property$mediaArgs<ExtArgs>
@@ -11539,6 +11634,8 @@ export namespace Prisma {
     name: "Property"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      amenities: Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>[]
+      seasonalRates: Prisma.$SeasonalRatePayload<ExtArgs>[]
       wilaya: Prisma.$WilayaPayload<ExtArgs>
       commune: Prisma.$CommunePayload<ExtArgs> | null
       media: Prisma.$PropertyMediaPayload<ExtArgs>[]
@@ -11578,27 +11675,6 @@ export namespace Prisma {
       totalFloors: number | null
       buildingAge: number | null
       constructionYear: number | null
-      hasElevator: boolean
-      hasBalcony: boolean
-      hasTerrace: boolean
-      hasCellar: boolean
-      hasParking: boolean
-      hasGarage: boolean
-      hasGarden: boolean
-      hasPool: boolean
-      hasAirConditioning: boolean
-      heatingType: $Enums.HeatingType
-      hasEquippedKitchen: boolean
-      isFurnished: boolean
-      hasInternet: boolean
-      hasCityGas: boolean
-      hasWater: boolean
-      hasElectricity: boolean
-      hasGuard: boolean
-      hasIntercom: boolean
-      hasAlarm: boolean
-      hasElectricGate: boolean
-      hasCCTV: boolean
       viewType: $Enums.ViewType
       distanceToSchool: number | null
       distanceToTransport: number | null
@@ -12031,6 +12107,8 @@ export namespace Prisma {
   export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    amenities<T extends Property$amenitiesArgs<ExtArgs> = {}>(args?: Subset<T, Property$amenitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    seasonalRates<T extends Property$seasonalRatesArgs<ExtArgs> = {}>(args?: Subset<T, Property$seasonalRatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     wilaya<T extends WilayaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WilayaDefaultArgs<ExtArgs>>): Prisma__WilayaClient<$Result.GetResult<Prisma.$WilayaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     commune<T extends Property$communeArgs<ExtArgs> = {}>(args?: Subset<T, Property$communeArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     media<T extends Property$mediaArgs<ExtArgs> = {}>(args?: Subset<T, Property$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropertyMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -12097,27 +12175,6 @@ export namespace Prisma {
     readonly totalFloors: FieldRef<"Property", 'Int'>
     readonly buildingAge: FieldRef<"Property", 'Int'>
     readonly constructionYear: FieldRef<"Property", 'Int'>
-    readonly hasElevator: FieldRef<"Property", 'Boolean'>
-    readonly hasBalcony: FieldRef<"Property", 'Boolean'>
-    readonly hasTerrace: FieldRef<"Property", 'Boolean'>
-    readonly hasCellar: FieldRef<"Property", 'Boolean'>
-    readonly hasParking: FieldRef<"Property", 'Boolean'>
-    readonly hasGarage: FieldRef<"Property", 'Boolean'>
-    readonly hasGarden: FieldRef<"Property", 'Boolean'>
-    readonly hasPool: FieldRef<"Property", 'Boolean'>
-    readonly hasAirConditioning: FieldRef<"Property", 'Boolean'>
-    readonly heatingType: FieldRef<"Property", 'HeatingType'>
-    readonly hasEquippedKitchen: FieldRef<"Property", 'Boolean'>
-    readonly isFurnished: FieldRef<"Property", 'Boolean'>
-    readonly hasInternet: FieldRef<"Property", 'Boolean'>
-    readonly hasCityGas: FieldRef<"Property", 'Boolean'>
-    readonly hasWater: FieldRef<"Property", 'Boolean'>
-    readonly hasElectricity: FieldRef<"Property", 'Boolean'>
-    readonly hasGuard: FieldRef<"Property", 'Boolean'>
-    readonly hasIntercom: FieldRef<"Property", 'Boolean'>
-    readonly hasAlarm: FieldRef<"Property", 'Boolean'>
-    readonly hasElectricGate: FieldRef<"Property", 'Boolean'>
-    readonly hasCCTV: FieldRef<"Property", 'Boolean'>
     readonly viewType: FieldRef<"Property", 'ViewType'>
     readonly distanceToSchool: FieldRef<"Property", 'Int'>
     readonly distanceToTransport: FieldRef<"Property", 'Int'>
@@ -12548,6 +12605,54 @@ export namespace Prisma {
      * Limit how many Properties to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Property.amenities
+   */
+  export type Property$amenitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    where?: AmenitiesOnPropertiesWhereInput
+    orderBy?: AmenitiesOnPropertiesOrderByWithRelationInput | AmenitiesOnPropertiesOrderByWithRelationInput[]
+    cursor?: AmenitiesOnPropertiesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AmenitiesOnPropertiesScalarFieldEnum | AmenitiesOnPropertiesScalarFieldEnum[]
+  }
+
+  /**
+   * Property.seasonalRates
+   */
+  export type Property$seasonalRatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    where?: SeasonalRateWhereInput
+    orderBy?: SeasonalRateOrderByWithRelationInput | SeasonalRateOrderByWithRelationInput[]
+    cursor?: SeasonalRateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeasonalRateScalarFieldEnum | SeasonalRateScalarFieldEnum[]
   }
 
   /**
@@ -14016,11 +14121,11 @@ export namespace Prisma {
   }
 
   export type PropertyMediaAvgAggregateOutputType = {
-    displayOrder: number | null
+    order: number | null
   }
 
   export type PropertyMediaSumAggregateOutputType = {
-    displayOrder: number | null
+    order: number | null
   }
 
   export type PropertyMediaMinAggregateOutputType = {
@@ -14029,8 +14134,8 @@ export namespace Prisma {
     updatedAt: Date | null
     propertyId: string | null
     mediaType: $Enums.MediaType | null
-    displayOrder: number | null
-    isPrimary: boolean | null
+    order: number | null
+    isThumbnail: boolean | null
     deletedAt: Date | null
   }
 
@@ -14040,8 +14145,8 @@ export namespace Prisma {
     updatedAt: Date | null
     propertyId: string | null
     mediaType: $Enums.MediaType | null
-    displayOrder: number | null
-    isPrimary: boolean | null
+    order: number | null
+    isThumbnail: boolean | null
     deletedAt: Date | null
   }
 
@@ -14053,19 +14158,19 @@ export namespace Prisma {
     mediaType: number
     imageData: number
     videoData: number
-    displayOrder: number
-    isPrimary: number
+    order: number
+    isThumbnail: number
     deletedAt: number
     _all: number
   }
 
 
   export type PropertyMediaAvgAggregateInputType = {
-    displayOrder?: true
+    order?: true
   }
 
   export type PropertyMediaSumAggregateInputType = {
-    displayOrder?: true
+    order?: true
   }
 
   export type PropertyMediaMinAggregateInputType = {
@@ -14074,8 +14179,8 @@ export namespace Prisma {
     updatedAt?: true
     propertyId?: true
     mediaType?: true
-    displayOrder?: true
-    isPrimary?: true
+    order?: true
+    isThumbnail?: true
     deletedAt?: true
   }
 
@@ -14085,8 +14190,8 @@ export namespace Prisma {
     updatedAt?: true
     propertyId?: true
     mediaType?: true
-    displayOrder?: true
-    isPrimary?: true
+    order?: true
+    isThumbnail?: true
     deletedAt?: true
   }
 
@@ -14098,8 +14203,8 @@ export namespace Prisma {
     mediaType?: true
     imageData?: true
     videoData?: true
-    displayOrder?: true
-    isPrimary?: true
+    order?: true
+    isThumbnail?: true
     deletedAt?: true
     _all?: true
   }
@@ -14198,8 +14303,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData: JsonValue | null
     videoData: JsonValue | null
-    displayOrder: number
-    isPrimary: boolean
+    order: number
+    isThumbnail: boolean
     deletedAt: Date | null
     _count: PropertyMediaCountAggregateOutputType | null
     _avg: PropertyMediaAvgAggregateOutputType | null
@@ -14230,8 +14335,8 @@ export namespace Prisma {
     mediaType?: boolean
     imageData?: boolean
     videoData?: boolean
-    displayOrder?: boolean
-    isPrimary?: boolean
+    order?: boolean
+    isThumbnail?: boolean
     deletedAt?: boolean
     property?: boolean | PropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["propertyMedia"]>
@@ -14244,8 +14349,8 @@ export namespace Prisma {
     mediaType?: boolean
     imageData?: boolean
     videoData?: boolean
-    displayOrder?: boolean
-    isPrimary?: boolean
+    order?: boolean
+    isThumbnail?: boolean
     deletedAt?: boolean
     property?: boolean | PropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["propertyMedia"]>
@@ -14258,8 +14363,8 @@ export namespace Prisma {
     mediaType?: boolean
     imageData?: boolean
     videoData?: boolean
-    displayOrder?: boolean
-    isPrimary?: boolean
+    order?: boolean
+    isThumbnail?: boolean
     deletedAt?: boolean
     property?: boolean | PropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["propertyMedia"]>
@@ -14272,12 +14377,12 @@ export namespace Prisma {
     mediaType?: boolean
     imageData?: boolean
     videoData?: boolean
-    displayOrder?: boolean
-    isPrimary?: boolean
+    order?: boolean
+    isThumbnail?: boolean
     deletedAt?: boolean
   }
 
-  export type PropertyMediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "propertyId" | "mediaType" | "imageData" | "videoData" | "displayOrder" | "isPrimary" | "deletedAt", ExtArgs["result"]["propertyMedia"]>
+  export type PropertyMediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "propertyId" | "mediaType" | "imageData" | "videoData" | "order" | "isThumbnail" | "deletedAt", ExtArgs["result"]["propertyMedia"]>
   export type PropertyMediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     property?: boolean | PropertyDefaultArgs<ExtArgs>
   }
@@ -14301,8 +14406,8 @@ export namespace Prisma {
       mediaType: $Enums.MediaType
       imageData: Prisma.JsonValue | null
       videoData: Prisma.JsonValue | null
-      displayOrder: number
-      isPrimary: boolean
+      order: number
+      isThumbnail: boolean
       deletedAt: Date | null
     }, ExtArgs["result"]["propertyMedia"]>
     composites: {}
@@ -14735,8 +14840,8 @@ export namespace Prisma {
     readonly mediaType: FieldRef<"PropertyMedia", 'MediaType'>
     readonly imageData: FieldRef<"PropertyMedia", 'Json'>
     readonly videoData: FieldRef<"PropertyMedia", 'Json'>
-    readonly displayOrder: FieldRef<"PropertyMedia", 'Int'>
-    readonly isPrimary: FieldRef<"PropertyMedia", 'Boolean'>
+    readonly order: FieldRef<"PropertyMedia", 'Int'>
+    readonly isThumbnail: FieldRef<"PropertyMedia", 'Boolean'>
     readonly deletedAt: FieldRef<"PropertyMedia", 'DateTime'>
   }
     
@@ -15149,6 +15254,3221 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PropertyMediaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Amenity
+   */
+
+  export type AggregateAmenity = {
+    _count: AmenityCountAggregateOutputType | null
+    _min: AmenityMinAggregateOutputType | null
+    _max: AmenityMaxAggregateOutputType | null
+  }
+
+  export type AmenityMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    category: string | null
+    icon: string | null
+  }
+
+  export type AmenityMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    category: string | null
+    icon: string | null
+  }
+
+  export type AmenityCountAggregateOutputType = {
+    id: number
+    name: number
+    category: number
+    icon: number
+    _all: number
+  }
+
+
+  export type AmenityMinAggregateInputType = {
+    id?: true
+    name?: true
+    category?: true
+    icon?: true
+  }
+
+  export type AmenityMaxAggregateInputType = {
+    id?: true
+    name?: true
+    category?: true
+    icon?: true
+  }
+
+  export type AmenityCountAggregateInputType = {
+    id?: true
+    name?: true
+    category?: true
+    icon?: true
+    _all?: true
+  }
+
+  export type AmenityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Amenity to aggregate.
+     */
+    where?: AmenityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Amenities to fetch.
+     */
+    orderBy?: AmenityOrderByWithRelationInput | AmenityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AmenityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Amenities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Amenities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Amenities
+    **/
+    _count?: true | AmenityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AmenityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AmenityMaxAggregateInputType
+  }
+
+  export type GetAmenityAggregateType<T extends AmenityAggregateArgs> = {
+        [P in keyof T & keyof AggregateAmenity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAmenity[P]>
+      : GetScalarType<T[P], AggregateAmenity[P]>
+  }
+
+
+
+
+  export type AmenityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AmenityWhereInput
+    orderBy?: AmenityOrderByWithAggregationInput | AmenityOrderByWithAggregationInput[]
+    by: AmenityScalarFieldEnum[] | AmenityScalarFieldEnum
+    having?: AmenityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AmenityCountAggregateInputType | true
+    _min?: AmenityMinAggregateInputType
+    _max?: AmenityMaxAggregateInputType
+  }
+
+  export type AmenityGroupByOutputType = {
+    id: string
+    name: string
+    category: string
+    icon: string | null
+    _count: AmenityCountAggregateOutputType | null
+    _min: AmenityMinAggregateOutputType | null
+    _max: AmenityMaxAggregateOutputType | null
+  }
+
+  type GetAmenityGroupByPayload<T extends AmenityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AmenityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AmenityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AmenityGroupByOutputType[P]>
+            : GetScalarType<T[P], AmenityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AmenitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    icon?: boolean
+    properties?: boolean | Amenity$propertiesArgs<ExtArgs>
+    _count?: boolean | AmenityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["amenity"]>
+
+  export type AmenitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    icon?: boolean
+  }, ExtArgs["result"]["amenity"]>
+
+  export type AmenitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    icon?: boolean
+  }, ExtArgs["result"]["amenity"]>
+
+  export type AmenitySelectScalar = {
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    icon?: boolean
+  }
+
+  export type AmenityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "category" | "icon", ExtArgs["result"]["amenity"]>
+  export type AmenityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    properties?: boolean | Amenity$propertiesArgs<ExtArgs>
+    _count?: boolean | AmenityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AmenityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AmenityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AmenityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Amenity"
+    objects: {
+      properties: Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      category: string
+      icon: string | null
+    }, ExtArgs["result"]["amenity"]>
+    composites: {}
+  }
+
+  type AmenityGetPayload<S extends boolean | null | undefined | AmenityDefaultArgs> = $Result.GetResult<Prisma.$AmenityPayload, S>
+
+  type AmenityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AmenityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AmenityCountAggregateInputType | true
+    }
+
+  export interface AmenityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Amenity'], meta: { name: 'Amenity' } }
+    /**
+     * Find zero or one Amenity that matches the filter.
+     * @param {AmenityFindUniqueArgs} args - Arguments to find a Amenity
+     * @example
+     * // Get one Amenity
+     * const amenity = await prisma.amenity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AmenityFindUniqueArgs>(args: SelectSubset<T, AmenityFindUniqueArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Amenity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AmenityFindUniqueOrThrowArgs} args - Arguments to find a Amenity
+     * @example
+     * // Get one Amenity
+     * const amenity = await prisma.amenity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AmenityFindUniqueOrThrowArgs>(args: SelectSubset<T, AmenityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Amenity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityFindFirstArgs} args - Arguments to find a Amenity
+     * @example
+     * // Get one Amenity
+     * const amenity = await prisma.amenity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AmenityFindFirstArgs>(args?: SelectSubset<T, AmenityFindFirstArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Amenity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityFindFirstOrThrowArgs} args - Arguments to find a Amenity
+     * @example
+     * // Get one Amenity
+     * const amenity = await prisma.amenity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AmenityFindFirstOrThrowArgs>(args?: SelectSubset<T, AmenityFindFirstOrThrowArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Amenities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Amenities
+     * const amenities = await prisma.amenity.findMany()
+     * 
+     * // Get first 10 Amenities
+     * const amenities = await prisma.amenity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const amenityWithIdOnly = await prisma.amenity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AmenityFindManyArgs>(args?: SelectSubset<T, AmenityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Amenity.
+     * @param {AmenityCreateArgs} args - Arguments to create a Amenity.
+     * @example
+     * // Create one Amenity
+     * const Amenity = await prisma.amenity.create({
+     *   data: {
+     *     // ... data to create a Amenity
+     *   }
+     * })
+     * 
+     */
+    create<T extends AmenityCreateArgs>(args: SelectSubset<T, AmenityCreateArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Amenities.
+     * @param {AmenityCreateManyArgs} args - Arguments to create many Amenities.
+     * @example
+     * // Create many Amenities
+     * const amenity = await prisma.amenity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AmenityCreateManyArgs>(args?: SelectSubset<T, AmenityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Amenities and returns the data saved in the database.
+     * @param {AmenityCreateManyAndReturnArgs} args - Arguments to create many Amenities.
+     * @example
+     * // Create many Amenities
+     * const amenity = await prisma.amenity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Amenities and only return the `id`
+     * const amenityWithIdOnly = await prisma.amenity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AmenityCreateManyAndReturnArgs>(args?: SelectSubset<T, AmenityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Amenity.
+     * @param {AmenityDeleteArgs} args - Arguments to delete one Amenity.
+     * @example
+     * // Delete one Amenity
+     * const Amenity = await prisma.amenity.delete({
+     *   where: {
+     *     // ... filter to delete one Amenity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AmenityDeleteArgs>(args: SelectSubset<T, AmenityDeleteArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Amenity.
+     * @param {AmenityUpdateArgs} args - Arguments to update one Amenity.
+     * @example
+     * // Update one Amenity
+     * const amenity = await prisma.amenity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AmenityUpdateArgs>(args: SelectSubset<T, AmenityUpdateArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Amenities.
+     * @param {AmenityDeleteManyArgs} args - Arguments to filter Amenities to delete.
+     * @example
+     * // Delete a few Amenities
+     * const { count } = await prisma.amenity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AmenityDeleteManyArgs>(args?: SelectSubset<T, AmenityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Amenities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Amenities
+     * const amenity = await prisma.amenity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AmenityUpdateManyArgs>(args: SelectSubset<T, AmenityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Amenities and returns the data updated in the database.
+     * @param {AmenityUpdateManyAndReturnArgs} args - Arguments to update many Amenities.
+     * @example
+     * // Update many Amenities
+     * const amenity = await prisma.amenity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Amenities and only return the `id`
+     * const amenityWithIdOnly = await prisma.amenity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AmenityUpdateManyAndReturnArgs>(args: SelectSubset<T, AmenityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Amenity.
+     * @param {AmenityUpsertArgs} args - Arguments to update or create a Amenity.
+     * @example
+     * // Update or create a Amenity
+     * const amenity = await prisma.amenity.upsert({
+     *   create: {
+     *     // ... data to create a Amenity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Amenity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AmenityUpsertArgs>(args: SelectSubset<T, AmenityUpsertArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Amenities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityCountArgs} args - Arguments to filter Amenities to count.
+     * @example
+     * // Count the number of Amenities
+     * const count = await prisma.amenity.count({
+     *   where: {
+     *     // ... the filter for the Amenities we want to count
+     *   }
+     * })
+    **/
+    count<T extends AmenityCountArgs>(
+      args?: Subset<T, AmenityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AmenityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Amenity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AmenityAggregateArgs>(args: Subset<T, AmenityAggregateArgs>): Prisma.PrismaPromise<GetAmenityAggregateType<T>>
+
+    /**
+     * Group by Amenity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AmenityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AmenityGroupByArgs['orderBy'] }
+        : { orderBy?: AmenityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AmenityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAmenityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Amenity model
+   */
+  readonly fields: AmenityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Amenity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AmenityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    properties<T extends Amenity$propertiesArgs<ExtArgs> = {}>(args?: Subset<T, Amenity$propertiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Amenity model
+   */
+  interface AmenityFieldRefs {
+    readonly id: FieldRef<"Amenity", 'String'>
+    readonly name: FieldRef<"Amenity", 'String'>
+    readonly category: FieldRef<"Amenity", 'String'>
+    readonly icon: FieldRef<"Amenity", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Amenity findUnique
+   */
+  export type AmenityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * Filter, which Amenity to fetch.
+     */
+    where: AmenityWhereUniqueInput
+  }
+
+  /**
+   * Amenity findUniqueOrThrow
+   */
+  export type AmenityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * Filter, which Amenity to fetch.
+     */
+    where: AmenityWhereUniqueInput
+  }
+
+  /**
+   * Amenity findFirst
+   */
+  export type AmenityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * Filter, which Amenity to fetch.
+     */
+    where?: AmenityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Amenities to fetch.
+     */
+    orderBy?: AmenityOrderByWithRelationInput | AmenityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Amenities.
+     */
+    cursor?: AmenityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Amenities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Amenities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Amenities.
+     */
+    distinct?: AmenityScalarFieldEnum | AmenityScalarFieldEnum[]
+  }
+
+  /**
+   * Amenity findFirstOrThrow
+   */
+  export type AmenityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * Filter, which Amenity to fetch.
+     */
+    where?: AmenityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Amenities to fetch.
+     */
+    orderBy?: AmenityOrderByWithRelationInput | AmenityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Amenities.
+     */
+    cursor?: AmenityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Amenities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Amenities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Amenities.
+     */
+    distinct?: AmenityScalarFieldEnum | AmenityScalarFieldEnum[]
+  }
+
+  /**
+   * Amenity findMany
+   */
+  export type AmenityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * Filter, which Amenities to fetch.
+     */
+    where?: AmenityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Amenities to fetch.
+     */
+    orderBy?: AmenityOrderByWithRelationInput | AmenityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Amenities.
+     */
+    cursor?: AmenityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Amenities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Amenities.
+     */
+    skip?: number
+    distinct?: AmenityScalarFieldEnum | AmenityScalarFieldEnum[]
+  }
+
+  /**
+   * Amenity create
+   */
+  export type AmenityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Amenity.
+     */
+    data: XOR<AmenityCreateInput, AmenityUncheckedCreateInput>
+  }
+
+  /**
+   * Amenity createMany
+   */
+  export type AmenityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Amenities.
+     */
+    data: AmenityCreateManyInput | AmenityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Amenity createManyAndReturn
+   */
+  export type AmenityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * The data used to create many Amenities.
+     */
+    data: AmenityCreateManyInput | AmenityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Amenity update
+   */
+  export type AmenityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Amenity.
+     */
+    data: XOR<AmenityUpdateInput, AmenityUncheckedUpdateInput>
+    /**
+     * Choose, which Amenity to update.
+     */
+    where: AmenityWhereUniqueInput
+  }
+
+  /**
+   * Amenity updateMany
+   */
+  export type AmenityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Amenities.
+     */
+    data: XOR<AmenityUpdateManyMutationInput, AmenityUncheckedUpdateManyInput>
+    /**
+     * Filter which Amenities to update
+     */
+    where?: AmenityWhereInput
+    /**
+     * Limit how many Amenities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Amenity updateManyAndReturn
+   */
+  export type AmenityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * The data used to update Amenities.
+     */
+    data: XOR<AmenityUpdateManyMutationInput, AmenityUncheckedUpdateManyInput>
+    /**
+     * Filter which Amenities to update
+     */
+    where?: AmenityWhereInput
+    /**
+     * Limit how many Amenities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Amenity upsert
+   */
+  export type AmenityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Amenity to update in case it exists.
+     */
+    where: AmenityWhereUniqueInput
+    /**
+     * In case the Amenity found by the `where` argument doesn't exist, create a new Amenity with this data.
+     */
+    create: XOR<AmenityCreateInput, AmenityUncheckedCreateInput>
+    /**
+     * In case the Amenity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AmenityUpdateInput, AmenityUncheckedUpdateInput>
+  }
+
+  /**
+   * Amenity delete
+   */
+  export type AmenityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+    /**
+     * Filter which Amenity to delete.
+     */
+    where: AmenityWhereUniqueInput
+  }
+
+  /**
+   * Amenity deleteMany
+   */
+  export type AmenityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Amenities to delete
+     */
+    where?: AmenityWhereInput
+    /**
+     * Limit how many Amenities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Amenity.properties
+   */
+  export type Amenity$propertiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    where?: AmenitiesOnPropertiesWhereInput
+    orderBy?: AmenitiesOnPropertiesOrderByWithRelationInput | AmenitiesOnPropertiesOrderByWithRelationInput[]
+    cursor?: AmenitiesOnPropertiesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AmenitiesOnPropertiesScalarFieldEnum | AmenitiesOnPropertiesScalarFieldEnum[]
+  }
+
+  /**
+   * Amenity without action
+   */
+  export type AmenityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Amenity
+     */
+    select?: AmenitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Amenity
+     */
+    omit?: AmenityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AmenitiesOnProperties
+   */
+
+  export type AggregateAmenitiesOnProperties = {
+    _count: AmenitiesOnPropertiesCountAggregateOutputType | null
+    _min: AmenitiesOnPropertiesMinAggregateOutputType | null
+    _max: AmenitiesOnPropertiesMaxAggregateOutputType | null
+  }
+
+  export type AmenitiesOnPropertiesMinAggregateOutputType = {
+    propertyId: string | null
+    amenityId: string | null
+    assignedAt: Date | null
+  }
+
+  export type AmenitiesOnPropertiesMaxAggregateOutputType = {
+    propertyId: string | null
+    amenityId: string | null
+    assignedAt: Date | null
+  }
+
+  export type AmenitiesOnPropertiesCountAggregateOutputType = {
+    propertyId: number
+    amenityId: number
+    assignedAt: number
+    _all: number
+  }
+
+
+  export type AmenitiesOnPropertiesMinAggregateInputType = {
+    propertyId?: true
+    amenityId?: true
+    assignedAt?: true
+  }
+
+  export type AmenitiesOnPropertiesMaxAggregateInputType = {
+    propertyId?: true
+    amenityId?: true
+    assignedAt?: true
+  }
+
+  export type AmenitiesOnPropertiesCountAggregateInputType = {
+    propertyId?: true
+    amenityId?: true
+    assignedAt?: true
+    _all?: true
+  }
+
+  export type AmenitiesOnPropertiesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AmenitiesOnProperties to aggregate.
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AmenitiesOnProperties to fetch.
+     */
+    orderBy?: AmenitiesOnPropertiesOrderByWithRelationInput | AmenitiesOnPropertiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AmenitiesOnPropertiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AmenitiesOnProperties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AmenitiesOnProperties.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AmenitiesOnProperties
+    **/
+    _count?: true | AmenitiesOnPropertiesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AmenitiesOnPropertiesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AmenitiesOnPropertiesMaxAggregateInputType
+  }
+
+  export type GetAmenitiesOnPropertiesAggregateType<T extends AmenitiesOnPropertiesAggregateArgs> = {
+        [P in keyof T & keyof AggregateAmenitiesOnProperties]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAmenitiesOnProperties[P]>
+      : GetScalarType<T[P], AggregateAmenitiesOnProperties[P]>
+  }
+
+
+
+
+  export type AmenitiesOnPropertiesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AmenitiesOnPropertiesWhereInput
+    orderBy?: AmenitiesOnPropertiesOrderByWithAggregationInput | AmenitiesOnPropertiesOrderByWithAggregationInput[]
+    by: AmenitiesOnPropertiesScalarFieldEnum[] | AmenitiesOnPropertiesScalarFieldEnum
+    having?: AmenitiesOnPropertiesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AmenitiesOnPropertiesCountAggregateInputType | true
+    _min?: AmenitiesOnPropertiesMinAggregateInputType
+    _max?: AmenitiesOnPropertiesMaxAggregateInputType
+  }
+
+  export type AmenitiesOnPropertiesGroupByOutputType = {
+    propertyId: string
+    amenityId: string
+    assignedAt: Date
+    _count: AmenitiesOnPropertiesCountAggregateOutputType | null
+    _min: AmenitiesOnPropertiesMinAggregateOutputType | null
+    _max: AmenitiesOnPropertiesMaxAggregateOutputType | null
+  }
+
+  type GetAmenitiesOnPropertiesGroupByPayload<T extends AmenitiesOnPropertiesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AmenitiesOnPropertiesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AmenitiesOnPropertiesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AmenitiesOnPropertiesGroupByOutputType[P]>
+            : GetScalarType<T[P], AmenitiesOnPropertiesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AmenitiesOnPropertiesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    propertyId?: boolean
+    amenityId?: boolean
+    assignedAt?: boolean
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+    amenity?: boolean | AmenityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["amenitiesOnProperties"]>
+
+  export type AmenitiesOnPropertiesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    propertyId?: boolean
+    amenityId?: boolean
+    assignedAt?: boolean
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+    amenity?: boolean | AmenityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["amenitiesOnProperties"]>
+
+  export type AmenitiesOnPropertiesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    propertyId?: boolean
+    amenityId?: boolean
+    assignedAt?: boolean
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+    amenity?: boolean | AmenityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["amenitiesOnProperties"]>
+
+  export type AmenitiesOnPropertiesSelectScalar = {
+    propertyId?: boolean
+    amenityId?: boolean
+    assignedAt?: boolean
+  }
+
+  export type AmenitiesOnPropertiesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"propertyId" | "amenityId" | "assignedAt", ExtArgs["result"]["amenitiesOnProperties"]>
+  export type AmenitiesOnPropertiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+    amenity?: boolean | AmenityDefaultArgs<ExtArgs>
+  }
+  export type AmenitiesOnPropertiesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+    amenity?: boolean | AmenityDefaultArgs<ExtArgs>
+  }
+  export type AmenitiesOnPropertiesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+    amenity?: boolean | AmenityDefaultArgs<ExtArgs>
+  }
+
+  export type $AmenitiesOnPropertiesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AmenitiesOnProperties"
+    objects: {
+      property: Prisma.$PropertyPayload<ExtArgs>
+      amenity: Prisma.$AmenityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      propertyId: string
+      amenityId: string
+      assignedAt: Date
+    }, ExtArgs["result"]["amenitiesOnProperties"]>
+    composites: {}
+  }
+
+  type AmenitiesOnPropertiesGetPayload<S extends boolean | null | undefined | AmenitiesOnPropertiesDefaultArgs> = $Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload, S>
+
+  type AmenitiesOnPropertiesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AmenitiesOnPropertiesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AmenitiesOnPropertiesCountAggregateInputType | true
+    }
+
+  export interface AmenitiesOnPropertiesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AmenitiesOnProperties'], meta: { name: 'AmenitiesOnProperties' } }
+    /**
+     * Find zero or one AmenitiesOnProperties that matches the filter.
+     * @param {AmenitiesOnPropertiesFindUniqueArgs} args - Arguments to find a AmenitiesOnProperties
+     * @example
+     * // Get one AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AmenitiesOnPropertiesFindUniqueArgs>(args: SelectSubset<T, AmenitiesOnPropertiesFindUniqueArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AmenitiesOnProperties that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AmenitiesOnPropertiesFindUniqueOrThrowArgs} args - Arguments to find a AmenitiesOnProperties
+     * @example
+     * // Get one AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AmenitiesOnPropertiesFindUniqueOrThrowArgs>(args: SelectSubset<T, AmenitiesOnPropertiesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AmenitiesOnProperties that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesFindFirstArgs} args - Arguments to find a AmenitiesOnProperties
+     * @example
+     * // Get one AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AmenitiesOnPropertiesFindFirstArgs>(args?: SelectSubset<T, AmenitiesOnPropertiesFindFirstArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AmenitiesOnProperties that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesFindFirstOrThrowArgs} args - Arguments to find a AmenitiesOnProperties
+     * @example
+     * // Get one AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AmenitiesOnPropertiesFindFirstOrThrowArgs>(args?: SelectSubset<T, AmenitiesOnPropertiesFindFirstOrThrowArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AmenitiesOnProperties that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findMany()
+     * 
+     * // Get first 10 AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.findMany({ take: 10 })
+     * 
+     * // Only select the `propertyId`
+     * const amenitiesOnPropertiesWithPropertyIdOnly = await prisma.amenitiesOnProperties.findMany({ select: { propertyId: true } })
+     * 
+     */
+    findMany<T extends AmenitiesOnPropertiesFindManyArgs>(args?: SelectSubset<T, AmenitiesOnPropertiesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AmenitiesOnProperties.
+     * @param {AmenitiesOnPropertiesCreateArgs} args - Arguments to create a AmenitiesOnProperties.
+     * @example
+     * // Create one AmenitiesOnProperties
+     * const AmenitiesOnProperties = await prisma.amenitiesOnProperties.create({
+     *   data: {
+     *     // ... data to create a AmenitiesOnProperties
+     *   }
+     * })
+     * 
+     */
+    create<T extends AmenitiesOnPropertiesCreateArgs>(args: SelectSubset<T, AmenitiesOnPropertiesCreateArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AmenitiesOnProperties.
+     * @param {AmenitiesOnPropertiesCreateManyArgs} args - Arguments to create many AmenitiesOnProperties.
+     * @example
+     * // Create many AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AmenitiesOnPropertiesCreateManyArgs>(args?: SelectSubset<T, AmenitiesOnPropertiesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AmenitiesOnProperties and returns the data saved in the database.
+     * @param {AmenitiesOnPropertiesCreateManyAndReturnArgs} args - Arguments to create many AmenitiesOnProperties.
+     * @example
+     * // Create many AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AmenitiesOnProperties and only return the `propertyId`
+     * const amenitiesOnPropertiesWithPropertyIdOnly = await prisma.amenitiesOnProperties.createManyAndReturn({
+     *   select: { propertyId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AmenitiesOnPropertiesCreateManyAndReturnArgs>(args?: SelectSubset<T, AmenitiesOnPropertiesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AmenitiesOnProperties.
+     * @param {AmenitiesOnPropertiesDeleteArgs} args - Arguments to delete one AmenitiesOnProperties.
+     * @example
+     * // Delete one AmenitiesOnProperties
+     * const AmenitiesOnProperties = await prisma.amenitiesOnProperties.delete({
+     *   where: {
+     *     // ... filter to delete one AmenitiesOnProperties
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AmenitiesOnPropertiesDeleteArgs>(args: SelectSubset<T, AmenitiesOnPropertiesDeleteArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AmenitiesOnProperties.
+     * @param {AmenitiesOnPropertiesUpdateArgs} args - Arguments to update one AmenitiesOnProperties.
+     * @example
+     * // Update one AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AmenitiesOnPropertiesUpdateArgs>(args: SelectSubset<T, AmenitiesOnPropertiesUpdateArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AmenitiesOnProperties.
+     * @param {AmenitiesOnPropertiesDeleteManyArgs} args - Arguments to filter AmenitiesOnProperties to delete.
+     * @example
+     * // Delete a few AmenitiesOnProperties
+     * const { count } = await prisma.amenitiesOnProperties.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AmenitiesOnPropertiesDeleteManyArgs>(args?: SelectSubset<T, AmenitiesOnPropertiesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AmenitiesOnProperties.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AmenitiesOnPropertiesUpdateManyArgs>(args: SelectSubset<T, AmenitiesOnPropertiesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AmenitiesOnProperties and returns the data updated in the database.
+     * @param {AmenitiesOnPropertiesUpdateManyAndReturnArgs} args - Arguments to update many AmenitiesOnProperties.
+     * @example
+     * // Update many AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AmenitiesOnProperties and only return the `propertyId`
+     * const amenitiesOnPropertiesWithPropertyIdOnly = await prisma.amenitiesOnProperties.updateManyAndReturn({
+     *   select: { propertyId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AmenitiesOnPropertiesUpdateManyAndReturnArgs>(args: SelectSubset<T, AmenitiesOnPropertiesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AmenitiesOnProperties.
+     * @param {AmenitiesOnPropertiesUpsertArgs} args - Arguments to update or create a AmenitiesOnProperties.
+     * @example
+     * // Update or create a AmenitiesOnProperties
+     * const amenitiesOnProperties = await prisma.amenitiesOnProperties.upsert({
+     *   create: {
+     *     // ... data to create a AmenitiesOnProperties
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AmenitiesOnProperties we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AmenitiesOnPropertiesUpsertArgs>(args: SelectSubset<T, AmenitiesOnPropertiesUpsertArgs<ExtArgs>>): Prisma__AmenitiesOnPropertiesClient<$Result.GetResult<Prisma.$AmenitiesOnPropertiesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AmenitiesOnProperties.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesCountArgs} args - Arguments to filter AmenitiesOnProperties to count.
+     * @example
+     * // Count the number of AmenitiesOnProperties
+     * const count = await prisma.amenitiesOnProperties.count({
+     *   where: {
+     *     // ... the filter for the AmenitiesOnProperties we want to count
+     *   }
+     * })
+    **/
+    count<T extends AmenitiesOnPropertiesCountArgs>(
+      args?: Subset<T, AmenitiesOnPropertiesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AmenitiesOnPropertiesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AmenitiesOnProperties.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AmenitiesOnPropertiesAggregateArgs>(args: Subset<T, AmenitiesOnPropertiesAggregateArgs>): Prisma.PrismaPromise<GetAmenitiesOnPropertiesAggregateType<T>>
+
+    /**
+     * Group by AmenitiesOnProperties.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AmenitiesOnPropertiesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AmenitiesOnPropertiesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AmenitiesOnPropertiesGroupByArgs['orderBy'] }
+        : { orderBy?: AmenitiesOnPropertiesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AmenitiesOnPropertiesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAmenitiesOnPropertiesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AmenitiesOnProperties model
+   */
+  readonly fields: AmenitiesOnPropertiesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AmenitiesOnProperties.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AmenitiesOnPropertiesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    property<T extends PropertyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PropertyDefaultArgs<ExtArgs>>): Prisma__PropertyClient<$Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    amenity<T extends AmenityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AmenityDefaultArgs<ExtArgs>>): Prisma__AmenityClient<$Result.GetResult<Prisma.$AmenityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AmenitiesOnProperties model
+   */
+  interface AmenitiesOnPropertiesFieldRefs {
+    readonly propertyId: FieldRef<"AmenitiesOnProperties", 'String'>
+    readonly amenityId: FieldRef<"AmenitiesOnProperties", 'String'>
+    readonly assignedAt: FieldRef<"AmenitiesOnProperties", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AmenitiesOnProperties findUnique
+   */
+  export type AmenitiesOnPropertiesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * Filter, which AmenitiesOnProperties to fetch.
+     */
+    where: AmenitiesOnPropertiesWhereUniqueInput
+  }
+
+  /**
+   * AmenitiesOnProperties findUniqueOrThrow
+   */
+  export type AmenitiesOnPropertiesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * Filter, which AmenitiesOnProperties to fetch.
+     */
+    where: AmenitiesOnPropertiesWhereUniqueInput
+  }
+
+  /**
+   * AmenitiesOnProperties findFirst
+   */
+  export type AmenitiesOnPropertiesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * Filter, which AmenitiesOnProperties to fetch.
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AmenitiesOnProperties to fetch.
+     */
+    orderBy?: AmenitiesOnPropertiesOrderByWithRelationInput | AmenitiesOnPropertiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AmenitiesOnProperties.
+     */
+    cursor?: AmenitiesOnPropertiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AmenitiesOnProperties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AmenitiesOnProperties.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AmenitiesOnProperties.
+     */
+    distinct?: AmenitiesOnPropertiesScalarFieldEnum | AmenitiesOnPropertiesScalarFieldEnum[]
+  }
+
+  /**
+   * AmenitiesOnProperties findFirstOrThrow
+   */
+  export type AmenitiesOnPropertiesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * Filter, which AmenitiesOnProperties to fetch.
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AmenitiesOnProperties to fetch.
+     */
+    orderBy?: AmenitiesOnPropertiesOrderByWithRelationInput | AmenitiesOnPropertiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AmenitiesOnProperties.
+     */
+    cursor?: AmenitiesOnPropertiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AmenitiesOnProperties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AmenitiesOnProperties.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AmenitiesOnProperties.
+     */
+    distinct?: AmenitiesOnPropertiesScalarFieldEnum | AmenitiesOnPropertiesScalarFieldEnum[]
+  }
+
+  /**
+   * AmenitiesOnProperties findMany
+   */
+  export type AmenitiesOnPropertiesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * Filter, which AmenitiesOnProperties to fetch.
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AmenitiesOnProperties to fetch.
+     */
+    orderBy?: AmenitiesOnPropertiesOrderByWithRelationInput | AmenitiesOnPropertiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AmenitiesOnProperties.
+     */
+    cursor?: AmenitiesOnPropertiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AmenitiesOnProperties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AmenitiesOnProperties.
+     */
+    skip?: number
+    distinct?: AmenitiesOnPropertiesScalarFieldEnum | AmenitiesOnPropertiesScalarFieldEnum[]
+  }
+
+  /**
+   * AmenitiesOnProperties create
+   */
+  export type AmenitiesOnPropertiesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AmenitiesOnProperties.
+     */
+    data: XOR<AmenitiesOnPropertiesCreateInput, AmenitiesOnPropertiesUncheckedCreateInput>
+  }
+
+  /**
+   * AmenitiesOnProperties createMany
+   */
+  export type AmenitiesOnPropertiesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AmenitiesOnProperties.
+     */
+    data: AmenitiesOnPropertiesCreateManyInput | AmenitiesOnPropertiesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AmenitiesOnProperties createManyAndReturn
+   */
+  export type AmenitiesOnPropertiesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * The data used to create many AmenitiesOnProperties.
+     */
+    data: AmenitiesOnPropertiesCreateManyInput | AmenitiesOnPropertiesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AmenitiesOnProperties update
+   */
+  export type AmenitiesOnPropertiesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AmenitiesOnProperties.
+     */
+    data: XOR<AmenitiesOnPropertiesUpdateInput, AmenitiesOnPropertiesUncheckedUpdateInput>
+    /**
+     * Choose, which AmenitiesOnProperties to update.
+     */
+    where: AmenitiesOnPropertiesWhereUniqueInput
+  }
+
+  /**
+   * AmenitiesOnProperties updateMany
+   */
+  export type AmenitiesOnPropertiesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AmenitiesOnProperties.
+     */
+    data: XOR<AmenitiesOnPropertiesUpdateManyMutationInput, AmenitiesOnPropertiesUncheckedUpdateManyInput>
+    /**
+     * Filter which AmenitiesOnProperties to update
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * Limit how many AmenitiesOnProperties to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AmenitiesOnProperties updateManyAndReturn
+   */
+  export type AmenitiesOnPropertiesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * The data used to update AmenitiesOnProperties.
+     */
+    data: XOR<AmenitiesOnPropertiesUpdateManyMutationInput, AmenitiesOnPropertiesUncheckedUpdateManyInput>
+    /**
+     * Filter which AmenitiesOnProperties to update
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * Limit how many AmenitiesOnProperties to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AmenitiesOnProperties upsert
+   */
+  export type AmenitiesOnPropertiesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AmenitiesOnProperties to update in case it exists.
+     */
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    /**
+     * In case the AmenitiesOnProperties found by the `where` argument doesn't exist, create a new AmenitiesOnProperties with this data.
+     */
+    create: XOR<AmenitiesOnPropertiesCreateInput, AmenitiesOnPropertiesUncheckedCreateInput>
+    /**
+     * In case the AmenitiesOnProperties was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AmenitiesOnPropertiesUpdateInput, AmenitiesOnPropertiesUncheckedUpdateInput>
+  }
+
+  /**
+   * AmenitiesOnProperties delete
+   */
+  export type AmenitiesOnPropertiesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+    /**
+     * Filter which AmenitiesOnProperties to delete.
+     */
+    where: AmenitiesOnPropertiesWhereUniqueInput
+  }
+
+  /**
+   * AmenitiesOnProperties deleteMany
+   */
+  export type AmenitiesOnPropertiesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AmenitiesOnProperties to delete
+     */
+    where?: AmenitiesOnPropertiesWhereInput
+    /**
+     * Limit how many AmenitiesOnProperties to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AmenitiesOnProperties without action
+   */
+  export type AmenitiesOnPropertiesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AmenitiesOnProperties
+     */
+    select?: AmenitiesOnPropertiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AmenitiesOnProperties
+     */
+    omit?: AmenitiesOnPropertiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AmenitiesOnPropertiesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SeasonalRate
+   */
+
+  export type AggregateSeasonalRate = {
+    _count: SeasonalRateCountAggregateOutputType | null
+    _avg: SeasonalRateAvgAggregateOutputType | null
+    _sum: SeasonalRateSumAggregateOutputType | null
+    _min: SeasonalRateMinAggregateOutputType | null
+    _max: SeasonalRateMaxAggregateOutputType | null
+  }
+
+  export type SeasonalRateAvgAggregateOutputType = {
+    dailyRate: Decimal | null
+  }
+
+  export type SeasonalRateSumAggregateOutputType = {
+    dailyRate: Decimal | null
+  }
+
+  export type SeasonalRateMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    propertyId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    dailyRate: Decimal | null
+  }
+
+  export type SeasonalRateMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    propertyId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    dailyRate: Decimal | null
+  }
+
+  export type SeasonalRateCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    propertyId: number
+    startDate: number
+    endDate: number
+    dailyRate: number
+    _all: number
+  }
+
+
+  export type SeasonalRateAvgAggregateInputType = {
+    dailyRate?: true
+  }
+
+  export type SeasonalRateSumAggregateInputType = {
+    dailyRate?: true
+  }
+
+  export type SeasonalRateMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    propertyId?: true
+    startDate?: true
+    endDate?: true
+    dailyRate?: true
+  }
+
+  export type SeasonalRateMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    propertyId?: true
+    startDate?: true
+    endDate?: true
+    dailyRate?: true
+  }
+
+  export type SeasonalRateCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    propertyId?: true
+    startDate?: true
+    endDate?: true
+    dailyRate?: true
+    _all?: true
+  }
+
+  export type SeasonalRateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeasonalRate to aggregate.
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeasonalRates to fetch.
+     */
+    orderBy?: SeasonalRateOrderByWithRelationInput | SeasonalRateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeasonalRateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeasonalRates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeasonalRates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SeasonalRates
+    **/
+    _count?: true | SeasonalRateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SeasonalRateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SeasonalRateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeasonalRateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeasonalRateMaxAggregateInputType
+  }
+
+  export type GetSeasonalRateAggregateType<T extends SeasonalRateAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeasonalRate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeasonalRate[P]>
+      : GetScalarType<T[P], AggregateSeasonalRate[P]>
+  }
+
+
+
+
+  export type SeasonalRateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeasonalRateWhereInput
+    orderBy?: SeasonalRateOrderByWithAggregationInput | SeasonalRateOrderByWithAggregationInput[]
+    by: SeasonalRateScalarFieldEnum[] | SeasonalRateScalarFieldEnum
+    having?: SeasonalRateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeasonalRateCountAggregateInputType | true
+    _avg?: SeasonalRateAvgAggregateInputType
+    _sum?: SeasonalRateSumAggregateInputType
+    _min?: SeasonalRateMinAggregateInputType
+    _max?: SeasonalRateMaxAggregateInputType
+  }
+
+  export type SeasonalRateGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    propertyId: string
+    startDate: Date
+    endDate: Date
+    dailyRate: Decimal
+    _count: SeasonalRateCountAggregateOutputType | null
+    _avg: SeasonalRateAvgAggregateOutputType | null
+    _sum: SeasonalRateSumAggregateOutputType | null
+    _min: SeasonalRateMinAggregateOutputType | null
+    _max: SeasonalRateMaxAggregateOutputType | null
+  }
+
+  type GetSeasonalRateGroupByPayload<T extends SeasonalRateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeasonalRateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeasonalRateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeasonalRateGroupByOutputType[P]>
+            : GetScalarType<T[P], SeasonalRateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeasonalRateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    propertyId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    dailyRate?: boolean
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seasonalRate"]>
+
+  export type SeasonalRateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    propertyId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    dailyRate?: boolean
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seasonalRate"]>
+
+  export type SeasonalRateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    propertyId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    dailyRate?: boolean
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seasonalRate"]>
+
+  export type SeasonalRateSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    propertyId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    dailyRate?: boolean
+  }
+
+  export type SeasonalRateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "propertyId" | "startDate" | "endDate" | "dailyRate", ExtArgs["result"]["seasonalRate"]>
+  export type SeasonalRateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+  }
+  export type SeasonalRateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+  }
+  export type SeasonalRateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    property?: boolean | PropertyDefaultArgs<ExtArgs>
+  }
+
+  export type $SeasonalRatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SeasonalRate"
+    objects: {
+      property: Prisma.$PropertyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      propertyId: string
+      startDate: Date
+      endDate: Date
+      dailyRate: Prisma.Decimal
+    }, ExtArgs["result"]["seasonalRate"]>
+    composites: {}
+  }
+
+  type SeasonalRateGetPayload<S extends boolean | null | undefined | SeasonalRateDefaultArgs> = $Result.GetResult<Prisma.$SeasonalRatePayload, S>
+
+  type SeasonalRateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SeasonalRateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SeasonalRateCountAggregateInputType | true
+    }
+
+  export interface SeasonalRateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SeasonalRate'], meta: { name: 'SeasonalRate' } }
+    /**
+     * Find zero or one SeasonalRate that matches the filter.
+     * @param {SeasonalRateFindUniqueArgs} args - Arguments to find a SeasonalRate
+     * @example
+     * // Get one SeasonalRate
+     * const seasonalRate = await prisma.seasonalRate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeasonalRateFindUniqueArgs>(args: SelectSubset<T, SeasonalRateFindUniqueArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SeasonalRate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SeasonalRateFindUniqueOrThrowArgs} args - Arguments to find a SeasonalRate
+     * @example
+     * // Get one SeasonalRate
+     * const seasonalRate = await prisma.seasonalRate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeasonalRateFindUniqueOrThrowArgs>(args: SelectSubset<T, SeasonalRateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SeasonalRate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateFindFirstArgs} args - Arguments to find a SeasonalRate
+     * @example
+     * // Get one SeasonalRate
+     * const seasonalRate = await prisma.seasonalRate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeasonalRateFindFirstArgs>(args?: SelectSubset<T, SeasonalRateFindFirstArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SeasonalRate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateFindFirstOrThrowArgs} args - Arguments to find a SeasonalRate
+     * @example
+     * // Get one SeasonalRate
+     * const seasonalRate = await prisma.seasonalRate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeasonalRateFindFirstOrThrowArgs>(args?: SelectSubset<T, SeasonalRateFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SeasonalRates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SeasonalRates
+     * const seasonalRates = await prisma.seasonalRate.findMany()
+     * 
+     * // Get first 10 SeasonalRates
+     * const seasonalRates = await prisma.seasonalRate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const seasonalRateWithIdOnly = await prisma.seasonalRate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SeasonalRateFindManyArgs>(args?: SelectSubset<T, SeasonalRateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SeasonalRate.
+     * @param {SeasonalRateCreateArgs} args - Arguments to create a SeasonalRate.
+     * @example
+     * // Create one SeasonalRate
+     * const SeasonalRate = await prisma.seasonalRate.create({
+     *   data: {
+     *     // ... data to create a SeasonalRate
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeasonalRateCreateArgs>(args: SelectSubset<T, SeasonalRateCreateArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SeasonalRates.
+     * @param {SeasonalRateCreateManyArgs} args - Arguments to create many SeasonalRates.
+     * @example
+     * // Create many SeasonalRates
+     * const seasonalRate = await prisma.seasonalRate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeasonalRateCreateManyArgs>(args?: SelectSubset<T, SeasonalRateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SeasonalRates and returns the data saved in the database.
+     * @param {SeasonalRateCreateManyAndReturnArgs} args - Arguments to create many SeasonalRates.
+     * @example
+     * // Create many SeasonalRates
+     * const seasonalRate = await prisma.seasonalRate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SeasonalRates and only return the `id`
+     * const seasonalRateWithIdOnly = await prisma.seasonalRate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SeasonalRateCreateManyAndReturnArgs>(args?: SelectSubset<T, SeasonalRateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SeasonalRate.
+     * @param {SeasonalRateDeleteArgs} args - Arguments to delete one SeasonalRate.
+     * @example
+     * // Delete one SeasonalRate
+     * const SeasonalRate = await prisma.seasonalRate.delete({
+     *   where: {
+     *     // ... filter to delete one SeasonalRate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeasonalRateDeleteArgs>(args: SelectSubset<T, SeasonalRateDeleteArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SeasonalRate.
+     * @param {SeasonalRateUpdateArgs} args - Arguments to update one SeasonalRate.
+     * @example
+     * // Update one SeasonalRate
+     * const seasonalRate = await prisma.seasonalRate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeasonalRateUpdateArgs>(args: SelectSubset<T, SeasonalRateUpdateArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SeasonalRates.
+     * @param {SeasonalRateDeleteManyArgs} args - Arguments to filter SeasonalRates to delete.
+     * @example
+     * // Delete a few SeasonalRates
+     * const { count } = await prisma.seasonalRate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeasonalRateDeleteManyArgs>(args?: SelectSubset<T, SeasonalRateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SeasonalRates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SeasonalRates
+     * const seasonalRate = await prisma.seasonalRate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeasonalRateUpdateManyArgs>(args: SelectSubset<T, SeasonalRateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SeasonalRates and returns the data updated in the database.
+     * @param {SeasonalRateUpdateManyAndReturnArgs} args - Arguments to update many SeasonalRates.
+     * @example
+     * // Update many SeasonalRates
+     * const seasonalRate = await prisma.seasonalRate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SeasonalRates and only return the `id`
+     * const seasonalRateWithIdOnly = await prisma.seasonalRate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SeasonalRateUpdateManyAndReturnArgs>(args: SelectSubset<T, SeasonalRateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SeasonalRate.
+     * @param {SeasonalRateUpsertArgs} args - Arguments to update or create a SeasonalRate.
+     * @example
+     * // Update or create a SeasonalRate
+     * const seasonalRate = await prisma.seasonalRate.upsert({
+     *   create: {
+     *     // ... data to create a SeasonalRate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SeasonalRate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeasonalRateUpsertArgs>(args: SelectSubset<T, SeasonalRateUpsertArgs<ExtArgs>>): Prisma__SeasonalRateClient<$Result.GetResult<Prisma.$SeasonalRatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SeasonalRates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateCountArgs} args - Arguments to filter SeasonalRates to count.
+     * @example
+     * // Count the number of SeasonalRates
+     * const count = await prisma.seasonalRate.count({
+     *   where: {
+     *     // ... the filter for the SeasonalRates we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeasonalRateCountArgs>(
+      args?: Subset<T, SeasonalRateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeasonalRateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SeasonalRate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeasonalRateAggregateArgs>(args: Subset<T, SeasonalRateAggregateArgs>): Prisma.PrismaPromise<GetSeasonalRateAggregateType<T>>
+
+    /**
+     * Group by SeasonalRate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeasonalRateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeasonalRateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeasonalRateGroupByArgs['orderBy'] }
+        : { orderBy?: SeasonalRateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeasonalRateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeasonalRateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SeasonalRate model
+   */
+  readonly fields: SeasonalRateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SeasonalRate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeasonalRateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    property<T extends PropertyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PropertyDefaultArgs<ExtArgs>>): Prisma__PropertyClient<$Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SeasonalRate model
+   */
+  interface SeasonalRateFieldRefs {
+    readonly id: FieldRef<"SeasonalRate", 'String'>
+    readonly createdAt: FieldRef<"SeasonalRate", 'DateTime'>
+    readonly updatedAt: FieldRef<"SeasonalRate", 'DateTime'>
+    readonly propertyId: FieldRef<"SeasonalRate", 'String'>
+    readonly startDate: FieldRef<"SeasonalRate", 'DateTime'>
+    readonly endDate: FieldRef<"SeasonalRate", 'DateTime'>
+    readonly dailyRate: FieldRef<"SeasonalRate", 'Decimal'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SeasonalRate findUnique
+   */
+  export type SeasonalRateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * Filter, which SeasonalRate to fetch.
+     */
+    where: SeasonalRateWhereUniqueInput
+  }
+
+  /**
+   * SeasonalRate findUniqueOrThrow
+   */
+  export type SeasonalRateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * Filter, which SeasonalRate to fetch.
+     */
+    where: SeasonalRateWhereUniqueInput
+  }
+
+  /**
+   * SeasonalRate findFirst
+   */
+  export type SeasonalRateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * Filter, which SeasonalRate to fetch.
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeasonalRates to fetch.
+     */
+    orderBy?: SeasonalRateOrderByWithRelationInput | SeasonalRateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeasonalRates.
+     */
+    cursor?: SeasonalRateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeasonalRates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeasonalRates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeasonalRates.
+     */
+    distinct?: SeasonalRateScalarFieldEnum | SeasonalRateScalarFieldEnum[]
+  }
+
+  /**
+   * SeasonalRate findFirstOrThrow
+   */
+  export type SeasonalRateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * Filter, which SeasonalRate to fetch.
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeasonalRates to fetch.
+     */
+    orderBy?: SeasonalRateOrderByWithRelationInput | SeasonalRateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeasonalRates.
+     */
+    cursor?: SeasonalRateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeasonalRates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeasonalRates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeasonalRates.
+     */
+    distinct?: SeasonalRateScalarFieldEnum | SeasonalRateScalarFieldEnum[]
+  }
+
+  /**
+   * SeasonalRate findMany
+   */
+  export type SeasonalRateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * Filter, which SeasonalRates to fetch.
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeasonalRates to fetch.
+     */
+    orderBy?: SeasonalRateOrderByWithRelationInput | SeasonalRateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SeasonalRates.
+     */
+    cursor?: SeasonalRateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeasonalRates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeasonalRates.
+     */
+    skip?: number
+    distinct?: SeasonalRateScalarFieldEnum | SeasonalRateScalarFieldEnum[]
+  }
+
+  /**
+   * SeasonalRate create
+   */
+  export type SeasonalRateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SeasonalRate.
+     */
+    data: XOR<SeasonalRateCreateInput, SeasonalRateUncheckedCreateInput>
+  }
+
+  /**
+   * SeasonalRate createMany
+   */
+  export type SeasonalRateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SeasonalRates.
+     */
+    data: SeasonalRateCreateManyInput | SeasonalRateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SeasonalRate createManyAndReturn
+   */
+  export type SeasonalRateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * The data used to create many SeasonalRates.
+     */
+    data: SeasonalRateCreateManyInput | SeasonalRateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SeasonalRate update
+   */
+  export type SeasonalRateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SeasonalRate.
+     */
+    data: XOR<SeasonalRateUpdateInput, SeasonalRateUncheckedUpdateInput>
+    /**
+     * Choose, which SeasonalRate to update.
+     */
+    where: SeasonalRateWhereUniqueInput
+  }
+
+  /**
+   * SeasonalRate updateMany
+   */
+  export type SeasonalRateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SeasonalRates.
+     */
+    data: XOR<SeasonalRateUpdateManyMutationInput, SeasonalRateUncheckedUpdateManyInput>
+    /**
+     * Filter which SeasonalRates to update
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * Limit how many SeasonalRates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SeasonalRate updateManyAndReturn
+   */
+  export type SeasonalRateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * The data used to update SeasonalRates.
+     */
+    data: XOR<SeasonalRateUpdateManyMutationInput, SeasonalRateUncheckedUpdateManyInput>
+    /**
+     * Filter which SeasonalRates to update
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * Limit how many SeasonalRates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SeasonalRate upsert
+   */
+  export type SeasonalRateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SeasonalRate to update in case it exists.
+     */
+    where: SeasonalRateWhereUniqueInput
+    /**
+     * In case the SeasonalRate found by the `where` argument doesn't exist, create a new SeasonalRate with this data.
+     */
+    create: XOR<SeasonalRateCreateInput, SeasonalRateUncheckedCreateInput>
+    /**
+     * In case the SeasonalRate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeasonalRateUpdateInput, SeasonalRateUncheckedUpdateInput>
+  }
+
+  /**
+   * SeasonalRate delete
+   */
+  export type SeasonalRateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
+    /**
+     * Filter which SeasonalRate to delete.
+     */
+    where: SeasonalRateWhereUniqueInput
+  }
+
+  /**
+   * SeasonalRate deleteMany
+   */
+  export type SeasonalRateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeasonalRates to delete
+     */
+    where?: SeasonalRateWhereInput
+    /**
+     * Limit how many SeasonalRates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SeasonalRate without action
+   */
+  export type SeasonalRateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeasonalRate
+     */
+    select?: SeasonalRateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeasonalRate
+     */
+    omit?: SeasonalRateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeasonalRateInclude<ExtArgs> | null
   }
 
 
@@ -19917,6 +23237,7 @@ export namespace Prisma {
     notifyByEmail: boolean | null
     notifyInApp: boolean | null
     isActive: boolean | null
+    lastCheckedAt: Date | null
     lastMatchedAt: Date | null
     matchCount: number | null
     lastNotifiedAt: Date | null
@@ -19931,6 +23252,7 @@ export namespace Prisma {
     notifyByEmail: boolean | null
     notifyInApp: boolean | null
     isActive: boolean | null
+    lastCheckedAt: Date | null
     lastMatchedAt: Date | null
     matchCount: number | null
     lastNotifiedAt: Date | null
@@ -19942,10 +23264,11 @@ export namespace Prisma {
     updatedAt: number
     userId: number
     name: number
-    criteria: number
+    filters: number
     notifyByEmail: number
     notifyInApp: number
     isActive: number
+    lastCheckedAt: number
     lastMatchedAt: number
     matchCount: number
     lastNotifiedAt: number
@@ -19970,6 +23293,7 @@ export namespace Prisma {
     notifyByEmail?: true
     notifyInApp?: true
     isActive?: true
+    lastCheckedAt?: true
     lastMatchedAt?: true
     matchCount?: true
     lastNotifiedAt?: true
@@ -19984,6 +23308,7 @@ export namespace Prisma {
     notifyByEmail?: true
     notifyInApp?: true
     isActive?: true
+    lastCheckedAt?: true
     lastMatchedAt?: true
     matchCount?: true
     lastNotifiedAt?: true
@@ -19995,10 +23320,11 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     name?: true
-    criteria?: true
+    filters?: true
     notifyByEmail?: true
     notifyInApp?: true
     isActive?: true
+    lastCheckedAt?: true
     lastMatchedAt?: true
     matchCount?: true
     lastNotifiedAt?: true
@@ -20097,10 +23423,11 @@ export namespace Prisma {
     updatedAt: Date
     userId: string
     name: string
-    criteria: JsonValue
+    filters: JsonValue
     notifyByEmail: boolean
     notifyInApp: boolean
     isActive: boolean
+    lastCheckedAt: Date
     lastMatchedAt: Date | null
     matchCount: number
     lastNotifiedAt: Date | null
@@ -20131,10 +23458,11 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     name?: boolean
-    criteria?: boolean
+    filters?: boolean
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: boolean
     lastMatchedAt?: boolean
     matchCount?: boolean
     lastNotifiedAt?: boolean
@@ -20149,10 +23477,11 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     name?: boolean
-    criteria?: boolean
+    filters?: boolean
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: boolean
     lastMatchedAt?: boolean
     matchCount?: boolean
     lastNotifiedAt?: boolean
@@ -20165,10 +23494,11 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     name?: boolean
-    criteria?: boolean
+    filters?: boolean
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: boolean
     lastMatchedAt?: boolean
     matchCount?: boolean
     lastNotifiedAt?: boolean
@@ -20181,16 +23511,17 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     name?: boolean
-    criteria?: boolean
+    filters?: boolean
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: boolean
     lastMatchedAt?: boolean
     matchCount?: boolean
     lastNotifiedAt?: boolean
   }
 
-  export type SavedSearchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "name" | "criteria" | "notifyByEmail" | "notifyInApp" | "isActive" | "lastMatchedAt" | "matchCount" | "lastNotifiedAt", ExtArgs["result"]["savedSearch"]>
+  export type SavedSearchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "name" | "filters" | "notifyByEmail" | "notifyInApp" | "isActive" | "lastCheckedAt" | "lastMatchedAt" | "matchCount" | "lastNotifiedAt", ExtArgs["result"]["savedSearch"]>
   export type SavedSearchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     matches?: boolean | SavedSearch$matchesArgs<ExtArgs>
@@ -20215,7 +23546,7 @@ export namespace Prisma {
       updatedAt: Date
       userId: string
       name: string
-      criteria: Prisma.JsonValue
+      filters: Prisma.JsonValue
       /**
        * Structure:
        *   {
@@ -20226,13 +23557,14 @@ export namespace Prisma {
        *     "minPrice": 5000000,
        *     "maxPrice": 10000000,
        *     "minSurface": 80,
-       *     "hasParking": true,
+       *     "amenities": ["pool", "garden"],
        *     ...
        *   }
        */
       notifyByEmail: boolean
       notifyInApp: boolean
       isActive: boolean
+      lastCheckedAt: Date
       lastMatchedAt: Date | null
       matchCount: number
       lastNotifiedAt: Date | null
@@ -20666,10 +23998,11 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"SavedSearch", 'DateTime'>
     readonly userId: FieldRef<"SavedSearch", 'String'>
     readonly name: FieldRef<"SavedSearch", 'String'>
-    readonly criteria: FieldRef<"SavedSearch", 'Json'>
+    readonly filters: FieldRef<"SavedSearch", 'Json'>
     readonly notifyByEmail: FieldRef<"SavedSearch", 'Boolean'>
     readonly notifyInApp: FieldRef<"SavedSearch", 'Boolean'>
     readonly isActive: FieldRef<"SavedSearch", 'Boolean'>
+    readonly lastCheckedAt: FieldRef<"SavedSearch", 'DateTime'>
     readonly lastMatchedAt: FieldRef<"SavedSearch", 'DateTime'>
     readonly matchCount: FieldRef<"SavedSearch", 'Int'>
     readonly lastNotifiedAt: FieldRef<"SavedSearch", 'DateTime'>
@@ -35971,27 +39304,6 @@ export namespace Prisma {
     totalFloors: 'totalFloors',
     buildingAge: 'buildingAge',
     constructionYear: 'constructionYear',
-    hasElevator: 'hasElevator',
-    hasBalcony: 'hasBalcony',
-    hasTerrace: 'hasTerrace',
-    hasCellar: 'hasCellar',
-    hasParking: 'hasParking',
-    hasGarage: 'hasGarage',
-    hasGarden: 'hasGarden',
-    hasPool: 'hasPool',
-    hasAirConditioning: 'hasAirConditioning',
-    heatingType: 'heatingType',
-    hasEquippedKitchen: 'hasEquippedKitchen',
-    isFurnished: 'isFurnished',
-    hasInternet: 'hasInternet',
-    hasCityGas: 'hasCityGas',
-    hasWater: 'hasWater',
-    hasElectricity: 'hasElectricity',
-    hasGuard: 'hasGuard',
-    hasIntercom: 'hasIntercom',
-    hasAlarm: 'hasAlarm',
-    hasElectricGate: 'hasElectricGate',
-    hasCCTV: 'hasCCTV',
     viewType: 'viewType',
     distanceToSchool: 'distanceToSchool',
     distanceToTransport: 'distanceToTransport',
@@ -36057,12 +39369,44 @@ export namespace Prisma {
     mediaType: 'mediaType',
     imageData: 'imageData',
     videoData: 'videoData',
-    displayOrder: 'displayOrder',
-    isPrimary: 'isPrimary',
+    order: 'order',
+    isThumbnail: 'isThumbnail',
     deletedAt: 'deletedAt'
   };
 
   export type PropertyMediaScalarFieldEnum = (typeof PropertyMediaScalarFieldEnum)[keyof typeof PropertyMediaScalarFieldEnum]
+
+
+  export const AmenityScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    category: 'category',
+    icon: 'icon'
+  };
+
+  export type AmenityScalarFieldEnum = (typeof AmenityScalarFieldEnum)[keyof typeof AmenityScalarFieldEnum]
+
+
+  export const AmenitiesOnPropertiesScalarFieldEnum: {
+    propertyId: 'propertyId',
+    amenityId: 'amenityId',
+    assignedAt: 'assignedAt'
+  };
+
+  export type AmenitiesOnPropertiesScalarFieldEnum = (typeof AmenitiesOnPropertiesScalarFieldEnum)[keyof typeof AmenitiesOnPropertiesScalarFieldEnum]
+
+
+  export const SeasonalRateScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    propertyId: 'propertyId',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    dailyRate: 'dailyRate'
+  };
+
+  export type SeasonalRateScalarFieldEnum = (typeof SeasonalRateScalarFieldEnum)[keyof typeof SeasonalRateScalarFieldEnum]
 
 
   export const BoostPricingScalarFieldEnum: {
@@ -36145,10 +39489,11 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     userId: 'userId',
     name: 'name',
-    criteria: 'criteria',
+    filters: 'filters',
     notifyByEmail: 'notifyByEmail',
     notifyInApp: 'notifyInApp',
     isActive: 'isActive',
+    lastCheckedAt: 'lastCheckedAt',
     lastMatchedAt: 'lastMatchedAt',
     matchCount: 'matchCount',
     lastNotifiedAt: 'lastNotifiedAt'
@@ -36441,65 +39786,6 @@ export namespace Prisma {
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
-  export const UserOrderByRelevanceFieldEnum: {
-    id: 'id',
-    cognitoId: 'cognitoId',
-    email: 'email',
-    phone: 'phone',
-    firstName: 'firstName',
-    lastName: 'lastName',
-    avatar: 'avatar',
-    companyName: 'companyName',
-    companyLogo: 'companyLogo',
-    companyDescription: 'companyDescription',
-    commerceRegister: 'commerceRegister',
-    taxId: 'taxId',
-    whatsappNumber: 'whatsappNumber',
-    language: 'language',
-    banReason: 'banReason'
-  };
-
-  export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-  export const RoleOrderByRelevanceFieldEnum: {
-    id: 'id',
-    name: 'name',
-    description: 'description'
-  };
-
-  export type RoleOrderByRelevanceFieldEnum = (typeof RoleOrderByRelevanceFieldEnum)[keyof typeof RoleOrderByRelevanceFieldEnum]
-
-
-  export const UserRoleOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    roleId: 'roleId',
-    assignedBy: 'assignedBy'
-  };
-
-  export type UserRoleOrderByRelevanceFieldEnum = (typeof UserRoleOrderByRelevanceFieldEnum)[keyof typeof UserRoleOrderByRelevanceFieldEnum]
-
-
-  export const PermissionOrderByRelevanceFieldEnum: {
-    id: 'id',
-    code: 'code',
-    description: 'description',
-    category: 'category'
-  };
-
-  export type PermissionOrderByRelevanceFieldEnum = (typeof PermissionOrderByRelevanceFieldEnum)[keyof typeof PermissionOrderByRelevanceFieldEnum]
-
-
-  export const RolePermissionOrderByRelevanceFieldEnum: {
-    id: 'id',
-    roleId: 'roleId',
-    permissionId: 'permissionId'
-  };
-
-  export type RolePermissionOrderByRelevanceFieldEnum = (typeof RolePermissionOrderByRelevanceFieldEnum)[keyof typeof RolePermissionOrderByRelevanceFieldEnum]
-
-
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -36507,243 +39793,6 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-  export const PropertyOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    title: 'title',
-    description: 'description',
-    wilayaId: 'wilayaId',
-    communeId: 'communeId',
-    quartier: 'quartier',
-    fullAddress: 'fullAddress',
-    postalCode: 'postalCode',
-    mapboxPlaceId: 'mapboxPlaceId',
-    slug: 'slug',
-    metaTitle: 'metaTitle',
-    metaDescription: 'metaDescription',
-    moderatedBy: 'moderatedBy',
-    rejectionReason: 'rejectionReason'
-  };
-
-  export type PropertyOrderByRelevanceFieldEnum = (typeof PropertyOrderByRelevanceFieldEnum)[keyof typeof PropertyOrderByRelevanceFieldEnum]
-
-
-  export const PropertyPriceHistoryOrderByRelevanceFieldEnum: {
-    id: 'id',
-    propertyId: 'propertyId',
-    changedBy: 'changedBy'
-  };
-
-  export type PropertyPriceHistoryOrderByRelevanceFieldEnum = (typeof PropertyPriceHistoryOrderByRelevanceFieldEnum)[keyof typeof PropertyPriceHistoryOrderByRelevanceFieldEnum]
-
-
-  export const PropertyMediaOrderByRelevanceFieldEnum: {
-    id: 'id',
-    propertyId: 'propertyId'
-  };
-
-  export type PropertyMediaOrderByRelevanceFieldEnum = (typeof PropertyMediaOrderByRelevanceFieldEnum)[keyof typeof PropertyMediaOrderByRelevanceFieldEnum]
-
-
-  export const BoostPricingOrderByRelevanceFieldEnum: {
-    id: 'id'
-  };
-
-  export type BoostPricingOrderByRelevanceFieldEnum = (typeof BoostPricingOrderByRelevanceFieldEnum)[keyof typeof BoostPricingOrderByRelevanceFieldEnum]
-
-
-  export const PropertyBoostOrderByRelevanceFieldEnum: {
-    id: 'id',
-    propertyId: 'propertyId',
-    userId: 'userId',
-    paymentId: 'paymentId'
-  };
-
-  export type PropertyBoostOrderByRelevanceFieldEnum = (typeof PropertyBoostOrderByRelevanceFieldEnum)[keyof typeof PropertyBoostOrderByRelevanceFieldEnum]
-
-
-  export const LocationRequestOrderByRelevanceFieldEnum: {
-    id: 'id',
-    propertyId: 'propertyId',
-    requesterId: 'requesterId',
-    ownerId: 'ownerId',
-    message: 'message',
-    rejectionReason: 'rejectionReason',
-    revokedBy: 'revokedBy'
-  };
-
-  export type LocationRequestOrderByRelevanceFieldEnum = (typeof LocationRequestOrderByRelevanceFieldEnum)[keyof typeof LocationRequestOrderByRelevanceFieldEnum]
-
-
-  export const FavoriteOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    propertyId: 'propertyId'
-  };
-
-  export type FavoriteOrderByRelevanceFieldEnum = (typeof FavoriteOrderByRelevanceFieldEnum)[keyof typeof FavoriteOrderByRelevanceFieldEnum]
-
-
-  export const SavedSearchOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    name: 'name'
-  };
-
-  export type SavedSearchOrderByRelevanceFieldEnum = (typeof SavedSearchOrderByRelevanceFieldEnum)[keyof typeof SavedSearchOrderByRelevanceFieldEnum]
-
-
-  export const SavedSearchMatchOrderByRelevanceFieldEnum: {
-    id: 'id',
-    savedSearchId: 'savedSearchId',
-    propertyId: 'propertyId'
-  };
-
-  export type SavedSearchMatchOrderByRelevanceFieldEnum = (typeof SavedSearchMatchOrderByRelevanceFieldEnum)[keyof typeof SavedSearchMatchOrderByRelevanceFieldEnum]
-
-
-  export const ConversationOrderByRelevanceFieldEnum: {
-    id: 'id',
-    buyerId: 'buyerId',
-    sellerId: 'sellerId',
-    lastPropertyId: 'lastPropertyId'
-  };
-
-  export type ConversationOrderByRelevanceFieldEnum = (typeof ConversationOrderByRelevanceFieldEnum)[keyof typeof ConversationOrderByRelevanceFieldEnum]
-
-
-  export const MessageOrderByRelevanceFieldEnum: {
-    id: 'id',
-    conversationId: 'conversationId',
-    senderId: 'senderId',
-    receiverId: 'receiverId',
-    propertyId: 'propertyId',
-    content: 'content'
-  };
-
-  export type MessageOrderByRelevanceFieldEnum = (typeof MessageOrderByRelevanceFieldEnum)[keyof typeof MessageOrderByRelevanceFieldEnum]
-
-
-  export const ReviewOrderByRelevanceFieldEnum: {
-    id: 'id',
-    conversationId: 'conversationId',
-    propertyId: 'propertyId',
-    ownerId: 'ownerId',
-    reviewerId: 'reviewerId',
-    comment: 'comment',
-    tags: 'tags',
-    hiddenBy: 'hiddenBy',
-    ownerResponse: 'ownerResponse'
-  };
-
-  export type ReviewOrderByRelevanceFieldEnum = (typeof ReviewOrderByRelevanceFieldEnum)[keyof typeof ReviewOrderByRelevanceFieldEnum]
-
-
-  export const ReportOrderByRelevanceFieldEnum: {
-    id: 'id',
-    reporterId: 'reporterId',
-    propertyId: 'propertyId',
-    reportedUserId: 'reportedUserId',
-    description: 'description',
-    evidenceUrls: 'evidenceUrls',
-    reviewedBy: 'reviewedBy',
-    adminNotes: 'adminNotes',
-    actionTaken: 'actionTaken'
-  };
-
-  export type ReportOrderByRelevanceFieldEnum = (typeof ReportOrderByRelevanceFieldEnum)[keyof typeof ReportOrderByRelevanceFieldEnum]
-
-
-  export const PaymentOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    currency: 'currency',
-    chargilyTransactionId: 'chargilyTransactionId',
-    chargilyPaymentUrl: 'chargilyPaymentUrl',
-    chargilyInvoiceId: 'chargilyInvoiceId',
-    failureReason: 'failureReason',
-    failureCode: 'failureCode',
-    refundReason: 'refundReason',
-    refundedBy: 'refundedBy',
-    invoiceNumber: 'invoiceNumber',
-    invoiceUrl: 'invoiceUrl',
-    ipAddress: 'ipAddress',
-    userAgent: 'userAgent'
-  };
-
-  export type PaymentOrderByRelevanceFieldEnum = (typeof PaymentOrderByRelevanceFieldEnum)[keyof typeof PaymentOrderByRelevanceFieldEnum]
-
-
-  export const NotificationOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    title: 'title',
-    message: 'message',
-    propertyId: 'propertyId',
-    link: 'link'
-  };
-
-  export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
-
-
-  export const PropertyViewStatsOrderByRelevanceFieldEnum: {
-    id: 'id',
-    propertyId: 'propertyId'
-  };
-
-  export type PropertyViewStatsOrderByRelevanceFieldEnum = (typeof PropertyViewStatsOrderByRelevanceFieldEnum)[keyof typeof PropertyViewStatsOrderByRelevanceFieldEnum]
-
-
-  export const PropertyViewDetailOrderByRelevanceFieldEnum: {
-    id: 'id',
-    propertyId: 'propertyId',
-    userId: 'userId',
-    ipAddress: 'ipAddress',
-    userAgent: 'userAgent',
-    referer: 'referer',
-    sessionId: 'sessionId',
-    country: 'country',
-    city: 'city',
-    source: 'source',
-    campaign: 'campaign',
-    device: 'device'
-  };
-
-  export type PropertyViewDetailOrderByRelevanceFieldEnum = (typeof PropertyViewDetailOrderByRelevanceFieldEnum)[keyof typeof PropertyViewDetailOrderByRelevanceFieldEnum]
-
-
-  export const PopularSearchOrderByRelevanceFieldEnum: {
-    id: 'id',
-    wilayaId: 'wilayaId'
-  };
-
-  export type PopularSearchOrderByRelevanceFieldEnum = (typeof PopularSearchOrderByRelevanceFieldEnum)[keyof typeof PopularSearchOrderByRelevanceFieldEnum]
-
-
-  export const WilayaOrderByRelevanceFieldEnum: {
-    id: 'id',
-    code: 'code',
-    name: 'name',
-    nameAr: 'nameAr',
-    nameFr: 'nameFr'
-  };
-
-  export type WilayaOrderByRelevanceFieldEnum = (typeof WilayaOrderByRelevanceFieldEnum)[keyof typeof WilayaOrderByRelevanceFieldEnum]
-
-
-  export const CommuneOrderByRelevanceFieldEnum: {
-    id: 'id',
-    code: 'code',
-    name: 'name',
-    nameAr: 'nameAr',
-    nameFr: 'nameFr',
-    wilayaId: 'wilayaId',
-    postalCode: 'postalCode'
-  };
-
-  export type CommuneOrderByRelevanceFieldEnum = (typeof CommuneOrderByRelevanceFieldEnum)[keyof typeof CommuneOrderByRelevanceFieldEnum]
 
 
   /**
@@ -36909,20 +39958,6 @@ export namespace Prisma {
    * Reference to a field of type 'BigInt[]'
    */
   export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'HeatingType'
-   */
-  export type EnumHeatingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HeatingType'>
-    
-
-
-  /**
-   * Reference to a field of type 'HeatingType[]'
-   */
-  export type ListEnumHeatingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HeatingType[]'>
     
 
 
@@ -37266,7 +40301,6 @@ export namespace Prisma {
     notifications?: NotificationOrderByRelationAggregateInput
     locationRequestsSent?: LocationRequestOrderByRelationAggregateInput
     locationRequestsReceived?: LocationRequestOrderByRelationAggregateInput
-    _relevance?: UserOrderByRelevanceInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -37456,7 +40490,6 @@ export namespace Prisma {
     isSystem?: SortOrder
     users?: UserRoleOrderByRelationAggregateInput
     permissions?: RolePermissionOrderByRelationAggregateInput
-    _relevance?: RoleOrderByRelevanceInput
   }
 
   export type RoleWhereUniqueInput = Prisma.AtLeast<{
@@ -37520,7 +40553,6 @@ export namespace Prisma {
     assignedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     role?: RoleOrderByWithRelationInput
-    _relevance?: UserRoleOrderByRelevanceInput
   }
 
   export type UserRoleWhereUniqueInput = Prisma.AtLeast<{
@@ -37581,7 +40613,6 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     roles?: RolePermissionOrderByRelationAggregateInput
-    _relevance?: PermissionOrderByRelevanceInput
   }
 
   export type PermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -37637,7 +40668,6 @@ export namespace Prisma {
     permissionId?: SortOrder
     role?: RoleOrderByWithRelationInput
     permission?: PermissionOrderByWithRelationInput
-    _relevance?: RolePermissionOrderByRelevanceInput
   }
 
   export type RolePermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -37701,27 +40731,6 @@ export namespace Prisma {
     totalFloors?: IntNullableFilter<"Property"> | number | null
     buildingAge?: IntNullableFilter<"Property"> | number | null
     constructionYear?: IntNullableFilter<"Property"> | number | null
-    hasElevator?: BoolFilter<"Property"> | boolean
-    hasBalcony?: BoolFilter<"Property"> | boolean
-    hasTerrace?: BoolFilter<"Property"> | boolean
-    hasCellar?: BoolFilter<"Property"> | boolean
-    hasParking?: BoolFilter<"Property"> | boolean
-    hasGarage?: BoolFilter<"Property"> | boolean
-    hasGarden?: BoolFilter<"Property"> | boolean
-    hasPool?: BoolFilter<"Property"> | boolean
-    hasAirConditioning?: BoolFilter<"Property"> | boolean
-    heatingType?: EnumHeatingTypeFilter<"Property"> | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFilter<"Property"> | boolean
-    isFurnished?: BoolFilter<"Property"> | boolean
-    hasInternet?: BoolFilter<"Property"> | boolean
-    hasCityGas?: BoolFilter<"Property"> | boolean
-    hasWater?: BoolFilter<"Property"> | boolean
-    hasElectricity?: BoolFilter<"Property"> | boolean
-    hasGuard?: BoolFilter<"Property"> | boolean
-    hasIntercom?: BoolFilter<"Property"> | boolean
-    hasAlarm?: BoolFilter<"Property"> | boolean
-    hasElectricGate?: BoolFilter<"Property"> | boolean
-    hasCCTV?: BoolFilter<"Property"> | boolean
     viewType?: EnumViewTypeFilter<"Property"> | $Enums.ViewType
     distanceToSchool?: IntNullableFilter<"Property"> | number | null
     distanceToTransport?: IntNullableFilter<"Property"> | number | null
@@ -37760,6 +40769,8 @@ export namespace Prisma {
     isExpired?: BoolFilter<"Property"> | boolean
     deletedAt?: DateTimeNullableFilter<"Property"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    amenities?: AmenitiesOnPropertiesListRelationFilter
+    seasonalRates?: SeasonalRateListRelationFilter
     wilaya?: XOR<WilayaScalarRelationFilter, WilayaWhereInput>
     commune?: XOR<CommuneNullableScalarRelationFilter, CommuneWhereInput> | null
     media?: PropertyMediaListRelationFilter
@@ -37800,27 +40811,6 @@ export namespace Prisma {
     totalFloors?: SortOrderInput | SortOrder
     buildingAge?: SortOrderInput | SortOrder
     constructionYear?: SortOrderInput | SortOrder
-    hasElevator?: SortOrder
-    hasBalcony?: SortOrder
-    hasTerrace?: SortOrder
-    hasCellar?: SortOrder
-    hasParking?: SortOrder
-    hasGarage?: SortOrder
-    hasGarden?: SortOrder
-    hasPool?: SortOrder
-    hasAirConditioning?: SortOrder
-    heatingType?: SortOrder
-    hasEquippedKitchen?: SortOrder
-    isFurnished?: SortOrder
-    hasInternet?: SortOrder
-    hasCityGas?: SortOrder
-    hasWater?: SortOrder
-    hasElectricity?: SortOrder
-    hasGuard?: SortOrder
-    hasIntercom?: SortOrder
-    hasAlarm?: SortOrder
-    hasElectricGate?: SortOrder
-    hasCCTV?: SortOrder
     viewType?: SortOrder
     distanceToSchool?: SortOrderInput | SortOrder
     distanceToTransport?: SortOrderInput | SortOrder
@@ -37859,6 +40849,8 @@ export namespace Prisma {
     isExpired?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    amenities?: AmenitiesOnPropertiesOrderByRelationAggregateInput
+    seasonalRates?: SeasonalRateOrderByRelationAggregateInput
     wilaya?: WilayaOrderByWithRelationInput
     commune?: CommuneOrderByWithRelationInput
     media?: PropertyMediaOrderByRelationAggregateInput
@@ -37872,7 +40864,6 @@ export namespace Prisma {
     messages?: MessageOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
     locationRequests?: LocationRequestOrderByRelationAggregateInput
-    _relevance?: PropertyOrderByRelevanceInput
   }
 
   export type PropertyWhereUniqueInput = Prisma.AtLeast<{
@@ -37904,27 +40895,6 @@ export namespace Prisma {
     totalFloors?: IntNullableFilter<"Property"> | number | null
     buildingAge?: IntNullableFilter<"Property"> | number | null
     constructionYear?: IntNullableFilter<"Property"> | number | null
-    hasElevator?: BoolFilter<"Property"> | boolean
-    hasBalcony?: BoolFilter<"Property"> | boolean
-    hasTerrace?: BoolFilter<"Property"> | boolean
-    hasCellar?: BoolFilter<"Property"> | boolean
-    hasParking?: BoolFilter<"Property"> | boolean
-    hasGarage?: BoolFilter<"Property"> | boolean
-    hasGarden?: BoolFilter<"Property"> | boolean
-    hasPool?: BoolFilter<"Property"> | boolean
-    hasAirConditioning?: BoolFilter<"Property"> | boolean
-    heatingType?: EnumHeatingTypeFilter<"Property"> | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFilter<"Property"> | boolean
-    isFurnished?: BoolFilter<"Property"> | boolean
-    hasInternet?: BoolFilter<"Property"> | boolean
-    hasCityGas?: BoolFilter<"Property"> | boolean
-    hasWater?: BoolFilter<"Property"> | boolean
-    hasElectricity?: BoolFilter<"Property"> | boolean
-    hasGuard?: BoolFilter<"Property"> | boolean
-    hasIntercom?: BoolFilter<"Property"> | boolean
-    hasAlarm?: BoolFilter<"Property"> | boolean
-    hasElectricGate?: BoolFilter<"Property"> | boolean
-    hasCCTV?: BoolFilter<"Property"> | boolean
     viewType?: EnumViewTypeFilter<"Property"> | $Enums.ViewType
     distanceToSchool?: IntNullableFilter<"Property"> | number | null
     distanceToTransport?: IntNullableFilter<"Property"> | number | null
@@ -37962,6 +40932,8 @@ export namespace Prisma {
     isExpired?: BoolFilter<"Property"> | boolean
     deletedAt?: DateTimeNullableFilter<"Property"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    amenities?: AmenitiesOnPropertiesListRelationFilter
+    seasonalRates?: SeasonalRateListRelationFilter
     wilaya?: XOR<WilayaScalarRelationFilter, WilayaWhereInput>
     commune?: XOR<CommuneNullableScalarRelationFilter, CommuneWhereInput> | null
     media?: PropertyMediaListRelationFilter
@@ -38002,27 +40974,6 @@ export namespace Prisma {
     totalFloors?: SortOrderInput | SortOrder
     buildingAge?: SortOrderInput | SortOrder
     constructionYear?: SortOrderInput | SortOrder
-    hasElevator?: SortOrder
-    hasBalcony?: SortOrder
-    hasTerrace?: SortOrder
-    hasCellar?: SortOrder
-    hasParking?: SortOrder
-    hasGarage?: SortOrder
-    hasGarden?: SortOrder
-    hasPool?: SortOrder
-    hasAirConditioning?: SortOrder
-    heatingType?: SortOrder
-    hasEquippedKitchen?: SortOrder
-    isFurnished?: SortOrder
-    hasInternet?: SortOrder
-    hasCityGas?: SortOrder
-    hasWater?: SortOrder
-    hasElectricity?: SortOrder
-    hasGuard?: SortOrder
-    hasIntercom?: SortOrder
-    hasAlarm?: SortOrder
-    hasElectricGate?: SortOrder
-    hasCCTV?: SortOrder
     viewType?: SortOrder
     distanceToSchool?: SortOrderInput | SortOrder
     distanceToTransport?: SortOrderInput | SortOrder
@@ -38095,27 +41046,6 @@ export namespace Prisma {
     totalFloors?: IntNullableWithAggregatesFilter<"Property"> | number | null
     buildingAge?: IntNullableWithAggregatesFilter<"Property"> | number | null
     constructionYear?: IntNullableWithAggregatesFilter<"Property"> | number | null
-    hasElevator?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasBalcony?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasTerrace?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasCellar?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasParking?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasGarage?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasGarden?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasPool?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasAirConditioning?: BoolWithAggregatesFilter<"Property"> | boolean
-    heatingType?: EnumHeatingTypeWithAggregatesFilter<"Property"> | $Enums.HeatingType
-    hasEquippedKitchen?: BoolWithAggregatesFilter<"Property"> | boolean
-    isFurnished?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasInternet?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasCityGas?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasWater?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasElectricity?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasGuard?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasIntercom?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasAlarm?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasElectricGate?: BoolWithAggregatesFilter<"Property"> | boolean
-    hasCCTV?: BoolWithAggregatesFilter<"Property"> | boolean
     viewType?: EnumViewTypeWithAggregatesFilter<"Property"> | $Enums.ViewType
     distanceToSchool?: IntNullableWithAggregatesFilter<"Property"> | number | null
     distanceToTransport?: IntNullableWithAggregatesFilter<"Property"> | number | null
@@ -38182,7 +41112,6 @@ export namespace Prisma {
     notificationsSent?: SortOrder
     notifiedAt?: SortOrderInput | SortOrder
     property?: PropertyOrderByWithRelationInput
-    _relevance?: PropertyPriceHistoryOrderByRelevanceInput
   }
 
   export type PropertyPriceHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -38244,8 +41173,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFilter<"PropertyMedia"> | $Enums.MediaType
     imageData?: JsonNullableFilter<"PropertyMedia">
     videoData?: JsonNullableFilter<"PropertyMedia">
-    displayOrder?: IntFilter<"PropertyMedia"> | number
-    isPrimary?: BoolFilter<"PropertyMedia"> | boolean
+    order?: IntFilter<"PropertyMedia"> | number
+    isThumbnail?: BoolFilter<"PropertyMedia"> | boolean
     deletedAt?: DateTimeNullableFilter<"PropertyMedia"> | Date | string | null
     property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
   }
@@ -38258,11 +41187,10 @@ export namespace Prisma {
     mediaType?: SortOrder
     imageData?: SortOrderInput | SortOrder
     videoData?: SortOrderInput | SortOrder
-    displayOrder?: SortOrder
-    isPrimary?: SortOrder
+    order?: SortOrder
+    isThumbnail?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     property?: PropertyOrderByWithRelationInput
-    _relevance?: PropertyMediaOrderByRelevanceInput
   }
 
   export type PropertyMediaWhereUniqueInput = Prisma.AtLeast<{
@@ -38276,8 +41204,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFilter<"PropertyMedia"> | $Enums.MediaType
     imageData?: JsonNullableFilter<"PropertyMedia">
     videoData?: JsonNullableFilter<"PropertyMedia">
-    displayOrder?: IntFilter<"PropertyMedia"> | number
-    isPrimary?: BoolFilter<"PropertyMedia"> | boolean
+    order?: IntFilter<"PropertyMedia"> | number
+    isThumbnail?: BoolFilter<"PropertyMedia"> | boolean
     deletedAt?: DateTimeNullableFilter<"PropertyMedia"> | Date | string | null
     property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
   }, "id">
@@ -38290,8 +41218,8 @@ export namespace Prisma {
     mediaType?: SortOrder
     imageData?: SortOrderInput | SortOrder
     videoData?: SortOrderInput | SortOrder
-    displayOrder?: SortOrder
-    isPrimary?: SortOrder
+    order?: SortOrder
+    isThumbnail?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     _count?: PropertyMediaCountOrderByAggregateInput
     _avg?: PropertyMediaAvgOrderByAggregateInput
@@ -38311,9 +41239,175 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeWithAggregatesFilter<"PropertyMedia"> | $Enums.MediaType
     imageData?: JsonNullableWithAggregatesFilter<"PropertyMedia">
     videoData?: JsonNullableWithAggregatesFilter<"PropertyMedia">
-    displayOrder?: IntWithAggregatesFilter<"PropertyMedia"> | number
-    isPrimary?: BoolWithAggregatesFilter<"PropertyMedia"> | boolean
+    order?: IntWithAggregatesFilter<"PropertyMedia"> | number
+    isThumbnail?: BoolWithAggregatesFilter<"PropertyMedia"> | boolean
     deletedAt?: DateTimeNullableWithAggregatesFilter<"PropertyMedia"> | Date | string | null
+  }
+
+  export type AmenityWhereInput = {
+    AND?: AmenityWhereInput | AmenityWhereInput[]
+    OR?: AmenityWhereInput[]
+    NOT?: AmenityWhereInput | AmenityWhereInput[]
+    id?: StringFilter<"Amenity"> | string
+    name?: StringFilter<"Amenity"> | string
+    category?: StringFilter<"Amenity"> | string
+    icon?: StringNullableFilter<"Amenity"> | string | null
+    properties?: AmenitiesOnPropertiesListRelationFilter
+  }
+
+  export type AmenityOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    properties?: AmenitiesOnPropertiesOrderByRelationAggregateInput
+  }
+
+  export type AmenityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: AmenityWhereInput | AmenityWhereInput[]
+    OR?: AmenityWhereInput[]
+    NOT?: AmenityWhereInput | AmenityWhereInput[]
+    category?: StringFilter<"Amenity"> | string
+    icon?: StringNullableFilter<"Amenity"> | string | null
+    properties?: AmenitiesOnPropertiesListRelationFilter
+  }, "id" | "name">
+
+  export type AmenityOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    _count?: AmenityCountOrderByAggregateInput
+    _max?: AmenityMaxOrderByAggregateInput
+    _min?: AmenityMinOrderByAggregateInput
+  }
+
+  export type AmenityScalarWhereWithAggregatesInput = {
+    AND?: AmenityScalarWhereWithAggregatesInput | AmenityScalarWhereWithAggregatesInput[]
+    OR?: AmenityScalarWhereWithAggregatesInput[]
+    NOT?: AmenityScalarWhereWithAggregatesInput | AmenityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Amenity"> | string
+    name?: StringWithAggregatesFilter<"Amenity"> | string
+    category?: StringWithAggregatesFilter<"Amenity"> | string
+    icon?: StringNullableWithAggregatesFilter<"Amenity"> | string | null
+  }
+
+  export type AmenitiesOnPropertiesWhereInput = {
+    AND?: AmenitiesOnPropertiesWhereInput | AmenitiesOnPropertiesWhereInput[]
+    OR?: AmenitiesOnPropertiesWhereInput[]
+    NOT?: AmenitiesOnPropertiesWhereInput | AmenitiesOnPropertiesWhereInput[]
+    propertyId?: StringFilter<"AmenitiesOnProperties"> | string
+    amenityId?: StringFilter<"AmenitiesOnProperties"> | string
+    assignedAt?: DateTimeFilter<"AmenitiesOnProperties"> | Date | string
+    property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
+    amenity?: XOR<AmenityScalarRelationFilter, AmenityWhereInput>
+  }
+
+  export type AmenitiesOnPropertiesOrderByWithRelationInput = {
+    propertyId?: SortOrder
+    amenityId?: SortOrder
+    assignedAt?: SortOrder
+    property?: PropertyOrderByWithRelationInput
+    amenity?: AmenityOrderByWithRelationInput
+  }
+
+  export type AmenitiesOnPropertiesWhereUniqueInput = Prisma.AtLeast<{
+    propertyId_amenityId?: AmenitiesOnPropertiesPropertyIdAmenityIdCompoundUniqueInput
+    AND?: AmenitiesOnPropertiesWhereInput | AmenitiesOnPropertiesWhereInput[]
+    OR?: AmenitiesOnPropertiesWhereInput[]
+    NOT?: AmenitiesOnPropertiesWhereInput | AmenitiesOnPropertiesWhereInput[]
+    propertyId?: StringFilter<"AmenitiesOnProperties"> | string
+    amenityId?: StringFilter<"AmenitiesOnProperties"> | string
+    assignedAt?: DateTimeFilter<"AmenitiesOnProperties"> | Date | string
+    property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
+    amenity?: XOR<AmenityScalarRelationFilter, AmenityWhereInput>
+  }, "propertyId_amenityId">
+
+  export type AmenitiesOnPropertiesOrderByWithAggregationInput = {
+    propertyId?: SortOrder
+    amenityId?: SortOrder
+    assignedAt?: SortOrder
+    _count?: AmenitiesOnPropertiesCountOrderByAggregateInput
+    _max?: AmenitiesOnPropertiesMaxOrderByAggregateInput
+    _min?: AmenitiesOnPropertiesMinOrderByAggregateInput
+  }
+
+  export type AmenitiesOnPropertiesScalarWhereWithAggregatesInput = {
+    AND?: AmenitiesOnPropertiesScalarWhereWithAggregatesInput | AmenitiesOnPropertiesScalarWhereWithAggregatesInput[]
+    OR?: AmenitiesOnPropertiesScalarWhereWithAggregatesInput[]
+    NOT?: AmenitiesOnPropertiesScalarWhereWithAggregatesInput | AmenitiesOnPropertiesScalarWhereWithAggregatesInput[]
+    propertyId?: StringWithAggregatesFilter<"AmenitiesOnProperties"> | string
+    amenityId?: StringWithAggregatesFilter<"AmenitiesOnProperties"> | string
+    assignedAt?: DateTimeWithAggregatesFilter<"AmenitiesOnProperties"> | Date | string
+  }
+
+  export type SeasonalRateWhereInput = {
+    AND?: SeasonalRateWhereInput | SeasonalRateWhereInput[]
+    OR?: SeasonalRateWhereInput[]
+    NOT?: SeasonalRateWhereInput | SeasonalRateWhereInput[]
+    id?: StringFilter<"SeasonalRate"> | string
+    createdAt?: DateTimeFilter<"SeasonalRate"> | Date | string
+    updatedAt?: DateTimeFilter<"SeasonalRate"> | Date | string
+    propertyId?: StringFilter<"SeasonalRate"> | string
+    startDate?: DateTimeFilter<"SeasonalRate"> | Date | string
+    endDate?: DateTimeFilter<"SeasonalRate"> | Date | string
+    dailyRate?: DecimalFilter<"SeasonalRate"> | Decimal | DecimalJsLike | number | string
+    property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
+  }
+
+  export type SeasonalRateOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    propertyId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    dailyRate?: SortOrder
+    property?: PropertyOrderByWithRelationInput
+  }
+
+  export type SeasonalRateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SeasonalRateWhereInput | SeasonalRateWhereInput[]
+    OR?: SeasonalRateWhereInput[]
+    NOT?: SeasonalRateWhereInput | SeasonalRateWhereInput[]
+    createdAt?: DateTimeFilter<"SeasonalRate"> | Date | string
+    updatedAt?: DateTimeFilter<"SeasonalRate"> | Date | string
+    propertyId?: StringFilter<"SeasonalRate"> | string
+    startDate?: DateTimeFilter<"SeasonalRate"> | Date | string
+    endDate?: DateTimeFilter<"SeasonalRate"> | Date | string
+    dailyRate?: DecimalFilter<"SeasonalRate"> | Decimal | DecimalJsLike | number | string
+    property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
+  }, "id">
+
+  export type SeasonalRateOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    propertyId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    dailyRate?: SortOrder
+    _count?: SeasonalRateCountOrderByAggregateInput
+    _avg?: SeasonalRateAvgOrderByAggregateInput
+    _max?: SeasonalRateMaxOrderByAggregateInput
+    _min?: SeasonalRateMinOrderByAggregateInput
+    _sum?: SeasonalRateSumOrderByAggregateInput
+  }
+
+  export type SeasonalRateScalarWhereWithAggregatesInput = {
+    AND?: SeasonalRateScalarWhereWithAggregatesInput | SeasonalRateScalarWhereWithAggregatesInput[]
+    OR?: SeasonalRateScalarWhereWithAggregatesInput[]
+    NOT?: SeasonalRateScalarWhereWithAggregatesInput | SeasonalRateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SeasonalRate"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SeasonalRate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SeasonalRate"> | Date | string
+    propertyId?: StringWithAggregatesFilter<"SeasonalRate"> | string
+    startDate?: DateTimeWithAggregatesFilter<"SeasonalRate"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"SeasonalRate"> | Date | string
+    dailyRate?: DecimalWithAggregatesFilter<"SeasonalRate"> | Decimal | DecimalJsLike | number | string
   }
 
   export type BoostPricingWhereInput = {
@@ -38343,7 +41437,6 @@ export namespace Prisma {
     validFrom?: SortOrder
     validUntil?: SortOrderInput | SortOrder
     isActive?: SortOrder
-    _relevance?: BoostPricingOrderByRelevanceInput
   }
 
   export type BoostPricingWhereUniqueInput = Prisma.AtLeast<{
@@ -38447,7 +41540,6 @@ export namespace Prisma {
     property?: PropertyOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     payment?: PaymentOrderByWithRelationInput
-    _relevance?: PropertyBoostOrderByRelevanceInput
   }
 
   export type PropertyBoostWhereUniqueInput = Prisma.AtLeast<{
@@ -38575,7 +41667,6 @@ export namespace Prisma {
     property?: PropertyOrderByWithRelationInput
     requester?: UserOrderByWithRelationInput
     owner?: UserOrderByWithRelationInput
-    _relevance?: LocationRequestOrderByRelevanceInput
   }
 
   export type LocationRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -38671,7 +41762,6 @@ export namespace Prisma {
     notifyPriceChange?: SortOrder
     user?: UserOrderByWithRelationInput
     property?: PropertyOrderByWithRelationInput
-    _relevance?: FavoriteOrderByRelevanceInput
   }
 
   export type FavoriteWhereUniqueInput = Prisma.AtLeast<{
@@ -38719,10 +41809,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SavedSearch"> | Date | string
     userId?: StringFilter<"SavedSearch"> | string
     name?: StringFilter<"SavedSearch"> | string
-    criteria?: JsonFilter<"SavedSearch">
+    filters?: JsonFilter<"SavedSearch">
     notifyByEmail?: BoolFilter<"SavedSearch"> | boolean
     notifyInApp?: BoolFilter<"SavedSearch"> | boolean
     isActive?: BoolFilter<"SavedSearch"> | boolean
+    lastCheckedAt?: DateTimeFilter<"SavedSearch"> | Date | string
     lastMatchedAt?: DateTimeNullableFilter<"SavedSearch"> | Date | string | null
     matchCount?: IntFilter<"SavedSearch"> | number
     lastNotifiedAt?: DateTimeNullableFilter<"SavedSearch"> | Date | string | null
@@ -38736,16 +41827,16 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    criteria?: SortOrder
+    filters?: SortOrder
     notifyByEmail?: SortOrder
     notifyInApp?: SortOrder
     isActive?: SortOrder
+    lastCheckedAt?: SortOrder
     lastMatchedAt?: SortOrderInput | SortOrder
     matchCount?: SortOrder
     lastNotifiedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     matches?: SavedSearchMatchOrderByRelationAggregateInput
-    _relevance?: SavedSearchOrderByRelevanceInput
   }
 
   export type SavedSearchWhereUniqueInput = Prisma.AtLeast<{
@@ -38757,10 +41848,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SavedSearch"> | Date | string
     userId?: StringFilter<"SavedSearch"> | string
     name?: StringFilter<"SavedSearch"> | string
-    criteria?: JsonFilter<"SavedSearch">
+    filters?: JsonFilter<"SavedSearch">
     notifyByEmail?: BoolFilter<"SavedSearch"> | boolean
     notifyInApp?: BoolFilter<"SavedSearch"> | boolean
     isActive?: BoolFilter<"SavedSearch"> | boolean
+    lastCheckedAt?: DateTimeFilter<"SavedSearch"> | Date | string
     lastMatchedAt?: DateTimeNullableFilter<"SavedSearch"> | Date | string | null
     matchCount?: IntFilter<"SavedSearch"> | number
     lastNotifiedAt?: DateTimeNullableFilter<"SavedSearch"> | Date | string | null
@@ -38774,10 +41866,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    criteria?: SortOrder
+    filters?: SortOrder
     notifyByEmail?: SortOrder
     notifyInApp?: SortOrder
     isActive?: SortOrder
+    lastCheckedAt?: SortOrder
     lastMatchedAt?: SortOrderInput | SortOrder
     matchCount?: SortOrder
     lastNotifiedAt?: SortOrderInput | SortOrder
@@ -38797,10 +41890,11 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"SavedSearch"> | Date | string
     userId?: StringWithAggregatesFilter<"SavedSearch"> | string
     name?: StringWithAggregatesFilter<"SavedSearch"> | string
-    criteria?: JsonWithAggregatesFilter<"SavedSearch">
+    filters?: JsonWithAggregatesFilter<"SavedSearch">
     notifyByEmail?: BoolWithAggregatesFilter<"SavedSearch"> | boolean
     notifyInApp?: BoolWithAggregatesFilter<"SavedSearch"> | boolean
     isActive?: BoolWithAggregatesFilter<"SavedSearch"> | boolean
+    lastCheckedAt?: DateTimeWithAggregatesFilter<"SavedSearch"> | Date | string
     lastMatchedAt?: DateTimeNullableWithAggregatesFilter<"SavedSearch"> | Date | string | null
     matchCount?: IntWithAggregatesFilter<"SavedSearch"> | number
     lastNotifiedAt?: DateTimeNullableWithAggregatesFilter<"SavedSearch"> | Date | string | null
@@ -38829,7 +41923,6 @@ export namespace Prisma {
     viewedAt?: SortOrderInput | SortOrder
     savedSearch?: SavedSearchOrderByWithRelationInput
     property?: PropertyOrderByWithRelationInput
-    _relevance?: SavedSearchMatchOrderByRelevanceInput
   }
 
   export type SavedSearchMatchWhereUniqueInput = Prisma.AtLeast<{
@@ -38924,7 +42017,6 @@ export namespace Prisma {
     seller?: UserOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
-    _relevance?: ConversationOrderByRelevanceInput
   }
 
   export type ConversationWhereUniqueInput = Prisma.AtLeast<{
@@ -39048,7 +42140,6 @@ export namespace Prisma {
     sender?: UserOrderByWithRelationInput
     receiver?: UserOrderByWithRelationInput
     property?: PropertyOrderByWithRelationInput
-    _relevance?: MessageOrderByRelevanceInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -39158,7 +42249,6 @@ export namespace Prisma {
     property?: PropertyOrderByWithRelationInput
     owner?: UserOrderByWithRelationInput
     reviewer?: UserOrderByWithRelationInput
-    _relevance?: ReviewOrderByRelevanceInput
   }
 
   export type ReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -39277,7 +42367,6 @@ export namespace Prisma {
     reporter?: UserOrderByWithRelationInput
     property?: PropertyOrderByWithRelationInput
     reportedUser?: UserOrderByWithRelationInput
-    _relevance?: ReportOrderByRelevanceInput
   }
 
   export type ReportWhereUniqueInput = Prisma.AtLeast<{
@@ -39414,7 +42503,6 @@ export namespace Prisma {
     userAgent?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     boosts?: PropertyBoostOrderByRelationAggregateInput
-    _relevance?: PaymentOrderByRelevanceInput
   }
 
   export type PaymentWhereUniqueInput = Prisma.AtLeast<{
@@ -39570,7 +42658,6 @@ export namespace Prisma {
     metadata?: SortOrderInput | SortOrder
     deletedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
-    _relevance?: NotificationOrderByRelevanceInput
   }
 
   export type NotificationWhereUniqueInput = Prisma.AtLeast<{
@@ -39671,7 +42758,6 @@ export namespace Prisma {
     sourceBreakdown?: SortOrderInput | SortOrder
     deviceBreakdown?: SortOrderInput | SortOrder
     property?: PropertyOrderByWithRelationInput
-    _relevance?: PropertyViewStatsOrderByRelevanceInput
   }
 
   export type PropertyViewStatsWhereUniqueInput = Prisma.AtLeast<{
@@ -39772,7 +42858,6 @@ export namespace Prisma {
     device?: SortOrderInput | SortOrder
     property?: PropertyOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
-    _relevance?: PropertyViewDetailOrderByRelevanceInput
   }
 
   export type PropertyViewDetailWhereUniqueInput = Prisma.AtLeast<{
@@ -39878,7 +42963,6 @@ export namespace Prisma {
     cachedResults?: SortOrderInput | SortOrder
     cacheExpiresAt?: SortOrderInput | SortOrder
     cacheTTL?: SortOrder
-    _relevance?: PopularSearchOrderByRelevanceInput
   }
 
   export type PopularSearchWhereUniqueInput = Prisma.AtLeast<{
@@ -39970,7 +43054,6 @@ export namespace Prisma {
     area?: SortOrderInput | SortOrder
     communes?: CommuneOrderByRelationAggregateInput
     properties?: PropertyOrderByRelationAggregateInput
-    _relevance?: WilayaOrderByRelevanceInput
   }
 
   export type WilayaWhereUniqueInput = Prisma.AtLeast<{
@@ -40053,7 +43136,6 @@ export namespace Prisma {
     postalCode?: SortOrderInput | SortOrder
     wilaya?: WilayaOrderByWithRelationInput
     properties?: PropertyOrderByRelationAggregateInput
-    _relevance?: CommuneOrderByRelevanceInput
   }
 
   export type CommuneWhereUniqueInput = Prisma.AtLeast<{
@@ -40758,27 +43840,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -40815,6 +43876,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -40855,27 +43918,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -40913,6 +43955,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -40950,27 +43994,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41007,6 +44030,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -41047,27 +44072,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41105,6 +44109,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -41143,27 +44149,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -41227,27 +44212,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41310,27 +44274,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41460,8 +44403,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: number
-    isPrimary?: boolean
+    order?: number
+    isThumbnail?: boolean
     deletedAt?: Date | string | null
     property: PropertyCreateNestedOneWithoutMediaInput
   }
@@ -41474,8 +44417,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: number
-    isPrimary?: boolean
+    order?: number
+    isThumbnail?: boolean
     deletedAt?: Date | string | null
   }
 
@@ -41486,8 +44429,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     property?: PropertyUpdateOneRequiredWithoutMediaNestedInput
   }
@@ -41500,8 +44443,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -41513,8 +44456,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: number
-    isPrimary?: boolean
+    order?: number
+    isThumbnail?: boolean
     deletedAt?: Date | string | null
   }
 
@@ -41525,8 +44468,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -41538,9 +44481,171 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AmenityCreateInput = {
+    id?: string
+    name: string
+    category: string
+    icon?: string | null
+    properties?: AmenitiesOnPropertiesCreateNestedManyWithoutAmenityInput
+  }
+
+  export type AmenityUncheckedCreateInput = {
+    id?: string
+    name: string
+    category: string
+    icon?: string | null
+    properties?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutAmenityInput
+  }
+
+  export type AmenityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    properties?: AmenitiesOnPropertiesUpdateManyWithoutAmenityNestedInput
+  }
+
+  export type AmenityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    properties?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutAmenityNestedInput
+  }
+
+  export type AmenityCreateManyInput = {
+    id?: string
+    name: string
+    category: string
+    icon?: string | null
+  }
+
+  export type AmenityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AmenityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AmenitiesOnPropertiesCreateInput = {
+    assignedAt?: Date | string
+    property: PropertyCreateNestedOneWithoutAmenitiesInput
+    amenity: AmenityCreateNestedOneWithoutPropertiesInput
+  }
+
+  export type AmenitiesOnPropertiesUncheckedCreateInput = {
+    propertyId: string
+    amenityId: string
+    assignedAt?: Date | string
+  }
+
+  export type AmenitiesOnPropertiesUpdateInput = {
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    property?: PropertyUpdateOneRequiredWithoutAmenitiesNestedInput
+    amenity?: AmenityUpdateOneRequiredWithoutPropertiesNestedInput
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateInput = {
+    propertyId?: StringFieldUpdateOperationsInput | string
+    amenityId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AmenitiesOnPropertiesCreateManyInput = {
+    propertyId: string
+    amenityId: string
+    assignedAt?: Date | string
+  }
+
+  export type AmenitiesOnPropertiesUpdateManyMutationInput = {
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateManyInput = {
+    propertyId?: StringFieldUpdateOperationsInput | string
+    amenityId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeasonalRateCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startDate: Date | string
+    endDate: Date | string
+    dailyRate: Decimal | DecimalJsLike | number | string
+    property: PropertyCreateNestedOneWithoutSeasonalRatesInput
+  }
+
+  export type SeasonalRateUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propertyId: string
+    startDate: Date | string
+    endDate: Date | string
+    dailyRate: Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    property?: PropertyUpdateOneRequiredWithoutSeasonalRatesNestedInput
+  }
+
+  export type SeasonalRateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propertyId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propertyId: string
+    startDate: Date | string
+    endDate: Date | string
+    dailyRate: Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propertyId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type BoostPricingCreateInput = {
@@ -41974,10 +45079,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -41991,10 +45097,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -42006,10 +45113,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42023,10 +45131,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42039,10 +45148,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -42053,10 +45163,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42068,10 +45179,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43554,7 +46666,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
@@ -43581,7 +46692,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
@@ -43780,12 +46890,6 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type UserOrderByRelevanceInput = {
-    fields: UserOrderByRelevanceFieldEnum | UserOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -43952,7 +47056,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
@@ -43985,7 +47088,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
@@ -44087,12 +47189,6 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type RoleOrderByRelevanceInput = {
-    fields: RoleOrderByRelevanceFieldEnum | RoleOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type RoleCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -44130,12 +47226,6 @@ export namespace Prisma {
     isNot?: RoleWhereInput
   }
 
-  export type UserRoleOrderByRelevanceInput = {
-    fields: UserRoleOrderByRelevanceFieldEnum | UserRoleOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type UserRoleUserIdRoleIdCompoundUniqueInput = {
     userId: string
     roleId: string
@@ -44168,12 +47258,6 @@ export namespace Prisma {
     assignedAt?: SortOrder
   }
 
-  export type PermissionOrderByRelevanceInput = {
-    fields: PermissionOrderByRelevanceFieldEnum | PermissionOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PermissionCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -44201,12 +47285,6 @@ export namespace Prisma {
   export type PermissionScalarRelationFilter = {
     is?: PermissionWhereInput
     isNot?: PermissionWhereInput
-  }
-
-  export type RolePermissionOrderByRelevanceInput = {
-    fields: RolePermissionOrderByRelevanceFieldEnum | RolePermissionOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RolePermissionRoleIdPermissionIdCompoundUniqueInput = {
@@ -44289,13 +47367,6 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type EnumHeatingTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.HeatingType | EnumHeatingTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumHeatingTypeFilter<$PrismaModel> | $Enums.HeatingType
-  }
-
   export type EnumViewTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ViewType | EnumViewTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ViewType[] | ListEnumViewTypeFieldRefInput<$PrismaModel>
@@ -44344,6 +47415,18 @@ export namespace Prisma {
     not?: NestedEnumLocationInputModeFilter<$PrismaModel> | $Enums.LocationInputMode
   }
 
+  export type AmenitiesOnPropertiesListRelationFilter = {
+    every?: AmenitiesOnPropertiesWhereInput
+    some?: AmenitiesOnPropertiesWhereInput
+    none?: AmenitiesOnPropertiesWhereInput
+  }
+
+  export type SeasonalRateListRelationFilter = {
+    every?: SeasonalRateWhereInput
+    some?: SeasonalRateWhereInput
+    none?: SeasonalRateWhereInput
+  }
+
   export type WilayaScalarRelationFilter = {
     is?: WilayaWhereInput
     isNot?: WilayaWhereInput
@@ -44383,6 +47466,14 @@ export namespace Prisma {
     none?: PropertyViewStatsWhereInput
   }
 
+  export type AmenitiesOnPropertiesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SeasonalRateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PropertyMediaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -44397,12 +47488,6 @@ export namespace Prisma {
 
   export type PropertyViewStatsOrderByRelationAggregateInput = {
     _count?: SortOrder
-  }
-
-  export type PropertyOrderByRelevanceInput = {
-    fields: PropertyOrderByRelevanceFieldEnum | PropertyOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type PropertyCountOrderByAggregateInput = {
@@ -44430,27 +47515,6 @@ export namespace Prisma {
     totalFloors?: SortOrder
     buildingAge?: SortOrder
     constructionYear?: SortOrder
-    hasElevator?: SortOrder
-    hasBalcony?: SortOrder
-    hasTerrace?: SortOrder
-    hasCellar?: SortOrder
-    hasParking?: SortOrder
-    hasGarage?: SortOrder
-    hasGarden?: SortOrder
-    hasPool?: SortOrder
-    hasAirConditioning?: SortOrder
-    heatingType?: SortOrder
-    hasEquippedKitchen?: SortOrder
-    isFurnished?: SortOrder
-    hasInternet?: SortOrder
-    hasCityGas?: SortOrder
-    hasWater?: SortOrder
-    hasElectricity?: SortOrder
-    hasGuard?: SortOrder
-    hasIntercom?: SortOrder
-    hasAlarm?: SortOrder
-    hasElectricGate?: SortOrder
-    hasCCTV?: SortOrder
     viewType?: SortOrder
     distanceToSchool?: SortOrder
     distanceToTransport?: SortOrder
@@ -44546,27 +47610,6 @@ export namespace Prisma {
     totalFloors?: SortOrder
     buildingAge?: SortOrder
     constructionYear?: SortOrder
-    hasElevator?: SortOrder
-    hasBalcony?: SortOrder
-    hasTerrace?: SortOrder
-    hasCellar?: SortOrder
-    hasParking?: SortOrder
-    hasGarage?: SortOrder
-    hasGarden?: SortOrder
-    hasPool?: SortOrder
-    hasAirConditioning?: SortOrder
-    heatingType?: SortOrder
-    hasEquippedKitchen?: SortOrder
-    isFurnished?: SortOrder
-    hasInternet?: SortOrder
-    hasCityGas?: SortOrder
-    hasWater?: SortOrder
-    hasElectricity?: SortOrder
-    hasGuard?: SortOrder
-    hasIntercom?: SortOrder
-    hasAlarm?: SortOrder
-    hasElectricGate?: SortOrder
-    hasCCTV?: SortOrder
     viewType?: SortOrder
     distanceToSchool?: SortOrder
     distanceToTransport?: SortOrder
@@ -44630,27 +47673,6 @@ export namespace Prisma {
     totalFloors?: SortOrder
     buildingAge?: SortOrder
     constructionYear?: SortOrder
-    hasElevator?: SortOrder
-    hasBalcony?: SortOrder
-    hasTerrace?: SortOrder
-    hasCellar?: SortOrder
-    hasParking?: SortOrder
-    hasGarage?: SortOrder
-    hasGarden?: SortOrder
-    hasPool?: SortOrder
-    hasAirConditioning?: SortOrder
-    heatingType?: SortOrder
-    hasEquippedKitchen?: SortOrder
-    isFurnished?: SortOrder
-    hasInternet?: SortOrder
-    hasCityGas?: SortOrder
-    hasWater?: SortOrder
-    hasElectricity?: SortOrder
-    hasGuard?: SortOrder
-    hasIntercom?: SortOrder
-    hasAlarm?: SortOrder
-    hasElectricGate?: SortOrder
-    hasCCTV?: SortOrder
     viewType?: SortOrder
     distanceToSchool?: SortOrder
     distanceToTransport?: SortOrder
@@ -44798,16 +47820,6 @@ export namespace Prisma {
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
-  export type EnumHeatingTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.HeatingType | EnumHeatingTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumHeatingTypeWithAggregatesFilter<$PrismaModel> | $Enums.HeatingType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumHeatingTypeFilter<$PrismaModel>
-    _max?: NestedEnumHeatingTypeFilter<$PrismaModel>
-  }
-
   export type EnumViewTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ViewType | EnumViewTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ViewType[] | ListEnumViewTypeFieldRefInput<$PrismaModel>
@@ -44875,12 +47887,6 @@ export namespace Prisma {
     isNot?: PropertyWhereInput
   }
 
-  export type PropertyPriceHistoryOrderByRelevanceInput = {
-    fields: PropertyPriceHistoryOrderByRelevanceFieldEnum | PropertyPriceHistoryOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PropertyPriceHistoryCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -44938,12 +47944,6 @@ export namespace Prisma {
     not?: NestedEnumMediaTypeFilter<$PrismaModel> | $Enums.MediaType
   }
 
-  export type PropertyMediaOrderByRelevanceInput = {
-    fields: PropertyMediaOrderByRelevanceFieldEnum | PropertyMediaOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PropertyMediaCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -44952,13 +47952,13 @@ export namespace Prisma {
     mediaType?: SortOrder
     imageData?: SortOrder
     videoData?: SortOrder
-    displayOrder?: SortOrder
-    isPrimary?: SortOrder
+    order?: SortOrder
+    isThumbnail?: SortOrder
     deletedAt?: SortOrder
   }
 
   export type PropertyMediaAvgOrderByAggregateInput = {
-    displayOrder?: SortOrder
+    order?: SortOrder
   }
 
   export type PropertyMediaMaxOrderByAggregateInput = {
@@ -44967,8 +47967,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     propertyId?: SortOrder
     mediaType?: SortOrder
-    displayOrder?: SortOrder
-    isPrimary?: SortOrder
+    order?: SortOrder
+    isThumbnail?: SortOrder
     deletedAt?: SortOrder
   }
 
@@ -44978,13 +47978,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
     propertyId?: SortOrder
     mediaType?: SortOrder
-    displayOrder?: SortOrder
-    isPrimary?: SortOrder
+    order?: SortOrder
+    isThumbnail?: SortOrder
     deletedAt?: SortOrder
   }
 
   export type PropertyMediaSumOrderByAggregateInput = {
-    displayOrder?: SortOrder
+    order?: SortOrder
   }
 
   export type EnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -44995,6 +47995,93 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumMediaTypeFilter<$PrismaModel>
     _max?: NestedEnumMediaTypeFilter<$PrismaModel>
+  }
+
+  export type AmenityCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type AmenityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type AmenityMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type AmenityScalarRelationFilter = {
+    is?: AmenityWhereInput
+    isNot?: AmenityWhereInput
+  }
+
+  export type AmenitiesOnPropertiesPropertyIdAmenityIdCompoundUniqueInput = {
+    propertyId: string
+    amenityId: string
+  }
+
+  export type AmenitiesOnPropertiesCountOrderByAggregateInput = {
+    propertyId?: SortOrder
+    amenityId?: SortOrder
+    assignedAt?: SortOrder
+  }
+
+  export type AmenitiesOnPropertiesMaxOrderByAggregateInput = {
+    propertyId?: SortOrder
+    amenityId?: SortOrder
+    assignedAt?: SortOrder
+  }
+
+  export type AmenitiesOnPropertiesMinOrderByAggregateInput = {
+    propertyId?: SortOrder
+    amenityId?: SortOrder
+    assignedAt?: SortOrder
+  }
+
+  export type SeasonalRateCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    propertyId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    dailyRate?: SortOrder
+  }
+
+  export type SeasonalRateAvgOrderByAggregateInput = {
+    dailyRate?: SortOrder
+  }
+
+  export type SeasonalRateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    propertyId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    dailyRate?: SortOrder
+  }
+
+  export type SeasonalRateMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    propertyId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    dailyRate?: SortOrder
+  }
+
+  export type SeasonalRateSumOrderByAggregateInput = {
+    dailyRate?: SortOrder
   }
 
   export type EnumBoostTierFilter<$PrismaModel = never> = {
@@ -45025,12 +48112,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type BoostPricingOrderByRelevanceInput = {
-    fields: BoostPricingOrderByRelevanceFieldEnum | BoostPricingOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type BoostPricingCountOrderByAggregateInput = {
@@ -45133,12 +48214,6 @@ export namespace Prisma {
   export type PaymentNullableScalarRelationFilter = {
     is?: PaymentWhereInput | null
     isNot?: PaymentWhereInput | null
-  }
-
-  export type PropertyBoostOrderByRelevanceInput = {
-    fields: PropertyBoostOrderByRelevanceFieldEnum | PropertyBoostOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type PropertyBoostCountOrderByAggregateInput = {
@@ -45250,12 +48325,6 @@ export namespace Prisma {
     not?: NestedEnumLocationRequestStatusFilter<$PrismaModel> | $Enums.LocationRequestStatus
   }
 
-  export type LocationRequestOrderByRelevanceInput = {
-    fields: LocationRequestOrderByRelevanceFieldEnum | LocationRequestOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type LocationRequestPropertyIdRequesterIdCompoundUniqueInput = {
     propertyId: string
     requesterId: string
@@ -45336,12 +48405,6 @@ export namespace Prisma {
     _max?: NestedEnumLocationRequestStatusFilter<$PrismaModel>
   }
 
-  export type FavoriteOrderByRelevanceInput = {
-    fields: FavoriteOrderByRelevanceFieldEnum | FavoriteOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type FavoriteUserIdPropertyIdCompoundUniqueInput = {
     userId: string
     propertyId: string
@@ -45371,22 +48434,17 @@ export namespace Prisma {
     notifyPriceChange?: SortOrder
   }
 
-  export type SavedSearchOrderByRelevanceInput = {
-    fields: SavedSearchOrderByRelevanceFieldEnum | SavedSearchOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SavedSearchCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    criteria?: SortOrder
+    filters?: SortOrder
     notifyByEmail?: SortOrder
     notifyInApp?: SortOrder
     isActive?: SortOrder
+    lastCheckedAt?: SortOrder
     lastMatchedAt?: SortOrder
     matchCount?: SortOrder
     lastNotifiedAt?: SortOrder
@@ -45405,6 +48463,7 @@ export namespace Prisma {
     notifyByEmail?: SortOrder
     notifyInApp?: SortOrder
     isActive?: SortOrder
+    lastCheckedAt?: SortOrder
     lastMatchedAt?: SortOrder
     matchCount?: SortOrder
     lastNotifiedAt?: SortOrder
@@ -45419,6 +48478,7 @@ export namespace Prisma {
     notifyByEmail?: SortOrder
     notifyInApp?: SortOrder
     isActive?: SortOrder
+    lastCheckedAt?: SortOrder
     lastMatchedAt?: SortOrder
     matchCount?: SortOrder
     lastNotifiedAt?: SortOrder
@@ -45431,12 +48491,6 @@ export namespace Prisma {
   export type SavedSearchScalarRelationFilter = {
     is?: SavedSearchWhereInput
     isNot?: SavedSearchWhereInput
-  }
-
-  export type SavedSearchMatchOrderByRelevanceInput = {
-    fields: SavedSearchMatchOrderByRelevanceFieldEnum | SavedSearchMatchOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SavedSearchMatchSavedSearchIdPropertyIdCompoundUniqueInput = {
@@ -45469,12 +48523,6 @@ export namespace Prisma {
     propertyId?: SortOrder
     notified?: SortOrder
     viewedAt?: SortOrder
-  }
-
-  export type ConversationOrderByRelevanceInput = {
-    fields: ConversationOrderByRelevanceFieldEnum | ConversationOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type ConversationBuyerIdSellerIdCompoundUniqueInput = {
@@ -45577,12 +48625,6 @@ export namespace Prisma {
     isNot?: PropertyWhereInput | null
   }
 
-  export type MessageOrderByRelevanceInput = {
-    fields: MessageOrderByRelevanceFieldEnum | MessageOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MessageCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -45642,12 +48684,6 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
-  }
-
-  export type ReviewOrderByRelevanceInput = {
-    fields: ReviewOrderByRelevanceFieldEnum | ReviewOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type ReviewCountOrderByAggregateInput = {
@@ -45735,12 +48771,6 @@ export namespace Prisma {
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
-  }
-
-  export type ReportOrderByRelevanceInput = {
-    fields: ReportOrderByRelevanceFieldEnum | ReportOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type ReportCountOrderByAggregateInput = {
@@ -45831,12 +48861,6 @@ export namespace Prisma {
     in?: $Enums.PaymentProductType[] | ListEnumPaymentProductTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.PaymentProductType[] | ListEnumPaymentProductTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentProductTypeFilter<$PrismaModel> | $Enums.PaymentProductType
-  }
-
-  export type PaymentOrderByRelevanceInput = {
-    fields: PaymentOrderByRelevanceFieldEnum | PaymentOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type PaymentCountOrderByAggregateInput = {
@@ -45983,12 +49007,6 @@ export namespace Prisma {
     not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
   }
 
-  export type NotificationOrderByRelevanceInput = {
-    fields: NotificationOrderByRelevanceFieldEnum | NotificationOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type NotificationCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -46054,12 +49072,6 @@ export namespace Prisma {
     _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
   }
 
-  export type PropertyViewStatsOrderByRelevanceInput = {
-    fields: PropertyViewStatsOrderByRelevanceFieldEnum | PropertyViewStatsOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PropertyViewStatsPropertyIdDateCompoundUniqueInput = {
     propertyId: string
     date: Date | string
@@ -46117,12 +49129,6 @@ export namespace Prisma {
     avgDuration?: SortOrder
     bounceRate?: SortOrder
     conversions?: SortOrder
-  }
-
-  export type PropertyViewDetailOrderByRelevanceInput = {
-    fields: PropertyViewDetailOrderByRelevanceFieldEnum | PropertyViewDetailOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type PropertyViewDetailCountOrderByAggregateInput = {
@@ -46202,12 +49208,6 @@ export namespace Prisma {
     in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel> | null
     not?: NestedEnumTransactionTypeNullableFilter<$PrismaModel> | $Enums.TransactionType | null
-  }
-
-  export type PopularSearchOrderByRelevanceInput = {
-    fields: PopularSearchOrderByRelevanceFieldEnum | PopularSearchOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type PopularSearchWilayaIdPropertyTypeTransactionTypeMinPriceMaxPriceCompoundUniqueInput = {
@@ -46308,12 +49308,6 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type WilayaOrderByRelevanceInput = {
-    fields: WilayaOrderByRelevanceFieldEnum | WilayaOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type WilayaCountOrderByAggregateInput = {
     id?: SortOrder
     code?: SortOrder
@@ -46362,12 +49356,6 @@ export namespace Prisma {
     longitude?: SortOrder
     population?: SortOrder
     area?: SortOrder
-  }
-
-  export type CommuneOrderByRelevanceInput = {
-    fields: CommuneOrderByRelevanceFieldEnum | CommuneOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type CommuneCountOrderByAggregateInput = {
@@ -47413,6 +50401,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput> | AmenitiesOnPropertiesCreateWithoutPropertyInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput | AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyPropertyInputEnvelope
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+  }
+
+  export type SeasonalRateCreateNestedManyWithoutPropertyInput = {
+    create?: XOR<SeasonalRateCreateWithoutPropertyInput, SeasonalRateUncheckedCreateWithoutPropertyInput> | SeasonalRateCreateWithoutPropertyInput[] | SeasonalRateUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: SeasonalRateCreateOrConnectWithoutPropertyInput | SeasonalRateCreateOrConnectWithoutPropertyInput[]
+    createMany?: SeasonalRateCreateManyPropertyInputEnvelope
+    connect?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+  }
+
   export type WilayaCreateNestedOneWithoutPropertiesInput = {
     create?: XOR<WilayaCreateWithoutPropertiesInput, WilayaUncheckedCreateWithoutPropertiesInput>
     connectOrCreate?: WilayaCreateOrConnectWithoutPropertiesInput
@@ -47499,6 +50501,20 @@ export namespace Prisma {
     connectOrCreate?: LocationRequestCreateOrConnectWithoutPropertyInput | LocationRequestCreateOrConnectWithoutPropertyInput[]
     createMany?: LocationRequestCreateManyPropertyInputEnvelope
     connect?: LocationRequestWhereUniqueInput | LocationRequestWhereUniqueInput[]
+  }
+
+  export type AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput> | AmenitiesOnPropertiesCreateWithoutPropertyInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput | AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyPropertyInputEnvelope
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+  }
+
+  export type SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput = {
+    create?: XOR<SeasonalRateCreateWithoutPropertyInput, SeasonalRateUncheckedCreateWithoutPropertyInput> | SeasonalRateCreateWithoutPropertyInput[] | SeasonalRateUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: SeasonalRateCreateOrConnectWithoutPropertyInput | SeasonalRateCreateOrConnectWithoutPropertyInput[]
+    createMany?: SeasonalRateCreateManyPropertyInputEnvelope
+    connect?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
   }
 
   export type PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput = {
@@ -47613,10 +50629,6 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
-  export type EnumHeatingTypeFieldUpdateOperationsInput = {
-    set?: $Enums.HeatingType
-  }
-
   export type EnumViewTypeFieldUpdateOperationsInput = {
     set?: $Enums.ViewType
   }
@@ -47639,6 +50651,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPropertiesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPropertiesInput, UserUpdateWithoutPropertiesInput>, UserUncheckedUpdateWithoutPropertiesInput>
+  }
+
+  export type AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput> | AmenitiesOnPropertiesCreateWithoutPropertyInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput | AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput[]
+    upsert?: AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutPropertyInput | AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutPropertyInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyPropertyInputEnvelope
+    set?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    disconnect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    delete?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    update?: AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutPropertyInput | AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutPropertyInput[]
+    updateMany?: AmenitiesOnPropertiesUpdateManyWithWhereWithoutPropertyInput | AmenitiesOnPropertiesUpdateManyWithWhereWithoutPropertyInput[]
+    deleteMany?: AmenitiesOnPropertiesScalarWhereInput | AmenitiesOnPropertiesScalarWhereInput[]
+  }
+
+  export type SeasonalRateUpdateManyWithoutPropertyNestedInput = {
+    create?: XOR<SeasonalRateCreateWithoutPropertyInput, SeasonalRateUncheckedCreateWithoutPropertyInput> | SeasonalRateCreateWithoutPropertyInput[] | SeasonalRateUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: SeasonalRateCreateOrConnectWithoutPropertyInput | SeasonalRateCreateOrConnectWithoutPropertyInput[]
+    upsert?: SeasonalRateUpsertWithWhereUniqueWithoutPropertyInput | SeasonalRateUpsertWithWhereUniqueWithoutPropertyInput[]
+    createMany?: SeasonalRateCreateManyPropertyInputEnvelope
+    set?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    disconnect?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    delete?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    connect?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    update?: SeasonalRateUpdateWithWhereUniqueWithoutPropertyInput | SeasonalRateUpdateWithWhereUniqueWithoutPropertyInput[]
+    updateMany?: SeasonalRateUpdateManyWithWhereWithoutPropertyInput | SeasonalRateUpdateManyWithWhereWithoutPropertyInput[]
+    deleteMany?: SeasonalRateScalarWhereInput | SeasonalRateScalarWhereInput[]
   }
 
   export type WilayaUpdateOneRequiredWithoutPropertiesNestedInput = {
@@ -47807,6 +50847,34 @@ export namespace Prisma {
     update?: LocationRequestUpdateWithWhereUniqueWithoutPropertyInput | LocationRequestUpdateWithWhereUniqueWithoutPropertyInput[]
     updateMany?: LocationRequestUpdateManyWithWhereWithoutPropertyInput | LocationRequestUpdateManyWithWhereWithoutPropertyInput[]
     deleteMany?: LocationRequestScalarWhereInput | LocationRequestScalarWhereInput[]
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput> | AmenitiesOnPropertiesCreateWithoutPropertyInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput | AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput[]
+    upsert?: AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutPropertyInput | AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutPropertyInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyPropertyInputEnvelope
+    set?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    disconnect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    delete?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    update?: AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutPropertyInput | AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutPropertyInput[]
+    updateMany?: AmenitiesOnPropertiesUpdateManyWithWhereWithoutPropertyInput | AmenitiesOnPropertiesUpdateManyWithWhereWithoutPropertyInput[]
+    deleteMany?: AmenitiesOnPropertiesScalarWhereInput | AmenitiesOnPropertiesScalarWhereInput[]
+  }
+
+  export type SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput = {
+    create?: XOR<SeasonalRateCreateWithoutPropertyInput, SeasonalRateUncheckedCreateWithoutPropertyInput> | SeasonalRateCreateWithoutPropertyInput[] | SeasonalRateUncheckedCreateWithoutPropertyInput[]
+    connectOrCreate?: SeasonalRateCreateOrConnectWithoutPropertyInput | SeasonalRateCreateOrConnectWithoutPropertyInput[]
+    upsert?: SeasonalRateUpsertWithWhereUniqueWithoutPropertyInput | SeasonalRateUpsertWithWhereUniqueWithoutPropertyInput[]
+    createMany?: SeasonalRateCreateManyPropertyInputEnvelope
+    set?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    disconnect?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    delete?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    connect?: SeasonalRateWhereUniqueInput | SeasonalRateWhereUniqueInput[]
+    update?: SeasonalRateUpdateWithWhereUniqueWithoutPropertyInput | SeasonalRateUpdateWithWhereUniqueWithoutPropertyInput[]
+    updateMany?: SeasonalRateUpdateManyWithWhereWithoutPropertyInput | SeasonalRateUpdateManyWithWhereWithoutPropertyInput[]
+    deleteMany?: SeasonalRateScalarWhereInput | SeasonalRateScalarWhereInput[]
   }
 
   export type PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput = {
@@ -47989,6 +51057,90 @@ export namespace Prisma {
     upsert?: PropertyUpsertWithoutMediaInput
     connect?: PropertyWhereUniqueInput
     update?: XOR<XOR<PropertyUpdateToOneWithWhereWithoutMediaInput, PropertyUpdateWithoutMediaInput>, PropertyUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type AmenitiesOnPropertiesCreateNestedManyWithoutAmenityInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput> | AmenitiesOnPropertiesCreateWithoutAmenityInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput | AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyAmenityInputEnvelope
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+  }
+
+  export type AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutAmenityInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput> | AmenitiesOnPropertiesCreateWithoutAmenityInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput | AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyAmenityInputEnvelope
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+  }
+
+  export type AmenitiesOnPropertiesUpdateManyWithoutAmenityNestedInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput> | AmenitiesOnPropertiesCreateWithoutAmenityInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput | AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput[]
+    upsert?: AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutAmenityInput | AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutAmenityInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyAmenityInputEnvelope
+    set?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    disconnect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    delete?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    update?: AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutAmenityInput | AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutAmenityInput[]
+    updateMany?: AmenitiesOnPropertiesUpdateManyWithWhereWithoutAmenityInput | AmenitiesOnPropertiesUpdateManyWithWhereWithoutAmenityInput[]
+    deleteMany?: AmenitiesOnPropertiesScalarWhereInput | AmenitiesOnPropertiesScalarWhereInput[]
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateManyWithoutAmenityNestedInput = {
+    create?: XOR<AmenitiesOnPropertiesCreateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput> | AmenitiesOnPropertiesCreateWithoutAmenityInput[] | AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput[]
+    connectOrCreate?: AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput | AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput[]
+    upsert?: AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutAmenityInput | AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutAmenityInput[]
+    createMany?: AmenitiesOnPropertiesCreateManyAmenityInputEnvelope
+    set?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    disconnect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    delete?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    connect?: AmenitiesOnPropertiesWhereUniqueInput | AmenitiesOnPropertiesWhereUniqueInput[]
+    update?: AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutAmenityInput | AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutAmenityInput[]
+    updateMany?: AmenitiesOnPropertiesUpdateManyWithWhereWithoutAmenityInput | AmenitiesOnPropertiesUpdateManyWithWhereWithoutAmenityInput[]
+    deleteMany?: AmenitiesOnPropertiesScalarWhereInput | AmenitiesOnPropertiesScalarWhereInput[]
+  }
+
+  export type PropertyCreateNestedOneWithoutAmenitiesInput = {
+    create?: XOR<PropertyCreateWithoutAmenitiesInput, PropertyUncheckedCreateWithoutAmenitiesInput>
+    connectOrCreate?: PropertyCreateOrConnectWithoutAmenitiesInput
+    connect?: PropertyWhereUniqueInput
+  }
+
+  export type AmenityCreateNestedOneWithoutPropertiesInput = {
+    create?: XOR<AmenityCreateWithoutPropertiesInput, AmenityUncheckedCreateWithoutPropertiesInput>
+    connectOrCreate?: AmenityCreateOrConnectWithoutPropertiesInput
+    connect?: AmenityWhereUniqueInput
+  }
+
+  export type PropertyUpdateOneRequiredWithoutAmenitiesNestedInput = {
+    create?: XOR<PropertyCreateWithoutAmenitiesInput, PropertyUncheckedCreateWithoutAmenitiesInput>
+    connectOrCreate?: PropertyCreateOrConnectWithoutAmenitiesInput
+    upsert?: PropertyUpsertWithoutAmenitiesInput
+    connect?: PropertyWhereUniqueInput
+    update?: XOR<XOR<PropertyUpdateToOneWithWhereWithoutAmenitiesInput, PropertyUpdateWithoutAmenitiesInput>, PropertyUncheckedUpdateWithoutAmenitiesInput>
+  }
+
+  export type AmenityUpdateOneRequiredWithoutPropertiesNestedInput = {
+    create?: XOR<AmenityCreateWithoutPropertiesInput, AmenityUncheckedCreateWithoutPropertiesInput>
+    connectOrCreate?: AmenityCreateOrConnectWithoutPropertiesInput
+    upsert?: AmenityUpsertWithoutPropertiesInput
+    connect?: AmenityWhereUniqueInput
+    update?: XOR<XOR<AmenityUpdateToOneWithWhereWithoutPropertiesInput, AmenityUpdateWithoutPropertiesInput>, AmenityUncheckedUpdateWithoutPropertiesInput>
+  }
+
+  export type PropertyCreateNestedOneWithoutSeasonalRatesInput = {
+    create?: XOR<PropertyCreateWithoutSeasonalRatesInput, PropertyUncheckedCreateWithoutSeasonalRatesInput>
+    connectOrCreate?: PropertyCreateOrConnectWithoutSeasonalRatesInput
+    connect?: PropertyWhereUniqueInput
+  }
+
+  export type PropertyUpdateOneRequiredWithoutSeasonalRatesNestedInput = {
+    create?: XOR<PropertyCreateWithoutSeasonalRatesInput, PropertyUncheckedCreateWithoutSeasonalRatesInput>
+    connectOrCreate?: PropertyCreateOrConnectWithoutSeasonalRatesInput
+    upsert?: PropertyUpsertWithoutSeasonalRatesInput
+    connect?: PropertyWhereUniqueInput
+    update?: XOR<XOR<PropertyUpdateToOneWithWhereWithoutSeasonalRatesInput, PropertyUpdateWithoutSeasonalRatesInput>, PropertyUncheckedUpdateWithoutSeasonalRatesInput>
   }
 
   export type EnumBoostTierFieldUpdateOperationsInput = {
@@ -48796,7 +51948,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -48822,7 +51973,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
@@ -48896,7 +52046,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -48928,7 +52077,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -49084,13 +52232,6 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type NestedEnumHeatingTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.HeatingType | EnumHeatingTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumHeatingTypeFilter<$PrismaModel> | $Enums.HeatingType
-  }
-
   export type NestedEnumViewTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ViewType | EnumViewTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ViewType[] | ListEnumViewTypeFieldRefInput<$PrismaModel>
@@ -49203,16 +52344,6 @@ export namespace Prisma {
     _sum?: NestedBigIntNullableFilter<$PrismaModel>
     _min?: NestedBigIntNullableFilter<$PrismaModel>
     _max?: NestedBigIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumHeatingTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.HeatingType | EnumHeatingTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HeatingType[] | ListEnumHeatingTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumHeatingTypeWithAggregatesFilter<$PrismaModel> | $Enums.HeatingType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumHeatingTypeFilter<$PrismaModel>
-    _max?: NestedEnumHeatingTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumViewTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -49585,27 +52716,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -49641,6 +52751,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -49680,27 +52792,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -49738,6 +52829,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -49790,10 +52883,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -49805,10 +52899,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -50577,27 +53672,6 @@ export namespace Prisma {
     totalFloors?: IntNullableFilter<"Property"> | number | null
     buildingAge?: IntNullableFilter<"Property"> | number | null
     constructionYear?: IntNullableFilter<"Property"> | number | null
-    hasElevator?: BoolFilter<"Property"> | boolean
-    hasBalcony?: BoolFilter<"Property"> | boolean
-    hasTerrace?: BoolFilter<"Property"> | boolean
-    hasCellar?: BoolFilter<"Property"> | boolean
-    hasParking?: BoolFilter<"Property"> | boolean
-    hasGarage?: BoolFilter<"Property"> | boolean
-    hasGarden?: BoolFilter<"Property"> | boolean
-    hasPool?: BoolFilter<"Property"> | boolean
-    hasAirConditioning?: BoolFilter<"Property"> | boolean
-    heatingType?: EnumHeatingTypeFilter<"Property"> | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFilter<"Property"> | boolean
-    isFurnished?: BoolFilter<"Property"> | boolean
-    hasInternet?: BoolFilter<"Property"> | boolean
-    hasCityGas?: BoolFilter<"Property"> | boolean
-    hasWater?: BoolFilter<"Property"> | boolean
-    hasElectricity?: BoolFilter<"Property"> | boolean
-    hasGuard?: BoolFilter<"Property"> | boolean
-    hasIntercom?: BoolFilter<"Property"> | boolean
-    hasAlarm?: BoolFilter<"Property"> | boolean
-    hasElectricGate?: BoolFilter<"Property"> | boolean
-    hasCCTV?: BoolFilter<"Property"> | boolean
     viewType?: EnumViewTypeFilter<"Property"> | $Enums.ViewType
     distanceToSchool?: IntNullableFilter<"Property"> | number | null
     distanceToTransport?: IntNullableFilter<"Property"> | number | null
@@ -50689,10 +53763,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SavedSearch"> | Date | string
     userId?: StringFilter<"SavedSearch"> | string
     name?: StringFilter<"SavedSearch"> | string
-    criteria?: JsonFilter<"SavedSearch">
+    filters?: JsonFilter<"SavedSearch">
     notifyByEmail?: BoolFilter<"SavedSearch"> | boolean
     notifyInApp?: BoolFilter<"SavedSearch"> | boolean
     isActive?: BoolFilter<"SavedSearch"> | boolean
+    lastCheckedAt?: DateTimeFilter<"SavedSearch"> | Date | string
     lastMatchedAt?: DateTimeNullableFilter<"SavedSearch"> | Date | string | null
     matchCount?: IntFilter<"SavedSearch"> | number
     lastNotifiedAt?: DateTimeNullableFilter<"SavedSearch"> | Date | string | null
@@ -51816,6 +54891,54 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPropertiesInput, UserUncheckedCreateWithoutPropertiesInput>
   }
 
+  export type AmenitiesOnPropertiesCreateWithoutPropertyInput = {
+    assignedAt?: Date | string
+    amenity: AmenityCreateNestedOneWithoutPropertiesInput
+  }
+
+  export type AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput = {
+    amenityId: string
+    assignedAt?: Date | string
+  }
+
+  export type AmenitiesOnPropertiesCreateOrConnectWithoutPropertyInput = {
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    create: XOR<AmenitiesOnPropertiesCreateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput>
+  }
+
+  export type AmenitiesOnPropertiesCreateManyPropertyInputEnvelope = {
+    data: AmenitiesOnPropertiesCreateManyPropertyInput | AmenitiesOnPropertiesCreateManyPropertyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SeasonalRateCreateWithoutPropertyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startDate: Date | string
+    endDate: Date | string
+    dailyRate: Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateUncheckedCreateWithoutPropertyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startDate: Date | string
+    endDate: Date | string
+    dailyRate: Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateCreateOrConnectWithoutPropertyInput = {
+    where: SeasonalRateWhereUniqueInput
+    create: XOR<SeasonalRateCreateWithoutPropertyInput, SeasonalRateUncheckedCreateWithoutPropertyInput>
+  }
+
+  export type SeasonalRateCreateManyPropertyInputEnvelope = {
+    data: SeasonalRateCreateManyPropertyInput | SeasonalRateCreateManyPropertyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WilayaCreateWithoutPropertiesInput = {
     id?: string
     code: string
@@ -51885,8 +55008,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: number
-    isPrimary?: boolean
+    order?: number
+    isThumbnail?: boolean
     deletedAt?: Date | string | null
   }
 
@@ -51897,8 +55020,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: number
-    isPrimary?: boolean
+    order?: number
+    isThumbnail?: boolean
     deletedAt?: Date | string | null
   }
 
@@ -52432,6 +55555,60 @@ export namespace Prisma {
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
+  export type AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutPropertyInput = {
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    update: XOR<AmenitiesOnPropertiesUpdateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedUpdateWithoutPropertyInput>
+    create: XOR<AmenitiesOnPropertiesCreateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedCreateWithoutPropertyInput>
+  }
+
+  export type AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutPropertyInput = {
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    data: XOR<AmenitiesOnPropertiesUpdateWithoutPropertyInput, AmenitiesOnPropertiesUncheckedUpdateWithoutPropertyInput>
+  }
+
+  export type AmenitiesOnPropertiesUpdateManyWithWhereWithoutPropertyInput = {
+    where: AmenitiesOnPropertiesScalarWhereInput
+    data: XOR<AmenitiesOnPropertiesUpdateManyMutationInput, AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyInput>
+  }
+
+  export type AmenitiesOnPropertiesScalarWhereInput = {
+    AND?: AmenitiesOnPropertiesScalarWhereInput | AmenitiesOnPropertiesScalarWhereInput[]
+    OR?: AmenitiesOnPropertiesScalarWhereInput[]
+    NOT?: AmenitiesOnPropertiesScalarWhereInput | AmenitiesOnPropertiesScalarWhereInput[]
+    propertyId?: StringFilter<"AmenitiesOnProperties"> | string
+    amenityId?: StringFilter<"AmenitiesOnProperties"> | string
+    assignedAt?: DateTimeFilter<"AmenitiesOnProperties"> | Date | string
+  }
+
+  export type SeasonalRateUpsertWithWhereUniqueWithoutPropertyInput = {
+    where: SeasonalRateWhereUniqueInput
+    update: XOR<SeasonalRateUpdateWithoutPropertyInput, SeasonalRateUncheckedUpdateWithoutPropertyInput>
+    create: XOR<SeasonalRateCreateWithoutPropertyInput, SeasonalRateUncheckedCreateWithoutPropertyInput>
+  }
+
+  export type SeasonalRateUpdateWithWhereUniqueWithoutPropertyInput = {
+    where: SeasonalRateWhereUniqueInput
+    data: XOR<SeasonalRateUpdateWithoutPropertyInput, SeasonalRateUncheckedUpdateWithoutPropertyInput>
+  }
+
+  export type SeasonalRateUpdateManyWithWhereWithoutPropertyInput = {
+    where: SeasonalRateScalarWhereInput
+    data: XOR<SeasonalRateUpdateManyMutationInput, SeasonalRateUncheckedUpdateManyWithoutPropertyInput>
+  }
+
+  export type SeasonalRateScalarWhereInput = {
+    AND?: SeasonalRateScalarWhereInput | SeasonalRateScalarWhereInput[]
+    OR?: SeasonalRateScalarWhereInput[]
+    NOT?: SeasonalRateScalarWhereInput | SeasonalRateScalarWhereInput[]
+    id?: StringFilter<"SeasonalRate"> | string
+    createdAt?: DateTimeFilter<"SeasonalRate"> | Date | string
+    updatedAt?: DateTimeFilter<"SeasonalRate"> | Date | string
+    propertyId?: StringFilter<"SeasonalRate"> | string
+    startDate?: DateTimeFilter<"SeasonalRate"> | Date | string
+    endDate?: DateTimeFilter<"SeasonalRate"> | Date | string
+    dailyRate?: DecimalFilter<"SeasonalRate"> | Decimal | DecimalJsLike | number | string
+  }
+
   export type WilayaUpsertWithoutPropertiesInput = {
     update: XOR<WilayaUpdateWithoutPropertiesInput, WilayaUncheckedUpdateWithoutPropertiesInput>
     create: XOR<WilayaCreateWithoutPropertiesInput, WilayaUncheckedCreateWithoutPropertiesInput>
@@ -52533,8 +55710,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFilter<"PropertyMedia"> | $Enums.MediaType
     imageData?: JsonNullableFilter<"PropertyMedia">
     videoData?: JsonNullableFilter<"PropertyMedia">
-    displayOrder?: IntFilter<"PropertyMedia"> | number
-    isPrimary?: BoolFilter<"PropertyMedia"> | boolean
+    order?: IntFilter<"PropertyMedia"> | number
+    isThumbnail?: BoolFilter<"PropertyMedia"> | boolean
     deletedAt?: DateTimeNullableFilter<"PropertyMedia"> | Date | string | null
   }
 
@@ -52803,27 +55980,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -52860,6 +56016,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -52899,27 +56057,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -52957,6 +56094,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -53009,27 +56148,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -53066,6 +56184,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -53105,27 +56225,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -53163,6 +56262,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -53199,27 +56300,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -53256,6 +56336,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     boost?: PropertyBoostCreateNestedOneWithoutPropertyInput
@@ -53295,27 +56377,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -53353,6 +56414,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
     savedSearchMatches?: SavedSearchMatchUncheckedCreateNestedManyWithoutPropertyInput
@@ -53405,27 +56468,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -53462,6 +56504,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     boost?: PropertyBoostUpdateOneWithoutPropertyNestedInput
@@ -53501,27 +56545,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -53559,6 +56582,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
     savedSearchMatches?: SavedSearchMatchUncheckedUpdateManyWithoutPropertyNestedInput
@@ -53571,7 +56596,43 @@ export namespace Prisma {
     locationRequests?: LocationRequestUncheckedUpdateManyWithoutPropertyNestedInput
   }
 
-  export type PropertyCreateWithoutBoostInput = {
+  export type AmenitiesOnPropertiesCreateWithoutAmenityInput = {
+    assignedAt?: Date | string
+    property: PropertyCreateNestedOneWithoutAmenitiesInput
+  }
+
+  export type AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput = {
+    propertyId: string
+    assignedAt?: Date | string
+  }
+
+  export type AmenitiesOnPropertiesCreateOrConnectWithoutAmenityInput = {
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    create: XOR<AmenitiesOnPropertiesCreateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput>
+  }
+
+  export type AmenitiesOnPropertiesCreateManyAmenityInputEnvelope = {
+    data: AmenitiesOnPropertiesCreateManyAmenityInput | AmenitiesOnPropertiesCreateManyAmenityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutAmenityInput = {
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    update: XOR<AmenitiesOnPropertiesUpdateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedUpdateWithoutAmenityInput>
+    create: XOR<AmenitiesOnPropertiesCreateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedCreateWithoutAmenityInput>
+  }
+
+  export type AmenitiesOnPropertiesUpdateWithWhereUniqueWithoutAmenityInput = {
+    where: AmenitiesOnPropertiesWhereUniqueInput
+    data: XOR<AmenitiesOnPropertiesUpdateWithoutAmenityInput, AmenitiesOnPropertiesUncheckedUpdateWithoutAmenityInput>
+  }
+
+  export type AmenitiesOnPropertiesUpdateManyWithWhereWithoutAmenityInput = {
+    where: AmenitiesOnPropertiesScalarWhereInput
+    data: XOR<AmenitiesOnPropertiesUpdateManyMutationInput, AmenitiesOnPropertiesUncheckedUpdateManyWithoutAmenityInput>
+  }
+
+  export type PropertyCreateWithoutAmenitiesInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -53595,27 +56656,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -53652,6 +56692,692 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
+    wilaya: WilayaCreateNestedOneWithoutPropertiesInput
+    commune?: CommuneCreateNestedOneWithoutPropertiesInput
+    media?: PropertyMediaCreateNestedManyWithoutPropertyInput
+    boost?: PropertyBoostCreateNestedOneWithoutPropertyInput
+    favorites?: FavoriteCreateNestedManyWithoutPropertyInput
+    savedSearchMatches?: SavedSearchMatchCreateNestedManyWithoutPropertyInput
+    priceHistory?: PropertyPriceHistoryCreateNestedManyWithoutPropertyInput
+    viewStats?: PropertyViewStatsCreateNestedManyWithoutPropertyInput
+    viewDetails?: PropertyViewDetailCreateNestedManyWithoutPropertyInput
+    reports?: ReportCreateNestedManyWithoutPropertyInput
+    messages?: MessageCreateNestedManyWithoutPropertyInput
+    reviews?: ReviewCreateNestedManyWithoutPropertyInput
+    locationRequests?: LocationRequestCreateNestedManyWithoutPropertyInput
+  }
+
+  export type PropertyUncheckedCreateWithoutAmenitiesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    title: string
+    description: string
+    propertyType: $Enums.PropertyType
+    transactionType: $Enums.TransactionType
+    status?: $Enums.PropertyStatus
+    priceAmount: bigint | number
+    priceNegotiable?: boolean
+    minRentDuration?: number | null
+    rentDeposit?: bigint | number | null
+    surfaceArea?: number | null
+    landArea?: number | null
+    totalRooms?: number | null
+    bedrooms?: number | null
+    bathrooms?: number | null
+    kitchens?: number | null
+    livingRooms?: number | null
+    floor?: number | null
+    totalFloors?: number | null
+    buildingAge?: number | null
+    constructionYear?: number | null
+    viewType?: $Enums.ViewType
+    distanceToSchool?: number | null
+    distanceToTransport?: number | null
+    distanceToShops?: number | null
+    distanceToMosque?: number | null
+    distanceToHospital?: number | null
+    hasLivretFoncier?: boolean
+    hasActeVente?: boolean
+    hasPermisConstruction?: boolean
+    arePapersComplete?: boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    wilayaId: string
+    communeId?: string | null
+    quartier?: string | null
+    fullAddress?: string | null
+    postalCode?: string | null
+    exactLatitude: Decimal | DecimalJsLike | number | string
+    exactLongitude: Decimal | DecimalJsLike | number | string
+    publicLatitude: Decimal | DecimalJsLike | number | string
+    publicLongitude: Decimal | DecimalJsLike | number | string
+    showExactLocation?: boolean
+    privacyRadiusMeters?: number
+    locationInputMode?: $Enums.LocationInputMode
+    mapboxPlaceId?: string | null
+    viewsCount?: number
+    favoritesCount?: number
+    contactsCount?: number
+    sharesCount?: number
+    slug: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    moderatedAt?: Date | string | null
+    moderatedBy?: string | null
+    rejectionReason?: string | null
+    expiresAt?: Date | string | null
+    isExpired?: boolean
+    deletedAt?: Date | string | null
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
+    media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
+    boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
+    savedSearchMatches?: SavedSearchMatchUncheckedCreateNestedManyWithoutPropertyInput
+    priceHistory?: PropertyPriceHistoryUncheckedCreateNestedManyWithoutPropertyInput
+    viewStats?: PropertyViewStatsUncheckedCreateNestedManyWithoutPropertyInput
+    viewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutPropertyInput
+    reports?: ReportUncheckedCreateNestedManyWithoutPropertyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutPropertyInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutPropertyInput
+    locationRequests?: LocationRequestUncheckedCreateNestedManyWithoutPropertyInput
+  }
+
+  export type PropertyCreateOrConnectWithoutAmenitiesInput = {
+    where: PropertyWhereUniqueInput
+    create: XOR<PropertyCreateWithoutAmenitiesInput, PropertyUncheckedCreateWithoutAmenitiesInput>
+  }
+
+  export type AmenityCreateWithoutPropertiesInput = {
+    id?: string
+    name: string
+    category: string
+    icon?: string | null
+  }
+
+  export type AmenityUncheckedCreateWithoutPropertiesInput = {
+    id?: string
+    name: string
+    category: string
+    icon?: string | null
+  }
+
+  export type AmenityCreateOrConnectWithoutPropertiesInput = {
+    where: AmenityWhereUniqueInput
+    create: XOR<AmenityCreateWithoutPropertiesInput, AmenityUncheckedCreateWithoutPropertiesInput>
+  }
+
+  export type PropertyUpsertWithoutAmenitiesInput = {
+    update: XOR<PropertyUpdateWithoutAmenitiesInput, PropertyUncheckedUpdateWithoutAmenitiesInput>
+    create: XOR<PropertyCreateWithoutAmenitiesInput, PropertyUncheckedCreateWithoutAmenitiesInput>
+    where?: PropertyWhereInput
+  }
+
+  export type PropertyUpdateToOneWithWhereWithoutAmenitiesInput = {
+    where?: PropertyWhereInput
+    data: XOR<PropertyUpdateWithoutAmenitiesInput, PropertyUncheckedUpdateWithoutAmenitiesInput>
+  }
+
+  export type PropertyUpdateWithoutAmenitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    propertyType?: EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    status?: EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+    priceAmount?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceNegotiable?: BoolFieldUpdateOperationsInput | boolean
+    minRentDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    rentDeposit?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    surfaceArea?: NullableIntFieldUpdateOperationsInput | number | null
+    landArea?: NullableIntFieldUpdateOperationsInput | number | null
+    totalRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bedrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bathrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    kitchens?: NullableIntFieldUpdateOperationsInput | number | null
+    livingRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
+    buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
+    constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
+    distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToShops?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToMosque?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToHospital?: NullableIntFieldUpdateOperationsInput | number | null
+    hasLivretFoncier?: BoolFieldUpdateOperationsInput | boolean
+    hasActeVente?: BoolFieldUpdateOperationsInput | boolean
+    hasPermisConstruction?: BoolFieldUpdateOperationsInput | boolean
+    arePapersComplete?: BoolFieldUpdateOperationsInput | boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    quartier?: NullableStringFieldUpdateOperationsInput | string | null
+    fullAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    exactLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    exactLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    showExactLocation?: BoolFieldUpdateOperationsInput | boolean
+    privacyRadiusMeters?: IntFieldUpdateOperationsInput | number
+    locationInputMode?: EnumLocationInputModeFieldUpdateOperationsInput | $Enums.LocationInputMode
+    mapboxPlaceId?: NullableStringFieldUpdateOperationsInput | string | null
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    favoritesCount?: IntFieldUpdateOperationsInput | number
+    contactsCount?: IntFieldUpdateOperationsInput | number
+    sharesCount?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    moderatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    moderatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isExpired?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
+    wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
+    commune?: CommuneUpdateOneWithoutPropertiesNestedInput
+    media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
+    boost?: PropertyBoostUpdateOneWithoutPropertyNestedInput
+    favorites?: FavoriteUpdateManyWithoutPropertyNestedInput
+    savedSearchMatches?: SavedSearchMatchUpdateManyWithoutPropertyNestedInput
+    priceHistory?: PropertyPriceHistoryUpdateManyWithoutPropertyNestedInput
+    viewStats?: PropertyViewStatsUpdateManyWithoutPropertyNestedInput
+    viewDetails?: PropertyViewDetailUpdateManyWithoutPropertyNestedInput
+    reports?: ReportUpdateManyWithoutPropertyNestedInput
+    messages?: MessageUpdateManyWithoutPropertyNestedInput
+    reviews?: ReviewUpdateManyWithoutPropertyNestedInput
+    locationRequests?: LocationRequestUpdateManyWithoutPropertyNestedInput
+  }
+
+  export type PropertyUncheckedUpdateWithoutAmenitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    propertyType?: EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    status?: EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+    priceAmount?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceNegotiable?: BoolFieldUpdateOperationsInput | boolean
+    minRentDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    rentDeposit?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    surfaceArea?: NullableIntFieldUpdateOperationsInput | number | null
+    landArea?: NullableIntFieldUpdateOperationsInput | number | null
+    totalRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bedrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bathrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    kitchens?: NullableIntFieldUpdateOperationsInput | number | null
+    livingRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
+    buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
+    constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
+    distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToShops?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToMosque?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToHospital?: NullableIntFieldUpdateOperationsInput | number | null
+    hasLivretFoncier?: BoolFieldUpdateOperationsInput | boolean
+    hasActeVente?: BoolFieldUpdateOperationsInput | boolean
+    hasPermisConstruction?: BoolFieldUpdateOperationsInput | boolean
+    arePapersComplete?: BoolFieldUpdateOperationsInput | boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    wilayaId?: StringFieldUpdateOperationsInput | string
+    communeId?: NullableStringFieldUpdateOperationsInput | string | null
+    quartier?: NullableStringFieldUpdateOperationsInput | string | null
+    fullAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    exactLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    exactLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    showExactLocation?: BoolFieldUpdateOperationsInput | boolean
+    privacyRadiusMeters?: IntFieldUpdateOperationsInput | number
+    locationInputMode?: EnumLocationInputModeFieldUpdateOperationsInput | $Enums.LocationInputMode
+    mapboxPlaceId?: NullableStringFieldUpdateOperationsInput | string | null
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    favoritesCount?: IntFieldUpdateOperationsInput | number
+    contactsCount?: IntFieldUpdateOperationsInput | number
+    sharesCount?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    moderatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    moderatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isExpired?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
+    media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
+    boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
+    savedSearchMatches?: SavedSearchMatchUncheckedUpdateManyWithoutPropertyNestedInput
+    priceHistory?: PropertyPriceHistoryUncheckedUpdateManyWithoutPropertyNestedInput
+    viewStats?: PropertyViewStatsUncheckedUpdateManyWithoutPropertyNestedInput
+    viewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutPropertyNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutPropertyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutPropertyNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutPropertyNestedInput
+    locationRequests?: LocationRequestUncheckedUpdateManyWithoutPropertyNestedInput
+  }
+
+  export type AmenityUpsertWithoutPropertiesInput = {
+    update: XOR<AmenityUpdateWithoutPropertiesInput, AmenityUncheckedUpdateWithoutPropertiesInput>
+    create: XOR<AmenityCreateWithoutPropertiesInput, AmenityUncheckedCreateWithoutPropertiesInput>
+    where?: AmenityWhereInput
+  }
+
+  export type AmenityUpdateToOneWithWhereWithoutPropertiesInput = {
+    where?: AmenityWhereInput
+    data: XOR<AmenityUpdateWithoutPropertiesInput, AmenityUncheckedUpdateWithoutPropertiesInput>
+  }
+
+  export type AmenityUpdateWithoutPropertiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AmenityUncheckedUpdateWithoutPropertiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PropertyCreateWithoutSeasonalRatesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    description: string
+    propertyType: $Enums.PropertyType
+    transactionType: $Enums.TransactionType
+    status?: $Enums.PropertyStatus
+    priceAmount: bigint | number
+    priceNegotiable?: boolean
+    minRentDuration?: number | null
+    rentDeposit?: bigint | number | null
+    surfaceArea?: number | null
+    landArea?: number | null
+    totalRooms?: number | null
+    bedrooms?: number | null
+    bathrooms?: number | null
+    kitchens?: number | null
+    livingRooms?: number | null
+    floor?: number | null
+    totalFloors?: number | null
+    buildingAge?: number | null
+    constructionYear?: number | null
+    viewType?: $Enums.ViewType
+    distanceToSchool?: number | null
+    distanceToTransport?: number | null
+    distanceToShops?: number | null
+    distanceToMosque?: number | null
+    distanceToHospital?: number | null
+    hasLivretFoncier?: boolean
+    hasActeVente?: boolean
+    hasPermisConstruction?: boolean
+    arePapersComplete?: boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    quartier?: string | null
+    fullAddress?: string | null
+    postalCode?: string | null
+    exactLatitude: Decimal | DecimalJsLike | number | string
+    exactLongitude: Decimal | DecimalJsLike | number | string
+    publicLatitude: Decimal | DecimalJsLike | number | string
+    publicLongitude: Decimal | DecimalJsLike | number | string
+    showExactLocation?: boolean
+    privacyRadiusMeters?: number
+    locationInputMode?: $Enums.LocationInputMode
+    mapboxPlaceId?: string | null
+    viewsCount?: number
+    favoritesCount?: number
+    contactsCount?: number
+    sharesCount?: number
+    slug: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    moderatedAt?: Date | string | null
+    moderatedBy?: string | null
+    rejectionReason?: string | null
+    expiresAt?: Date | string | null
+    isExpired?: boolean
+    deletedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    wilaya: WilayaCreateNestedOneWithoutPropertiesInput
+    commune?: CommuneCreateNestedOneWithoutPropertiesInput
+    media?: PropertyMediaCreateNestedManyWithoutPropertyInput
+    boost?: PropertyBoostCreateNestedOneWithoutPropertyInput
+    favorites?: FavoriteCreateNestedManyWithoutPropertyInput
+    savedSearchMatches?: SavedSearchMatchCreateNestedManyWithoutPropertyInput
+    priceHistory?: PropertyPriceHistoryCreateNestedManyWithoutPropertyInput
+    viewStats?: PropertyViewStatsCreateNestedManyWithoutPropertyInput
+    viewDetails?: PropertyViewDetailCreateNestedManyWithoutPropertyInput
+    reports?: ReportCreateNestedManyWithoutPropertyInput
+    messages?: MessageCreateNestedManyWithoutPropertyInput
+    reviews?: ReviewCreateNestedManyWithoutPropertyInput
+    locationRequests?: LocationRequestCreateNestedManyWithoutPropertyInput
+  }
+
+  export type PropertyUncheckedCreateWithoutSeasonalRatesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    title: string
+    description: string
+    propertyType: $Enums.PropertyType
+    transactionType: $Enums.TransactionType
+    status?: $Enums.PropertyStatus
+    priceAmount: bigint | number
+    priceNegotiable?: boolean
+    minRentDuration?: number | null
+    rentDeposit?: bigint | number | null
+    surfaceArea?: number | null
+    landArea?: number | null
+    totalRooms?: number | null
+    bedrooms?: number | null
+    bathrooms?: number | null
+    kitchens?: number | null
+    livingRooms?: number | null
+    floor?: number | null
+    totalFloors?: number | null
+    buildingAge?: number | null
+    constructionYear?: number | null
+    viewType?: $Enums.ViewType
+    distanceToSchool?: number | null
+    distanceToTransport?: number | null
+    distanceToShops?: number | null
+    distanceToMosque?: number | null
+    distanceToHospital?: number | null
+    hasLivretFoncier?: boolean
+    hasActeVente?: boolean
+    hasPermisConstruction?: boolean
+    arePapersComplete?: boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    wilayaId: string
+    communeId?: string | null
+    quartier?: string | null
+    fullAddress?: string | null
+    postalCode?: string | null
+    exactLatitude: Decimal | DecimalJsLike | number | string
+    exactLongitude: Decimal | DecimalJsLike | number | string
+    publicLatitude: Decimal | DecimalJsLike | number | string
+    publicLongitude: Decimal | DecimalJsLike | number | string
+    showExactLocation?: boolean
+    privacyRadiusMeters?: number
+    locationInputMode?: $Enums.LocationInputMode
+    mapboxPlaceId?: string | null
+    viewsCount?: number
+    favoritesCount?: number
+    contactsCount?: number
+    sharesCount?: number
+    slug: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    moderatedAt?: Date | string | null
+    moderatedBy?: string | null
+    rejectionReason?: string | null
+    expiresAt?: Date | string | null
+    isExpired?: boolean
+    deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
+    boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
+    savedSearchMatches?: SavedSearchMatchUncheckedCreateNestedManyWithoutPropertyInput
+    priceHistory?: PropertyPriceHistoryUncheckedCreateNestedManyWithoutPropertyInput
+    viewStats?: PropertyViewStatsUncheckedCreateNestedManyWithoutPropertyInput
+    viewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutPropertyInput
+    reports?: ReportUncheckedCreateNestedManyWithoutPropertyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutPropertyInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutPropertyInput
+    locationRequests?: LocationRequestUncheckedCreateNestedManyWithoutPropertyInput
+  }
+
+  export type PropertyCreateOrConnectWithoutSeasonalRatesInput = {
+    where: PropertyWhereUniqueInput
+    create: XOR<PropertyCreateWithoutSeasonalRatesInput, PropertyUncheckedCreateWithoutSeasonalRatesInput>
+  }
+
+  export type PropertyUpsertWithoutSeasonalRatesInput = {
+    update: XOR<PropertyUpdateWithoutSeasonalRatesInput, PropertyUncheckedUpdateWithoutSeasonalRatesInput>
+    create: XOR<PropertyCreateWithoutSeasonalRatesInput, PropertyUncheckedCreateWithoutSeasonalRatesInput>
+    where?: PropertyWhereInput
+  }
+
+  export type PropertyUpdateToOneWithWhereWithoutSeasonalRatesInput = {
+    where?: PropertyWhereInput
+    data: XOR<PropertyUpdateWithoutSeasonalRatesInput, PropertyUncheckedUpdateWithoutSeasonalRatesInput>
+  }
+
+  export type PropertyUpdateWithoutSeasonalRatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    propertyType?: EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    status?: EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+    priceAmount?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceNegotiable?: BoolFieldUpdateOperationsInput | boolean
+    minRentDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    rentDeposit?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    surfaceArea?: NullableIntFieldUpdateOperationsInput | number | null
+    landArea?: NullableIntFieldUpdateOperationsInput | number | null
+    totalRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bedrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bathrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    kitchens?: NullableIntFieldUpdateOperationsInput | number | null
+    livingRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
+    buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
+    constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
+    distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToShops?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToMosque?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToHospital?: NullableIntFieldUpdateOperationsInput | number | null
+    hasLivretFoncier?: BoolFieldUpdateOperationsInput | boolean
+    hasActeVente?: BoolFieldUpdateOperationsInput | boolean
+    hasPermisConstruction?: BoolFieldUpdateOperationsInput | boolean
+    arePapersComplete?: BoolFieldUpdateOperationsInput | boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    quartier?: NullableStringFieldUpdateOperationsInput | string | null
+    fullAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    exactLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    exactLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    showExactLocation?: BoolFieldUpdateOperationsInput | boolean
+    privacyRadiusMeters?: IntFieldUpdateOperationsInput | number
+    locationInputMode?: EnumLocationInputModeFieldUpdateOperationsInput | $Enums.LocationInputMode
+    mapboxPlaceId?: NullableStringFieldUpdateOperationsInput | string | null
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    favoritesCount?: IntFieldUpdateOperationsInput | number
+    contactsCount?: IntFieldUpdateOperationsInput | number
+    sharesCount?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    moderatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    moderatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isExpired?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
+    commune?: CommuneUpdateOneWithoutPropertiesNestedInput
+    media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
+    boost?: PropertyBoostUpdateOneWithoutPropertyNestedInput
+    favorites?: FavoriteUpdateManyWithoutPropertyNestedInput
+    savedSearchMatches?: SavedSearchMatchUpdateManyWithoutPropertyNestedInput
+    priceHistory?: PropertyPriceHistoryUpdateManyWithoutPropertyNestedInput
+    viewStats?: PropertyViewStatsUpdateManyWithoutPropertyNestedInput
+    viewDetails?: PropertyViewDetailUpdateManyWithoutPropertyNestedInput
+    reports?: ReportUpdateManyWithoutPropertyNestedInput
+    messages?: MessageUpdateManyWithoutPropertyNestedInput
+    reviews?: ReviewUpdateManyWithoutPropertyNestedInput
+    locationRequests?: LocationRequestUpdateManyWithoutPropertyNestedInput
+  }
+
+  export type PropertyUncheckedUpdateWithoutSeasonalRatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    propertyType?: EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    status?: EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+    priceAmount?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceNegotiable?: BoolFieldUpdateOperationsInput | boolean
+    minRentDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    rentDeposit?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    surfaceArea?: NullableIntFieldUpdateOperationsInput | number | null
+    landArea?: NullableIntFieldUpdateOperationsInput | number | null
+    totalRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bedrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    bathrooms?: NullableIntFieldUpdateOperationsInput | number | null
+    kitchens?: NullableIntFieldUpdateOperationsInput | number | null
+    livingRooms?: NullableIntFieldUpdateOperationsInput | number | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
+    buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
+    constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
+    distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToShops?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToMosque?: NullableIntFieldUpdateOperationsInput | number | null
+    distanceToHospital?: NullableIntFieldUpdateOperationsInput | number | null
+    hasLivretFoncier?: BoolFieldUpdateOperationsInput | boolean
+    hasActeVente?: BoolFieldUpdateOperationsInput | boolean
+    hasPermisConstruction?: BoolFieldUpdateOperationsInput | boolean
+    arePapersComplete?: BoolFieldUpdateOperationsInput | boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    wilayaId?: StringFieldUpdateOperationsInput | string
+    communeId?: NullableStringFieldUpdateOperationsInput | string | null
+    quartier?: NullableStringFieldUpdateOperationsInput | string | null
+    fullAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    exactLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    exactLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLatitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    publicLongitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    showExactLocation?: BoolFieldUpdateOperationsInput | boolean
+    privacyRadiusMeters?: IntFieldUpdateOperationsInput | number
+    locationInputMode?: EnumLocationInputModeFieldUpdateOperationsInput | $Enums.LocationInputMode
+    mapboxPlaceId?: NullableStringFieldUpdateOperationsInput | string | null
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    favoritesCount?: IntFieldUpdateOperationsInput | number
+    contactsCount?: IntFieldUpdateOperationsInput | number
+    sharesCount?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    moderatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    moderatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isExpired?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
+    boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
+    savedSearchMatches?: SavedSearchMatchUncheckedUpdateManyWithoutPropertyNestedInput
+    priceHistory?: PropertyPriceHistoryUncheckedUpdateManyWithoutPropertyNestedInput
+    viewStats?: PropertyViewStatsUncheckedUpdateManyWithoutPropertyNestedInput
+    viewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutPropertyNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutPropertyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutPropertyNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutPropertyNestedInput
+    locationRequests?: LocationRequestUncheckedUpdateManyWithoutPropertyNestedInput
+  }
+
+  export type PropertyCreateWithoutBoostInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    description: string
+    propertyType: $Enums.PropertyType
+    transactionType: $Enums.TransactionType
+    status?: $Enums.PropertyStatus
+    priceAmount: bigint | number
+    priceNegotiable?: boolean
+    minRentDuration?: number | null
+    rentDeposit?: bigint | number | null
+    surfaceArea?: number | null
+    landArea?: number | null
+    totalRooms?: number | null
+    bedrooms?: number | null
+    bathrooms?: number | null
+    kitchens?: number | null
+    livingRooms?: number | null
+    floor?: number | null
+    totalFloors?: number | null
+    buildingAge?: number | null
+    constructionYear?: number | null
+    viewType?: $Enums.ViewType
+    distanceToSchool?: number | null
+    distanceToTransport?: number | null
+    distanceToShops?: number | null
+    distanceToMosque?: number | null
+    distanceToHospital?: number | null
+    hasLivretFoncier?: boolean
+    hasActeVente?: boolean
+    hasPermisConstruction?: boolean
+    arePapersComplete?: boolean
+    customFeatures?: NullableJsonNullValueInput | InputJsonValue
+    quartier?: string | null
+    fullAddress?: string | null
+    postalCode?: string | null
+    exactLatitude: Decimal | DecimalJsLike | number | string
+    exactLongitude: Decimal | DecimalJsLike | number | string
+    publicLatitude: Decimal | DecimalJsLike | number | string
+    publicLongitude: Decimal | DecimalJsLike | number | string
+    showExactLocation?: boolean
+    privacyRadiusMeters?: number
+    locationInputMode?: $Enums.LocationInputMode
+    mapboxPlaceId?: string | null
+    viewsCount?: number
+    favoritesCount?: number
+    contactsCount?: number
+    sharesCount?: number
+    slug: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    moderatedAt?: Date | string | null
+    moderatedBy?: string | null
+    rejectionReason?: string | null
+    expiresAt?: Date | string | null
+    isExpired?: boolean
+    deletedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -53691,27 +57417,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -53749,6 +57454,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
     savedSearchMatches?: SavedSearchMatchUncheckedCreateNestedManyWithoutPropertyInput
@@ -54001,27 +57708,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -54058,6 +57744,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -54097,27 +57785,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -54155,6 +57822,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
     savedSearchMatches?: SavedSearchMatchUncheckedUpdateManyWithoutPropertyNestedInput
@@ -54403,27 +58072,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -54460,6 +58108,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -54499,27 +58149,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -54557,6 +58186,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -54867,27 +58498,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -54924,6 +58534,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -54963,27 +58575,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -55021,6 +58612,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -55456,27 +59049,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -55513,6 +59085,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -55552,27 +59126,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -55610,6 +59163,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     savedSearchMatches?: SavedSearchMatchUncheckedCreateNestedManyWithoutPropertyInput
@@ -55797,27 +59352,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -55854,6 +59388,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -55893,27 +59429,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -55951,6 +59466,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     savedSearchMatches?: SavedSearchMatchUncheckedUpdateManyWithoutPropertyNestedInput
@@ -56274,10 +59791,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -56290,10 +59808,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -56328,27 +59847,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -56385,6 +59883,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -56424,27 +59924,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -56482,6 +59961,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -56515,10 +59996,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -56531,10 +60013,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -56575,27 +60058,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -56632,6 +60094,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -56671,27 +60135,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -56729,6 +60172,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -57720,27 +61165,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -57777,6 +61201,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -57816,27 +61242,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -57874,6 +61279,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -58253,27 +61660,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -58310,6 +61696,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -58349,27 +61737,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -58407,6 +61774,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -58494,27 +61863,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -58551,6 +61899,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -58590,27 +61940,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -58648,6 +61977,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -59015,27 +62346,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -59072,6 +62382,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -59111,27 +62423,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -59169,6 +62460,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -59604,27 +62897,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -59661,6 +62933,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -59700,27 +62974,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -59758,6 +63011,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -60074,27 +63329,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -60131,6 +63365,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -60170,27 +63406,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -60228,6 +63443,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -60995,27 +64212,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -61052,6 +64248,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -61091,27 +64289,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -61149,6 +64326,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -61201,27 +64380,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -61258,6 +64416,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -61297,27 +64457,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -61355,6 +64494,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -61391,27 +64532,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -61448,6 +64568,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
@@ -61487,27 +64609,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -61545,6 +64646,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -61726,27 +64829,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -61783,6 +64865,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -61822,27 +64906,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -61880,6 +64943,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -62087,27 +65152,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -62144,6 +65188,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     commune?: CommuneCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostCreateNestedOneWithoutPropertyInput
@@ -62183,27 +65229,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -62240,6 +65265,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -62366,27 +65393,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -62423,6 +65429,8 @@ export namespace Prisma {
     isExpired?: boolean
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPropertiesInput
+    amenities?: AmenitiesOnPropertiesCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateCreateNestedManyWithoutPropertyInput
     wilaya: WilayaCreateNestedOneWithoutPropertiesInput
     media?: PropertyMediaCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostCreateNestedOneWithoutPropertyInput
@@ -62462,27 +65470,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -62519,6 +65506,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     isExpired?: boolean
     deletedAt?: Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedCreateNestedManyWithoutPropertyInput
+    seasonalRates?: SeasonalRateUncheckedCreateNestedManyWithoutPropertyInput
     media?: PropertyMediaUncheckedCreateNestedManyWithoutPropertyInput
     boost?: PropertyBoostUncheckedCreateNestedOneWithoutPropertyInput
     favorites?: FavoriteUncheckedCreateNestedManyWithoutPropertyInput
@@ -62627,27 +65616,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -62699,10 +65667,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     name: string
-    criteria: JsonNullValueInput | InputJsonValue
+    filters: JsonNullValueInput | InputJsonValue
     notifyByEmail?: boolean
     notifyInApp?: boolean
     isActive?: boolean
+    lastCheckedAt?: Date | string
     lastMatchedAt?: Date | string | null
     matchCount?: number
     lastNotifiedAt?: Date | string | null
@@ -63021,27 +65990,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63077,6 +66025,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
@@ -63116,27 +66066,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63174,6 +66103,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -63211,27 +66142,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63297,10 +66207,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -63312,10 +66223,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -63327,10 +66239,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    criteria?: JsonNullValueInput | InputJsonValue
+    filters?: JsonNullValueInput | InputJsonValue
     notifyByEmail?: BoolFieldUpdateOperationsInput | boolean
     notifyInApp?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastCheckedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastMatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     matchCount?: IntFieldUpdateOperationsInput | number
     lastNotifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -64221,6 +67134,20 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type AmenitiesOnPropertiesCreateManyPropertyInput = {
+    amenityId: string
+    assignedAt?: Date | string
+  }
+
+  export type SeasonalRateCreateManyPropertyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startDate: Date | string
+    endDate: Date | string
+    dailyRate: Decimal | DecimalJsLike | number | string
+  }
+
   export type PropertyMediaCreateManyPropertyInput = {
     id?: string
     createdAt?: Date | string
@@ -64228,8 +67155,8 @@ export namespace Prisma {
     mediaType: $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: number
-    isPrimary?: boolean
+    order?: number
+    isThumbnail?: boolean
     deletedAt?: Date | string | null
   }
 
@@ -64357,6 +67284,48 @@ export namespace Prisma {
     viewCount?: number
   }
 
+  export type AmenitiesOnPropertiesUpdateWithoutPropertyInput = {
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    amenity?: AmenityUpdateOneRequiredWithoutPropertiesNestedInput
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateWithoutPropertyInput = {
+    amenityId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyInput = {
+    amenityId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeasonalRateUpdateWithoutPropertyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateUncheckedUpdateWithoutPropertyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type SeasonalRateUncheckedUpdateManyWithoutPropertyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
   export type PropertyMediaUpdateWithoutPropertyInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64364,8 +67333,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -64376,8 +67345,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -64388,8 +67357,8 @@ export namespace Prisma {
     mediaType?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     imageData?: NullableJsonNullValueInput | InputJsonValue
     videoData?: NullableJsonNullValueInput | InputJsonValue
-    displayOrder?: IntFieldUpdateOperationsInput | number
-    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    isThumbnail?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -64765,6 +67734,26 @@ export namespace Prisma {
     viewCount?: IntFieldUpdateOperationsInput | number
   }
 
+  export type AmenitiesOnPropertiesCreateManyAmenityInput = {
+    propertyId: string
+    assignedAt?: Date | string
+  }
+
+  export type AmenitiesOnPropertiesUpdateWithoutAmenityInput = {
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    property?: PropertyUpdateOneRequiredWithoutAmenitiesNestedInput
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateWithoutAmenityInput = {
+    propertyId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AmenitiesOnPropertiesUncheckedUpdateManyWithoutAmenityInput = {
+    propertyId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SavedSearchMatchCreateManySavedSearchInput = {
     id?: string
     createdAt?: Date | string
@@ -65050,27 +68039,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -65171,27 +68139,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -65228,6 +68175,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     commune?: CommuneUpdateOneWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUpdateOneWithoutPropertyNestedInput
@@ -65267,27 +68216,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -65324,6 +68252,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -65362,27 +68292,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -65446,27 +68355,6 @@ export namespace Prisma {
     totalFloors?: number | null
     buildingAge?: number | null
     constructionYear?: number | null
-    hasElevator?: boolean
-    hasBalcony?: boolean
-    hasTerrace?: boolean
-    hasCellar?: boolean
-    hasParking?: boolean
-    hasGarage?: boolean
-    hasGarden?: boolean
-    hasPool?: boolean
-    hasAirConditioning?: boolean
-    heatingType?: $Enums.HeatingType
-    hasEquippedKitchen?: boolean
-    isFurnished?: boolean
-    hasInternet?: boolean
-    hasCityGas?: boolean
-    hasWater?: boolean
-    hasElectricity?: boolean
-    hasGuard?: boolean
-    hasIntercom?: boolean
-    hasAlarm?: boolean
-    hasElectricGate?: boolean
-    hasCCTV?: boolean
     viewType?: $Enums.ViewType
     distanceToSchool?: number | null
     distanceToTransport?: number | null
@@ -65529,27 +68417,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -65586,6 +68453,8 @@ export namespace Prisma {
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPropertiesNestedInput
+    amenities?: AmenitiesOnPropertiesUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUpdateManyWithoutPropertyNestedInput
     wilaya?: WilayaUpdateOneRequiredWithoutPropertiesNestedInput
     media?: PropertyMediaUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUpdateOneWithoutPropertyNestedInput
@@ -65625,27 +68494,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null
@@ -65682,6 +68530,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isExpired?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    amenities?: AmenitiesOnPropertiesUncheckedUpdateManyWithoutPropertyNestedInput
+    seasonalRates?: SeasonalRateUncheckedUpdateManyWithoutPropertyNestedInput
     media?: PropertyMediaUncheckedUpdateManyWithoutPropertyNestedInput
     boost?: PropertyBoostUncheckedUpdateOneWithoutPropertyNestedInput
     favorites?: FavoriteUncheckedUpdateManyWithoutPropertyNestedInput
@@ -65720,27 +68570,6 @@ export namespace Prisma {
     totalFloors?: NullableIntFieldUpdateOperationsInput | number | null
     buildingAge?: NullableIntFieldUpdateOperationsInput | number | null
     constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
-    hasElevator?: BoolFieldUpdateOperationsInput | boolean
-    hasBalcony?: BoolFieldUpdateOperationsInput | boolean
-    hasTerrace?: BoolFieldUpdateOperationsInput | boolean
-    hasCellar?: BoolFieldUpdateOperationsInput | boolean
-    hasParking?: BoolFieldUpdateOperationsInput | boolean
-    hasGarage?: BoolFieldUpdateOperationsInput | boolean
-    hasGarden?: BoolFieldUpdateOperationsInput | boolean
-    hasPool?: BoolFieldUpdateOperationsInput | boolean
-    hasAirConditioning?: BoolFieldUpdateOperationsInput | boolean
-    heatingType?: EnumHeatingTypeFieldUpdateOperationsInput | $Enums.HeatingType
-    hasEquippedKitchen?: BoolFieldUpdateOperationsInput | boolean
-    isFurnished?: BoolFieldUpdateOperationsInput | boolean
-    hasInternet?: BoolFieldUpdateOperationsInput | boolean
-    hasCityGas?: BoolFieldUpdateOperationsInput | boolean
-    hasWater?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricity?: BoolFieldUpdateOperationsInput | boolean
-    hasGuard?: BoolFieldUpdateOperationsInput | boolean
-    hasIntercom?: BoolFieldUpdateOperationsInput | boolean
-    hasAlarm?: BoolFieldUpdateOperationsInput | boolean
-    hasElectricGate?: BoolFieldUpdateOperationsInput | boolean
-    hasCCTV?: BoolFieldUpdateOperationsInput | boolean
     viewType?: EnumViewTypeFieldUpdateOperationsInput | $Enums.ViewType
     distanceToSchool?: NullableIntFieldUpdateOperationsInput | number | null
     distanceToTransport?: NullableIntFieldUpdateOperationsInput | number | null

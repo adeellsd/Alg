@@ -18,7 +18,7 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearchPostgres", "postgresqlExtensions"]
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
@@ -441,29 +441,10 @@ model Property {
   constructionYear Int?
 
   // ===== FEATURES =====
-  hasElevator        Boolean     @default(false)
-  hasBalcony         Boolean     @default(false)
-  hasTerrace         Boolean     @default(false)
-  hasCellar          Boolean     @default(false)
-  hasParking         Boolean     @default(false)
-  hasGarage          Boolean     @default(false)
-  hasGarden          Boolean     @default(false)
-  hasPool            Boolean     @default(false)
-  hasAirConditioning Boolean     @default(false)
-  heatingType        HeatingType @default(NONE)
-  hasEquippedKitchen Boolean     @default(false)
-  isFurnished        Boolean     @default(false)
-  hasInternet        Boolean     @default(false)
-  hasCityGas         Boolean     @default(false)
-  hasWater           Boolean     @default(true)
-  hasElectricity     Boolean     @default(true)
+  amenities AmenitiesOnProperties[]
 
-  // ===== SECURITY =====
-  hasGuard        Boolean @default(false)
-  hasIntercom     Boolean @default(false)
-  hasAlarm        Boolean @default(false)
-  hasElectricGate Boolean @default(false)
-  hasCCTV         Boolean @default(false)
+  // ===== SEASONAL PRICING =====
+  seasonalRates SeasonalRate[]
 
   // ===== VIEW =====
   viewType ViewType @default(NONE)
@@ -640,18 +621,70 @@ model PropertyMedia {
   */
 
   // ===== ORDERING =====
-  displayOrder Int     @default(0)
-  isPrimary    Boolean @default(false)
+  order        Int     @default(0)
+  isThumbnail  Boolean @default(false)
 
   // ===== SOFT DELETE =====
   deletedAt DateTime?
 
   @@index([propertyId])
   @@index([mediaType])
-  @@index([displayOrder])
-  @@index([isPrimary])
+  @@index([order])
+  @@index([isThumbnail])
   @@index([deletedAt])
   @@map("property_media")
+}
+
+// ============================================================================
+// AMENITIES (NOUVEAU)
+// ============================================================================
+
+model Amenity {
+  id        String   @id @default(cuid())
+  name      String   @unique // Ex: "Piscine", "Jardin", "Ascenseur"
+  category  String   // Ex: "Équipement", "Sécurité", "Extérieur"
+  icon      String?  // Nom de l'icône (ex: Lucide icon name)
+  
+  properties AmenitiesOnProperties[]
+
+  @@index([category])
+  @@map("amenities")
+}
+
+model AmenitiesOnProperties {
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  amenityId  String
+  amenity    Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  assignedAt DateTime @default(now())
+
+  @@id([propertyId, amenityId])
+  @@index([propertyId])
+  @@index([amenityId])
+  @@map("amenities_on_properties")
+}
+
+// ============================================================================
+// SEASONAL RATES (NOUVEAU)
+// ============================================================================
+
+model SeasonalRate {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  startDate DateTime
+  endDate   DateTime
+  dailyRate Decimal  @db.Decimal(10, 2)
+
+  @@index([propertyId])
+  @@index([startDate, endDate])
+  @@map("seasonal_rates")
 }
 
 // ============================================================================
@@ -804,8 +837,8 @@ model SavedSearch {
 
   name String @db.VarChar(100)
 
-  // Critères de recherche (JSON pour flexibilité)
-  criteria Json
+  // Critères de recherche
+  filters Json
   /* Structure:
   {
     "wilayaId": "...",
@@ -815,7 +848,7 @@ model SavedSearch {
     "minPrice": 5000000,
     "maxPrice": 10000000,
     "minSurface": 80,
-    "hasParking": true,
+    "amenities": ["pool", "garden"],
     ...
   }
   */
@@ -825,6 +858,7 @@ model SavedSearch {
   isActive      Boolean @default(true)
 
   // Stats
+  lastCheckedAt DateTime @default(now()) // Quand le système a vérifié pour la dernière fois
   lastMatchedAt DateTime?
   matchCount    Int      @default(0)
   
@@ -836,7 +870,7 @@ model SavedSearch {
   @@index([userId])
   @@index([isActive])
   @@index([userId, isActive])
-  @@index([lastMatchedAt])
+  @@index([lastCheckedAt])
   @@map("saved_searches")
 }
 

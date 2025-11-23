@@ -3,7 +3,7 @@
     "id": "search_1",
     "userId": "user_2",
     "name": "F3 Alger Centre < 7M DZD",
-    "criteria": {
+    "filters": {
       "wilayaId": "16",
       "propertyType": ["APARTMENT_F3"],
       "transactionType": "SALE",

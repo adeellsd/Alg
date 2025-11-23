@@ -13,8 +13,8 @@
     "format": "jpeg",
     "sizeBytes": 245678,
     "altText": "Salon moderne avec vue mer",
-    "displayOrder": 0,
-    "isPrimary": true
+    "order": 0,
+    "isThumbnail": true
   },
   {
     "propertyId": "prop_1",
@@ -27,7 +27,7 @@
     "width": 1080,
     "height": 1920,
     "format": "mp4",
-    "displayOrder": 1,
-    "isPrimary": false
+    "order": 1,
+    "isThumbnail": false
   }
 ]
