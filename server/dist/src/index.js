@@ -9,6 +9,9 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
+const authMiddleware_1 = require("./middleware/authMiddleware");
+const particulierRoutes_1 = __importDefault(require("./routes/particulierRoutes"));
+const proRoutes_1 = __importDefault(require("./routes/proRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -21,6 +24,8 @@ app.use((0, cors_1.default)());
 app.get("/", (req, res) => {
     res.send("Ca marche yakho....");
 });
+app.use("/particulier", (0, authMiddleware_1.AuthMiddleware)(["FREE"]), particulierRoutes_1.default);
+app.use("/pro", (0, authMiddleware_1.AuthMiddleware)(["STARTER", "PRO", "ELITE"]), proRoutes_1.default);
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     console.log(`aw yemchi sur le port ${PORT}`);

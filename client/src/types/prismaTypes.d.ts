@@ -79,6 +79,11 @@ export type BoostPricing = $Result.DefaultSelection<Prisma.$BoostPricingPayload>
  */
 export type PropertyBoost = $Result.DefaultSelection<Prisma.$PropertyBoostPayload>
 /**
+ * Model BoostBundle
+ * 
+ */
+export type BoostBundle = $Result.DefaultSelection<Prisma.$BoostBundlePayload>
+/**
  * Model LocationRequest
  * 
  */
@@ -124,6 +129,11 @@ export type Report = $Result.DefaultSelection<Prisma.$ReportPayload>
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
 /**
+ * Model Subscription
+ * 
+ */
+export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
+/**
  * Model Notification
  * 
  */
@@ -149,6 +159,16 @@ export type PopularSearch = $Result.DefaultSelection<Prisma.$PopularSearchPayloa
  */
 export type Wilaya = $Result.DefaultSelection<Prisma.$WilayaPayload>
 /**
+ * Model UpgradeBanner
+ * 
+ */
+export type UpgradeBanner = $Result.DefaultSelection<Prisma.$UpgradeBannerPayload>
+/**
+ * Model EmailCampaign
+ * 
+ */
+export type EmailCampaign = $Result.DefaultSelection<Prisma.$EmailCampaignPayload>
+/**
  * Model Commune
  * 
  */
@@ -169,8 +189,10 @@ export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
 
 
 export const AccountTier: {
-  PARTICULIER: 'PARTICULIER',
-  PROFESSIONNEL: 'PROFESSIONNEL'
+  FREE: 'FREE',
+  STARTER: 'STARTER',
+  PRO: 'PRO',
+  ELITE: 'ELITE'
 };
 
 export type AccountTier = (typeof AccountTier)[keyof typeof AccountTier]
@@ -731,6 +753,16 @@ export class PrismaClient<
   get propertyBoost(): Prisma.PropertyBoostDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.boostBundle`: Exposes CRUD operations for the **BoostBundle** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BoostBundles
+    * const boostBundles = await prisma.boostBundle.findMany()
+    * ```
+    */
+  get boostBundle(): Prisma.BoostBundleDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.locationRequest`: Exposes CRUD operations for the **LocationRequest** model.
     * Example usage:
     * ```ts
@@ -821,6 +853,16 @@ export class PrismaClient<
   get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.subscription`: Exposes CRUD operations for the **Subscription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Subscriptions
+    * const subscriptions = await prisma.subscription.findMany()
+    * ```
+    */
+  get subscription(): Prisma.SubscriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
     * Example usage:
     * ```ts
@@ -869,6 +911,26 @@ export class PrismaClient<
     * ```
     */
   get wilaya(): Prisma.WilayaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.upgradeBanner`: Exposes CRUD operations for the **UpgradeBanner** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UpgradeBanners
+    * const upgradeBanners = await prisma.upgradeBanner.findMany()
+    * ```
+    */
+  get upgradeBanner(): Prisma.UpgradeBannerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailCampaign`: Exposes CRUD operations for the **EmailCampaign** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailCampaigns
+    * const emailCampaigns = await prisma.emailCampaign.findMany()
+    * ```
+    */
+  get emailCampaign(): Prisma.EmailCampaignDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.commune`: Exposes CRUD operations for the **Commune** model.
@@ -1333,6 +1395,7 @@ export namespace Prisma {
     SeasonalRate: 'SeasonalRate',
     BoostPricing: 'BoostPricing',
     PropertyBoost: 'PropertyBoost',
+    BoostBundle: 'BoostBundle',
     LocationRequest: 'LocationRequest',
     Favorite: 'Favorite',
     SavedSearch: 'SavedSearch',
@@ -1342,11 +1405,14 @@ export namespace Prisma {
     Review: 'Review',
     Report: 'Report',
     Payment: 'Payment',
+    Subscription: 'Subscription',
     Notification: 'Notification',
     PropertyViewStats: 'PropertyViewStats',
     PropertyViewDetail: 'PropertyViewDetail',
     PopularSearch: 'PopularSearch',
     Wilaya: 'Wilaya',
+    UpgradeBanner: 'UpgradeBanner',
+    EmailCampaign: 'EmailCampaign',
     Commune: 'Commune'
   };
 
@@ -1366,7 +1432,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "role" | "userRole" | "permission" | "rolePermission" | "property" | "propertyPriceHistory" | "propertyMedia" | "amenity" | "amenitiesOnProperties" | "seasonalRate" | "boostPricing" | "propertyBoost" | "locationRequest" | "favorite" | "savedSearch" | "savedSearchMatch" | "conversation" | "message" | "review" | "report" | "payment" | "notification" | "propertyViewStats" | "propertyViewDetail" | "popularSearch" | "wilaya" | "commune"
+      modelProps: "user" | "role" | "userRole" | "permission" | "rolePermission" | "property" | "propertyPriceHistory" | "propertyMedia" | "amenity" | "amenitiesOnProperties" | "seasonalRate" | "boostPricing" | "propertyBoost" | "boostBundle" | "locationRequest" | "favorite" | "savedSearch" | "savedSearchMatch" | "conversation" | "message" | "review" | "report" | "payment" | "subscription" | "notification" | "propertyViewStats" | "propertyViewDetail" | "popularSearch" | "wilaya" | "upgradeBanner" | "emailCampaign" | "commune"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2332,6 +2398,80 @@ export namespace Prisma {
           }
         }
       }
+      BoostBundle: {
+        payload: Prisma.$BoostBundlePayload<ExtArgs>
+        fields: Prisma.BoostBundleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BoostBundleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BoostBundleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>
+          }
+          findFirst: {
+            args: Prisma.BoostBundleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BoostBundleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>
+          }
+          findMany: {
+            args: Prisma.BoostBundleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>[]
+          }
+          create: {
+            args: Prisma.BoostBundleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>
+          }
+          createMany: {
+            args: Prisma.BoostBundleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BoostBundleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>[]
+          }
+          delete: {
+            args: Prisma.BoostBundleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>
+          }
+          update: {
+            args: Prisma.BoostBundleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>
+          }
+          deleteMany: {
+            args: Prisma.BoostBundleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BoostBundleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BoostBundleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>[]
+          }
+          upsert: {
+            args: Prisma.BoostBundleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoostBundlePayload>
+          }
+          aggregate: {
+            args: Prisma.BoostBundleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBoostBundle>
+          }
+          groupBy: {
+            args: Prisma.BoostBundleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BoostBundleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BoostBundleCountArgs<ExtArgs>
+            result: $Utils.Optional<BoostBundleCountAggregateOutputType> | number
+          }
+        }
+      }
       LocationRequest: {
         payload: Prisma.$LocationRequestPayload<ExtArgs>
         fields: Prisma.LocationRequestFieldRefs
@@ -2998,6 +3138,80 @@ export namespace Prisma {
           }
         }
       }
+      Subscription: {
+        payload: Prisma.$SubscriptionPayload<ExtArgs>
+        fields: Prisma.SubscriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          findMany: {
+            args: Prisma.SubscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          create: {
+            args: Prisma.SubscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          createMany: {
+            args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SubscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.SubscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          update: {
+            args: Prisma.SubscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SubscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.SubscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubscription>
+          }
+          groupBy: {
+            args: Prisma.SubscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SubscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
       Notification: {
         payload: Prisma.$NotificationPayload<ExtArgs>
         fields: Prisma.NotificationFieldRefs
@@ -3368,6 +3582,154 @@ export namespace Prisma {
           }
         }
       }
+      UpgradeBanner: {
+        payload: Prisma.$UpgradeBannerPayload<ExtArgs>
+        fields: Prisma.UpgradeBannerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UpgradeBannerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UpgradeBannerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>
+          }
+          findFirst: {
+            args: Prisma.UpgradeBannerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UpgradeBannerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>
+          }
+          findMany: {
+            args: Prisma.UpgradeBannerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>[]
+          }
+          create: {
+            args: Prisma.UpgradeBannerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>
+          }
+          createMany: {
+            args: Prisma.UpgradeBannerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UpgradeBannerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>[]
+          }
+          delete: {
+            args: Prisma.UpgradeBannerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>
+          }
+          update: {
+            args: Prisma.UpgradeBannerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>
+          }
+          deleteMany: {
+            args: Prisma.UpgradeBannerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UpgradeBannerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UpgradeBannerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>[]
+          }
+          upsert: {
+            args: Prisma.UpgradeBannerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UpgradeBannerPayload>
+          }
+          aggregate: {
+            args: Prisma.UpgradeBannerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUpgradeBanner>
+          }
+          groupBy: {
+            args: Prisma.UpgradeBannerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UpgradeBannerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UpgradeBannerCountArgs<ExtArgs>
+            result: $Utils.Optional<UpgradeBannerCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailCampaign: {
+        payload: Prisma.$EmailCampaignPayload<ExtArgs>
+        fields: Prisma.EmailCampaignFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailCampaignFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailCampaignFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailCampaignFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailCampaignFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          findMany: {
+            args: Prisma.EmailCampaignFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>[]
+          }
+          create: {
+            args: Prisma.EmailCampaignCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          createMany: {
+            args: Prisma.EmailCampaignCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailCampaignCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailCampaignDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          update: {
+            args: Prisma.EmailCampaignUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailCampaignDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailCampaignUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailCampaignUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailCampaignUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailCampaignAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailCampaign>
+          }
+          groupBy: {
+            args: Prisma.EmailCampaignGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailCampaignCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignCountAggregateOutputType> | number
+          }
+        }
+      }
       Commune: {
         payload: Prisma.$CommunePayload<ExtArgs>
         fields: Prisma.CommuneFieldRefs
@@ -3551,6 +3913,7 @@ export namespace Prisma {
     seasonalRate?: SeasonalRateOmit
     boostPricing?: BoostPricingOmit
     propertyBoost?: PropertyBoostOmit
+    boostBundle?: BoostBundleOmit
     locationRequest?: LocationRequestOmit
     favorite?: FavoriteOmit
     savedSearch?: SavedSearchOmit
@@ -3560,11 +3923,14 @@ export namespace Prisma {
     review?: ReviewOmit
     report?: ReportOmit
     payment?: PaymentOmit
+    subscription?: SubscriptionOmit
     notification?: NotificationOmit
     propertyViewStats?: PropertyViewStatsOmit
     propertyViewDetail?: PropertyViewDetailOmit
     popularSearch?: PopularSearchOmit
     wilaya?: WilayaOmit
+    upgradeBanner?: UpgradeBannerOmit
+    emailCampaign?: EmailCampaignOmit
     commune?: CommuneOmit
   }
 
@@ -3660,10 +4026,14 @@ export namespace Prisma {
     reportsReceived: number
     payments: number
     boosts: number
+    boostBundles: number
+    subscriptions: number
     propertyViewDetails: number
     notifications: number
     locationRequestsSent: number
     locationRequestsReceived: number
+    upgradeBanners: number
+    emailCampaigns: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3681,10 +4051,14 @@ export namespace Prisma {
     reportsReceived?: boolean | UserCountOutputTypeCountReportsReceivedArgs
     payments?: boolean | UserCountOutputTypeCountPaymentsArgs
     boosts?: boolean | UserCountOutputTypeCountBoostsArgs
+    boostBundles?: boolean | UserCountOutputTypeCountBoostBundlesArgs
+    subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
     propertyViewDetails?: boolean | UserCountOutputTypeCountPropertyViewDetailsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     locationRequestsSent?: boolean | UserCountOutputTypeCountLocationRequestsSentArgs
     locationRequestsReceived?: boolean | UserCountOutputTypeCountLocationRequestsReceivedArgs
+    upgradeBanners?: boolean | UserCountOutputTypeCountUpgradeBannersArgs
+    emailCampaigns?: boolean | UserCountOutputTypeCountEmailCampaignsArgs
   }
 
   // Custom InputTypes
@@ -3799,6 +4173,20 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountBoostBundlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BoostBundleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountPropertyViewDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PropertyViewDetailWhereInput
   }
@@ -3822,6 +4210,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountLocationRequestsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LocationRequestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpgradeBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UpgradeBannerWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEmailCampaignsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignWhereInput
   }
 
 
@@ -4058,6 +4460,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type BoostBundleCountOutputType
+   */
+
+  export type BoostBundleCountOutputType = {
+    usedBoosts: number
+  }
+
+  export type BoostBundleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usedBoosts?: boolean | BoostBundleCountOutputTypeCountUsedBoostsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BoostBundleCountOutputType without action
+   */
+  export type BoostBundleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundleCountOutputType
+     */
+    select?: BoostBundleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BoostBundleCountOutputType without action
+   */
+  export type BoostBundleCountOutputTypeCountUsedBoostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PropertyBoostWhereInput
+  }
+
+
+  /**
    * Count Type SavedSearchCountOutputType
    */
 
@@ -4134,10 +4567,12 @@ export namespace Prisma {
 
   export type PaymentCountOutputType = {
     boosts: number
+    subscriptions: number
   }
 
   export type PaymentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     boosts?: boolean | PaymentCountOutputTypeCountBoostsArgs
+    subscriptions?: boolean | PaymentCountOutputTypeCountSubscriptionsArgs
   }
 
   // Custom InputTypes
@@ -4156,6 +4591,13 @@ export namespace Prisma {
    */
   export type PaymentCountOutputTypeCountBoostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PropertyBoostWhereInput
+  }
+
+  /**
+   * PaymentCountOutputType without action
+   */
+  export type PaymentCountOutputTypeCountSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
   }
 
 
@@ -4247,6 +4689,9 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
+    propertyLimit: number | null
+    imagesPerPropertyLimit: number | null
+    videosPerPropertyLimit: number | null
     warningCount: number | null
     totalProperties: number | null
     activeProperties: number | null
@@ -4257,6 +4702,9 @@ export namespace Prisma {
   }
 
   export type UserSumAggregateOutputType = {
+    propertyLimit: number | null
+    imagesPerPropertyLimit: number | null
+    videosPerPropertyLimit: number | null
     warningCount: number | null
     totalProperties: number | null
     activeProperties: number | null
@@ -4280,9 +4728,16 @@ export namespace Prisma {
     avatar: string | null
     accountTier: $Enums.AccountTier | null
     status: $Enums.AccountStatus | null
-    proActivatedAt: Date | null
-    proExpiresAt: Date | null
-    proAutoRenew: boolean | null
+    subscriptionStartedAt: Date | null
+    subscriptionExpiresAt: Date | null
+    subscriptionAutoRenew: boolean | null
+    subscriptionCancelledAt: Date | null
+    trialStartedAt: Date | null
+    trialEndsAt: Date | null
+    trialUsed: boolean | null
+    propertyLimit: number | null
+    imagesPerPropertyLimit: number | null
+    videosPerPropertyLimit: number | null
     companyName: string | null
     companyLogo: string | null
     companyDescription: string | null
@@ -4325,9 +4780,16 @@ export namespace Prisma {
     avatar: string | null
     accountTier: $Enums.AccountTier | null
     status: $Enums.AccountStatus | null
-    proActivatedAt: Date | null
-    proExpiresAt: Date | null
-    proAutoRenew: boolean | null
+    subscriptionStartedAt: Date | null
+    subscriptionExpiresAt: Date | null
+    subscriptionAutoRenew: boolean | null
+    subscriptionCancelledAt: Date | null
+    trialStartedAt: Date | null
+    trialEndsAt: Date | null
+    trialUsed: boolean | null
+    propertyLimit: number | null
+    imagesPerPropertyLimit: number | null
+    videosPerPropertyLimit: number | null
     companyName: string | null
     companyLogo: string | null
     companyDescription: string | null
@@ -4370,14 +4832,22 @@ export namespace Prisma {
     avatar: number
     accountTier: number
     status: number
-    proActivatedAt: number
-    proExpiresAt: number
-    proAutoRenew: number
+    subscriptionStartedAt: number
+    subscriptionExpiresAt: number
+    subscriptionAutoRenew: number
+    subscriptionCancelledAt: number
+    trialStartedAt: number
+    trialEndsAt: number
+    trialUsed: number
+    propertyLimit: number
+    imagesPerPropertyLimit: number
+    videosPerPropertyLimit: number
     companyName: number
     companyLogo: number
     companyDescription: number
     commerceRegister: number
     taxId: number
+    teamMemberEmails: number
     showPhone: number
     showWhatsApp: number
     whatsappNumber: number
@@ -4404,6 +4874,9 @@ export namespace Prisma {
 
 
   export type UserAvgAggregateInputType = {
+    propertyLimit?: true
+    imagesPerPropertyLimit?: true
+    videosPerPropertyLimit?: true
     warningCount?: true
     totalProperties?: true
     activeProperties?: true
@@ -4414,6 +4887,9 @@ export namespace Prisma {
   }
 
   export type UserSumAggregateInputType = {
+    propertyLimit?: true
+    imagesPerPropertyLimit?: true
+    videosPerPropertyLimit?: true
     warningCount?: true
     totalProperties?: true
     activeProperties?: true
@@ -4437,9 +4913,16 @@ export namespace Prisma {
     avatar?: true
     accountTier?: true
     status?: true
-    proActivatedAt?: true
-    proExpiresAt?: true
-    proAutoRenew?: true
+    subscriptionStartedAt?: true
+    subscriptionExpiresAt?: true
+    subscriptionAutoRenew?: true
+    subscriptionCancelledAt?: true
+    trialStartedAt?: true
+    trialEndsAt?: true
+    trialUsed?: true
+    propertyLimit?: true
+    imagesPerPropertyLimit?: true
+    videosPerPropertyLimit?: true
     companyName?: true
     companyLogo?: true
     companyDescription?: true
@@ -4482,9 +4965,16 @@ export namespace Prisma {
     avatar?: true
     accountTier?: true
     status?: true
-    proActivatedAt?: true
-    proExpiresAt?: true
-    proAutoRenew?: true
+    subscriptionStartedAt?: true
+    subscriptionExpiresAt?: true
+    subscriptionAutoRenew?: true
+    subscriptionCancelledAt?: true
+    trialStartedAt?: true
+    trialEndsAt?: true
+    trialUsed?: true
+    propertyLimit?: true
+    imagesPerPropertyLimit?: true
+    videosPerPropertyLimit?: true
     companyName?: true
     companyLogo?: true
     companyDescription?: true
@@ -4527,14 +5017,22 @@ export namespace Prisma {
     avatar?: true
     accountTier?: true
     status?: true
-    proActivatedAt?: true
-    proExpiresAt?: true
-    proAutoRenew?: true
+    subscriptionStartedAt?: true
+    subscriptionExpiresAt?: true
+    subscriptionAutoRenew?: true
+    subscriptionCancelledAt?: true
+    trialStartedAt?: true
+    trialEndsAt?: true
+    trialUsed?: true
+    propertyLimit?: true
+    imagesPerPropertyLimit?: true
+    videosPerPropertyLimit?: true
     companyName?: true
     companyLogo?: true
     companyDescription?: true
     commerceRegister?: true
     taxId?: true
+    teamMemberEmails?: true
     showPhone?: true
     showWhatsApp?: true
     whatsappNumber?: true
@@ -4659,14 +5157,22 @@ export namespace Prisma {
     avatar: string | null
     accountTier: $Enums.AccountTier
     status: $Enums.AccountStatus
-    proActivatedAt: Date | null
-    proExpiresAt: Date | null
-    proAutoRenew: boolean
+    subscriptionStartedAt: Date | null
+    subscriptionExpiresAt: Date | null
+    subscriptionAutoRenew: boolean
+    subscriptionCancelledAt: Date | null
+    trialStartedAt: Date | null
+    trialEndsAt: Date | null
+    trialUsed: boolean
+    propertyLimit: number
+    imagesPerPropertyLimit: number
+    videosPerPropertyLimit: number
     companyName: string | null
     companyLogo: string | null
     companyDescription: string | null
     commerceRegister: string | null
     taxId: string | null
+    teamMemberEmails: string[]
     showPhone: boolean
     showWhatsApp: boolean
     whatsappNumber: string | null
@@ -4723,14 +5229,22 @@ export namespace Prisma {
     avatar?: boolean
     accountTier?: boolean
     status?: boolean
-    proActivatedAt?: boolean
-    proExpiresAt?: boolean
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: boolean
+    subscriptionExpiresAt?: boolean
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: boolean
+    trialStartedAt?: boolean
+    trialEndsAt?: boolean
+    trialUsed?: boolean
+    propertyLimit?: boolean
+    imagesPerPropertyLimit?: boolean
+    videosPerPropertyLimit?: boolean
     companyName?: boolean
     companyLogo?: boolean
     companyDescription?: boolean
     commerceRegister?: boolean
     taxId?: boolean
+    teamMemberEmails?: boolean
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: boolean
@@ -4766,10 +5280,14 @@ export namespace Prisma {
     reportsReceived?: boolean | User$reportsReceivedArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     boosts?: boolean | User$boostsArgs<ExtArgs>
+    boostBundles?: boolean | User$boostBundlesArgs<ExtArgs>
+    subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
     propertyViewDetails?: boolean | User$propertyViewDetailsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     locationRequestsSent?: boolean | User$locationRequestsSentArgs<ExtArgs>
     locationRequestsReceived?: boolean | User$locationRequestsReceivedArgs<ExtArgs>
+    upgradeBanners?: boolean | User$upgradeBannersArgs<ExtArgs>
+    emailCampaigns?: boolean | User$emailCampaignsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4787,14 +5305,22 @@ export namespace Prisma {
     avatar?: boolean
     accountTier?: boolean
     status?: boolean
-    proActivatedAt?: boolean
-    proExpiresAt?: boolean
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: boolean
+    subscriptionExpiresAt?: boolean
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: boolean
+    trialStartedAt?: boolean
+    trialEndsAt?: boolean
+    trialUsed?: boolean
+    propertyLimit?: boolean
+    imagesPerPropertyLimit?: boolean
+    videosPerPropertyLimit?: boolean
     companyName?: boolean
     companyLogo?: boolean
     companyDescription?: boolean
     commerceRegister?: boolean
     taxId?: boolean
+    teamMemberEmails?: boolean
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: boolean
@@ -4832,14 +5358,22 @@ export namespace Prisma {
     avatar?: boolean
     accountTier?: boolean
     status?: boolean
-    proActivatedAt?: boolean
-    proExpiresAt?: boolean
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: boolean
+    subscriptionExpiresAt?: boolean
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: boolean
+    trialStartedAt?: boolean
+    trialEndsAt?: boolean
+    trialUsed?: boolean
+    propertyLimit?: boolean
+    imagesPerPropertyLimit?: boolean
+    videosPerPropertyLimit?: boolean
     companyName?: boolean
     companyLogo?: boolean
     companyDescription?: boolean
     commerceRegister?: boolean
     taxId?: boolean
+    teamMemberEmails?: boolean
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: boolean
@@ -4877,14 +5411,22 @@ export namespace Prisma {
     avatar?: boolean
     accountTier?: boolean
     status?: boolean
-    proActivatedAt?: boolean
-    proExpiresAt?: boolean
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: boolean
+    subscriptionExpiresAt?: boolean
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: boolean
+    trialStartedAt?: boolean
+    trialEndsAt?: boolean
+    trialUsed?: boolean
+    propertyLimit?: boolean
+    imagesPerPropertyLimit?: boolean
+    videosPerPropertyLimit?: boolean
     companyName?: boolean
     companyLogo?: boolean
     companyDescription?: boolean
     commerceRegister?: boolean
     taxId?: boolean
+    teamMemberEmails?: boolean
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: boolean
@@ -4908,7 +5450,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "cognitoId" | "email" | "phone" | "emailVerified" | "phoneVerified" | "firstName" | "lastName" | "avatar" | "accountTier" | "status" | "proActivatedAt" | "proExpiresAt" | "proAutoRenew" | "companyName" | "companyLogo" | "companyDescription" | "commerceRegister" | "taxId" | "showPhone" | "showWhatsApp" | "whatsappNumber" | "preferredContact" | "language" | "emailNotifications" | "smsNotifications" | "pushNotifications" | "autoApproveProperties" | "warningCount" | "bannedAt" | "banReason" | "totalProperties" | "activeProperties" | "totalViews" | "totalFavorites" | "averageRating" | "totalReviews" | "lastLoginAt" | "lastActivityAt" | "deletedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "cognitoId" | "email" | "phone" | "emailVerified" | "phoneVerified" | "firstName" | "lastName" | "avatar" | "accountTier" | "status" | "subscriptionStartedAt" | "subscriptionExpiresAt" | "subscriptionAutoRenew" | "subscriptionCancelledAt" | "trialStartedAt" | "trialEndsAt" | "trialUsed" | "propertyLimit" | "imagesPerPropertyLimit" | "videosPerPropertyLimit" | "companyName" | "companyLogo" | "companyDescription" | "commerceRegister" | "taxId" | "teamMemberEmails" | "showPhone" | "showWhatsApp" | "whatsappNumber" | "preferredContact" | "language" | "emailNotifications" | "smsNotifications" | "pushNotifications" | "autoApproveProperties" | "warningCount" | "bannedAt" | "banReason" | "totalProperties" | "activeProperties" | "totalViews" | "totalFavorites" | "averageRating" | "totalReviews" | "lastLoginAt" | "lastActivityAt" | "deletedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     roles?: boolean | User$rolesArgs<ExtArgs>
     properties?: boolean | User$propertiesArgs<ExtArgs>
@@ -4924,10 +5466,14 @@ export namespace Prisma {
     reportsReceived?: boolean | User$reportsReceivedArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     boosts?: boolean | User$boostsArgs<ExtArgs>
+    boostBundles?: boolean | User$boostBundlesArgs<ExtArgs>
+    subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
     propertyViewDetails?: boolean | User$propertyViewDetailsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     locationRequestsSent?: boolean | User$locationRequestsSentArgs<ExtArgs>
     locationRequestsReceived?: boolean | User$locationRequestsReceivedArgs<ExtArgs>
+    upgradeBanners?: boolean | User$upgradeBannersArgs<ExtArgs>
+    emailCampaigns?: boolean | User$emailCampaignsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4950,10 +5496,14 @@ export namespace Prisma {
       reportsReceived: Prisma.$ReportPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
       boosts: Prisma.$PropertyBoostPayload<ExtArgs>[]
+      boostBundles: Prisma.$BoostBundlePayload<ExtArgs>[]
+      subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
       propertyViewDetails: Prisma.$PropertyViewDetailPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       locationRequestsSent: Prisma.$LocationRequestPayload<ExtArgs>[]
       locationRequestsReceived: Prisma.$LocationRequestPayload<ExtArgs>[]
+      upgradeBanners: Prisma.$UpgradeBannerPayload<ExtArgs>[]
+      emailCampaigns: Prisma.$EmailCampaignPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4969,14 +5519,22 @@ export namespace Prisma {
       avatar: string | null
       accountTier: $Enums.AccountTier
       status: $Enums.AccountStatus
-      proActivatedAt: Date | null
-      proExpiresAt: Date | null
-      proAutoRenew: boolean
+      subscriptionStartedAt: Date | null
+      subscriptionExpiresAt: Date | null
+      subscriptionAutoRenew: boolean
+      subscriptionCancelledAt: Date | null
+      trialStartedAt: Date | null
+      trialEndsAt: Date | null
+      trialUsed: boolean
+      propertyLimit: number
+      imagesPerPropertyLimit: number
+      videosPerPropertyLimit: number
       companyName: string | null
       companyLogo: string | null
       companyDescription: string | null
       commerceRegister: string | null
       taxId: string | null
+      teamMemberEmails: string[]
       showPhone: boolean
       showWhatsApp: boolean
       whatsappNumber: string | null
@@ -5406,10 +5964,14 @@ export namespace Prisma {
     reportsReceived<T extends User$reportsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$reportsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     boosts<T extends User$boostsArgs<ExtArgs> = {}>(args?: Subset<T, User$boostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropertyBoostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    boostBundles<T extends User$boostBundlesArgs<ExtArgs> = {}>(args?: Subset<T, User$boostBundlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscriptions<T extends User$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     propertyViewDetails<T extends User$propertyViewDetailsArgs<ExtArgs> = {}>(args?: Subset<T, User$propertyViewDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropertyViewDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     locationRequestsSent<T extends User$locationRequestsSentArgs<ExtArgs> = {}>(args?: Subset<T, User$locationRequestsSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     locationRequestsReceived<T extends User$locationRequestsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$locationRequestsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    upgradeBanners<T extends User$upgradeBannersArgs<ExtArgs> = {}>(args?: Subset<T, User$upgradeBannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailCampaigns<T extends User$emailCampaignsArgs<ExtArgs> = {}>(args?: Subset<T, User$emailCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5452,14 +6014,22 @@ export namespace Prisma {
     readonly avatar: FieldRef<"User", 'String'>
     readonly accountTier: FieldRef<"User", 'AccountTier'>
     readonly status: FieldRef<"User", 'AccountStatus'>
-    readonly proActivatedAt: FieldRef<"User", 'DateTime'>
-    readonly proExpiresAt: FieldRef<"User", 'DateTime'>
-    readonly proAutoRenew: FieldRef<"User", 'Boolean'>
+    readonly subscriptionStartedAt: FieldRef<"User", 'DateTime'>
+    readonly subscriptionExpiresAt: FieldRef<"User", 'DateTime'>
+    readonly subscriptionAutoRenew: FieldRef<"User", 'Boolean'>
+    readonly subscriptionCancelledAt: FieldRef<"User", 'DateTime'>
+    readonly trialStartedAt: FieldRef<"User", 'DateTime'>
+    readonly trialEndsAt: FieldRef<"User", 'DateTime'>
+    readonly trialUsed: FieldRef<"User", 'Boolean'>
+    readonly propertyLimit: FieldRef<"User", 'Int'>
+    readonly imagesPerPropertyLimit: FieldRef<"User", 'Int'>
+    readonly videosPerPropertyLimit: FieldRef<"User", 'Int'>
     readonly companyName: FieldRef<"User", 'String'>
     readonly companyLogo: FieldRef<"User", 'String'>
     readonly companyDescription: FieldRef<"User", 'String'>
     readonly commerceRegister: FieldRef<"User", 'String'>
     readonly taxId: FieldRef<"User", 'String'>
+    readonly teamMemberEmails: FieldRef<"User", 'String[]'>
     readonly showPhone: FieldRef<"User", 'Boolean'>
     readonly showWhatsApp: FieldRef<"User", 'Boolean'>
     readonly whatsappNumber: FieldRef<"User", 'String'>
@@ -6205,6 +6775,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.boostBundles
+   */
+  export type User$boostBundlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    where?: BoostBundleWhereInput
+    orderBy?: BoostBundleOrderByWithRelationInput | BoostBundleOrderByWithRelationInput[]
+    cursor?: BoostBundleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BoostBundleScalarFieldEnum | BoostBundleScalarFieldEnum[]
+  }
+
+  /**
+   * User.subscriptions
+   */
+  export type User$subscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    cursor?: SubscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
    * User.propertyViewDetails
    */
   export type User$propertyViewDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6298,6 +6916,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LocationRequestScalarFieldEnum | LocationRequestScalarFieldEnum[]
+  }
+
+  /**
+   * User.upgradeBanners
+   */
+  export type User$upgradeBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    where?: UpgradeBannerWhereInput
+    orderBy?: UpgradeBannerOrderByWithRelationInput | UpgradeBannerOrderByWithRelationInput[]
+    cursor?: UpgradeBannerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UpgradeBannerScalarFieldEnum | UpgradeBannerScalarFieldEnum[]
+  }
+
+  /**
+   * User.emailCampaigns
+   */
+  export type User$emailCampaignsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    where?: EmailCampaignWhereInput
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    cursor?: EmailCampaignWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
   }
 
   /**
@@ -18485,13 +19151,11 @@ export namespace Prisma {
   }
 
   export type BoostPricingAvgAggregateOutputType = {
-    pricePerWeek: number | null
-    pricePerMonth: number | null
+    visibilityBoostPercentage: number | null
   }
 
   export type BoostPricingSumAggregateOutputType = {
-    pricePerWeek: bigint | null
-    pricePerMonth: bigint | null
+    visibilityBoostPercentage: number | null
   }
 
   export type BoostPricingMinAggregateOutputType = {
@@ -18499,8 +19163,11 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     tier: $Enums.BoostTier | null
-    pricePerWeek: bigint | null
-    pricePerMonth: bigint | null
+    visibilityBoostPercentage: number | null
+    availableForFree: boolean | null
+    availableForStarter: boolean | null
+    availableForPro: boolean | null
+    availableForElite: boolean | null
     validFrom: Date | null
     validUntil: Date | null
     isActive: boolean | null
@@ -18511,8 +19178,11 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     tier: $Enums.BoostTier | null
-    pricePerWeek: bigint | null
-    pricePerMonth: bigint | null
+    visibilityBoostPercentage: number | null
+    availableForFree: boolean | null
+    availableForStarter: boolean | null
+    availableForPro: boolean | null
+    availableForElite: boolean | null
     validFrom: Date | null
     validUntil: Date | null
     isActive: boolean | null
@@ -18523,9 +19193,13 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     tier: number
-    pricePerWeek: number
-    pricePerMonth: number
+    pricing: number
     features: number
+    visibilityBoostPercentage: number
+    availableForFree: number
+    availableForStarter: number
+    availableForPro: number
+    availableForElite: number
     validFrom: number
     validUntil: number
     isActive: number
@@ -18534,13 +19208,11 @@ export namespace Prisma {
 
 
   export type BoostPricingAvgAggregateInputType = {
-    pricePerWeek?: true
-    pricePerMonth?: true
+    visibilityBoostPercentage?: true
   }
 
   export type BoostPricingSumAggregateInputType = {
-    pricePerWeek?: true
-    pricePerMonth?: true
+    visibilityBoostPercentage?: true
   }
 
   export type BoostPricingMinAggregateInputType = {
@@ -18548,8 +19220,11 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     tier?: true
-    pricePerWeek?: true
-    pricePerMonth?: true
+    visibilityBoostPercentage?: true
+    availableForFree?: true
+    availableForStarter?: true
+    availableForPro?: true
+    availableForElite?: true
     validFrom?: true
     validUntil?: true
     isActive?: true
@@ -18560,8 +19235,11 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     tier?: true
-    pricePerWeek?: true
-    pricePerMonth?: true
+    visibilityBoostPercentage?: true
+    availableForFree?: true
+    availableForStarter?: true
+    availableForPro?: true
+    availableForElite?: true
     validFrom?: true
     validUntil?: true
     isActive?: true
@@ -18572,9 +19250,13 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     tier?: true
-    pricePerWeek?: true
-    pricePerMonth?: true
+    pricing?: true
     features?: true
+    visibilityBoostPercentage?: true
+    availableForFree?: true
+    availableForStarter?: true
+    availableForPro?: true
+    availableForElite?: true
     validFrom?: true
     validUntil?: true
     isActive?: true
@@ -18672,9 +19354,13 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     tier: $Enums.BoostTier
-    pricePerWeek: bigint
-    pricePerMonth: bigint | null
+    pricing: JsonValue
     features: JsonValue
+    visibilityBoostPercentage: number
+    availableForFree: boolean
+    availableForStarter: boolean
+    availableForPro: boolean
+    availableForElite: boolean
     validFrom: Date
     validUntil: Date | null
     isActive: boolean
@@ -18704,9 +19390,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     tier?: boolean
-    pricePerWeek?: boolean
-    pricePerMonth?: boolean
+    pricing?: boolean
     features?: boolean
+    visibilityBoostPercentage?: boolean
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: boolean
     validUntil?: boolean
     isActive?: boolean
@@ -18717,9 +19407,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     tier?: boolean
-    pricePerWeek?: boolean
-    pricePerMonth?: boolean
+    pricing?: boolean
     features?: boolean
+    visibilityBoostPercentage?: boolean
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: boolean
     validUntil?: boolean
     isActive?: boolean
@@ -18730,9 +19424,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     tier?: boolean
-    pricePerWeek?: boolean
-    pricePerMonth?: boolean
+    pricing?: boolean
     features?: boolean
+    visibilityBoostPercentage?: boolean
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: boolean
     validUntil?: boolean
     isActive?: boolean
@@ -18743,15 +19441,19 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     tier?: boolean
-    pricePerWeek?: boolean
-    pricePerMonth?: boolean
+    pricing?: boolean
     features?: boolean
+    visibilityBoostPercentage?: boolean
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: boolean
     validUntil?: boolean
     isActive?: boolean
   }
 
-  export type BoostPricingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "tier" | "pricePerWeek" | "pricePerMonth" | "features" | "validFrom" | "validUntil" | "isActive", ExtArgs["result"]["boostPricing"]>
+  export type BoostPricingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "tier" | "pricing" | "features" | "visibilityBoostPercentage" | "availableForFree" | "availableForStarter" | "availableForPro" | "availableForElite" | "validFrom" | "validUntil" | "isActive", ExtArgs["result"]["boostPricing"]>
 
   export type $BoostPricingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BoostPricing"
@@ -18761,9 +19463,13 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       tier: $Enums.BoostTier
-      pricePerWeek: bigint
-      pricePerMonth: bigint | null
+      pricing: Prisma.JsonValue
       features: Prisma.JsonValue
+      visibilityBoostPercentage: number
+      availableForFree: boolean
+      availableForStarter: boolean
+      availableForPro: boolean
+      availableForElite: boolean
       validFrom: Date
       validUntil: Date | null
       isActive: boolean
@@ -19194,9 +19900,13 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"BoostPricing", 'DateTime'>
     readonly updatedAt: FieldRef<"BoostPricing", 'DateTime'>
     readonly tier: FieldRef<"BoostPricing", 'BoostTier'>
-    readonly pricePerWeek: FieldRef<"BoostPricing", 'BigInt'>
-    readonly pricePerMonth: FieldRef<"BoostPricing", 'BigInt'>
+    readonly pricing: FieldRef<"BoostPricing", 'Json'>
     readonly features: FieldRef<"BoostPricing", 'Json'>
+    readonly visibilityBoostPercentage: FieldRef<"BoostPricing", 'Int'>
+    readonly availableForFree: FieldRef<"BoostPricing", 'Boolean'>
+    readonly availableForStarter: FieldRef<"BoostPricing", 'Boolean'>
+    readonly availableForPro: FieldRef<"BoostPricing", 'Boolean'>
+    readonly availableForElite: FieldRef<"BoostPricing", 'Boolean'>
     readonly validFrom: FieldRef<"BoostPricing", 'DateTime'>
     readonly validUntil: FieldRef<"BoostPricing", 'DateTime'>
     readonly isActive: FieldRef<"BoostPricing", 'Boolean'>
@@ -19579,6 +20289,7 @@ export namespace Prisma {
   }
 
   export type PropertyBoostAvgAggregateOutputType = {
+    durationDays: number | null
     amountPaid: number | null
     priceReference: number | null
     upgradeAmountPaid: number | null
@@ -19587,6 +20298,7 @@ export namespace Prisma {
   }
 
   export type PropertyBoostSumAggregateOutputType = {
+    durationDays: number | null
     amountPaid: bigint | null
     priceReference: bigint | null
     upgradeAmountPaid: bigint | null
@@ -19601,6 +20313,9 @@ export namespace Prisma {
     propertyId: string | null
     userId: string | null
     boostTier: $Enums.BoostTier | null
+    durationDays: number | null
+    fromBundle: boolean | null
+    bundleId: string | null
     startDate: Date | null
     endDate: Date | null
     status: $Enums.BoostStatus | null
@@ -19623,6 +20338,9 @@ export namespace Prisma {
     propertyId: string | null
     userId: string | null
     boostTier: $Enums.BoostTier | null
+    durationDays: number | null
+    fromBundle: boolean | null
+    bundleId: string | null
     startDate: Date | null
     endDate: Date | null
     status: $Enums.BoostStatus | null
@@ -19645,6 +20363,9 @@ export namespace Prisma {
     propertyId: number
     userId: number
     boostTier: number
+    durationDays: number
+    fromBundle: number
+    bundleId: number
     startDate: number
     endDate: number
     status: number
@@ -19663,6 +20384,7 @@ export namespace Prisma {
 
 
   export type PropertyBoostAvgAggregateInputType = {
+    durationDays?: true
     amountPaid?: true
     priceReference?: true
     upgradeAmountPaid?: true
@@ -19671,6 +20393,7 @@ export namespace Prisma {
   }
 
   export type PropertyBoostSumAggregateInputType = {
+    durationDays?: true
     amountPaid?: true
     priceReference?: true
     upgradeAmountPaid?: true
@@ -19685,6 +20408,9 @@ export namespace Prisma {
     propertyId?: true
     userId?: true
     boostTier?: true
+    durationDays?: true
+    fromBundle?: true
+    bundleId?: true
     startDate?: true
     endDate?: true
     status?: true
@@ -19707,6 +20433,9 @@ export namespace Prisma {
     propertyId?: true
     userId?: true
     boostTier?: true
+    durationDays?: true
+    fromBundle?: true
+    bundleId?: true
     startDate?: true
     endDate?: true
     status?: true
@@ -19729,6 +20458,9 @@ export namespace Prisma {
     propertyId?: true
     userId?: true
     boostTier?: true
+    durationDays?: true
+    fromBundle?: true
+    bundleId?: true
     startDate?: true
     endDate?: true
     status?: true
@@ -19838,6 +20570,9 @@ export namespace Prisma {
     propertyId: string
     userId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle: boolean
+    bundleId: string | null
     startDate: Date
     endDate: Date
     status: $Enums.BoostStatus
@@ -19879,6 +20614,9 @@ export namespace Prisma {
     propertyId?: boolean
     userId?: boolean
     boostTier?: boolean
+    durationDays?: boolean
+    fromBundle?: boolean
+    bundleId?: boolean
     startDate?: boolean
     endDate?: boolean
     status?: boolean
@@ -19894,6 +20632,7 @@ export namespace Prisma {
     totalClicks?: boolean
     property?: boolean | PropertyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    bundle?: boolean | PropertyBoost$bundleArgs<ExtArgs>
     payment?: boolean | PropertyBoost$paymentArgs<ExtArgs>
   }, ExtArgs["result"]["propertyBoost"]>
 
@@ -19904,6 +20643,9 @@ export namespace Prisma {
     propertyId?: boolean
     userId?: boolean
     boostTier?: boolean
+    durationDays?: boolean
+    fromBundle?: boolean
+    bundleId?: boolean
     startDate?: boolean
     endDate?: boolean
     status?: boolean
@@ -19919,6 +20661,7 @@ export namespace Prisma {
     totalClicks?: boolean
     property?: boolean | PropertyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    bundle?: boolean | PropertyBoost$bundleArgs<ExtArgs>
     payment?: boolean | PropertyBoost$paymentArgs<ExtArgs>
   }, ExtArgs["result"]["propertyBoost"]>
 
@@ -19929,6 +20672,9 @@ export namespace Prisma {
     propertyId?: boolean
     userId?: boolean
     boostTier?: boolean
+    durationDays?: boolean
+    fromBundle?: boolean
+    bundleId?: boolean
     startDate?: boolean
     endDate?: boolean
     status?: boolean
@@ -19944,6 +20690,7 @@ export namespace Prisma {
     totalClicks?: boolean
     property?: boolean | PropertyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    bundle?: boolean | PropertyBoost$bundleArgs<ExtArgs>
     payment?: boolean | PropertyBoost$paymentArgs<ExtArgs>
   }, ExtArgs["result"]["propertyBoost"]>
 
@@ -19954,6 +20701,9 @@ export namespace Prisma {
     propertyId?: boolean
     userId?: boolean
     boostTier?: boolean
+    durationDays?: boolean
+    fromBundle?: boolean
+    bundleId?: boolean
     startDate?: boolean
     endDate?: boolean
     status?: boolean
@@ -19969,20 +20719,23 @@ export namespace Prisma {
     totalClicks?: boolean
   }
 
-  export type PropertyBoostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "propertyId" | "userId" | "boostTier" | "startDate" | "endDate" | "status" | "amountPaid" | "priceReference" | "previousTier" | "isUpgrade" | "upgradeAmountPaid" | "paymentId" | "expirationNotificationSent" | "notificationSentAt" | "totalImpressions" | "totalClicks", ExtArgs["result"]["propertyBoost"]>
+  export type PropertyBoostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "propertyId" | "userId" | "boostTier" | "durationDays" | "fromBundle" | "bundleId" | "startDate" | "endDate" | "status" | "amountPaid" | "priceReference" | "previousTier" | "isUpgrade" | "upgradeAmountPaid" | "paymentId" | "expirationNotificationSent" | "notificationSentAt" | "totalImpressions" | "totalClicks", ExtArgs["result"]["propertyBoost"]>
   export type PropertyBoostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     property?: boolean | PropertyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    bundle?: boolean | PropertyBoost$bundleArgs<ExtArgs>
     payment?: boolean | PropertyBoost$paymentArgs<ExtArgs>
   }
   export type PropertyBoostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     property?: boolean | PropertyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    bundle?: boolean | PropertyBoost$bundleArgs<ExtArgs>
     payment?: boolean | PropertyBoost$paymentArgs<ExtArgs>
   }
   export type PropertyBoostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     property?: boolean | PropertyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    bundle?: boolean | PropertyBoost$bundleArgs<ExtArgs>
     payment?: boolean | PropertyBoost$paymentArgs<ExtArgs>
   }
 
@@ -19991,6 +20744,7 @@ export namespace Prisma {
     objects: {
       property: Prisma.$PropertyPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
+      bundle: Prisma.$BoostBundlePayload<ExtArgs> | null
       payment: Prisma.$PaymentPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -20000,6 +20754,9 @@ export namespace Prisma {
       propertyId: string
       userId: string
       boostTier: $Enums.BoostTier
+      durationDays: number
+      fromBundle: boolean
+      bundleId: string | null
       startDate: Date
       endDate: Date
       status: $Enums.BoostStatus
@@ -20409,6 +21166,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     property<T extends PropertyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PropertyDefaultArgs<ExtArgs>>): Prisma__PropertyClient<$Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bundle<T extends PropertyBoost$bundleArgs<ExtArgs> = {}>(args?: Subset<T, PropertyBoost$bundleArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     payment<T extends PropertyBoost$paymentArgs<ExtArgs> = {}>(args?: Subset<T, PropertyBoost$paymentArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -20445,6 +21203,9 @@ export namespace Prisma {
     readonly propertyId: FieldRef<"PropertyBoost", 'String'>
     readonly userId: FieldRef<"PropertyBoost", 'String'>
     readonly boostTier: FieldRef<"PropertyBoost", 'BoostTier'>
+    readonly durationDays: FieldRef<"PropertyBoost", 'Int'>
+    readonly fromBundle: FieldRef<"PropertyBoost", 'Boolean'>
+    readonly bundleId: FieldRef<"PropertyBoost", 'String'>
     readonly startDate: FieldRef<"PropertyBoost", 'DateTime'>
     readonly endDate: FieldRef<"PropertyBoost", 'DateTime'>
     readonly status: FieldRef<"PropertyBoost", 'BoostStatus'>
@@ -20854,6 +21615,25 @@ export namespace Prisma {
   }
 
   /**
+   * PropertyBoost.bundle
+   */
+  export type PropertyBoost$bundleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    where?: BoostBundleWhereInput
+  }
+
+  /**
    * PropertyBoost.payment
    */
   export type PropertyBoost$paymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20888,6 +21668,1205 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PropertyBoostInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BoostBundle
+   */
+
+  export type AggregateBoostBundle = {
+    _count: BoostBundleCountAggregateOutputType | null
+    _avg: BoostBundleAvgAggregateOutputType | null
+    _sum: BoostBundleSumAggregateOutputType | null
+    _min: BoostBundleMinAggregateOutputType | null
+    _max: BoostBundleMaxAggregateOutputType | null
+  }
+
+  export type BoostBundleAvgAggregateOutputType = {
+    tierLevel: number | null
+    quantity: number | null
+    remaining: number | null
+    pricePaid: number | null
+  }
+
+  export type BoostBundleSumAggregateOutputType = {
+    tierLevel: number | null
+    quantity: number | null
+    remaining: number | null
+    pricePaid: bigint | null
+  }
+
+  export type BoostBundleMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    tierLevel: number | null
+    quantity: number | null
+    remaining: number | null
+    pricePaid: bigint | null
+    purchasedAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type BoostBundleMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    tierLevel: number | null
+    quantity: number | null
+    remaining: number | null
+    pricePaid: bigint | null
+    purchasedAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type BoostBundleCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: number
+    purchasedAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type BoostBundleAvgAggregateInputType = {
+    tierLevel?: true
+    quantity?: true
+    remaining?: true
+    pricePaid?: true
+  }
+
+  export type BoostBundleSumAggregateInputType = {
+    tierLevel?: true
+    quantity?: true
+    remaining?: true
+    pricePaid?: true
+  }
+
+  export type BoostBundleMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    tierLevel?: true
+    quantity?: true
+    remaining?: true
+    pricePaid?: true
+    purchasedAt?: true
+    expiresAt?: true
+  }
+
+  export type BoostBundleMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    tierLevel?: true
+    quantity?: true
+    remaining?: true
+    pricePaid?: true
+    purchasedAt?: true
+    expiresAt?: true
+  }
+
+  export type BoostBundleCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    tierLevel?: true
+    quantity?: true
+    remaining?: true
+    pricePaid?: true
+    purchasedAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type BoostBundleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BoostBundle to aggregate.
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoostBundles to fetch.
+     */
+    orderBy?: BoostBundleOrderByWithRelationInput | BoostBundleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BoostBundleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoostBundles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoostBundles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BoostBundles
+    **/
+    _count?: true | BoostBundleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BoostBundleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BoostBundleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BoostBundleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BoostBundleMaxAggregateInputType
+  }
+
+  export type GetBoostBundleAggregateType<T extends BoostBundleAggregateArgs> = {
+        [P in keyof T & keyof AggregateBoostBundle]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBoostBundle[P]>
+      : GetScalarType<T[P], AggregateBoostBundle[P]>
+  }
+
+
+
+
+  export type BoostBundleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BoostBundleWhereInput
+    orderBy?: BoostBundleOrderByWithAggregationInput | BoostBundleOrderByWithAggregationInput[]
+    by: BoostBundleScalarFieldEnum[] | BoostBundleScalarFieldEnum
+    having?: BoostBundleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BoostBundleCountAggregateInputType | true
+    _avg?: BoostBundleAvgAggregateInputType
+    _sum?: BoostBundleSumAggregateInputType
+    _min?: BoostBundleMinAggregateInputType
+    _max?: BoostBundleMaxAggregateInputType
+  }
+
+  export type BoostBundleGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint
+    purchasedAt: Date
+    expiresAt: Date
+    _count: BoostBundleCountAggregateOutputType | null
+    _avg: BoostBundleAvgAggregateOutputType | null
+    _sum: BoostBundleSumAggregateOutputType | null
+    _min: BoostBundleMinAggregateOutputType | null
+    _max: BoostBundleMaxAggregateOutputType | null
+  }
+
+  type GetBoostBundleGroupByPayload<T extends BoostBundleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BoostBundleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BoostBundleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BoostBundleGroupByOutputType[P]>
+            : GetScalarType<T[P], BoostBundleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BoostBundleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tierLevel?: boolean
+    quantity?: boolean
+    remaining?: boolean
+    pricePaid?: boolean
+    purchasedAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    usedBoosts?: boolean | BoostBundle$usedBoostsArgs<ExtArgs>
+    _count?: boolean | BoostBundleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["boostBundle"]>
+
+  export type BoostBundleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tierLevel?: boolean
+    quantity?: boolean
+    remaining?: boolean
+    pricePaid?: boolean
+    purchasedAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["boostBundle"]>
+
+  export type BoostBundleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tierLevel?: boolean
+    quantity?: boolean
+    remaining?: boolean
+    pricePaid?: boolean
+    purchasedAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["boostBundle"]>
+
+  export type BoostBundleSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tierLevel?: boolean
+    quantity?: boolean
+    remaining?: boolean
+    pricePaid?: boolean
+    purchasedAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type BoostBundleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "tierLevel" | "quantity" | "remaining" | "pricePaid" | "purchasedAt" | "expiresAt", ExtArgs["result"]["boostBundle"]>
+  export type BoostBundleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    usedBoosts?: boolean | BoostBundle$usedBoostsArgs<ExtArgs>
+    _count?: boolean | BoostBundleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BoostBundleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BoostBundleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BoostBundlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BoostBundle"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      usedBoosts: Prisma.$PropertyBoostPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+      tierLevel: number
+      quantity: number
+      remaining: number
+      pricePaid: bigint
+      purchasedAt: Date
+      expiresAt: Date
+    }, ExtArgs["result"]["boostBundle"]>
+    composites: {}
+  }
+
+  type BoostBundleGetPayload<S extends boolean | null | undefined | BoostBundleDefaultArgs> = $Result.GetResult<Prisma.$BoostBundlePayload, S>
+
+  type BoostBundleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BoostBundleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BoostBundleCountAggregateInputType | true
+    }
+
+  export interface BoostBundleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BoostBundle'], meta: { name: 'BoostBundle' } }
+    /**
+     * Find zero or one BoostBundle that matches the filter.
+     * @param {BoostBundleFindUniqueArgs} args - Arguments to find a BoostBundle
+     * @example
+     * // Get one BoostBundle
+     * const boostBundle = await prisma.boostBundle.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BoostBundleFindUniqueArgs>(args: SelectSubset<T, BoostBundleFindUniqueArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BoostBundle that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BoostBundleFindUniqueOrThrowArgs} args - Arguments to find a BoostBundle
+     * @example
+     * // Get one BoostBundle
+     * const boostBundle = await prisma.boostBundle.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BoostBundleFindUniqueOrThrowArgs>(args: SelectSubset<T, BoostBundleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BoostBundle that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleFindFirstArgs} args - Arguments to find a BoostBundle
+     * @example
+     * // Get one BoostBundle
+     * const boostBundle = await prisma.boostBundle.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BoostBundleFindFirstArgs>(args?: SelectSubset<T, BoostBundleFindFirstArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BoostBundle that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleFindFirstOrThrowArgs} args - Arguments to find a BoostBundle
+     * @example
+     * // Get one BoostBundle
+     * const boostBundle = await prisma.boostBundle.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BoostBundleFindFirstOrThrowArgs>(args?: SelectSubset<T, BoostBundleFindFirstOrThrowArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BoostBundles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BoostBundles
+     * const boostBundles = await prisma.boostBundle.findMany()
+     * 
+     * // Get first 10 BoostBundles
+     * const boostBundles = await prisma.boostBundle.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const boostBundleWithIdOnly = await prisma.boostBundle.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BoostBundleFindManyArgs>(args?: SelectSubset<T, BoostBundleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BoostBundle.
+     * @param {BoostBundleCreateArgs} args - Arguments to create a BoostBundle.
+     * @example
+     * // Create one BoostBundle
+     * const BoostBundle = await prisma.boostBundle.create({
+     *   data: {
+     *     // ... data to create a BoostBundle
+     *   }
+     * })
+     * 
+     */
+    create<T extends BoostBundleCreateArgs>(args: SelectSubset<T, BoostBundleCreateArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BoostBundles.
+     * @param {BoostBundleCreateManyArgs} args - Arguments to create many BoostBundles.
+     * @example
+     * // Create many BoostBundles
+     * const boostBundle = await prisma.boostBundle.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BoostBundleCreateManyArgs>(args?: SelectSubset<T, BoostBundleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BoostBundles and returns the data saved in the database.
+     * @param {BoostBundleCreateManyAndReturnArgs} args - Arguments to create many BoostBundles.
+     * @example
+     * // Create many BoostBundles
+     * const boostBundle = await prisma.boostBundle.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BoostBundles and only return the `id`
+     * const boostBundleWithIdOnly = await prisma.boostBundle.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BoostBundleCreateManyAndReturnArgs>(args?: SelectSubset<T, BoostBundleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BoostBundle.
+     * @param {BoostBundleDeleteArgs} args - Arguments to delete one BoostBundle.
+     * @example
+     * // Delete one BoostBundle
+     * const BoostBundle = await prisma.boostBundle.delete({
+     *   where: {
+     *     // ... filter to delete one BoostBundle
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BoostBundleDeleteArgs>(args: SelectSubset<T, BoostBundleDeleteArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BoostBundle.
+     * @param {BoostBundleUpdateArgs} args - Arguments to update one BoostBundle.
+     * @example
+     * // Update one BoostBundle
+     * const boostBundle = await prisma.boostBundle.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BoostBundleUpdateArgs>(args: SelectSubset<T, BoostBundleUpdateArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BoostBundles.
+     * @param {BoostBundleDeleteManyArgs} args - Arguments to filter BoostBundles to delete.
+     * @example
+     * // Delete a few BoostBundles
+     * const { count } = await prisma.boostBundle.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BoostBundleDeleteManyArgs>(args?: SelectSubset<T, BoostBundleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BoostBundles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BoostBundles
+     * const boostBundle = await prisma.boostBundle.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BoostBundleUpdateManyArgs>(args: SelectSubset<T, BoostBundleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BoostBundles and returns the data updated in the database.
+     * @param {BoostBundleUpdateManyAndReturnArgs} args - Arguments to update many BoostBundles.
+     * @example
+     * // Update many BoostBundles
+     * const boostBundle = await prisma.boostBundle.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BoostBundles and only return the `id`
+     * const boostBundleWithIdOnly = await prisma.boostBundle.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BoostBundleUpdateManyAndReturnArgs>(args: SelectSubset<T, BoostBundleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BoostBundle.
+     * @param {BoostBundleUpsertArgs} args - Arguments to update or create a BoostBundle.
+     * @example
+     * // Update or create a BoostBundle
+     * const boostBundle = await prisma.boostBundle.upsert({
+     *   create: {
+     *     // ... data to create a BoostBundle
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BoostBundle we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BoostBundleUpsertArgs>(args: SelectSubset<T, BoostBundleUpsertArgs<ExtArgs>>): Prisma__BoostBundleClient<$Result.GetResult<Prisma.$BoostBundlePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BoostBundles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleCountArgs} args - Arguments to filter BoostBundles to count.
+     * @example
+     * // Count the number of BoostBundles
+     * const count = await prisma.boostBundle.count({
+     *   where: {
+     *     // ... the filter for the BoostBundles we want to count
+     *   }
+     * })
+    **/
+    count<T extends BoostBundleCountArgs>(
+      args?: Subset<T, BoostBundleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BoostBundleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BoostBundle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BoostBundleAggregateArgs>(args: Subset<T, BoostBundleAggregateArgs>): Prisma.PrismaPromise<GetBoostBundleAggregateType<T>>
+
+    /**
+     * Group by BoostBundle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoostBundleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BoostBundleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BoostBundleGroupByArgs['orderBy'] }
+        : { orderBy?: BoostBundleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BoostBundleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBoostBundleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BoostBundle model
+   */
+  readonly fields: BoostBundleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BoostBundle.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BoostBundleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    usedBoosts<T extends BoostBundle$usedBoostsArgs<ExtArgs> = {}>(args?: Subset<T, BoostBundle$usedBoostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropertyBoostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BoostBundle model
+   */
+  interface BoostBundleFieldRefs {
+    readonly id: FieldRef<"BoostBundle", 'String'>
+    readonly createdAt: FieldRef<"BoostBundle", 'DateTime'>
+    readonly updatedAt: FieldRef<"BoostBundle", 'DateTime'>
+    readonly userId: FieldRef<"BoostBundle", 'String'>
+    readonly tierLevel: FieldRef<"BoostBundle", 'Int'>
+    readonly quantity: FieldRef<"BoostBundle", 'Int'>
+    readonly remaining: FieldRef<"BoostBundle", 'Int'>
+    readonly pricePaid: FieldRef<"BoostBundle", 'BigInt'>
+    readonly purchasedAt: FieldRef<"BoostBundle", 'DateTime'>
+    readonly expiresAt: FieldRef<"BoostBundle", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BoostBundle findUnique
+   */
+  export type BoostBundleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * Filter, which BoostBundle to fetch.
+     */
+    where: BoostBundleWhereUniqueInput
+  }
+
+  /**
+   * BoostBundle findUniqueOrThrow
+   */
+  export type BoostBundleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * Filter, which BoostBundle to fetch.
+     */
+    where: BoostBundleWhereUniqueInput
+  }
+
+  /**
+   * BoostBundle findFirst
+   */
+  export type BoostBundleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * Filter, which BoostBundle to fetch.
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoostBundles to fetch.
+     */
+    orderBy?: BoostBundleOrderByWithRelationInput | BoostBundleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BoostBundles.
+     */
+    cursor?: BoostBundleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoostBundles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoostBundles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BoostBundles.
+     */
+    distinct?: BoostBundleScalarFieldEnum | BoostBundleScalarFieldEnum[]
+  }
+
+  /**
+   * BoostBundle findFirstOrThrow
+   */
+  export type BoostBundleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * Filter, which BoostBundle to fetch.
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoostBundles to fetch.
+     */
+    orderBy?: BoostBundleOrderByWithRelationInput | BoostBundleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BoostBundles.
+     */
+    cursor?: BoostBundleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoostBundles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoostBundles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BoostBundles.
+     */
+    distinct?: BoostBundleScalarFieldEnum | BoostBundleScalarFieldEnum[]
+  }
+
+  /**
+   * BoostBundle findMany
+   */
+  export type BoostBundleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * Filter, which BoostBundles to fetch.
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoostBundles to fetch.
+     */
+    orderBy?: BoostBundleOrderByWithRelationInput | BoostBundleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BoostBundles.
+     */
+    cursor?: BoostBundleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoostBundles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoostBundles.
+     */
+    skip?: number
+    distinct?: BoostBundleScalarFieldEnum | BoostBundleScalarFieldEnum[]
+  }
+
+  /**
+   * BoostBundle create
+   */
+  export type BoostBundleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BoostBundle.
+     */
+    data: XOR<BoostBundleCreateInput, BoostBundleUncheckedCreateInput>
+  }
+
+  /**
+   * BoostBundle createMany
+   */
+  export type BoostBundleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BoostBundles.
+     */
+    data: BoostBundleCreateManyInput | BoostBundleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BoostBundle createManyAndReturn
+   */
+  export type BoostBundleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * The data used to create many BoostBundles.
+     */
+    data: BoostBundleCreateManyInput | BoostBundleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BoostBundle update
+   */
+  export type BoostBundleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BoostBundle.
+     */
+    data: XOR<BoostBundleUpdateInput, BoostBundleUncheckedUpdateInput>
+    /**
+     * Choose, which BoostBundle to update.
+     */
+    where: BoostBundleWhereUniqueInput
+  }
+
+  /**
+   * BoostBundle updateMany
+   */
+  export type BoostBundleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BoostBundles.
+     */
+    data: XOR<BoostBundleUpdateManyMutationInput, BoostBundleUncheckedUpdateManyInput>
+    /**
+     * Filter which BoostBundles to update
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * Limit how many BoostBundles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BoostBundle updateManyAndReturn
+   */
+  export type BoostBundleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * The data used to update BoostBundles.
+     */
+    data: XOR<BoostBundleUpdateManyMutationInput, BoostBundleUncheckedUpdateManyInput>
+    /**
+     * Filter which BoostBundles to update
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * Limit how many BoostBundles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BoostBundle upsert
+   */
+  export type BoostBundleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BoostBundle to update in case it exists.
+     */
+    where: BoostBundleWhereUniqueInput
+    /**
+     * In case the BoostBundle found by the `where` argument doesn't exist, create a new BoostBundle with this data.
+     */
+    create: XOR<BoostBundleCreateInput, BoostBundleUncheckedCreateInput>
+    /**
+     * In case the BoostBundle was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BoostBundleUpdateInput, BoostBundleUncheckedUpdateInput>
+  }
+
+  /**
+   * BoostBundle delete
+   */
+  export type BoostBundleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
+    /**
+     * Filter which BoostBundle to delete.
+     */
+    where: BoostBundleWhereUniqueInput
+  }
+
+  /**
+   * BoostBundle deleteMany
+   */
+  export type BoostBundleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BoostBundles to delete
+     */
+    where?: BoostBundleWhereInput
+    /**
+     * Limit how many BoostBundles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BoostBundle.usedBoosts
+   */
+  export type BoostBundle$usedBoostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PropertyBoost
+     */
+    select?: PropertyBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PropertyBoost
+     */
+    omit?: PropertyBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PropertyBoostInclude<ExtArgs> | null
+    where?: PropertyBoostWhereInput
+    orderBy?: PropertyBoostOrderByWithRelationInput | PropertyBoostOrderByWithRelationInput[]
+    cursor?: PropertyBoostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PropertyBoostScalarFieldEnum | PropertyBoostScalarFieldEnum[]
+  }
+
+  /**
+   * BoostBundle without action
+   */
+  export type BoostBundleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoostBundle
+     */
+    select?: BoostBundleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoostBundle
+     */
+    omit?: BoostBundleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoostBundleInclude<ExtArgs> | null
   }
 
 
@@ -23548,18 +25527,19 @@ export namespace Prisma {
       name: string
       filters: Prisma.JsonValue
       /**
-       * Structure:
-       *   {
-       *     "wilayaId": "...",
-       *     "communeId": "...",
-       *     "propertyType": ["APARTMENT_F3", "APARTMENT_F4"],
-       *     "transactionType": "SALE",
-       *     "minPrice": 5000000,
-       *     "maxPrice": 10000000,
-       *     "minSurface": 80,
-       *     "amenities": ["pool", "garden"],
-       *     ...
-       *   }
+       * *
+       *    * Structure:
+       *    * {
+       *    * "wilayaId": "...",
+       *    * "communeId": "...",
+       *    * "propertyType": ["APARTMENT_F3", "APARTMENT_F4"],
+       *    * "transactionType": "SALE",
+       *    * "minPrice": 5000000,
+       *    * "maxPrice": 10000000,
+       *    * "minSurface": 80,
+       *    * "amenities": ["pool", "garden"],
+       *    * ...
+       *    * }
        */
       notifyByEmail: boolean
       notifyInApp: boolean
@@ -30956,6 +32936,7 @@ export namespace Prisma {
     userAgent?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     boosts?: boolean | Payment$boostsArgs<ExtArgs>
+    subscriptions?: boolean | Payment$subscriptionsArgs<ExtArgs>
     _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
@@ -31064,6 +33045,7 @@ export namespace Prisma {
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     boosts?: boolean | Payment$boostsArgs<ExtArgs>
+    subscriptions?: boolean | Payment$subscriptionsArgs<ExtArgs>
     _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -31078,6 +33060,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       boosts: Prisma.$PropertyBoostPayload<ExtArgs>[]
+      subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -31506,6 +33489,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     boosts<T extends Payment$boostsArgs<ExtArgs> = {}>(args?: Subset<T, Payment$boostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropertyBoostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscriptions<T extends Payment$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Payment$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -31985,6 +33969,30 @@ export namespace Prisma {
   }
 
   /**
+   * Payment.subscriptions
+   */
+  export type Payment$subscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    cursor?: SubscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
    * Payment without action
    */
   export type PaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -32000,6 +34008,1268 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Subscription
+   */
+
+  export type AggregateSubscription = {
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  export type SubscriptionAvgAggregateOutputType = {
+    amountPaid: number | null
+  }
+
+  export type SubscriptionSumAggregateOutputType = {
+    amountPaid: bigint | null
+  }
+
+  export type SubscriptionMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    tier: $Enums.AccountTier | null
+    startDate: Date | null
+    endDate: Date | null
+    isActive: boolean | null
+    autoRenew: boolean | null
+    amountPaid: bigint | null
+    currency: string | null
+    billingCycle: string | null
+    paymentId: string | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
+    expiryWarningSenitAt: boolean | null
+  }
+
+  export type SubscriptionMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    tier: $Enums.AccountTier | null
+    startDate: Date | null
+    endDate: Date | null
+    isActive: boolean | null
+    autoRenew: boolean | null
+    amountPaid: bigint | null
+    currency: string | null
+    billingCycle: string | null
+    paymentId: string | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
+    expiryWarningSenitAt: boolean | null
+  }
+
+  export type SubscriptionCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    tier: number
+    startDate: number
+    endDate: number
+    isActive: number
+    autoRenew: number
+    amountPaid: number
+    currency: number
+    billingCycle: number
+    paymentId: number
+    cancelledAt: number
+    cancellationReason: number
+    expiryWarningSenitAt: number
+    _all: number
+  }
+
+
+  export type SubscriptionAvgAggregateInputType = {
+    amountPaid?: true
+  }
+
+  export type SubscriptionSumAggregateInputType = {
+    amountPaid?: true
+  }
+
+  export type SubscriptionMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    tier?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    autoRenew?: true
+    amountPaid?: true
+    currency?: true
+    billingCycle?: true
+    paymentId?: true
+    cancelledAt?: true
+    cancellationReason?: true
+    expiryWarningSenitAt?: true
+  }
+
+  export type SubscriptionMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    tier?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    autoRenew?: true
+    amountPaid?: true
+    currency?: true
+    billingCycle?: true
+    paymentId?: true
+    cancelledAt?: true
+    cancellationReason?: true
+    expiryWarningSenitAt?: true
+  }
+
+  export type SubscriptionCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    tier?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    autoRenew?: true
+    amountPaid?: true
+    currency?: true
+    billingCycle?: true
+    paymentId?: true
+    cancelledAt?: true
+    cancellationReason?: true
+    expiryWarningSenitAt?: true
+    _all?: true
+  }
+
+  export type SubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Subscription to aggregate.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Subscriptions
+    **/
+    _count?: true | SubscriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SubscriptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SubscriptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubscriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type GetSubscriptionAggregateType<T extends SubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubscription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubscription[P]>
+      : GetScalarType<T[P], AggregateSubscription[P]>
+  }
+
+
+
+
+  export type SubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithAggregationInput | SubscriptionOrderByWithAggregationInput[]
+    by: SubscriptionScalarFieldEnum[] | SubscriptionScalarFieldEnum
+    having?: SubscriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubscriptionCountAggregateInputType | true
+    _avg?: SubscriptionAvgAggregateInputType
+    _sum?: SubscriptionSumAggregateInputType
+    _min?: SubscriptionMinAggregateInputType
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type SubscriptionGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    tier: $Enums.AccountTier
+    startDate: Date
+    endDate: Date
+    isActive: boolean
+    autoRenew: boolean
+    amountPaid: bigint
+    currency: string
+    billingCycle: string
+    paymentId: string | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
+    expiryWarningSenitAt: boolean
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  type GetSubscriptionGroupByPayload<T extends SubscriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubscriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubscriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tier?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid?: boolean
+    currency?: boolean
+    billingCycle?: boolean
+    paymentId?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    expiryWarningSenitAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Subscription$paymentArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tier?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid?: boolean
+    currency?: boolean
+    billingCycle?: boolean
+    paymentId?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    expiryWarningSenitAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Subscription$paymentArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tier?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid?: boolean
+    currency?: boolean
+    billingCycle?: boolean
+    paymentId?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    expiryWarningSenitAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Subscription$paymentArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    tier?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid?: boolean
+    currency?: boolean
+    billingCycle?: boolean
+    paymentId?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    expiryWarningSenitAt?: boolean
+  }
+
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "tier" | "startDate" | "endDate" | "isActive" | "autoRenew" | "amountPaid" | "currency" | "billingCycle" | "paymentId" | "cancelledAt" | "cancellationReason" | "expiryWarningSenitAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Subscription$paymentArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Subscription$paymentArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Subscription$paymentArgs<ExtArgs>
+  }
+
+  export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Subscription"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      payment: Prisma.$PaymentPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+      tier: $Enums.AccountTier
+      startDate: Date
+      endDate: Date
+      isActive: boolean
+      autoRenew: boolean
+      amountPaid: bigint
+      currency: string
+      billingCycle: string
+      paymentId: string | null
+      cancelledAt: Date | null
+      cancellationReason: string | null
+      expiryWarningSenitAt: boolean
+    }, ExtArgs["result"]["subscription"]>
+    composites: {}
+  }
+
+  type SubscriptionGetPayload<S extends boolean | null | undefined | SubscriptionDefaultArgs> = $Result.GetResult<Prisma.$SubscriptionPayload, S>
+
+  type SubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubscriptionCountAggregateInputType | true
+    }
+
+  export interface SubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Subscription'], meta: { name: 'Subscription' } }
+    /**
+     * Find zero or one Subscription that matches the filter.
+     * @param {SubscriptionFindUniqueArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SubscriptionFindUniqueArgs>(args: SelectSubset<T, SubscriptionFindUniqueArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Subscription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SubscriptionFindUniqueOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, SubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindFirstArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SubscriptionFindFirstArgs>(args?: SelectSubset<T, SubscriptionFindFirstArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindFirstOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, SubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Subscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Subscriptions
+     * const subscriptions = await prisma.subscription.findMany()
+     * 
+     * // Get first 10 Subscriptions
+     * const subscriptions = await prisma.subscription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SubscriptionFindManyArgs>(args?: SelectSubset<T, SubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Subscription.
+     * @param {SubscriptionCreateArgs} args - Arguments to create a Subscription.
+     * @example
+     * // Create one Subscription
+     * const Subscription = await prisma.subscription.create({
+     *   data: {
+     *     // ... data to create a Subscription
+     *   }
+     * })
+     * 
+     */
+    create<T extends SubscriptionCreateArgs>(args: SelectSubset<T, SubscriptionCreateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Subscriptions.
+     * @param {SubscriptionCreateManyArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SubscriptionCreateManyArgs>(args?: SelectSubset<T, SubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Subscriptions and returns the data saved in the database.
+     * @param {SubscriptionCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, SubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Subscription.
+     * @param {SubscriptionDeleteArgs} args - Arguments to delete one Subscription.
+     * @example
+     * // Delete one Subscription
+     * const Subscription = await prisma.subscription.delete({
+     *   where: {
+     *     // ... filter to delete one Subscription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SubscriptionDeleteArgs>(args: SelectSubset<T, SubscriptionDeleteArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Subscription.
+     * @param {SubscriptionUpdateArgs} args - Arguments to update one Subscription.
+     * @example
+     * // Update one Subscription
+     * const subscription = await prisma.subscription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SubscriptionUpdateArgs>(args: SelectSubset<T, SubscriptionUpdateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Subscriptions.
+     * @param {SubscriptionDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
+     * @example
+     * // Delete a few Subscriptions
+     * const { count } = await prisma.subscription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SubscriptionDeleteManyArgs>(args?: SelectSubset<T, SubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SubscriptionUpdateManyArgs>(args: SelectSubset<T, SubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions and returns the data updated in the database.
+     * @param {SubscriptionUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, SubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Subscription.
+     * @param {SubscriptionUpsertArgs} args - Arguments to update or create a Subscription.
+     * @example
+     * // Update or create a Subscription
+     * const subscription = await prisma.subscription.upsert({
+     *   create: {
+     *     // ... data to create a Subscription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Subscription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SubscriptionUpsertArgs>(args: SelectSubset<T, SubscriptionUpsertArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionCountArgs} args - Arguments to filter Subscriptions to count.
+     * @example
+     * // Count the number of Subscriptions
+     * const count = await prisma.subscription.count({
+     *   where: {
+     *     // ... the filter for the Subscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubscriptionCountArgs>(
+      args?: Subset<T, SubscriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubscriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubscriptionAggregateArgs>(args: Subset<T, SubscriptionAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionAggregateType<T>>
+
+    /**
+     * Group by Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubscriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: SubscriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Subscription model
+   */
+  readonly fields: SubscriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Subscription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    payment<T extends Subscription$paymentArgs<ExtArgs> = {}>(args?: Subset<T, Subscription$paymentArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Subscription model
+   */
+  interface SubscriptionFieldRefs {
+    readonly id: FieldRef<"Subscription", 'String'>
+    readonly createdAt: FieldRef<"Subscription", 'DateTime'>
+    readonly updatedAt: FieldRef<"Subscription", 'DateTime'>
+    readonly userId: FieldRef<"Subscription", 'String'>
+    readonly tier: FieldRef<"Subscription", 'AccountTier'>
+    readonly startDate: FieldRef<"Subscription", 'DateTime'>
+    readonly endDate: FieldRef<"Subscription", 'DateTime'>
+    readonly isActive: FieldRef<"Subscription", 'Boolean'>
+    readonly autoRenew: FieldRef<"Subscription", 'Boolean'>
+    readonly amountPaid: FieldRef<"Subscription", 'BigInt'>
+    readonly currency: FieldRef<"Subscription", 'String'>
+    readonly billingCycle: FieldRef<"Subscription", 'String'>
+    readonly paymentId: FieldRef<"Subscription", 'String'>
+    readonly cancelledAt: FieldRef<"Subscription", 'DateTime'>
+    readonly cancellationReason: FieldRef<"Subscription", 'String'>
+    readonly expiryWarningSenitAt: FieldRef<"Subscription", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Subscription findUnique
+   */
+  export type SubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription findUniqueOrThrow
+   */
+  export type SubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription findFirst
+   */
+  export type SubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription findFirstOrThrow
+   */
+  export type SubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription findMany
+   */
+  export type SubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscriptions to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription create
+   */
+  export type SubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Subscription.
+     */
+    data: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
+  }
+
+  /**
+   * Subscription createMany
+   */
+  export type SubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Subscriptions.
+     */
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Subscription createManyAndReturn
+   */
+  export type SubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Subscriptions.
+     */
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Subscription update
+   */
+  export type SubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Subscription.
+     */
+    data: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
+    /**
+     * Choose, which Subscription to update.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription updateMany
+   */
+  export type SubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Subscriptions.
+     */
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Subscriptions to update
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Subscription updateManyAndReturn
+   */
+  export type SubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update Subscriptions.
+     */
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Subscriptions to update
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Subscription upsert
+   */
+  export type SubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Subscription to update in case it exists.
+     */
+    where: SubscriptionWhereUniqueInput
+    /**
+     * In case the Subscription found by the `where` argument doesn't exist, create a new Subscription with this data.
+     */
+    create: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
+    /**
+     * In case the Subscription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * Subscription delete
+   */
+  export type SubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter which Subscription to delete.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription deleteMany
+   */
+  export type SubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Subscriptions to delete
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Subscription.payment
+   */
+  export type Subscription$paymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+  }
+
+  /**
+   * Subscription without action
+   */
+  export type SubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
   }
 
 
@@ -37978,6 +41248,2273 @@ export namespace Prisma {
 
 
   /**
+   * Model UpgradeBanner
+   */
+
+  export type AggregateUpgradeBanner = {
+    _count: UpgradeBannerCountAggregateOutputType | null
+    _avg: UpgradeBannerAvgAggregateOutputType | null
+    _sum: UpgradeBannerSumAggregateOutputType | null
+    _min: UpgradeBannerMinAggregateOutputType | null
+    _max: UpgradeBannerMaxAggregateOutputType | null
+  }
+
+  export type UpgradeBannerAvgAggregateOutputType = {
+    impressions: number | null
+  }
+
+  export type UpgradeBannerSumAggregateOutputType = {
+    impressions: number | null
+  }
+
+  export type UpgradeBannerMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    bannerType: string | null
+    dismissedAt: Date | null
+    impressions: number | null
+    clicked: boolean | null
+    expiresAt: Date | null
+  }
+
+  export type UpgradeBannerMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    bannerType: string | null
+    dismissedAt: Date | null
+    impressions: number | null
+    clicked: boolean | null
+    expiresAt: Date | null
+  }
+
+  export type UpgradeBannerCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    bannerType: number
+    dismissedAt: number
+    impressions: number
+    clicked: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type UpgradeBannerAvgAggregateInputType = {
+    impressions?: true
+  }
+
+  export type UpgradeBannerSumAggregateInputType = {
+    impressions?: true
+  }
+
+  export type UpgradeBannerMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    bannerType?: true
+    dismissedAt?: true
+    impressions?: true
+    clicked?: true
+    expiresAt?: true
+  }
+
+  export type UpgradeBannerMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    bannerType?: true
+    dismissedAt?: true
+    impressions?: true
+    clicked?: true
+    expiresAt?: true
+  }
+
+  export type UpgradeBannerCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    bannerType?: true
+    dismissedAt?: true
+    impressions?: true
+    clicked?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type UpgradeBannerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UpgradeBanner to aggregate.
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UpgradeBanners to fetch.
+     */
+    orderBy?: UpgradeBannerOrderByWithRelationInput | UpgradeBannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UpgradeBannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UpgradeBanners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UpgradeBanners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UpgradeBanners
+    **/
+    _count?: true | UpgradeBannerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UpgradeBannerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UpgradeBannerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UpgradeBannerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UpgradeBannerMaxAggregateInputType
+  }
+
+  export type GetUpgradeBannerAggregateType<T extends UpgradeBannerAggregateArgs> = {
+        [P in keyof T & keyof AggregateUpgradeBanner]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUpgradeBanner[P]>
+      : GetScalarType<T[P], AggregateUpgradeBanner[P]>
+  }
+
+
+
+
+  export type UpgradeBannerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UpgradeBannerWhereInput
+    orderBy?: UpgradeBannerOrderByWithAggregationInput | UpgradeBannerOrderByWithAggregationInput[]
+    by: UpgradeBannerScalarFieldEnum[] | UpgradeBannerScalarFieldEnum
+    having?: UpgradeBannerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UpgradeBannerCountAggregateInputType | true
+    _avg?: UpgradeBannerAvgAggregateInputType
+    _sum?: UpgradeBannerSumAggregateInputType
+    _min?: UpgradeBannerMinAggregateInputType
+    _max?: UpgradeBannerMaxAggregateInputType
+  }
+
+  export type UpgradeBannerGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    bannerType: string
+    dismissedAt: Date | null
+    impressions: number
+    clicked: boolean
+    expiresAt: Date
+    _count: UpgradeBannerCountAggregateOutputType | null
+    _avg: UpgradeBannerAvgAggregateOutputType | null
+    _sum: UpgradeBannerSumAggregateOutputType | null
+    _min: UpgradeBannerMinAggregateOutputType | null
+    _max: UpgradeBannerMaxAggregateOutputType | null
+  }
+
+  type GetUpgradeBannerGroupByPayload<T extends UpgradeBannerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UpgradeBannerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UpgradeBannerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UpgradeBannerGroupByOutputType[P]>
+            : GetScalarType<T[P], UpgradeBannerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UpgradeBannerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    bannerType?: boolean
+    dismissedAt?: boolean
+    impressions?: boolean
+    clicked?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["upgradeBanner"]>
+
+  export type UpgradeBannerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    bannerType?: boolean
+    dismissedAt?: boolean
+    impressions?: boolean
+    clicked?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["upgradeBanner"]>
+
+  export type UpgradeBannerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    bannerType?: boolean
+    dismissedAt?: boolean
+    impressions?: boolean
+    clicked?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["upgradeBanner"]>
+
+  export type UpgradeBannerSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    bannerType?: boolean
+    dismissedAt?: boolean
+    impressions?: boolean
+    clicked?: boolean
+    expiresAt?: boolean
+  }
+
+  export type UpgradeBannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "bannerType" | "dismissedAt" | "impressions" | "clicked" | "expiresAt", ExtArgs["result"]["upgradeBanner"]>
+  export type UpgradeBannerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UpgradeBannerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UpgradeBannerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UpgradeBannerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UpgradeBanner"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+      bannerType: string
+      dismissedAt: Date | null
+      impressions: number
+      clicked: boolean
+      expiresAt: Date
+    }, ExtArgs["result"]["upgradeBanner"]>
+    composites: {}
+  }
+
+  type UpgradeBannerGetPayload<S extends boolean | null | undefined | UpgradeBannerDefaultArgs> = $Result.GetResult<Prisma.$UpgradeBannerPayload, S>
+
+  type UpgradeBannerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UpgradeBannerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UpgradeBannerCountAggregateInputType | true
+    }
+
+  export interface UpgradeBannerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UpgradeBanner'], meta: { name: 'UpgradeBanner' } }
+    /**
+     * Find zero or one UpgradeBanner that matches the filter.
+     * @param {UpgradeBannerFindUniqueArgs} args - Arguments to find a UpgradeBanner
+     * @example
+     * // Get one UpgradeBanner
+     * const upgradeBanner = await prisma.upgradeBanner.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UpgradeBannerFindUniqueArgs>(args: SelectSubset<T, UpgradeBannerFindUniqueArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UpgradeBanner that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UpgradeBannerFindUniqueOrThrowArgs} args - Arguments to find a UpgradeBanner
+     * @example
+     * // Get one UpgradeBanner
+     * const upgradeBanner = await prisma.upgradeBanner.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UpgradeBannerFindUniqueOrThrowArgs>(args: SelectSubset<T, UpgradeBannerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UpgradeBanner that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerFindFirstArgs} args - Arguments to find a UpgradeBanner
+     * @example
+     * // Get one UpgradeBanner
+     * const upgradeBanner = await prisma.upgradeBanner.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UpgradeBannerFindFirstArgs>(args?: SelectSubset<T, UpgradeBannerFindFirstArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UpgradeBanner that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerFindFirstOrThrowArgs} args - Arguments to find a UpgradeBanner
+     * @example
+     * // Get one UpgradeBanner
+     * const upgradeBanner = await prisma.upgradeBanner.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UpgradeBannerFindFirstOrThrowArgs>(args?: SelectSubset<T, UpgradeBannerFindFirstOrThrowArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UpgradeBanners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UpgradeBanners
+     * const upgradeBanners = await prisma.upgradeBanner.findMany()
+     * 
+     * // Get first 10 UpgradeBanners
+     * const upgradeBanners = await prisma.upgradeBanner.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const upgradeBannerWithIdOnly = await prisma.upgradeBanner.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UpgradeBannerFindManyArgs>(args?: SelectSubset<T, UpgradeBannerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UpgradeBanner.
+     * @param {UpgradeBannerCreateArgs} args - Arguments to create a UpgradeBanner.
+     * @example
+     * // Create one UpgradeBanner
+     * const UpgradeBanner = await prisma.upgradeBanner.create({
+     *   data: {
+     *     // ... data to create a UpgradeBanner
+     *   }
+     * })
+     * 
+     */
+    create<T extends UpgradeBannerCreateArgs>(args: SelectSubset<T, UpgradeBannerCreateArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UpgradeBanners.
+     * @param {UpgradeBannerCreateManyArgs} args - Arguments to create many UpgradeBanners.
+     * @example
+     * // Create many UpgradeBanners
+     * const upgradeBanner = await prisma.upgradeBanner.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UpgradeBannerCreateManyArgs>(args?: SelectSubset<T, UpgradeBannerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UpgradeBanners and returns the data saved in the database.
+     * @param {UpgradeBannerCreateManyAndReturnArgs} args - Arguments to create many UpgradeBanners.
+     * @example
+     * // Create many UpgradeBanners
+     * const upgradeBanner = await prisma.upgradeBanner.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UpgradeBanners and only return the `id`
+     * const upgradeBannerWithIdOnly = await prisma.upgradeBanner.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UpgradeBannerCreateManyAndReturnArgs>(args?: SelectSubset<T, UpgradeBannerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UpgradeBanner.
+     * @param {UpgradeBannerDeleteArgs} args - Arguments to delete one UpgradeBanner.
+     * @example
+     * // Delete one UpgradeBanner
+     * const UpgradeBanner = await prisma.upgradeBanner.delete({
+     *   where: {
+     *     // ... filter to delete one UpgradeBanner
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UpgradeBannerDeleteArgs>(args: SelectSubset<T, UpgradeBannerDeleteArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UpgradeBanner.
+     * @param {UpgradeBannerUpdateArgs} args - Arguments to update one UpgradeBanner.
+     * @example
+     * // Update one UpgradeBanner
+     * const upgradeBanner = await prisma.upgradeBanner.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UpgradeBannerUpdateArgs>(args: SelectSubset<T, UpgradeBannerUpdateArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UpgradeBanners.
+     * @param {UpgradeBannerDeleteManyArgs} args - Arguments to filter UpgradeBanners to delete.
+     * @example
+     * // Delete a few UpgradeBanners
+     * const { count } = await prisma.upgradeBanner.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UpgradeBannerDeleteManyArgs>(args?: SelectSubset<T, UpgradeBannerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UpgradeBanners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UpgradeBanners
+     * const upgradeBanner = await prisma.upgradeBanner.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UpgradeBannerUpdateManyArgs>(args: SelectSubset<T, UpgradeBannerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UpgradeBanners and returns the data updated in the database.
+     * @param {UpgradeBannerUpdateManyAndReturnArgs} args - Arguments to update many UpgradeBanners.
+     * @example
+     * // Update many UpgradeBanners
+     * const upgradeBanner = await prisma.upgradeBanner.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UpgradeBanners and only return the `id`
+     * const upgradeBannerWithIdOnly = await prisma.upgradeBanner.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UpgradeBannerUpdateManyAndReturnArgs>(args: SelectSubset<T, UpgradeBannerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UpgradeBanner.
+     * @param {UpgradeBannerUpsertArgs} args - Arguments to update or create a UpgradeBanner.
+     * @example
+     * // Update or create a UpgradeBanner
+     * const upgradeBanner = await prisma.upgradeBanner.upsert({
+     *   create: {
+     *     // ... data to create a UpgradeBanner
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UpgradeBanner we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UpgradeBannerUpsertArgs>(args: SelectSubset<T, UpgradeBannerUpsertArgs<ExtArgs>>): Prisma__UpgradeBannerClient<$Result.GetResult<Prisma.$UpgradeBannerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UpgradeBanners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerCountArgs} args - Arguments to filter UpgradeBanners to count.
+     * @example
+     * // Count the number of UpgradeBanners
+     * const count = await prisma.upgradeBanner.count({
+     *   where: {
+     *     // ... the filter for the UpgradeBanners we want to count
+     *   }
+     * })
+    **/
+    count<T extends UpgradeBannerCountArgs>(
+      args?: Subset<T, UpgradeBannerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UpgradeBannerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UpgradeBanner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UpgradeBannerAggregateArgs>(args: Subset<T, UpgradeBannerAggregateArgs>): Prisma.PrismaPromise<GetUpgradeBannerAggregateType<T>>
+
+    /**
+     * Group by UpgradeBanner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UpgradeBannerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UpgradeBannerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UpgradeBannerGroupByArgs['orderBy'] }
+        : { orderBy?: UpgradeBannerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UpgradeBannerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUpgradeBannerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UpgradeBanner model
+   */
+  readonly fields: UpgradeBannerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UpgradeBanner.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UpgradeBannerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UpgradeBanner model
+   */
+  interface UpgradeBannerFieldRefs {
+    readonly id: FieldRef<"UpgradeBanner", 'String'>
+    readonly createdAt: FieldRef<"UpgradeBanner", 'DateTime'>
+    readonly updatedAt: FieldRef<"UpgradeBanner", 'DateTime'>
+    readonly userId: FieldRef<"UpgradeBanner", 'String'>
+    readonly bannerType: FieldRef<"UpgradeBanner", 'String'>
+    readonly dismissedAt: FieldRef<"UpgradeBanner", 'DateTime'>
+    readonly impressions: FieldRef<"UpgradeBanner", 'Int'>
+    readonly clicked: FieldRef<"UpgradeBanner", 'Boolean'>
+    readonly expiresAt: FieldRef<"UpgradeBanner", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UpgradeBanner findUnique
+   */
+  export type UpgradeBannerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * Filter, which UpgradeBanner to fetch.
+     */
+    where: UpgradeBannerWhereUniqueInput
+  }
+
+  /**
+   * UpgradeBanner findUniqueOrThrow
+   */
+  export type UpgradeBannerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * Filter, which UpgradeBanner to fetch.
+     */
+    where: UpgradeBannerWhereUniqueInput
+  }
+
+  /**
+   * UpgradeBanner findFirst
+   */
+  export type UpgradeBannerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * Filter, which UpgradeBanner to fetch.
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UpgradeBanners to fetch.
+     */
+    orderBy?: UpgradeBannerOrderByWithRelationInput | UpgradeBannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UpgradeBanners.
+     */
+    cursor?: UpgradeBannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UpgradeBanners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UpgradeBanners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UpgradeBanners.
+     */
+    distinct?: UpgradeBannerScalarFieldEnum | UpgradeBannerScalarFieldEnum[]
+  }
+
+  /**
+   * UpgradeBanner findFirstOrThrow
+   */
+  export type UpgradeBannerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * Filter, which UpgradeBanner to fetch.
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UpgradeBanners to fetch.
+     */
+    orderBy?: UpgradeBannerOrderByWithRelationInput | UpgradeBannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UpgradeBanners.
+     */
+    cursor?: UpgradeBannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UpgradeBanners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UpgradeBanners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UpgradeBanners.
+     */
+    distinct?: UpgradeBannerScalarFieldEnum | UpgradeBannerScalarFieldEnum[]
+  }
+
+  /**
+   * UpgradeBanner findMany
+   */
+  export type UpgradeBannerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * Filter, which UpgradeBanners to fetch.
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UpgradeBanners to fetch.
+     */
+    orderBy?: UpgradeBannerOrderByWithRelationInput | UpgradeBannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UpgradeBanners.
+     */
+    cursor?: UpgradeBannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UpgradeBanners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UpgradeBanners.
+     */
+    skip?: number
+    distinct?: UpgradeBannerScalarFieldEnum | UpgradeBannerScalarFieldEnum[]
+  }
+
+  /**
+   * UpgradeBanner create
+   */
+  export type UpgradeBannerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UpgradeBanner.
+     */
+    data: XOR<UpgradeBannerCreateInput, UpgradeBannerUncheckedCreateInput>
+  }
+
+  /**
+   * UpgradeBanner createMany
+   */
+  export type UpgradeBannerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UpgradeBanners.
+     */
+    data: UpgradeBannerCreateManyInput | UpgradeBannerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UpgradeBanner createManyAndReturn
+   */
+  export type UpgradeBannerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * The data used to create many UpgradeBanners.
+     */
+    data: UpgradeBannerCreateManyInput | UpgradeBannerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UpgradeBanner update
+   */
+  export type UpgradeBannerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UpgradeBanner.
+     */
+    data: XOR<UpgradeBannerUpdateInput, UpgradeBannerUncheckedUpdateInput>
+    /**
+     * Choose, which UpgradeBanner to update.
+     */
+    where: UpgradeBannerWhereUniqueInput
+  }
+
+  /**
+   * UpgradeBanner updateMany
+   */
+  export type UpgradeBannerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UpgradeBanners.
+     */
+    data: XOR<UpgradeBannerUpdateManyMutationInput, UpgradeBannerUncheckedUpdateManyInput>
+    /**
+     * Filter which UpgradeBanners to update
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * Limit how many UpgradeBanners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UpgradeBanner updateManyAndReturn
+   */
+  export type UpgradeBannerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * The data used to update UpgradeBanners.
+     */
+    data: XOR<UpgradeBannerUpdateManyMutationInput, UpgradeBannerUncheckedUpdateManyInput>
+    /**
+     * Filter which UpgradeBanners to update
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * Limit how many UpgradeBanners to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UpgradeBanner upsert
+   */
+  export type UpgradeBannerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UpgradeBanner to update in case it exists.
+     */
+    where: UpgradeBannerWhereUniqueInput
+    /**
+     * In case the UpgradeBanner found by the `where` argument doesn't exist, create a new UpgradeBanner with this data.
+     */
+    create: XOR<UpgradeBannerCreateInput, UpgradeBannerUncheckedCreateInput>
+    /**
+     * In case the UpgradeBanner was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UpgradeBannerUpdateInput, UpgradeBannerUncheckedUpdateInput>
+  }
+
+  /**
+   * UpgradeBanner delete
+   */
+  export type UpgradeBannerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+    /**
+     * Filter which UpgradeBanner to delete.
+     */
+    where: UpgradeBannerWhereUniqueInput
+  }
+
+  /**
+   * UpgradeBanner deleteMany
+   */
+  export type UpgradeBannerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UpgradeBanners to delete
+     */
+    where?: UpgradeBannerWhereInput
+    /**
+     * Limit how many UpgradeBanners to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UpgradeBanner without action
+   */
+  export type UpgradeBannerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpgradeBanner
+     */
+    select?: UpgradeBannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpgradeBanner
+     */
+    omit?: UpgradeBannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpgradeBannerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailCampaign
+   */
+
+  export type AggregateEmailCampaign = {
+    _count: EmailCampaignCountAggregateOutputType | null
+    _min: EmailCampaignMinAggregateOutputType | null
+    _max: EmailCampaignMaxAggregateOutputType | null
+  }
+
+  export type EmailCampaignMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    campaignType: string | null
+    sentAt: Date | null
+    opened: boolean | null
+    openedAt: Date | null
+    clicked: boolean | null
+    clickedAt: Date | null
+  }
+
+  export type EmailCampaignMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+    campaignType: string | null
+    sentAt: Date | null
+    opened: boolean | null
+    openedAt: Date | null
+    clicked: boolean | null
+    clickedAt: Date | null
+  }
+
+  export type EmailCampaignCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    campaignType: number
+    sentAt: number
+    opened: number
+    openedAt: number
+    clicked: number
+    clickedAt: number
+    _all: number
+  }
+
+
+  export type EmailCampaignMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    campaignType?: true
+    sentAt?: true
+    opened?: true
+    openedAt?: true
+    clicked?: true
+    clickedAt?: true
+  }
+
+  export type EmailCampaignMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    campaignType?: true
+    sentAt?: true
+    opened?: true
+    openedAt?: true
+    clicked?: true
+    clickedAt?: true
+  }
+
+  export type EmailCampaignCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    campaignType?: true
+    sentAt?: true
+    opened?: true
+    openedAt?: true
+    clicked?: true
+    clickedAt?: true
+    _all?: true
+  }
+
+  export type EmailCampaignAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaign to aggregate.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailCampaigns
+    **/
+    _count?: true | EmailCampaignCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailCampaignMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailCampaignMaxAggregateInputType
+  }
+
+  export type GetEmailCampaignAggregateType<T extends EmailCampaignAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailCampaign]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailCampaign[P]>
+      : GetScalarType<T[P], AggregateEmailCampaign[P]>
+  }
+
+
+
+
+  export type EmailCampaignGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignWhereInput
+    orderBy?: EmailCampaignOrderByWithAggregationInput | EmailCampaignOrderByWithAggregationInput[]
+    by: EmailCampaignScalarFieldEnum[] | EmailCampaignScalarFieldEnum
+    having?: EmailCampaignScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailCampaignCountAggregateInputType | true
+    _min?: EmailCampaignMinAggregateInputType
+    _max?: EmailCampaignMaxAggregateInputType
+  }
+
+  export type EmailCampaignGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    campaignType: string
+    sentAt: Date
+    opened: boolean
+    openedAt: Date | null
+    clicked: boolean
+    clickedAt: Date | null
+    _count: EmailCampaignCountAggregateOutputType | null
+    _min: EmailCampaignMinAggregateOutputType | null
+    _max: EmailCampaignMaxAggregateOutputType | null
+  }
+
+  type GetEmailCampaignGroupByPayload<T extends EmailCampaignGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailCampaignGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailCampaignGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    campaignType?: boolean
+    sentAt?: boolean
+    opened?: boolean
+    openedAt?: boolean
+    clicked?: boolean
+    clickedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    campaignType?: boolean
+    sentAt?: boolean
+    opened?: boolean
+    openedAt?: boolean
+    clicked?: boolean
+    clickedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    campaignType?: boolean
+    sentAt?: boolean
+    opened?: boolean
+    openedAt?: boolean
+    clicked?: boolean
+    clickedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    campaignType?: boolean
+    sentAt?: boolean
+    opened?: boolean
+    openedAt?: boolean
+    clicked?: boolean
+    clickedAt?: boolean
+  }
+
+  export type EmailCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "campaignType" | "sentAt" | "opened" | "openedAt" | "clicked" | "clickedAt", ExtArgs["result"]["emailCampaign"]>
+  export type EmailCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailCampaignPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailCampaign"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+      campaignType: string
+      sentAt: Date
+      opened: boolean
+      openedAt: Date | null
+      clicked: boolean
+      clickedAt: Date | null
+    }, ExtArgs["result"]["emailCampaign"]>
+    composites: {}
+  }
+
+  type EmailCampaignGetPayload<S extends boolean | null | undefined | EmailCampaignDefaultArgs> = $Result.GetResult<Prisma.$EmailCampaignPayload, S>
+
+  type EmailCampaignCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailCampaignFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailCampaignCountAggregateInputType | true
+    }
+
+  export interface EmailCampaignDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailCampaign'], meta: { name: 'EmailCampaign' } }
+    /**
+     * Find zero or one EmailCampaign that matches the filter.
+     * @param {EmailCampaignFindUniqueArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailCampaignFindUniqueArgs>(args: SelectSubset<T, EmailCampaignFindUniqueArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailCampaign that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailCampaignFindUniqueOrThrowArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailCampaignFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailCampaignFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaign that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindFirstArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailCampaignFindFirstArgs>(args?: SelectSubset<T, EmailCampaignFindFirstArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaign that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindFirstOrThrowArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailCampaignFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailCampaignFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailCampaigns that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailCampaigns
+     * const emailCampaigns = await prisma.emailCampaign.findMany()
+     * 
+     * // Get first 10 EmailCampaigns
+     * const emailCampaigns = await prisma.emailCampaign.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailCampaignFindManyArgs>(args?: SelectSubset<T, EmailCampaignFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailCampaign.
+     * @param {EmailCampaignCreateArgs} args - Arguments to create a EmailCampaign.
+     * @example
+     * // Create one EmailCampaign
+     * const EmailCampaign = await prisma.emailCampaign.create({
+     *   data: {
+     *     // ... data to create a EmailCampaign
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailCampaignCreateArgs>(args: SelectSubset<T, EmailCampaignCreateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailCampaigns.
+     * @param {EmailCampaignCreateManyArgs} args - Arguments to create many EmailCampaigns.
+     * @example
+     * // Create many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailCampaignCreateManyArgs>(args?: SelectSubset<T, EmailCampaignCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailCampaigns and returns the data saved in the database.
+     * @param {EmailCampaignCreateManyAndReturnArgs} args - Arguments to create many EmailCampaigns.
+     * @example
+     * // Create many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailCampaigns and only return the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailCampaignCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailCampaignCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailCampaign.
+     * @param {EmailCampaignDeleteArgs} args - Arguments to delete one EmailCampaign.
+     * @example
+     * // Delete one EmailCampaign
+     * const EmailCampaign = await prisma.emailCampaign.delete({
+     *   where: {
+     *     // ... filter to delete one EmailCampaign
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailCampaignDeleteArgs>(args: SelectSubset<T, EmailCampaignDeleteArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailCampaign.
+     * @param {EmailCampaignUpdateArgs} args - Arguments to update one EmailCampaign.
+     * @example
+     * // Update one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailCampaignUpdateArgs>(args: SelectSubset<T, EmailCampaignUpdateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailCampaigns.
+     * @param {EmailCampaignDeleteManyArgs} args - Arguments to filter EmailCampaigns to delete.
+     * @example
+     * // Delete a few EmailCampaigns
+     * const { count } = await prisma.emailCampaign.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailCampaignDeleteManyArgs>(args?: SelectSubset<T, EmailCampaignDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailCampaignUpdateManyArgs>(args: SelectSubset<T, EmailCampaignUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaigns and returns the data updated in the database.
+     * @param {EmailCampaignUpdateManyAndReturnArgs} args - Arguments to update many EmailCampaigns.
+     * @example
+     * // Update many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailCampaigns and only return the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailCampaignUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailCampaignUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailCampaign.
+     * @param {EmailCampaignUpsertArgs} args - Arguments to update or create a EmailCampaign.
+     * @example
+     * // Update or create a EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.upsert({
+     *   create: {
+     *     // ... data to create a EmailCampaign
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailCampaign we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailCampaignUpsertArgs>(args: SelectSubset<T, EmailCampaignUpsertArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailCampaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignCountArgs} args - Arguments to filter EmailCampaigns to count.
+     * @example
+     * // Count the number of EmailCampaigns
+     * const count = await prisma.emailCampaign.count({
+     *   where: {
+     *     // ... the filter for the EmailCampaigns we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailCampaignCountArgs>(
+      args?: Subset<T, EmailCampaignCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailCampaignCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailCampaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailCampaignAggregateArgs>(args: Subset<T, EmailCampaignAggregateArgs>): Prisma.PrismaPromise<GetEmailCampaignAggregateType<T>>
+
+    /**
+     * Group by EmailCampaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailCampaignGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailCampaignGroupByArgs['orderBy'] }
+        : { orderBy?: EmailCampaignGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailCampaignGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailCampaignGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailCampaign model
+   */
+  readonly fields: EmailCampaignFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailCampaign.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailCampaign model
+   */
+  interface EmailCampaignFieldRefs {
+    readonly id: FieldRef<"EmailCampaign", 'String'>
+    readonly createdAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly userId: FieldRef<"EmailCampaign", 'String'>
+    readonly campaignType: FieldRef<"EmailCampaign", 'String'>
+    readonly sentAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly opened: FieldRef<"EmailCampaign", 'Boolean'>
+    readonly openedAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly clicked: FieldRef<"EmailCampaign", 'Boolean'>
+    readonly clickedAt: FieldRef<"EmailCampaign", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailCampaign findUnique
+   */
+  export type EmailCampaignFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign findUniqueOrThrow
+   */
+  export type EmailCampaignFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign findFirst
+   */
+  export type EmailCampaignFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaigns.
+     */
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign findFirstOrThrow
+   */
+  export type EmailCampaignFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaigns.
+     */
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign findMany
+   */
+  export type EmailCampaignFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaigns to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign create
+   */
+  export type EmailCampaignCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailCampaign.
+     */
+    data: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
+  }
+
+  /**
+   * EmailCampaign createMany
+   */
+  export type EmailCampaignCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailCampaigns.
+     */
+    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailCampaign createManyAndReturn
+   */
+  export type EmailCampaignCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailCampaigns.
+     */
+    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaign update
+   */
+  export type EmailCampaignUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailCampaign.
+     */
+    data: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
+    /**
+     * Choose, which EmailCampaign to update.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign updateMany
+   */
+  export type EmailCampaignUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailCampaigns.
+     */
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaigns to update
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaign updateManyAndReturn
+   */
+  export type EmailCampaignUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailCampaigns.
+     */
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaigns to update
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaign upsert
+   */
+  export type EmailCampaignUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailCampaign to update in case it exists.
+     */
+    where: EmailCampaignWhereUniqueInput
+    /**
+     * In case the EmailCampaign found by the `where` argument doesn't exist, create a new EmailCampaign with this data.
+     */
+    create: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
+    /**
+     * In case the EmailCampaign was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailCampaign delete
+   */
+  export type EmailCampaignDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter which EmailCampaign to delete.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign deleteMany
+   */
+  export type EmailCampaignDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaigns to delete
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaign without action
+   */
+  export type EmailCampaignDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Commune
    */
 
@@ -39200,14 +44737,22 @@ export namespace Prisma {
     avatar: 'avatar',
     accountTier: 'accountTier',
     status: 'status',
-    proActivatedAt: 'proActivatedAt',
-    proExpiresAt: 'proExpiresAt',
-    proAutoRenew: 'proAutoRenew',
+    subscriptionStartedAt: 'subscriptionStartedAt',
+    subscriptionExpiresAt: 'subscriptionExpiresAt',
+    subscriptionAutoRenew: 'subscriptionAutoRenew',
+    subscriptionCancelledAt: 'subscriptionCancelledAt',
+    trialStartedAt: 'trialStartedAt',
+    trialEndsAt: 'trialEndsAt',
+    trialUsed: 'trialUsed',
+    propertyLimit: 'propertyLimit',
+    imagesPerPropertyLimit: 'imagesPerPropertyLimit',
+    videosPerPropertyLimit: 'videosPerPropertyLimit',
     companyName: 'companyName',
     companyLogo: 'companyLogo',
     companyDescription: 'companyDescription',
     commerceRegister: 'commerceRegister',
     taxId: 'taxId',
+    teamMemberEmails: 'teamMemberEmails',
     showPhone: 'showPhone',
     showWhatsApp: 'showWhatsApp',
     whatsappNumber: 'whatsappNumber',
@@ -39414,9 +44959,13 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     tier: 'tier',
-    pricePerWeek: 'pricePerWeek',
-    pricePerMonth: 'pricePerMonth',
+    pricing: 'pricing',
     features: 'features',
+    visibilityBoostPercentage: 'visibilityBoostPercentage',
+    availableForFree: 'availableForFree',
+    availableForStarter: 'availableForStarter',
+    availableForPro: 'availableForPro',
+    availableForElite: 'availableForElite',
     validFrom: 'validFrom',
     validUntil: 'validUntil',
     isActive: 'isActive'
@@ -39432,6 +44981,9 @@ export namespace Prisma {
     propertyId: 'propertyId',
     userId: 'userId',
     boostTier: 'boostTier',
+    durationDays: 'durationDays',
+    fromBundle: 'fromBundle',
+    bundleId: 'bundleId',
     startDate: 'startDate',
     endDate: 'endDate',
     status: 'status',
@@ -39448,6 +45000,22 @@ export namespace Prisma {
   };
 
   export type PropertyBoostScalarFieldEnum = (typeof PropertyBoostScalarFieldEnum)[keyof typeof PropertyBoostScalarFieldEnum]
+
+
+  export const BoostBundleScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId',
+    tierLevel: 'tierLevel',
+    quantity: 'quantity',
+    remaining: 'remaining',
+    pricePaid: 'pricePaid',
+    purchasedAt: 'purchasedAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type BoostBundleScalarFieldEnum = (typeof BoostBundleScalarFieldEnum)[keyof typeof BoostBundleScalarFieldEnum]
 
 
   export const LocationRequestScalarFieldEnum: {
@@ -39636,6 +45204,28 @@ export namespace Prisma {
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
+  export const SubscriptionScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId',
+    tier: 'tier',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    isActive: 'isActive',
+    autoRenew: 'autoRenew',
+    amountPaid: 'amountPaid',
+    currency: 'currency',
+    billingCycle: 'billingCycle',
+    paymentId: 'paymentId',
+    cancelledAt: 'cancelledAt',
+    cancellationReason: 'cancellationReason',
+    expiryWarningSenitAt: 'expiryWarningSenitAt'
+  };
+
+  export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
   export const NotificationScalarFieldEnum: {
     id: 'id',
     createdAt: 'createdAt',
@@ -39729,6 +45319,37 @@ export namespace Prisma {
   };
 
   export type WilayaScalarFieldEnum = (typeof WilayaScalarFieldEnum)[keyof typeof WilayaScalarFieldEnum]
+
+
+  export const UpgradeBannerScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId',
+    bannerType: 'bannerType',
+    dismissedAt: 'dismissedAt',
+    impressions: 'impressions',
+    clicked: 'clicked',
+    expiresAt: 'expiresAt'
+  };
+
+  export type UpgradeBannerScalarFieldEnum = (typeof UpgradeBannerScalarFieldEnum)[keyof typeof UpgradeBannerScalarFieldEnum]
+
+
+  export const EmailCampaignScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId',
+    campaignType: 'campaignType',
+    sentAt: 'sentAt',
+    opened: 'opened',
+    openedAt: 'openedAt',
+    clicked: 'clicked',
+    clickedAt: 'clickedAt'
+  };
+
+  export type EmailCampaignScalarFieldEnum = (typeof EmailCampaignScalarFieldEnum)[keyof typeof EmailCampaignScalarFieldEnum]
 
 
   export const CommuneScalarFieldEnum: {
@@ -39864,20 +45485,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ContactPreference'
-   */
-  export type EnumContactPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactPreference'>
-    
-
-
-  /**
-   * Reference to a field of type 'ContactPreference[]'
-   */
-  export type ListEnumContactPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactPreference[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -39888,6 +45495,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContactPreference'
+   */
+  export type EnumContactPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactPreference'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContactPreference[]'
+   */
+  export type ListEnumContactPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactPreference[]'>
     
 
 
@@ -40191,14 +45812,22 @@ export namespace Prisma {
     avatar?: StringNullableFilter<"User"> | string | null
     accountTier?: EnumAccountTierFilter<"User"> | $Enums.AccountTier
     status?: EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
-    proActivatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    proExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    proAutoRenew?: BoolFilter<"User"> | boolean
+    subscriptionStartedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    subscriptionExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    subscriptionAutoRenew?: BoolFilter<"User"> | boolean
+    subscriptionCancelledAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    trialStartedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    trialEndsAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    trialUsed?: BoolFilter<"User"> | boolean
+    propertyLimit?: IntFilter<"User"> | number
+    imagesPerPropertyLimit?: IntFilter<"User"> | number
+    videosPerPropertyLimit?: IntFilter<"User"> | number
     companyName?: StringNullableFilter<"User"> | string | null
     companyLogo?: StringNullableFilter<"User"> | string | null
     companyDescription?: StringNullableFilter<"User"> | string | null
     commerceRegister?: StringNullableFilter<"User"> | string | null
     taxId?: StringNullableFilter<"User"> | string | null
+    teamMemberEmails?: StringNullableListFilter<"User">
     showPhone?: BoolFilter<"User"> | boolean
     showWhatsApp?: BoolFilter<"User"> | boolean
     whatsappNumber?: StringNullableFilter<"User"> | string | null
@@ -40234,10 +45863,14 @@ export namespace Prisma {
     reportsReceived?: ReportListRelationFilter
     payments?: PaymentListRelationFilter
     boosts?: PropertyBoostListRelationFilter
+    boostBundles?: BoostBundleListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
     propertyViewDetails?: PropertyViewDetailListRelationFilter
     notifications?: NotificationListRelationFilter
     locationRequestsSent?: LocationRequestListRelationFilter
     locationRequestsReceived?: LocationRequestListRelationFilter
+    upgradeBanners?: UpgradeBannerListRelationFilter
+    emailCampaigns?: EmailCampaignListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -40254,14 +45887,22 @@ export namespace Prisma {
     avatar?: SortOrderInput | SortOrder
     accountTier?: SortOrder
     status?: SortOrder
-    proActivatedAt?: SortOrderInput | SortOrder
-    proExpiresAt?: SortOrderInput | SortOrder
-    proAutoRenew?: SortOrder
+    subscriptionStartedAt?: SortOrderInput | SortOrder
+    subscriptionExpiresAt?: SortOrderInput | SortOrder
+    subscriptionAutoRenew?: SortOrder
+    subscriptionCancelledAt?: SortOrderInput | SortOrder
+    trialStartedAt?: SortOrderInput | SortOrder
+    trialEndsAt?: SortOrderInput | SortOrder
+    trialUsed?: SortOrder
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     companyName?: SortOrderInput | SortOrder
     companyLogo?: SortOrderInput | SortOrder
     companyDescription?: SortOrderInput | SortOrder
     commerceRegister?: SortOrderInput | SortOrder
     taxId?: SortOrderInput | SortOrder
+    teamMemberEmails?: SortOrder
     showPhone?: SortOrder
     showWhatsApp?: SortOrder
     whatsappNumber?: SortOrderInput | SortOrder
@@ -40297,10 +45938,14 @@ export namespace Prisma {
     reportsReceived?: ReportOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
     boosts?: PropertyBoostOrderByRelationAggregateInput
+    boostBundles?: BoostBundleOrderByRelationAggregateInput
+    subscriptions?: SubscriptionOrderByRelationAggregateInput
     propertyViewDetails?: PropertyViewDetailOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     locationRequestsSent?: LocationRequestOrderByRelationAggregateInput
     locationRequestsReceived?: LocationRequestOrderByRelationAggregateInput
+    upgradeBanners?: UpgradeBannerOrderByRelationAggregateInput
+    emailCampaigns?: EmailCampaignOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -40320,14 +45965,22 @@ export namespace Prisma {
     avatar?: StringNullableFilter<"User"> | string | null
     accountTier?: EnumAccountTierFilter<"User"> | $Enums.AccountTier
     status?: EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
-    proActivatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    proExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    proAutoRenew?: BoolFilter<"User"> | boolean
+    subscriptionStartedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    subscriptionExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    subscriptionAutoRenew?: BoolFilter<"User"> | boolean
+    subscriptionCancelledAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    trialStartedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    trialEndsAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    trialUsed?: BoolFilter<"User"> | boolean
+    propertyLimit?: IntFilter<"User"> | number
+    imagesPerPropertyLimit?: IntFilter<"User"> | number
+    videosPerPropertyLimit?: IntFilter<"User"> | number
     companyName?: StringNullableFilter<"User"> | string | null
     companyLogo?: StringNullableFilter<"User"> | string | null
     companyDescription?: StringNullableFilter<"User"> | string | null
     commerceRegister?: StringNullableFilter<"User"> | string | null
     taxId?: StringNullableFilter<"User"> | string | null
+    teamMemberEmails?: StringNullableListFilter<"User">
     showPhone?: BoolFilter<"User"> | boolean
     showWhatsApp?: BoolFilter<"User"> | boolean
     whatsappNumber?: StringNullableFilter<"User"> | string | null
@@ -40363,10 +46016,14 @@ export namespace Prisma {
     reportsReceived?: ReportListRelationFilter
     payments?: PaymentListRelationFilter
     boosts?: PropertyBoostListRelationFilter
+    boostBundles?: BoostBundleListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
     propertyViewDetails?: PropertyViewDetailListRelationFilter
     notifications?: NotificationListRelationFilter
     locationRequestsSent?: LocationRequestListRelationFilter
     locationRequestsReceived?: LocationRequestListRelationFilter
+    upgradeBanners?: UpgradeBannerListRelationFilter
+    emailCampaigns?: EmailCampaignListRelationFilter
   }, "id" | "cognitoId" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -40383,14 +46040,22 @@ export namespace Prisma {
     avatar?: SortOrderInput | SortOrder
     accountTier?: SortOrder
     status?: SortOrder
-    proActivatedAt?: SortOrderInput | SortOrder
-    proExpiresAt?: SortOrderInput | SortOrder
-    proAutoRenew?: SortOrder
+    subscriptionStartedAt?: SortOrderInput | SortOrder
+    subscriptionExpiresAt?: SortOrderInput | SortOrder
+    subscriptionAutoRenew?: SortOrder
+    subscriptionCancelledAt?: SortOrderInput | SortOrder
+    trialStartedAt?: SortOrderInput | SortOrder
+    trialEndsAt?: SortOrderInput | SortOrder
+    trialUsed?: SortOrder
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     companyName?: SortOrderInput | SortOrder
     companyLogo?: SortOrderInput | SortOrder
     companyDescription?: SortOrderInput | SortOrder
     commerceRegister?: SortOrderInput | SortOrder
     taxId?: SortOrderInput | SortOrder
+    teamMemberEmails?: SortOrder
     showPhone?: SortOrder
     showWhatsApp?: SortOrder
     whatsappNumber?: SortOrderInput | SortOrder
@@ -40436,14 +46101,22 @@ export namespace Prisma {
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     accountTier?: EnumAccountTierWithAggregatesFilter<"User"> | $Enums.AccountTier
     status?: EnumAccountStatusWithAggregatesFilter<"User"> | $Enums.AccountStatus
-    proActivatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    proExpiresAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    proAutoRenew?: BoolWithAggregatesFilter<"User"> | boolean
+    subscriptionStartedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    subscriptionExpiresAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    subscriptionAutoRenew?: BoolWithAggregatesFilter<"User"> | boolean
+    subscriptionCancelledAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    trialStartedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    trialEndsAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    trialUsed?: BoolWithAggregatesFilter<"User"> | boolean
+    propertyLimit?: IntWithAggregatesFilter<"User"> | number
+    imagesPerPropertyLimit?: IntWithAggregatesFilter<"User"> | number
+    videosPerPropertyLimit?: IntWithAggregatesFilter<"User"> | number
     companyName?: StringNullableWithAggregatesFilter<"User"> | string | null
     companyLogo?: StringNullableWithAggregatesFilter<"User"> | string | null
     companyDescription?: StringNullableWithAggregatesFilter<"User"> | string | null
     commerceRegister?: StringNullableWithAggregatesFilter<"User"> | string | null
     taxId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    teamMemberEmails?: StringNullableListFilter<"User">
     showPhone?: BoolWithAggregatesFilter<"User"> | boolean
     showWhatsApp?: BoolWithAggregatesFilter<"User"> | boolean
     whatsappNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -41418,9 +47091,13 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"BoostPricing"> | Date | string
     updatedAt?: DateTimeFilter<"BoostPricing"> | Date | string
     tier?: EnumBoostTierFilter<"BoostPricing"> | $Enums.BoostTier
-    pricePerWeek?: BigIntFilter<"BoostPricing"> | bigint | number
-    pricePerMonth?: BigIntNullableFilter<"BoostPricing"> | bigint | number | null
+    pricing?: JsonFilter<"BoostPricing">
     features?: JsonFilter<"BoostPricing">
+    visibilityBoostPercentage?: IntFilter<"BoostPricing"> | number
+    availableForFree?: BoolFilter<"BoostPricing"> | boolean
+    availableForStarter?: BoolFilter<"BoostPricing"> | boolean
+    availableForPro?: BoolFilter<"BoostPricing"> | boolean
+    availableForElite?: BoolFilter<"BoostPricing"> | boolean
     validFrom?: DateTimeFilter<"BoostPricing"> | Date | string
     validUntil?: DateTimeNullableFilter<"BoostPricing"> | Date | string | null
     isActive?: BoolFilter<"BoostPricing"> | boolean
@@ -41431,9 +47108,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tier?: SortOrder
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrderInput | SortOrder
+    pricing?: SortOrder
     features?: SortOrder
+    visibilityBoostPercentage?: SortOrder
+    availableForFree?: SortOrder
+    availableForStarter?: SortOrder
+    availableForPro?: SortOrder
+    availableForElite?: SortOrder
     validFrom?: SortOrder
     validUntil?: SortOrderInput | SortOrder
     isActive?: SortOrder
@@ -41447,9 +47128,13 @@ export namespace Prisma {
     NOT?: BoostPricingWhereInput | BoostPricingWhereInput[]
     createdAt?: DateTimeFilter<"BoostPricing"> | Date | string
     updatedAt?: DateTimeFilter<"BoostPricing"> | Date | string
-    pricePerWeek?: BigIntFilter<"BoostPricing"> | bigint | number
-    pricePerMonth?: BigIntNullableFilter<"BoostPricing"> | bigint | number | null
+    pricing?: JsonFilter<"BoostPricing">
     features?: JsonFilter<"BoostPricing">
+    visibilityBoostPercentage?: IntFilter<"BoostPricing"> | number
+    availableForFree?: BoolFilter<"BoostPricing"> | boolean
+    availableForStarter?: BoolFilter<"BoostPricing"> | boolean
+    availableForPro?: BoolFilter<"BoostPricing"> | boolean
+    availableForElite?: BoolFilter<"BoostPricing"> | boolean
     validFrom?: DateTimeFilter<"BoostPricing"> | Date | string
     validUntil?: DateTimeNullableFilter<"BoostPricing"> | Date | string | null
     isActive?: BoolFilter<"BoostPricing"> | boolean
@@ -41460,9 +47145,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tier?: SortOrder
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrderInput | SortOrder
+    pricing?: SortOrder
     features?: SortOrder
+    visibilityBoostPercentage?: SortOrder
+    availableForFree?: SortOrder
+    availableForStarter?: SortOrder
+    availableForPro?: SortOrder
+    availableForElite?: SortOrder
     validFrom?: SortOrder
     validUntil?: SortOrderInput | SortOrder
     isActive?: SortOrder
@@ -41481,9 +47170,13 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"BoostPricing"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BoostPricing"> | Date | string
     tier?: EnumBoostTierWithAggregatesFilter<"BoostPricing"> | $Enums.BoostTier
-    pricePerWeek?: BigIntWithAggregatesFilter<"BoostPricing"> | bigint | number
-    pricePerMonth?: BigIntNullableWithAggregatesFilter<"BoostPricing"> | bigint | number | null
+    pricing?: JsonWithAggregatesFilter<"BoostPricing">
     features?: JsonWithAggregatesFilter<"BoostPricing">
+    visibilityBoostPercentage?: IntWithAggregatesFilter<"BoostPricing"> | number
+    availableForFree?: BoolWithAggregatesFilter<"BoostPricing"> | boolean
+    availableForStarter?: BoolWithAggregatesFilter<"BoostPricing"> | boolean
+    availableForPro?: BoolWithAggregatesFilter<"BoostPricing"> | boolean
+    availableForElite?: BoolWithAggregatesFilter<"BoostPricing"> | boolean
     validFrom?: DateTimeWithAggregatesFilter<"BoostPricing"> | Date | string
     validUntil?: DateTimeNullableWithAggregatesFilter<"BoostPricing"> | Date | string | null
     isActive?: BoolWithAggregatesFilter<"BoostPricing"> | boolean
@@ -41499,6 +47192,9 @@ export namespace Prisma {
     propertyId?: StringFilter<"PropertyBoost"> | string
     userId?: StringFilter<"PropertyBoost"> | string
     boostTier?: EnumBoostTierFilter<"PropertyBoost"> | $Enums.BoostTier
+    durationDays?: IntFilter<"PropertyBoost"> | number
+    fromBundle?: BoolFilter<"PropertyBoost"> | boolean
+    bundleId?: StringNullableFilter<"PropertyBoost"> | string | null
     startDate?: DateTimeFilter<"PropertyBoost"> | Date | string
     endDate?: DateTimeFilter<"PropertyBoost"> | Date | string
     status?: EnumBoostStatusFilter<"PropertyBoost"> | $Enums.BoostStatus
@@ -41514,6 +47210,7 @@ export namespace Prisma {
     totalClicks?: IntFilter<"PropertyBoost"> | number
     property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    bundle?: XOR<BoostBundleNullableScalarRelationFilter, BoostBundleWhereInput> | null
     payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
   }
 
@@ -41524,6 +47221,9 @@ export namespace Prisma {
     propertyId?: SortOrder
     userId?: SortOrder
     boostTier?: SortOrder
+    durationDays?: SortOrder
+    fromBundle?: SortOrder
+    bundleId?: SortOrderInput | SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
@@ -41539,6 +47239,7 @@ export namespace Prisma {
     totalClicks?: SortOrder
     property?: PropertyOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
+    bundle?: BoostBundleOrderByWithRelationInput
     payment?: PaymentOrderByWithRelationInput
   }
 
@@ -41552,6 +47253,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"PropertyBoost"> | Date | string
     userId?: StringFilter<"PropertyBoost"> | string
     boostTier?: EnumBoostTierFilter<"PropertyBoost"> | $Enums.BoostTier
+    durationDays?: IntFilter<"PropertyBoost"> | number
+    fromBundle?: BoolFilter<"PropertyBoost"> | boolean
+    bundleId?: StringNullableFilter<"PropertyBoost"> | string | null
     startDate?: DateTimeFilter<"PropertyBoost"> | Date | string
     endDate?: DateTimeFilter<"PropertyBoost"> | Date | string
     status?: EnumBoostStatusFilter<"PropertyBoost"> | $Enums.BoostStatus
@@ -41567,6 +47271,7 @@ export namespace Prisma {
     totalClicks?: IntFilter<"PropertyBoost"> | number
     property?: XOR<PropertyScalarRelationFilter, PropertyWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    bundle?: XOR<BoostBundleNullableScalarRelationFilter, BoostBundleWhereInput> | null
     payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
   }, "id" | "propertyId">
 
@@ -41577,6 +47282,9 @@ export namespace Prisma {
     propertyId?: SortOrder
     userId?: SortOrder
     boostTier?: SortOrder
+    durationDays?: SortOrder
+    fromBundle?: SortOrder
+    bundleId?: SortOrderInput | SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
@@ -41607,6 +47315,9 @@ export namespace Prisma {
     propertyId?: StringWithAggregatesFilter<"PropertyBoost"> | string
     userId?: StringWithAggregatesFilter<"PropertyBoost"> | string
     boostTier?: EnumBoostTierWithAggregatesFilter<"PropertyBoost"> | $Enums.BoostTier
+    durationDays?: IntWithAggregatesFilter<"PropertyBoost"> | number
+    fromBundle?: BoolWithAggregatesFilter<"PropertyBoost"> | boolean
+    bundleId?: StringNullableWithAggregatesFilter<"PropertyBoost"> | string | null
     startDate?: DateTimeWithAggregatesFilter<"PropertyBoost"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"PropertyBoost"> | Date | string
     status?: EnumBoostStatusWithAggregatesFilter<"PropertyBoost"> | $Enums.BoostStatus
@@ -41620,6 +47331,91 @@ export namespace Prisma {
     notificationSentAt?: DateTimeNullableWithAggregatesFilter<"PropertyBoost"> | Date | string | null
     totalImpressions?: IntWithAggregatesFilter<"PropertyBoost"> | number
     totalClicks?: IntWithAggregatesFilter<"PropertyBoost"> | number
+  }
+
+  export type BoostBundleWhereInput = {
+    AND?: BoostBundleWhereInput | BoostBundleWhereInput[]
+    OR?: BoostBundleWhereInput[]
+    NOT?: BoostBundleWhereInput | BoostBundleWhereInput[]
+    id?: StringFilter<"BoostBundle"> | string
+    createdAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    updatedAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    userId?: StringFilter<"BoostBundle"> | string
+    tierLevel?: IntFilter<"BoostBundle"> | number
+    quantity?: IntFilter<"BoostBundle"> | number
+    remaining?: IntFilter<"BoostBundle"> | number
+    pricePaid?: BigIntFilter<"BoostBundle"> | bigint | number
+    purchasedAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    expiresAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    usedBoosts?: PropertyBoostListRelationFilter
+  }
+
+  export type BoostBundleOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
+    purchasedAt?: SortOrder
+    expiresAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    usedBoosts?: PropertyBoostOrderByRelationAggregateInput
+  }
+
+  export type BoostBundleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BoostBundleWhereInput | BoostBundleWhereInput[]
+    OR?: BoostBundleWhereInput[]
+    NOT?: BoostBundleWhereInput | BoostBundleWhereInput[]
+    createdAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    updatedAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    userId?: StringFilter<"BoostBundle"> | string
+    tierLevel?: IntFilter<"BoostBundle"> | number
+    quantity?: IntFilter<"BoostBundle"> | number
+    remaining?: IntFilter<"BoostBundle"> | number
+    pricePaid?: BigIntFilter<"BoostBundle"> | bigint | number
+    purchasedAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    expiresAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    usedBoosts?: PropertyBoostListRelationFilter
+  }, "id">
+
+  export type BoostBundleOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
+    purchasedAt?: SortOrder
+    expiresAt?: SortOrder
+    _count?: BoostBundleCountOrderByAggregateInput
+    _avg?: BoostBundleAvgOrderByAggregateInput
+    _max?: BoostBundleMaxOrderByAggregateInput
+    _min?: BoostBundleMinOrderByAggregateInput
+    _sum?: BoostBundleSumOrderByAggregateInput
+  }
+
+  export type BoostBundleScalarWhereWithAggregatesInput = {
+    AND?: BoostBundleScalarWhereWithAggregatesInput | BoostBundleScalarWhereWithAggregatesInput[]
+    OR?: BoostBundleScalarWhereWithAggregatesInput[]
+    NOT?: BoostBundleScalarWhereWithAggregatesInput | BoostBundleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BoostBundle"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BoostBundle"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BoostBundle"> | Date | string
+    userId?: StringWithAggregatesFilter<"BoostBundle"> | string
+    tierLevel?: IntWithAggregatesFilter<"BoostBundle"> | number
+    quantity?: IntWithAggregatesFilter<"BoostBundle"> | number
+    remaining?: IntWithAggregatesFilter<"BoostBundle"> | number
+    pricePaid?: BigIntWithAggregatesFilter<"BoostBundle"> | bigint | number
+    purchasedAt?: DateTimeWithAggregatesFilter<"BoostBundle"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"BoostBundle"> | Date | string
   }
 
   export type LocationRequestWhereInput = {
@@ -42468,6 +48264,7 @@ export namespace Prisma {
     userAgent?: StringNullableFilter<"Payment"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     boosts?: PropertyBoostListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
   }
 
   export type PaymentOrderByWithRelationInput = {
@@ -42503,6 +48300,7 @@ export namespace Prisma {
     userAgent?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     boosts?: PropertyBoostOrderByRelationAggregateInput
+    subscriptions?: SubscriptionOrderByRelationAggregateInput
   }
 
   export type PaymentWhereUniqueInput = Prisma.AtLeast<{
@@ -42541,6 +48339,7 @@ export namespace Prisma {
     userAgent?: StringNullableFilter<"Payment"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     boosts?: PropertyBoostListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
   }, "id" | "chargilyTransactionId" | "invoiceNumber">
 
   export type PaymentOrderByWithAggregationInput = {
@@ -42615,6 +48414,121 @@ export namespace Prisma {
     metadata?: JsonNullableWithAggregatesFilter<"Payment">
     ipAddress?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"Payment"> | string | null
+  }
+
+  export type SubscriptionWhereInput = {
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    userId?: StringFilter<"Subscription"> | string
+    tier?: EnumAccountTierFilter<"Subscription"> | $Enums.AccountTier
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    endDate?: DateTimeFilter<"Subscription"> | Date | string
+    isActive?: BoolFilter<"Subscription"> | boolean
+    autoRenew?: BoolFilter<"Subscription"> | boolean
+    amountPaid?: BigIntFilter<"Subscription"> | bigint | number
+    currency?: StringFilter<"Subscription"> | string
+    billingCycle?: StringFilter<"Subscription"> | string
+    paymentId?: StringNullableFilter<"Subscription"> | string | null
+    cancelledAt?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancellationReason?: StringNullableFilter<"Subscription"> | string | null
+    expiryWarningSenitAt?: BoolFilter<"Subscription"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
+  }
+
+  export type SubscriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tier?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    autoRenew?: SortOrder
+    amountPaid?: SortOrder
+    currency?: SortOrder
+    billingCycle?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    expiryWarningSenitAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    payment?: PaymentOrderByWithRelationInput
+  }
+
+  export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    userId?: StringFilter<"Subscription"> | string
+    tier?: EnumAccountTierFilter<"Subscription"> | $Enums.AccountTier
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    endDate?: DateTimeFilter<"Subscription"> | Date | string
+    isActive?: BoolFilter<"Subscription"> | boolean
+    autoRenew?: BoolFilter<"Subscription"> | boolean
+    amountPaid?: BigIntFilter<"Subscription"> | bigint | number
+    currency?: StringFilter<"Subscription"> | string
+    billingCycle?: StringFilter<"Subscription"> | string
+    paymentId?: StringNullableFilter<"Subscription"> | string | null
+    cancelledAt?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancellationReason?: StringNullableFilter<"Subscription"> | string | null
+    expiryWarningSenitAt?: BoolFilter<"Subscription"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
+  }, "id">
+
+  export type SubscriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tier?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    autoRenew?: SortOrder
+    amountPaid?: SortOrder
+    currency?: SortOrder
+    billingCycle?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    expiryWarningSenitAt?: SortOrder
+    _count?: SubscriptionCountOrderByAggregateInput
+    _avg?: SubscriptionAvgOrderByAggregateInput
+    _max?: SubscriptionMaxOrderByAggregateInput
+    _min?: SubscriptionMinOrderByAggregateInput
+    _sum?: SubscriptionSumOrderByAggregateInput
+  }
+
+  export type SubscriptionScalarWhereWithAggregatesInput = {
+    AND?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    OR?: SubscriptionScalarWhereWithAggregatesInput[]
+    NOT?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Subscription"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    userId?: StringWithAggregatesFilter<"Subscription"> | string
+    tier?: EnumAccountTierWithAggregatesFilter<"Subscription"> | $Enums.AccountTier
+    startDate?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    isActive?: BoolWithAggregatesFilter<"Subscription"> | boolean
+    autoRenew?: BoolWithAggregatesFilter<"Subscription"> | boolean
+    amountPaid?: BigIntWithAggregatesFilter<"Subscription"> | bigint | number
+    currency?: StringWithAggregatesFilter<"Subscription"> | string
+    billingCycle?: StringWithAggregatesFilter<"Subscription"> | string
+    paymentId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
+    cancelledAt?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    cancellationReason?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
+    expiryWarningSenitAt?: BoolWithAggregatesFilter<"Subscription"> | boolean
   }
 
   export type NotificationWhereInput = {
@@ -43105,6 +49019,163 @@ export namespace Prisma {
     area?: IntNullableWithAggregatesFilter<"Wilaya"> | number | null
   }
 
+  export type UpgradeBannerWhereInput = {
+    AND?: UpgradeBannerWhereInput | UpgradeBannerWhereInput[]
+    OR?: UpgradeBannerWhereInput[]
+    NOT?: UpgradeBannerWhereInput | UpgradeBannerWhereInput[]
+    id?: StringFilter<"UpgradeBanner"> | string
+    createdAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    updatedAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    userId?: StringFilter<"UpgradeBanner"> | string
+    bannerType?: StringFilter<"UpgradeBanner"> | string
+    dismissedAt?: DateTimeNullableFilter<"UpgradeBanner"> | Date | string | null
+    impressions?: IntFilter<"UpgradeBanner"> | number
+    clicked?: BoolFilter<"UpgradeBanner"> | boolean
+    expiresAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UpgradeBannerOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    bannerType?: SortOrder
+    dismissedAt?: SortOrderInput | SortOrder
+    impressions?: SortOrder
+    clicked?: SortOrder
+    expiresAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UpgradeBannerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UpgradeBannerWhereInput | UpgradeBannerWhereInput[]
+    OR?: UpgradeBannerWhereInput[]
+    NOT?: UpgradeBannerWhereInput | UpgradeBannerWhereInput[]
+    createdAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    updatedAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    userId?: StringFilter<"UpgradeBanner"> | string
+    bannerType?: StringFilter<"UpgradeBanner"> | string
+    dismissedAt?: DateTimeNullableFilter<"UpgradeBanner"> | Date | string | null
+    impressions?: IntFilter<"UpgradeBanner"> | number
+    clicked?: BoolFilter<"UpgradeBanner"> | boolean
+    expiresAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UpgradeBannerOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    bannerType?: SortOrder
+    dismissedAt?: SortOrderInput | SortOrder
+    impressions?: SortOrder
+    clicked?: SortOrder
+    expiresAt?: SortOrder
+    _count?: UpgradeBannerCountOrderByAggregateInput
+    _avg?: UpgradeBannerAvgOrderByAggregateInput
+    _max?: UpgradeBannerMaxOrderByAggregateInput
+    _min?: UpgradeBannerMinOrderByAggregateInput
+    _sum?: UpgradeBannerSumOrderByAggregateInput
+  }
+
+  export type UpgradeBannerScalarWhereWithAggregatesInput = {
+    AND?: UpgradeBannerScalarWhereWithAggregatesInput | UpgradeBannerScalarWhereWithAggregatesInput[]
+    OR?: UpgradeBannerScalarWhereWithAggregatesInput[]
+    NOT?: UpgradeBannerScalarWhereWithAggregatesInput | UpgradeBannerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UpgradeBanner"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UpgradeBanner"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UpgradeBanner"> | Date | string
+    userId?: StringWithAggregatesFilter<"UpgradeBanner"> | string
+    bannerType?: StringWithAggregatesFilter<"UpgradeBanner"> | string
+    dismissedAt?: DateTimeNullableWithAggregatesFilter<"UpgradeBanner"> | Date | string | null
+    impressions?: IntWithAggregatesFilter<"UpgradeBanner"> | number
+    clicked?: BoolWithAggregatesFilter<"UpgradeBanner"> | boolean
+    expiresAt?: DateTimeWithAggregatesFilter<"UpgradeBanner"> | Date | string
+  }
+
+  export type EmailCampaignWhereInput = {
+    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    OR?: EmailCampaignWhereInput[]
+    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    id?: StringFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    userId?: StringFilter<"EmailCampaign"> | string
+    campaignType?: StringFilter<"EmailCampaign"> | string
+    sentAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    opened?: BoolFilter<"EmailCampaign"> | boolean
+    openedAt?: DateTimeNullableFilter<"EmailCampaign"> | Date | string | null
+    clicked?: BoolFilter<"EmailCampaign"> | boolean
+    clickedAt?: DateTimeNullableFilter<"EmailCampaign"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type EmailCampaignOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    campaignType?: SortOrder
+    sentAt?: SortOrder
+    opened?: SortOrder
+    openedAt?: SortOrderInput | SortOrder
+    clicked?: SortOrder
+    clickedAt?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type EmailCampaignWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    OR?: EmailCampaignWhereInput[]
+    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    userId?: StringFilter<"EmailCampaign"> | string
+    campaignType?: StringFilter<"EmailCampaign"> | string
+    sentAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    opened?: BoolFilter<"EmailCampaign"> | boolean
+    openedAt?: DateTimeNullableFilter<"EmailCampaign"> | Date | string | null
+    clicked?: BoolFilter<"EmailCampaign"> | boolean
+    clickedAt?: DateTimeNullableFilter<"EmailCampaign"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type EmailCampaignOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    campaignType?: SortOrder
+    sentAt?: SortOrder
+    opened?: SortOrder
+    openedAt?: SortOrderInput | SortOrder
+    clicked?: SortOrder
+    clickedAt?: SortOrderInput | SortOrder
+    _count?: EmailCampaignCountOrderByAggregateInput
+    _max?: EmailCampaignMaxOrderByAggregateInput
+    _min?: EmailCampaignMinOrderByAggregateInput
+  }
+
+  export type EmailCampaignScalarWhereWithAggregatesInput = {
+    AND?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
+    OR?: EmailCampaignScalarWhereWithAggregatesInput[]
+    NOT?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+    userId?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    campaignType?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    sentAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+    opened?: BoolWithAggregatesFilter<"EmailCampaign"> | boolean
+    openedAt?: DateTimeNullableWithAggregatesFilter<"EmailCampaign"> | Date | string | null
+    clicked?: BoolWithAggregatesFilter<"EmailCampaign"> | boolean
+    clickedAt?: DateTimeNullableWithAggregatesFilter<"EmailCampaign"> | Date | string | null
+  }
+
   export type CommuneWhereInput = {
     AND?: CommuneWhereInput | CommuneWhereInput[]
     OR?: CommuneWhereInput[]
@@ -43204,14 +49275,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -43247,10 +49326,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -43267,14 +49350,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -43310,10 +49401,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -43330,14 +49425,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43373,10 +49476,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -43393,14 +49500,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43436,10 +49551,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -43456,14 +49575,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -43501,14 +49628,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43546,14 +49681,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44653,9 +50796,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tier: $Enums.BoostTier
-    pricePerWeek: bigint | number
-    pricePerMonth?: bigint | number | null
+    pricing: JsonNullValueInput | InputJsonValue
     features: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage: number
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: Date | string
     validUntil?: Date | string | null
     isActive?: boolean
@@ -44666,9 +50813,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tier: $Enums.BoostTier
-    pricePerWeek: bigint | number
-    pricePerMonth?: bigint | number | null
+    pricing: JsonNullValueInput | InputJsonValue
     features: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage: number
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: Date | string
     validUntil?: Date | string | null
     isActive?: boolean
@@ -44679,9 +50830,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
-    pricePerWeek?: BigIntFieldUpdateOperationsInput | bigint | number
-    pricePerMonth?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pricing?: JsonNullValueInput | InputJsonValue
     features?: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage?: IntFieldUpdateOperationsInput | number
+    availableForFree?: BoolFieldUpdateOperationsInput | boolean
+    availableForStarter?: BoolFieldUpdateOperationsInput | boolean
+    availableForPro?: BoolFieldUpdateOperationsInput | boolean
+    availableForElite?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -44692,9 +50847,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
-    pricePerWeek?: BigIntFieldUpdateOperationsInput | bigint | number
-    pricePerMonth?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pricing?: JsonNullValueInput | InputJsonValue
     features?: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage?: IntFieldUpdateOperationsInput | number
+    availableForFree?: BoolFieldUpdateOperationsInput | boolean
+    availableForStarter?: BoolFieldUpdateOperationsInput | boolean
+    availableForPro?: BoolFieldUpdateOperationsInput | boolean
+    availableForElite?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -44705,9 +50864,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tier: $Enums.BoostTier
-    pricePerWeek: bigint | number
-    pricePerMonth?: bigint | number | null
+    pricing: JsonNullValueInput | InputJsonValue
     features: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage: number
+    availableForFree?: boolean
+    availableForStarter?: boolean
+    availableForPro?: boolean
+    availableForElite?: boolean
     validFrom?: Date | string
     validUntil?: Date | string | null
     isActive?: boolean
@@ -44718,9 +50881,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
-    pricePerWeek?: BigIntFieldUpdateOperationsInput | bigint | number
-    pricePerMonth?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pricing?: JsonNullValueInput | InputJsonValue
     features?: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage?: IntFieldUpdateOperationsInput | number
+    availableForFree?: BoolFieldUpdateOperationsInput | boolean
+    availableForStarter?: BoolFieldUpdateOperationsInput | boolean
+    availableForPro?: BoolFieldUpdateOperationsInput | boolean
+    availableForElite?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -44731,9 +50898,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
-    pricePerWeek?: BigIntFieldUpdateOperationsInput | bigint | number
-    pricePerMonth?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pricing?: JsonNullValueInput | InputJsonValue
     features?: JsonNullValueInput | InputJsonValue
+    visibilityBoostPercentage?: IntFieldUpdateOperationsInput | number
+    availableForFree?: BoolFieldUpdateOperationsInput | boolean
+    availableForStarter?: BoolFieldUpdateOperationsInput | boolean
+    availableForPro?: BoolFieldUpdateOperationsInput | boolean
+    availableForElite?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -44744,6 +50915,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -44758,6 +50931,7 @@ export namespace Prisma {
     totalClicks?: number
     property: PropertyCreateNestedOneWithoutBoostInput
     user: UserCreateNestedOneWithoutBoostsInput
+    bundle?: BoostBundleCreateNestedOneWithoutUsedBoostsInput
     payment?: PaymentCreateNestedOneWithoutBoostsInput
   }
 
@@ -44768,6 +50942,9 @@ export namespace Prisma {
     propertyId: string
     userId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -44788,6 +50965,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -44802,6 +50981,7 @@ export namespace Prisma {
     totalClicks?: IntFieldUpdateOperationsInput | number
     property?: PropertyUpdateOneRequiredWithoutBoostNestedInput
     user?: UserUpdateOneRequiredWithoutBoostsNestedInput
+    bundle?: BoostBundleUpdateOneWithoutUsedBoostsNestedInput
     payment?: PaymentUpdateOneWithoutBoostsNestedInput
   }
 
@@ -44812,6 +50992,9 @@ export namespace Prisma {
     propertyId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -44834,6 +51017,9 @@ export namespace Prisma {
     propertyId: string
     userId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -44854,6 +51040,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -44875,6 +51063,9 @@ export namespace Prisma {
     propertyId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -44888,6 +51079,100 @@ export namespace Prisma {
     notificationSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     totalImpressions?: IntFieldUpdateOperationsInput | number
     totalClicks?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BoostBundleCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+    user: UserCreateNestedOneWithoutBoostBundlesInput
+    usedBoosts?: PropertyBoostCreateNestedManyWithoutBundleInput
+  }
+
+  export type BoostBundleUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+    usedBoosts?: PropertyBoostUncheckedCreateNestedManyWithoutBundleInput
+  }
+
+  export type BoostBundleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBoostBundlesNestedInput
+    usedBoosts?: PropertyBoostUpdateManyWithoutBundleNestedInput
+  }
+
+  export type BoostBundleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedBoosts?: PropertyBoostUncheckedUpdateManyWithoutBundleNestedInput
+  }
+
+  export type BoostBundleCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type BoostBundleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoostBundleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LocationRequestCreateInput = {
@@ -45795,6 +52080,7 @@ export namespace Prisma {
     userAgent?: string | null
     user: UserCreateNestedOneWithoutPaymentsInput
     boosts?: PropertyBoostCreateNestedManyWithoutPaymentInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateInput = {
@@ -45829,6 +52115,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutPaymentInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUpdateInput = {
@@ -45863,6 +52150,7 @@ export namespace Prisma {
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     boosts?: PropertyBoostUpdateManyWithoutPaymentNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateInput = {
@@ -45897,6 +52185,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     boosts?: PropertyBoostUncheckedUpdateManyWithoutPaymentNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentCreateManyInput = {
@@ -45995,6 +52284,137 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SubscriptionCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+    user: UserCreateNestedOneWithoutSubscriptionsInput
+    payment?: PaymentCreateNestedOneWithoutSubscriptionsInput
+  }
+
+  export type SubscriptionUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    paymentId?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+  }
+
+  export type SubscriptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+    payment?: PaymentUpdateOneWithoutSubscriptionsNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    paymentId?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+  }
+
+  export type SubscriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type NotificationCreateInput = {
@@ -46561,6 +52981,179 @@ export namespace Prisma {
     area?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type UpgradeBannerCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerType: string
+    dismissedAt?: Date | string | null
+    impressions?: number
+    clicked?: boolean
+    expiresAt: Date | string
+    user: UserCreateNestedOneWithoutUpgradeBannersInput
+  }
+
+  export type UpgradeBannerUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    bannerType: string
+    dismissedAt?: Date | string | null
+    impressions?: number
+    clicked?: boolean
+    expiresAt: Date | string
+  }
+
+  export type UpgradeBannerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUpgradeBannersNestedInput
+  }
+
+  export type UpgradeBannerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpgradeBannerCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    bannerType: string
+    dismissedAt?: Date | string | null
+    impressions?: number
+    clicked?: boolean
+    expiresAt: Date | string
+  }
+
+  export type UpgradeBannerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpgradeBannerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignType: string
+    sentAt?: Date | string
+    opened?: boolean
+    openedAt?: Date | string | null
+    clicked?: boolean
+    clickedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutEmailCampaignsInput
+  }
+
+  export type EmailCampaignUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    campaignType: string
+    sentAt?: Date | string
+    opened?: boolean
+    openedAt?: Date | string | null
+    clicked?: boolean
+    clickedAt?: Date | string | null
+  }
+
+  export type EmailCampaignUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutEmailCampaignsNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EmailCampaignCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    campaignType: string
+    sentAt?: Date | string
+    opened?: boolean
+    openedAt?: Date | string | null
+    clicked?: boolean
+    clickedAt?: Date | string | null
+  }
+
+  export type EmailCampaignUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EmailCampaignUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type CommuneCreateInput = {
     id?: string
     code: string
@@ -46726,13 +53319,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type EnumContactPreferenceFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
-    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    not?: NestedEnumContactPreferenceFilter<$PrismaModel> | $Enums.ContactPreference
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -46742,6 +53328,21 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumContactPreferenceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactPreferenceFilter<$PrismaModel> | $Enums.ContactPreference
   }
 
   export type DecimalNullableFilter<$PrismaModel = never> = {
@@ -46815,6 +53416,18 @@ export namespace Prisma {
     none?: PropertyBoostWhereInput
   }
 
+  export type BoostBundleListRelationFilter = {
+    every?: BoostBundleWhereInput
+    some?: BoostBundleWhereInput
+    none?: BoostBundleWhereInput
+  }
+
+  export type SubscriptionListRelationFilter = {
+    every?: SubscriptionWhereInput
+    some?: SubscriptionWhereInput
+    none?: SubscriptionWhereInput
+  }
+
   export type PropertyViewDetailListRelationFilter = {
     every?: PropertyViewDetailWhereInput
     some?: PropertyViewDetailWhereInput
@@ -46831,6 +53444,18 @@ export namespace Prisma {
     every?: LocationRequestWhereInput
     some?: LocationRequestWhereInput
     none?: LocationRequestWhereInput
+  }
+
+  export type UpgradeBannerListRelationFilter = {
+    every?: UpgradeBannerWhereInput
+    some?: UpgradeBannerWhereInput
+    none?: UpgradeBannerWhereInput
+  }
+
+  export type EmailCampaignListRelationFilter = {
+    every?: EmailCampaignWhereInput
+    some?: EmailCampaignWhereInput
+    none?: EmailCampaignWhereInput
   }
 
   export type SortOrderInput = {
@@ -46878,6 +53503,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type BoostBundleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SubscriptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PropertyViewDetailOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -46887,6 +53520,14 @@ export namespace Prisma {
   }
 
   export type LocationRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UpgradeBannerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailCampaignOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -46904,14 +53545,22 @@ export namespace Prisma {
     avatar?: SortOrder
     accountTier?: SortOrder
     status?: SortOrder
-    proActivatedAt?: SortOrder
-    proExpiresAt?: SortOrder
-    proAutoRenew?: SortOrder
+    subscriptionStartedAt?: SortOrder
+    subscriptionExpiresAt?: SortOrder
+    subscriptionAutoRenew?: SortOrder
+    subscriptionCancelledAt?: SortOrder
+    trialStartedAt?: SortOrder
+    trialEndsAt?: SortOrder
+    trialUsed?: SortOrder
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     companyName?: SortOrder
     companyLogo?: SortOrder
     companyDescription?: SortOrder
     commerceRegister?: SortOrder
     taxId?: SortOrder
+    teamMemberEmails?: SortOrder
     showPhone?: SortOrder
     showWhatsApp?: SortOrder
     whatsappNumber?: SortOrder
@@ -46936,6 +53585,9 @@ export namespace Prisma {
   }
 
   export type UserAvgOrderByAggregateInput = {
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     warningCount?: SortOrder
     totalProperties?: SortOrder
     activeProperties?: SortOrder
@@ -46959,9 +53611,16 @@ export namespace Prisma {
     avatar?: SortOrder
     accountTier?: SortOrder
     status?: SortOrder
-    proActivatedAt?: SortOrder
-    proExpiresAt?: SortOrder
-    proAutoRenew?: SortOrder
+    subscriptionStartedAt?: SortOrder
+    subscriptionExpiresAt?: SortOrder
+    subscriptionAutoRenew?: SortOrder
+    subscriptionCancelledAt?: SortOrder
+    trialStartedAt?: SortOrder
+    trialEndsAt?: SortOrder
+    trialUsed?: SortOrder
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     companyName?: SortOrder
     companyLogo?: SortOrder
     companyDescription?: SortOrder
@@ -47004,9 +53663,16 @@ export namespace Prisma {
     avatar?: SortOrder
     accountTier?: SortOrder
     status?: SortOrder
-    proActivatedAt?: SortOrder
-    proExpiresAt?: SortOrder
-    proAutoRenew?: SortOrder
+    subscriptionStartedAt?: SortOrder
+    subscriptionExpiresAt?: SortOrder
+    subscriptionAutoRenew?: SortOrder
+    subscriptionCancelledAt?: SortOrder
+    trialStartedAt?: SortOrder
+    trialEndsAt?: SortOrder
+    trialUsed?: SortOrder
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     companyName?: SortOrder
     companyLogo?: SortOrder
     companyDescription?: SortOrder
@@ -47036,6 +53702,9 @@ export namespace Prisma {
   }
 
   export type UserSumOrderByAggregateInput = {
+    propertyLimit?: SortOrder
+    imagesPerPropertyLimit?: SortOrder
+    videosPerPropertyLimit?: SortOrder
     warningCount?: SortOrder
     totalProperties?: SortOrder
     activeProperties?: SortOrder
@@ -47137,16 +53806,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type EnumContactPreferenceWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
-    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    not?: NestedEnumContactPreferenceWithAggregatesFilter<$PrismaModel> | $Enums.ContactPreference
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumContactPreferenceFilter<$PrismaModel>
-    _max?: NestedEnumContactPreferenceFilter<$PrismaModel>
-  }
-
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -47161,6 +53820,16 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumContactPreferenceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactPreferenceWithAggregatesFilter<$PrismaModel> | $Enums.ContactPreference
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContactPreferenceFilter<$PrismaModel>
+    _max?: NestedEnumContactPreferenceFilter<$PrismaModel>
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -48119,17 +54788,20 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tier?: SortOrder
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrder
+    pricing?: SortOrder
     features?: SortOrder
+    visibilityBoostPercentage?: SortOrder
+    availableForFree?: SortOrder
+    availableForStarter?: SortOrder
+    availableForPro?: SortOrder
+    availableForElite?: SortOrder
     validFrom?: SortOrder
     validUntil?: SortOrder
     isActive?: SortOrder
   }
 
   export type BoostPricingAvgOrderByAggregateInput = {
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrder
+    visibilityBoostPercentage?: SortOrder
   }
 
   export type BoostPricingMaxOrderByAggregateInput = {
@@ -48137,8 +54809,11 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tier?: SortOrder
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrder
+    visibilityBoostPercentage?: SortOrder
+    availableForFree?: SortOrder
+    availableForStarter?: SortOrder
+    availableForPro?: SortOrder
+    availableForElite?: SortOrder
     validFrom?: SortOrder
     validUntil?: SortOrder
     isActive?: SortOrder
@@ -48149,16 +54824,18 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tier?: SortOrder
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrder
+    visibilityBoostPercentage?: SortOrder
+    availableForFree?: SortOrder
+    availableForStarter?: SortOrder
+    availableForPro?: SortOrder
+    availableForElite?: SortOrder
     validFrom?: SortOrder
     validUntil?: SortOrder
     isActive?: SortOrder
   }
 
   export type BoostPricingSumOrderByAggregateInput = {
-    pricePerWeek?: SortOrder
-    pricePerMonth?: SortOrder
+    visibilityBoostPercentage?: SortOrder
   }
 
   export type EnumBoostTierWithAggregatesFilter<$PrismaModel = never> = {
@@ -48211,6 +54888,11 @@ export namespace Prisma {
     not?: NestedEnumBoostTierNullableFilter<$PrismaModel> | $Enums.BoostTier | null
   }
 
+  export type BoostBundleNullableScalarRelationFilter = {
+    is?: BoostBundleWhereInput | null
+    isNot?: BoostBundleWhereInput | null
+  }
+
   export type PaymentNullableScalarRelationFilter = {
     is?: PaymentWhereInput | null
     isNot?: PaymentWhereInput | null
@@ -48223,6 +54905,9 @@ export namespace Prisma {
     propertyId?: SortOrder
     userId?: SortOrder
     boostTier?: SortOrder
+    durationDays?: SortOrder
+    fromBundle?: SortOrder
+    bundleId?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
@@ -48239,6 +54924,7 @@ export namespace Prisma {
   }
 
   export type PropertyBoostAvgOrderByAggregateInput = {
+    durationDays?: SortOrder
     amountPaid?: SortOrder
     priceReference?: SortOrder
     upgradeAmountPaid?: SortOrder
@@ -48253,6 +54939,9 @@ export namespace Prisma {
     propertyId?: SortOrder
     userId?: SortOrder
     boostTier?: SortOrder
+    durationDays?: SortOrder
+    fromBundle?: SortOrder
+    bundleId?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
@@ -48275,6 +54964,9 @@ export namespace Prisma {
     propertyId?: SortOrder
     userId?: SortOrder
     boostTier?: SortOrder
+    durationDays?: SortOrder
+    fromBundle?: SortOrder
+    bundleId?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
@@ -48291,6 +54983,7 @@ export namespace Prisma {
   }
 
   export type PropertyBoostSumOrderByAggregateInput = {
+    durationDays?: SortOrder
     amountPaid?: SortOrder
     priceReference?: SortOrder
     upgradeAmountPaid?: SortOrder
@@ -48316,6 +55009,59 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumBoostTierNullableFilter<$PrismaModel>
     _max?: NestedEnumBoostTierNullableFilter<$PrismaModel>
+  }
+
+  export type BoostBundleCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
+    purchasedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type BoostBundleAvgOrderByAggregateInput = {
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
+  }
+
+  export type BoostBundleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
+    purchasedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type BoostBundleMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
+    purchasedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type BoostBundleSumOrderByAggregateInput = {
+    tierLevel?: SortOrder
+    quantity?: SortOrder
+    remaining?: SortOrder
+    pricePaid?: SortOrder
   }
 
   export type EnumLocationRequestStatusFilter<$PrismaModel = never> = {
@@ -48678,14 +55424,6 @@ export namespace Prisma {
     _max?: NestedEnumMessageStatusFilter<$PrismaModel>
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type ReviewCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -48998,6 +55736,71 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPaymentProductTypeFilter<$PrismaModel>
     _max?: NestedEnumPaymentProductTypeFilter<$PrismaModel>
+  }
+
+  export type SubscriptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tier?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    autoRenew?: SortOrder
+    amountPaid?: SortOrder
+    currency?: SortOrder
+    billingCycle?: SortOrder
+    paymentId?: SortOrder
+    cancelledAt?: SortOrder
+    cancellationReason?: SortOrder
+    expiryWarningSenitAt?: SortOrder
+  }
+
+  export type SubscriptionAvgOrderByAggregateInput = {
+    amountPaid?: SortOrder
+  }
+
+  export type SubscriptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tier?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    autoRenew?: SortOrder
+    amountPaid?: SortOrder
+    currency?: SortOrder
+    billingCycle?: SortOrder
+    paymentId?: SortOrder
+    cancelledAt?: SortOrder
+    cancellationReason?: SortOrder
+    expiryWarningSenitAt?: SortOrder
+  }
+
+  export type SubscriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    tier?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    autoRenew?: SortOrder
+    amountPaid?: SortOrder
+    currency?: SortOrder
+    billingCycle?: SortOrder
+    paymentId?: SortOrder
+    cancelledAt?: SortOrder
+    cancellationReason?: SortOrder
+    expiryWarningSenitAt?: SortOrder
+  }
+
+  export type SubscriptionSumOrderByAggregateInput = {
+    amountPaid?: SortOrder
   }
 
   export type EnumNotificationTypeFilter<$PrismaModel = never> = {
@@ -49358,6 +56161,89 @@ export namespace Prisma {
     area?: SortOrder
   }
 
+  export type UpgradeBannerCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    bannerType?: SortOrder
+    dismissedAt?: SortOrder
+    impressions?: SortOrder
+    clicked?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UpgradeBannerAvgOrderByAggregateInput = {
+    impressions?: SortOrder
+  }
+
+  export type UpgradeBannerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    bannerType?: SortOrder
+    dismissedAt?: SortOrder
+    impressions?: SortOrder
+    clicked?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UpgradeBannerMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    bannerType?: SortOrder
+    dismissedAt?: SortOrder
+    impressions?: SortOrder
+    clicked?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UpgradeBannerSumOrderByAggregateInput = {
+    impressions?: SortOrder
+  }
+
+  export type EmailCampaignCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    campaignType?: SortOrder
+    sentAt?: SortOrder
+    opened?: SortOrder
+    openedAt?: SortOrder
+    clicked?: SortOrder
+    clickedAt?: SortOrder
+  }
+
+  export type EmailCampaignMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    campaignType?: SortOrder
+    sentAt?: SortOrder
+    opened?: SortOrder
+    openedAt?: SortOrder
+    clicked?: SortOrder
+    clickedAt?: SortOrder
+  }
+
+  export type EmailCampaignMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    campaignType?: SortOrder
+    sentAt?: SortOrder
+    opened?: SortOrder
+    openedAt?: SortOrder
+    clicked?: SortOrder
+    clickedAt?: SortOrder
+  }
+
   export type CommuneCountOrderByAggregateInput = {
     id?: SortOrder
     code?: SortOrder
@@ -49407,6 +56293,10 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     population?: SortOrder
+  }
+
+  export type UserCreateteamMemberEmailsInput = {
+    set: string[]
   }
 
   export type UserRoleCreateNestedManyWithoutUserInput = {
@@ -49507,6 +56397,20 @@ export namespace Prisma {
     connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
   }
 
+  export type BoostBundleCreateNestedManyWithoutUserInput = {
+    create?: XOR<BoostBundleCreateWithoutUserInput, BoostBundleUncheckedCreateWithoutUserInput> | BoostBundleCreateWithoutUserInput[] | BoostBundleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BoostBundleCreateOrConnectWithoutUserInput | BoostBundleCreateOrConnectWithoutUserInput[]
+    createMany?: BoostBundleCreateManyUserInputEnvelope
+    connect?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+  }
+
+  export type SubscriptionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+  }
+
   export type PropertyViewDetailCreateNestedManyWithoutUserInput = {
     create?: XOR<PropertyViewDetailCreateWithoutUserInput, PropertyViewDetailUncheckedCreateWithoutUserInput> | PropertyViewDetailCreateWithoutUserInput[] | PropertyViewDetailUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PropertyViewDetailCreateOrConnectWithoutUserInput | PropertyViewDetailCreateOrConnectWithoutUserInput[]
@@ -49533,6 +56437,20 @@ export namespace Prisma {
     connectOrCreate?: LocationRequestCreateOrConnectWithoutOwnerInput | LocationRequestCreateOrConnectWithoutOwnerInput[]
     createMany?: LocationRequestCreateManyOwnerInputEnvelope
     connect?: LocationRequestWhereUniqueInput | LocationRequestWhereUniqueInput[]
+  }
+
+  export type UpgradeBannerCreateNestedManyWithoutUserInput = {
+    create?: XOR<UpgradeBannerCreateWithoutUserInput, UpgradeBannerUncheckedCreateWithoutUserInput> | UpgradeBannerCreateWithoutUserInput[] | UpgradeBannerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpgradeBannerCreateOrConnectWithoutUserInput | UpgradeBannerCreateOrConnectWithoutUserInput[]
+    createMany?: UpgradeBannerCreateManyUserInputEnvelope
+    connect?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+  }
+
+  export type EmailCampaignCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmailCampaignCreateWithoutUserInput, EmailCampaignUncheckedCreateWithoutUserInput> | EmailCampaignCreateWithoutUserInput[] | EmailCampaignUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutUserInput | EmailCampaignCreateOrConnectWithoutUserInput[]
+    createMany?: EmailCampaignCreateManyUserInputEnvelope
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
   }
 
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
@@ -49633,6 +56551,20 @@ export namespace Prisma {
     connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
   }
 
+  export type BoostBundleUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BoostBundleCreateWithoutUserInput, BoostBundleUncheckedCreateWithoutUserInput> | BoostBundleCreateWithoutUserInput[] | BoostBundleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BoostBundleCreateOrConnectWithoutUserInput | BoostBundleCreateOrConnectWithoutUserInput[]
+    createMany?: BoostBundleCreateManyUserInputEnvelope
+    connect?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+  }
+
+  export type SubscriptionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+  }
+
   export type PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PropertyViewDetailCreateWithoutUserInput, PropertyViewDetailUncheckedCreateWithoutUserInput> | PropertyViewDetailCreateWithoutUserInput[] | PropertyViewDetailUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PropertyViewDetailCreateOrConnectWithoutUserInput | PropertyViewDetailCreateOrConnectWithoutUserInput[]
@@ -49659,6 +56591,20 @@ export namespace Prisma {
     connectOrCreate?: LocationRequestCreateOrConnectWithoutOwnerInput | LocationRequestCreateOrConnectWithoutOwnerInput[]
     createMany?: LocationRequestCreateManyOwnerInputEnvelope
     connect?: LocationRequestWhereUniqueInput | LocationRequestWhereUniqueInput[]
+  }
+
+  export type UpgradeBannerUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UpgradeBannerCreateWithoutUserInput, UpgradeBannerUncheckedCreateWithoutUserInput> | UpgradeBannerCreateWithoutUserInput[] | UpgradeBannerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpgradeBannerCreateOrConnectWithoutUserInput | UpgradeBannerCreateOrConnectWithoutUserInput[]
+    createMany?: UpgradeBannerCreateManyUserInputEnvelope
+    connect?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+  }
+
+  export type EmailCampaignUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmailCampaignCreateWithoutUserInput, EmailCampaignUncheckedCreateWithoutUserInput> | EmailCampaignCreateWithoutUserInput[] | EmailCampaignUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutUserInput | EmailCampaignCreateOrConnectWithoutUserInput[]
+    createMany?: EmailCampaignCreateManyUserInputEnvelope
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -49689,16 +56635,21 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type EnumContactPreferenceFieldUpdateOperationsInput = {
-    set?: $Enums.ContactPreference
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type UserUpdateteamMemberEmailsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type EnumContactPreferenceFieldUpdateOperationsInput = {
+    set?: $Enums.ContactPreference
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -49905,6 +56856,34 @@ export namespace Prisma {
     deleteMany?: PropertyBoostScalarWhereInput | PropertyBoostScalarWhereInput[]
   }
 
+  export type BoostBundleUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BoostBundleCreateWithoutUserInput, BoostBundleUncheckedCreateWithoutUserInput> | BoostBundleCreateWithoutUserInput[] | BoostBundleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BoostBundleCreateOrConnectWithoutUserInput | BoostBundleCreateOrConnectWithoutUserInput[]
+    upsert?: BoostBundleUpsertWithWhereUniqueWithoutUserInput | BoostBundleUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BoostBundleCreateManyUserInputEnvelope
+    set?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    disconnect?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    delete?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    connect?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    update?: BoostBundleUpdateWithWhereUniqueWithoutUserInput | BoostBundleUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BoostBundleUpdateManyWithWhereWithoutUserInput | BoostBundleUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BoostBundleScalarWhereInput | BoostBundleScalarWhereInput[]
+  }
+
+  export type SubscriptionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutUserInput | SubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutUserInput | SubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutUserInput | SubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
   export type PropertyViewDetailUpdateManyWithoutUserNestedInput = {
     create?: XOR<PropertyViewDetailCreateWithoutUserInput, PropertyViewDetailUncheckedCreateWithoutUserInput> | PropertyViewDetailCreateWithoutUserInput[] | PropertyViewDetailUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PropertyViewDetailCreateOrConnectWithoutUserInput | PropertyViewDetailCreateOrConnectWithoutUserInput[]
@@ -49959,6 +56938,34 @@ export namespace Prisma {
     update?: LocationRequestUpdateWithWhereUniqueWithoutOwnerInput | LocationRequestUpdateWithWhereUniqueWithoutOwnerInput[]
     updateMany?: LocationRequestUpdateManyWithWhereWithoutOwnerInput | LocationRequestUpdateManyWithWhereWithoutOwnerInput[]
     deleteMany?: LocationRequestScalarWhereInput | LocationRequestScalarWhereInput[]
+  }
+
+  export type UpgradeBannerUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UpgradeBannerCreateWithoutUserInput, UpgradeBannerUncheckedCreateWithoutUserInput> | UpgradeBannerCreateWithoutUserInput[] | UpgradeBannerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpgradeBannerCreateOrConnectWithoutUserInput | UpgradeBannerCreateOrConnectWithoutUserInput[]
+    upsert?: UpgradeBannerUpsertWithWhereUniqueWithoutUserInput | UpgradeBannerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UpgradeBannerCreateManyUserInputEnvelope
+    set?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    disconnect?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    delete?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    connect?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    update?: UpgradeBannerUpdateWithWhereUniqueWithoutUserInput | UpgradeBannerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UpgradeBannerUpdateManyWithWhereWithoutUserInput | UpgradeBannerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UpgradeBannerScalarWhereInput | UpgradeBannerScalarWhereInput[]
+  }
+
+  export type EmailCampaignUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutUserInput, EmailCampaignUncheckedCreateWithoutUserInput> | EmailCampaignCreateWithoutUserInput[] | EmailCampaignUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutUserInput | EmailCampaignCreateOrConnectWithoutUserInput[]
+    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutUserInput | EmailCampaignUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmailCampaignCreateManyUserInputEnvelope
+    set?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    disconnect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    delete?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    update?: EmailCampaignUpdateWithWhereUniqueWithoutUserInput | EmailCampaignUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmailCampaignUpdateManyWithWhereWithoutUserInput | EmailCampaignUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
   }
 
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
@@ -50157,6 +57164,34 @@ export namespace Prisma {
     deleteMany?: PropertyBoostScalarWhereInput | PropertyBoostScalarWhereInput[]
   }
 
+  export type BoostBundleUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BoostBundleCreateWithoutUserInput, BoostBundleUncheckedCreateWithoutUserInput> | BoostBundleCreateWithoutUserInput[] | BoostBundleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BoostBundleCreateOrConnectWithoutUserInput | BoostBundleCreateOrConnectWithoutUserInput[]
+    upsert?: BoostBundleUpsertWithWhereUniqueWithoutUserInput | BoostBundleUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BoostBundleCreateManyUserInputEnvelope
+    set?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    disconnect?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    delete?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    connect?: BoostBundleWhereUniqueInput | BoostBundleWhereUniqueInput[]
+    update?: BoostBundleUpdateWithWhereUniqueWithoutUserInput | BoostBundleUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BoostBundleUpdateManyWithWhereWithoutUserInput | BoostBundleUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BoostBundleScalarWhereInput | BoostBundleScalarWhereInput[]
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutUserInput | SubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutUserInput | SubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutUserInput | SubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
   export type PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PropertyViewDetailCreateWithoutUserInput, PropertyViewDetailUncheckedCreateWithoutUserInput> | PropertyViewDetailCreateWithoutUserInput[] | PropertyViewDetailUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PropertyViewDetailCreateOrConnectWithoutUserInput | PropertyViewDetailCreateOrConnectWithoutUserInput[]
@@ -50211,6 +57246,34 @@ export namespace Prisma {
     update?: LocationRequestUpdateWithWhereUniqueWithoutOwnerInput | LocationRequestUpdateWithWhereUniqueWithoutOwnerInput[]
     updateMany?: LocationRequestUpdateManyWithWhereWithoutOwnerInput | LocationRequestUpdateManyWithWhereWithoutOwnerInput[]
     deleteMany?: LocationRequestScalarWhereInput | LocationRequestScalarWhereInput[]
+  }
+
+  export type UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UpgradeBannerCreateWithoutUserInput, UpgradeBannerUncheckedCreateWithoutUserInput> | UpgradeBannerCreateWithoutUserInput[] | UpgradeBannerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpgradeBannerCreateOrConnectWithoutUserInput | UpgradeBannerCreateOrConnectWithoutUserInput[]
+    upsert?: UpgradeBannerUpsertWithWhereUniqueWithoutUserInput | UpgradeBannerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UpgradeBannerCreateManyUserInputEnvelope
+    set?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    disconnect?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    delete?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    connect?: UpgradeBannerWhereUniqueInput | UpgradeBannerWhereUniqueInput[]
+    update?: UpgradeBannerUpdateWithWhereUniqueWithoutUserInput | UpgradeBannerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UpgradeBannerUpdateManyWithWhereWithoutUserInput | UpgradeBannerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UpgradeBannerScalarWhereInput | UpgradeBannerScalarWhereInput[]
+  }
+
+  export type EmailCampaignUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutUserInput, EmailCampaignUncheckedCreateWithoutUserInput> | EmailCampaignCreateWithoutUserInput[] | EmailCampaignUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutUserInput | EmailCampaignCreateOrConnectWithoutUserInput[]
+    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutUserInput | EmailCampaignUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmailCampaignCreateManyUserInputEnvelope
+    set?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    disconnect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    delete?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    update?: EmailCampaignUpdateWithWhereUniqueWithoutUserInput | EmailCampaignUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmailCampaignUpdateManyWithWhereWithoutUserInput | EmailCampaignUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
   }
 
   export type UserRoleCreateNestedManyWithoutRoleInput = {
@@ -51159,6 +58222,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type BoostBundleCreateNestedOneWithoutUsedBoostsInput = {
+    create?: XOR<BoostBundleCreateWithoutUsedBoostsInput, BoostBundleUncheckedCreateWithoutUsedBoostsInput>
+    connectOrCreate?: BoostBundleCreateOrConnectWithoutUsedBoostsInput
+    connect?: BoostBundleWhereUniqueInput
+  }
+
   export type PaymentCreateNestedOneWithoutBoostsInput = {
     create?: XOR<PaymentCreateWithoutBoostsInput, PaymentUncheckedCreateWithoutBoostsInput>
     connectOrCreate?: PaymentCreateOrConnectWithoutBoostsInput
@@ -51189,6 +58258,16 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBoostsInput, UserUpdateWithoutBoostsInput>, UserUncheckedUpdateWithoutBoostsInput>
   }
 
+  export type BoostBundleUpdateOneWithoutUsedBoostsNestedInput = {
+    create?: XOR<BoostBundleCreateWithoutUsedBoostsInput, BoostBundleUncheckedCreateWithoutUsedBoostsInput>
+    connectOrCreate?: BoostBundleCreateOrConnectWithoutUsedBoostsInput
+    upsert?: BoostBundleUpsertWithoutUsedBoostsInput
+    disconnect?: BoostBundleWhereInput | boolean
+    delete?: BoostBundleWhereInput | boolean
+    connect?: BoostBundleWhereUniqueInput
+    update?: XOR<XOR<BoostBundleUpdateToOneWithWhereWithoutUsedBoostsInput, BoostBundleUpdateWithoutUsedBoostsInput>, BoostBundleUncheckedUpdateWithoutUsedBoostsInput>
+  }
+
   export type PaymentUpdateOneWithoutBoostsNestedInput = {
     create?: XOR<PaymentCreateWithoutBoostsInput, PaymentUncheckedCreateWithoutBoostsInput>
     connectOrCreate?: PaymentCreateOrConnectWithoutBoostsInput
@@ -51197,6 +58276,62 @@ export namespace Prisma {
     delete?: PaymentWhereInput | boolean
     connect?: PaymentWhereUniqueInput
     update?: XOR<XOR<PaymentUpdateToOneWithWhereWithoutBoostsInput, PaymentUpdateWithoutBoostsInput>, PaymentUncheckedUpdateWithoutBoostsInput>
+  }
+
+  export type UserCreateNestedOneWithoutBoostBundlesInput = {
+    create?: XOR<UserCreateWithoutBoostBundlesInput, UserUncheckedCreateWithoutBoostBundlesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBoostBundlesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PropertyBoostCreateNestedManyWithoutBundleInput = {
+    create?: XOR<PropertyBoostCreateWithoutBundleInput, PropertyBoostUncheckedCreateWithoutBundleInput> | PropertyBoostCreateWithoutBundleInput[] | PropertyBoostUncheckedCreateWithoutBundleInput[]
+    connectOrCreate?: PropertyBoostCreateOrConnectWithoutBundleInput | PropertyBoostCreateOrConnectWithoutBundleInput[]
+    createMany?: PropertyBoostCreateManyBundleInputEnvelope
+    connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+  }
+
+  export type PropertyBoostUncheckedCreateNestedManyWithoutBundleInput = {
+    create?: XOR<PropertyBoostCreateWithoutBundleInput, PropertyBoostUncheckedCreateWithoutBundleInput> | PropertyBoostCreateWithoutBundleInput[] | PropertyBoostUncheckedCreateWithoutBundleInput[]
+    connectOrCreate?: PropertyBoostCreateOrConnectWithoutBundleInput | PropertyBoostCreateOrConnectWithoutBundleInput[]
+    createMany?: PropertyBoostCreateManyBundleInputEnvelope
+    connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutBoostBundlesNestedInput = {
+    create?: XOR<UserCreateWithoutBoostBundlesInput, UserUncheckedCreateWithoutBoostBundlesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBoostBundlesInput
+    upsert?: UserUpsertWithoutBoostBundlesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBoostBundlesInput, UserUpdateWithoutBoostBundlesInput>, UserUncheckedUpdateWithoutBoostBundlesInput>
+  }
+
+  export type PropertyBoostUpdateManyWithoutBundleNestedInput = {
+    create?: XOR<PropertyBoostCreateWithoutBundleInput, PropertyBoostUncheckedCreateWithoutBundleInput> | PropertyBoostCreateWithoutBundleInput[] | PropertyBoostUncheckedCreateWithoutBundleInput[]
+    connectOrCreate?: PropertyBoostCreateOrConnectWithoutBundleInput | PropertyBoostCreateOrConnectWithoutBundleInput[]
+    upsert?: PropertyBoostUpsertWithWhereUniqueWithoutBundleInput | PropertyBoostUpsertWithWhereUniqueWithoutBundleInput[]
+    createMany?: PropertyBoostCreateManyBundleInputEnvelope
+    set?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    disconnect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    delete?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    update?: PropertyBoostUpdateWithWhereUniqueWithoutBundleInput | PropertyBoostUpdateWithWhereUniqueWithoutBundleInput[]
+    updateMany?: PropertyBoostUpdateManyWithWhereWithoutBundleInput | PropertyBoostUpdateManyWithWhereWithoutBundleInput[]
+    deleteMany?: PropertyBoostScalarWhereInput | PropertyBoostScalarWhereInput[]
+  }
+
+  export type PropertyBoostUncheckedUpdateManyWithoutBundleNestedInput = {
+    create?: XOR<PropertyBoostCreateWithoutBundleInput, PropertyBoostUncheckedCreateWithoutBundleInput> | PropertyBoostCreateWithoutBundleInput[] | PropertyBoostUncheckedCreateWithoutBundleInput[]
+    connectOrCreate?: PropertyBoostCreateOrConnectWithoutBundleInput | PropertyBoostCreateOrConnectWithoutBundleInput[]
+    upsert?: PropertyBoostUpsertWithWhereUniqueWithoutBundleInput | PropertyBoostUpsertWithWhereUniqueWithoutBundleInput[]
+    createMany?: PropertyBoostCreateManyBundleInputEnvelope
+    set?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    disconnect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    delete?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+    update?: PropertyBoostUpdateWithWhereUniqueWithoutBundleInput | PropertyBoostUpdateWithWhereUniqueWithoutBundleInput[]
+    updateMany?: PropertyBoostUpdateManyWithWhereWithoutBundleInput | PropertyBoostUpdateManyWithWhereWithoutBundleInput[]
+    deleteMany?: PropertyBoostScalarWhereInput | PropertyBoostScalarWhereInput[]
   }
 
   export type PropertyCreateNestedOneWithoutLocationRequestsInput = {
@@ -51672,11 +58807,25 @@ export namespace Prisma {
     connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
   }
 
+  export type SubscriptionCreateNestedManyWithoutPaymentInput = {
+    create?: XOR<SubscriptionCreateWithoutPaymentInput, SubscriptionUncheckedCreateWithoutPaymentInput> | SubscriptionCreateWithoutPaymentInput[] | SubscriptionUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutPaymentInput | SubscriptionCreateOrConnectWithoutPaymentInput[]
+    createMany?: SubscriptionCreateManyPaymentInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+  }
+
   export type PropertyBoostUncheckedCreateNestedManyWithoutPaymentInput = {
     create?: XOR<PropertyBoostCreateWithoutPaymentInput, PropertyBoostUncheckedCreateWithoutPaymentInput> | PropertyBoostCreateWithoutPaymentInput[] | PropertyBoostUncheckedCreateWithoutPaymentInput[]
     connectOrCreate?: PropertyBoostCreateOrConnectWithoutPaymentInput | PropertyBoostCreateOrConnectWithoutPaymentInput[]
     createMany?: PropertyBoostCreateManyPaymentInputEnvelope
     connect?: PropertyBoostWhereUniqueInput | PropertyBoostWhereUniqueInput[]
+  }
+
+  export type SubscriptionUncheckedCreateNestedManyWithoutPaymentInput = {
+    create?: XOR<SubscriptionCreateWithoutPaymentInput, SubscriptionUncheckedCreateWithoutPaymentInput> | SubscriptionCreateWithoutPaymentInput[] | SubscriptionUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutPaymentInput | SubscriptionCreateOrConnectWithoutPaymentInput[]
+    createMany?: SubscriptionCreateManyPaymentInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
   }
 
   export type EnumPaymentMethodFieldUpdateOperationsInput = {
@@ -51713,6 +58862,20 @@ export namespace Prisma {
     deleteMany?: PropertyBoostScalarWhereInput | PropertyBoostScalarWhereInput[]
   }
 
+  export type SubscriptionUpdateManyWithoutPaymentNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutPaymentInput, SubscriptionUncheckedCreateWithoutPaymentInput> | SubscriptionCreateWithoutPaymentInput[] | SubscriptionUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutPaymentInput | SubscriptionCreateOrConnectWithoutPaymentInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutPaymentInput | SubscriptionUpsertWithWhereUniqueWithoutPaymentInput[]
+    createMany?: SubscriptionCreateManyPaymentInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutPaymentInput | SubscriptionUpdateWithWhereUniqueWithoutPaymentInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutPaymentInput | SubscriptionUpdateManyWithWhereWithoutPaymentInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
   export type PropertyBoostUncheckedUpdateManyWithoutPaymentNestedInput = {
     create?: XOR<PropertyBoostCreateWithoutPaymentInput, PropertyBoostUncheckedCreateWithoutPaymentInput> | PropertyBoostCreateWithoutPaymentInput[] | PropertyBoostUncheckedCreateWithoutPaymentInput[]
     connectOrCreate?: PropertyBoostCreateOrConnectWithoutPaymentInput | PropertyBoostCreateOrConnectWithoutPaymentInput[]
@@ -51725,6 +58888,50 @@ export namespace Prisma {
     update?: PropertyBoostUpdateWithWhereUniqueWithoutPaymentInput | PropertyBoostUpdateWithWhereUniqueWithoutPaymentInput[]
     updateMany?: PropertyBoostUpdateManyWithWhereWithoutPaymentInput | PropertyBoostUpdateManyWithWhereWithoutPaymentInput[]
     deleteMany?: PropertyBoostScalarWhereInput | PropertyBoostScalarWhereInput[]
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutPaymentNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutPaymentInput, SubscriptionUncheckedCreateWithoutPaymentInput> | SubscriptionCreateWithoutPaymentInput[] | SubscriptionUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutPaymentInput | SubscriptionCreateOrConnectWithoutPaymentInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutPaymentInput | SubscriptionUpsertWithWhereUniqueWithoutPaymentInput[]
+    createMany?: SubscriptionCreateManyPaymentInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutPaymentInput | SubscriptionUpdateWithWhereUniqueWithoutPaymentInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutPaymentInput | SubscriptionUpdateManyWithWhereWithoutPaymentInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSubscriptionsInput = {
+    create?: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PaymentCreateNestedOneWithoutSubscriptionsInput = {
+    create?: XOR<PaymentCreateWithoutSubscriptionsInput, PaymentUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutSubscriptionsInput
+    connect?: PaymentWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+    create?: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionsInput
+    upsert?: UserUpsertWithoutSubscriptionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionsInput, UserUpdateWithoutSubscriptionsInput>, UserUncheckedUpdateWithoutSubscriptionsInput>
+  }
+
+  export type PaymentUpdateOneWithoutSubscriptionsNestedInput = {
+    create?: XOR<PaymentCreateWithoutSubscriptionsInput, PaymentUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutSubscriptionsInput
+    upsert?: PaymentUpsertWithoutSubscriptionsInput
+    disconnect?: PaymentWhereInput | boolean
+    delete?: PaymentWhereInput | boolean
+    connect?: PaymentWhereUniqueInput
+    update?: XOR<XOR<PaymentUpdateToOneWithWhereWithoutSubscriptionsInput, PaymentUpdateWithoutSubscriptionsInput>, PaymentUncheckedUpdateWithoutSubscriptionsInput>
   }
 
   export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -51881,6 +59088,34 @@ export namespace Prisma {
     deleteMany?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutUpgradeBannersInput = {
+    create?: XOR<UserCreateWithoutUpgradeBannersInput, UserUncheckedCreateWithoutUpgradeBannersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpgradeBannersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUpgradeBannersNestedInput = {
+    create?: XOR<UserCreateWithoutUpgradeBannersInput, UserUncheckedCreateWithoutUpgradeBannersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpgradeBannersInput
+    upsert?: UserUpsertWithoutUpgradeBannersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpgradeBannersInput, UserUpdateWithoutUpgradeBannersInput>, UserUncheckedUpdateWithoutUpgradeBannersInput>
+  }
+
+  export type UserCreateNestedOneWithoutEmailCampaignsInput = {
+    create?: XOR<UserCreateWithoutEmailCampaignsInput, UserUncheckedCreateWithoutEmailCampaignsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmailCampaignsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutEmailCampaignsNestedInput = {
+    create?: XOR<UserCreateWithoutEmailCampaignsInput, UserUncheckedCreateWithoutEmailCampaignsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmailCampaignsInput
+    upsert?: UserUpsertWithoutEmailCampaignsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmailCampaignsInput, UserUpdateWithoutEmailCampaignsInput>, UserUncheckedUpdateWithoutEmailCampaignsInput>
+  }
+
   export type WilayaCreateNestedOneWithoutCommunesInput = {
     create?: XOR<WilayaCreateWithoutCommunesInput, WilayaUncheckedCreateWithoutCommunesInput>
     connectOrCreate?: WilayaCreateOrConnectWithoutCommunesInput
@@ -52006,13 +59241,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedEnumContactPreferenceFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
-    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    not?: NestedEnumContactPreferenceFilter<$PrismaModel> | $Enums.ContactPreference
-  }
-
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -52022,6 +59250,13 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumContactPreferenceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactPreferenceFilter<$PrismaModel> | $Enums.ContactPreference
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
@@ -52136,16 +59371,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedEnumContactPreferenceWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
-    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
-    not?: NestedEnumContactPreferenceWithAggregatesFilter<$PrismaModel> | $Enums.ContactPreference
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumContactPreferenceFilter<$PrismaModel>
-    _max?: NestedEnumContactPreferenceFilter<$PrismaModel>
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -52171,6 +59396,16 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumContactPreferenceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactPreference | EnumContactPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactPreference[] | ListEnumContactPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactPreferenceWithAggregatesFilter<$PrismaModel> | $Enums.ContactPreference
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContactPreferenceFilter<$PrismaModel>
+    _max?: NestedEnumContactPreferenceFilter<$PrismaModel>
   }
 
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -53319,6 +60554,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     boosts?: PropertyBoostCreateNestedManyWithoutPaymentInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateWithoutUserInput = {
@@ -53352,6 +60588,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutPaymentInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentCreateOrConnectWithoutUserInput = {
@@ -53369,6 +60606,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -53382,6 +60621,7 @@ export namespace Prisma {
     totalImpressions?: number
     totalClicks?: number
     property: PropertyCreateNestedOneWithoutBoostInput
+    bundle?: BoostBundleCreateNestedOneWithoutUsedBoostsInput
     payment?: PaymentCreateNestedOneWithoutBoostsInput
   }
 
@@ -53391,6 +60631,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     propertyId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -53413,6 +60656,88 @@ export namespace Prisma {
 
   export type PropertyBoostCreateManyUserInputEnvelope = {
     data: PropertyBoostCreateManyUserInput | PropertyBoostCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BoostBundleCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+    usedBoosts?: PropertyBoostCreateNestedManyWithoutBundleInput
+  }
+
+  export type BoostBundleUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+    usedBoosts?: PropertyBoostUncheckedCreateNestedManyWithoutBundleInput
+  }
+
+  export type BoostBundleCreateOrConnectWithoutUserInput = {
+    where: BoostBundleWhereUniqueInput
+    create: XOR<BoostBundleCreateWithoutUserInput, BoostBundleUncheckedCreateWithoutUserInput>
+  }
+
+  export type BoostBundleCreateManyUserInputEnvelope = {
+    data: BoostBundleCreateManyUserInput | BoostBundleCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SubscriptionCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+    payment?: PaymentCreateNestedOneWithoutSubscriptionsInput
+  }
+
+  export type SubscriptionUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    paymentId?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+  }
+
+  export type SubscriptionCreateOrConnectWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SubscriptionCreateManyUserInputEnvelope = {
+    data: SubscriptionCreateManyUserInput | SubscriptionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -53597,6 +60922,72 @@ export namespace Prisma {
 
   export type LocationRequestCreateManyOwnerInputEnvelope = {
     data: LocationRequestCreateManyOwnerInput | LocationRequestCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UpgradeBannerCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerType: string
+    dismissedAt?: Date | string | null
+    impressions?: number
+    clicked?: boolean
+    expiresAt: Date | string
+  }
+
+  export type UpgradeBannerUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerType: string
+    dismissedAt?: Date | string | null
+    impressions?: number
+    clicked?: boolean
+    expiresAt: Date | string
+  }
+
+  export type UpgradeBannerCreateOrConnectWithoutUserInput = {
+    where: UpgradeBannerWhereUniqueInput
+    create: XOR<UpgradeBannerCreateWithoutUserInput, UpgradeBannerUncheckedCreateWithoutUserInput>
+  }
+
+  export type UpgradeBannerCreateManyUserInputEnvelope = {
+    data: UpgradeBannerCreateManyUserInput | UpgradeBannerCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailCampaignCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignType: string
+    sentAt?: Date | string
+    opened?: boolean
+    openedAt?: Date | string | null
+    clicked?: boolean
+    clickedAt?: Date | string | null
+  }
+
+  export type EmailCampaignUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignType: string
+    sentAt?: Date | string
+    opened?: boolean
+    openedAt?: Date | string | null
+    clicked?: boolean
+    clickedAt?: Date | string | null
+  }
+
+  export type EmailCampaignCreateOrConnectWithoutUserInput = {
+    where: EmailCampaignWhereUniqueInput
+    create: XOR<EmailCampaignCreateWithoutUserInput, EmailCampaignUncheckedCreateWithoutUserInput>
+  }
+
+  export type EmailCampaignCreateManyUserInputEnvelope = {
+    data: EmailCampaignCreateManyUserInput | EmailCampaignCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -54065,6 +61456,9 @@ export namespace Prisma {
     propertyId?: StringFilter<"PropertyBoost"> | string
     userId?: StringFilter<"PropertyBoost"> | string
     boostTier?: EnumBoostTierFilter<"PropertyBoost"> | $Enums.BoostTier
+    durationDays?: IntFilter<"PropertyBoost"> | number
+    fromBundle?: BoolFilter<"PropertyBoost"> | boolean
+    bundleId?: StringNullableFilter<"PropertyBoost"> | string | null
     startDate?: DateTimeFilter<"PropertyBoost"> | Date | string
     endDate?: DateTimeFilter<"PropertyBoost"> | Date | string
     status?: EnumBoostStatusFilter<"PropertyBoost"> | $Enums.BoostStatus
@@ -54078,6 +61472,76 @@ export namespace Prisma {
     notificationSentAt?: DateTimeNullableFilter<"PropertyBoost"> | Date | string | null
     totalImpressions?: IntFilter<"PropertyBoost"> | number
     totalClicks?: IntFilter<"PropertyBoost"> | number
+  }
+
+  export type BoostBundleUpsertWithWhereUniqueWithoutUserInput = {
+    where: BoostBundleWhereUniqueInput
+    update: XOR<BoostBundleUpdateWithoutUserInput, BoostBundleUncheckedUpdateWithoutUserInput>
+    create: XOR<BoostBundleCreateWithoutUserInput, BoostBundleUncheckedCreateWithoutUserInput>
+  }
+
+  export type BoostBundleUpdateWithWhereUniqueWithoutUserInput = {
+    where: BoostBundleWhereUniqueInput
+    data: XOR<BoostBundleUpdateWithoutUserInput, BoostBundleUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BoostBundleUpdateManyWithWhereWithoutUserInput = {
+    where: BoostBundleScalarWhereInput
+    data: XOR<BoostBundleUpdateManyMutationInput, BoostBundleUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BoostBundleScalarWhereInput = {
+    AND?: BoostBundleScalarWhereInput | BoostBundleScalarWhereInput[]
+    OR?: BoostBundleScalarWhereInput[]
+    NOT?: BoostBundleScalarWhereInput | BoostBundleScalarWhereInput[]
+    id?: StringFilter<"BoostBundle"> | string
+    createdAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    updatedAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    userId?: StringFilter<"BoostBundle"> | string
+    tierLevel?: IntFilter<"BoostBundle"> | number
+    quantity?: IntFilter<"BoostBundle"> | number
+    remaining?: IntFilter<"BoostBundle"> | number
+    pricePaid?: BigIntFilter<"BoostBundle"> | bigint | number
+    purchasedAt?: DateTimeFilter<"BoostBundle"> | Date | string
+    expiresAt?: DateTimeFilter<"BoostBundle"> | Date | string
+  }
+
+  export type SubscriptionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    update: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SubscriptionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    data: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SubscriptionUpdateManyWithWhereWithoutUserInput = {
+    where: SubscriptionScalarWhereInput
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SubscriptionScalarWhereInput = {
+    AND?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    OR?: SubscriptionScalarWhereInput[]
+    NOT?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    userId?: StringFilter<"Subscription"> | string
+    tier?: EnumAccountTierFilter<"Subscription"> | $Enums.AccountTier
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    endDate?: DateTimeFilter<"Subscription"> | Date | string
+    isActive?: BoolFilter<"Subscription"> | boolean
+    autoRenew?: BoolFilter<"Subscription"> | boolean
+    amountPaid?: BigIntFilter<"Subscription"> | bigint | number
+    currency?: StringFilter<"Subscription"> | string
+    billingCycle?: StringFilter<"Subscription"> | string
+    paymentId?: StringNullableFilter<"Subscription"> | string | null
+    cancelledAt?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancellationReason?: StringNullableFilter<"Subscription"> | string | null
+    expiryWarningSenitAt?: BoolFilter<"Subscription"> | boolean
   }
 
   export type PropertyViewDetailUpsertWithWhereUniqueWithoutUserInput = {
@@ -54210,6 +61674,69 @@ export namespace Prisma {
     data: XOR<LocationRequestUpdateManyMutationInput, LocationRequestUncheckedUpdateManyWithoutOwnerInput>
   }
 
+  export type UpgradeBannerUpsertWithWhereUniqueWithoutUserInput = {
+    where: UpgradeBannerWhereUniqueInput
+    update: XOR<UpgradeBannerUpdateWithoutUserInput, UpgradeBannerUncheckedUpdateWithoutUserInput>
+    create: XOR<UpgradeBannerCreateWithoutUserInput, UpgradeBannerUncheckedCreateWithoutUserInput>
+  }
+
+  export type UpgradeBannerUpdateWithWhereUniqueWithoutUserInput = {
+    where: UpgradeBannerWhereUniqueInput
+    data: XOR<UpgradeBannerUpdateWithoutUserInput, UpgradeBannerUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UpgradeBannerUpdateManyWithWhereWithoutUserInput = {
+    where: UpgradeBannerScalarWhereInput
+    data: XOR<UpgradeBannerUpdateManyMutationInput, UpgradeBannerUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UpgradeBannerScalarWhereInput = {
+    AND?: UpgradeBannerScalarWhereInput | UpgradeBannerScalarWhereInput[]
+    OR?: UpgradeBannerScalarWhereInput[]
+    NOT?: UpgradeBannerScalarWhereInput | UpgradeBannerScalarWhereInput[]
+    id?: StringFilter<"UpgradeBanner"> | string
+    createdAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    updatedAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+    userId?: StringFilter<"UpgradeBanner"> | string
+    bannerType?: StringFilter<"UpgradeBanner"> | string
+    dismissedAt?: DateTimeNullableFilter<"UpgradeBanner"> | Date | string | null
+    impressions?: IntFilter<"UpgradeBanner"> | number
+    clicked?: BoolFilter<"UpgradeBanner"> | boolean
+    expiresAt?: DateTimeFilter<"UpgradeBanner"> | Date | string
+  }
+
+  export type EmailCampaignUpsertWithWhereUniqueWithoutUserInput = {
+    where: EmailCampaignWhereUniqueInput
+    update: XOR<EmailCampaignUpdateWithoutUserInput, EmailCampaignUncheckedUpdateWithoutUserInput>
+    create: XOR<EmailCampaignCreateWithoutUserInput, EmailCampaignUncheckedCreateWithoutUserInput>
+  }
+
+  export type EmailCampaignUpdateWithWhereUniqueWithoutUserInput = {
+    where: EmailCampaignWhereUniqueInput
+    data: XOR<EmailCampaignUpdateWithoutUserInput, EmailCampaignUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EmailCampaignUpdateManyWithWhereWithoutUserInput = {
+    where: EmailCampaignScalarWhereInput
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type EmailCampaignScalarWhereInput = {
+    AND?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
+    OR?: EmailCampaignScalarWhereInput[]
+    NOT?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
+    id?: StringFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    userId?: StringFilter<"EmailCampaign"> | string
+    campaignType?: StringFilter<"EmailCampaign"> | string
+    sentAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    opened?: BoolFilter<"EmailCampaign"> | boolean
+    openedAt?: DateTimeNullableFilter<"EmailCampaign"> | Date | string | null
+    clicked?: BoolFilter<"EmailCampaign"> | boolean
+    clickedAt?: DateTimeNullableFilter<"EmailCampaign"> | Date | string | null
+  }
+
   export type UserRoleCreateWithoutRoleInput = {
     id?: string
     createdAt?: Date | string
@@ -54314,14 +61841,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -54356,10 +61891,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRolesInput = {
@@ -54376,14 +61915,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -54418,10 +61965,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRolesInput = {
@@ -54479,14 +62030,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54521,10 +62080,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRolesInput = {
@@ -54541,14 +62104,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54583,10 +62154,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleUpsertWithoutUsersInput = {
@@ -54776,14 +62351,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -54818,10 +62401,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPropertiesInput = {
@@ -54838,14 +62425,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -54880,10 +62475,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPropertiesInput = {
@@ -55040,6 +62639,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -55053,6 +62654,7 @@ export namespace Prisma {
     totalImpressions?: number
     totalClicks?: number
     user: UserCreateNestedOneWithoutBoostsInput
+    bundle?: BoostBundleCreateNestedOneWithoutUsedBoostsInput
     payment?: PaymentCreateNestedOneWithoutBoostsInput
   }
 
@@ -55062,6 +62664,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -55445,14 +63050,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55487,10 +63100,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPropertiesInput = {
@@ -55507,14 +63124,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55549,10 +63174,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AmenitiesOnPropertiesUpsertWithWhereUniqueWithoutPropertyInput = {
@@ -55731,6 +63360,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -55744,6 +63375,7 @@ export namespace Prisma {
     totalImpressions?: IntFieldUpdateOperationsInput | number
     totalClicks?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutBoostsNestedInput
+    bundle?: BoostBundleUpdateOneWithoutUsedBoostsNestedInput
     payment?: PaymentUpdateOneWithoutBoostsNestedInput
   }
 
@@ -55753,6 +63385,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -57487,14 +65122,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -57529,10 +65172,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBoostsInput = {
@@ -57549,14 +65196,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -57591,15 +65246,50 @@ export namespace Prisma {
     reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBoostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutBoostsInput, UserUncheckedCreateWithoutBoostsInput>
+  }
+
+  export type BoostBundleCreateWithoutUsedBoostsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+    user: UserCreateNestedOneWithoutBoostBundlesInput
+  }
+
+  export type BoostBundleUncheckedCreateWithoutUsedBoostsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type BoostBundleCreateOrConnectWithoutUsedBoostsInput = {
+    where: BoostBundleWhereUniqueInput
+    create: XOR<BoostBundleCreateWithoutUsedBoostsInput, BoostBundleUncheckedCreateWithoutUsedBoostsInput>
   }
 
   export type PaymentCreateWithoutBoostsInput = {
@@ -57633,6 +65323,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     user: UserCreateNestedOneWithoutPaymentsInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateWithoutBoostsInput = {
@@ -57666,6 +65357,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue
     ipAddress?: string | null
     userAgent?: string | null
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentCreateOrConnectWithoutBoostsInput = {
@@ -57861,14 +65553,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57903,10 +65603,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBoostsInput = {
@@ -57923,14 +65627,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57965,10 +65677,51 @@ export namespace Prisma {
     reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type BoostBundleUpsertWithoutUsedBoostsInput = {
+    update: XOR<BoostBundleUpdateWithoutUsedBoostsInput, BoostBundleUncheckedUpdateWithoutUsedBoostsInput>
+    create: XOR<BoostBundleCreateWithoutUsedBoostsInput, BoostBundleUncheckedCreateWithoutUsedBoostsInput>
+    where?: BoostBundleWhereInput
+  }
+
+  export type BoostBundleUpdateToOneWithWhereWithoutUsedBoostsInput = {
+    where?: BoostBundleWhereInput
+    data: XOR<BoostBundleUpdateWithoutUsedBoostsInput, BoostBundleUncheckedUpdateWithoutUsedBoostsInput>
+  }
+
+  export type BoostBundleUpdateWithoutUsedBoostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBoostBundlesNestedInput
+  }
+
+  export type BoostBundleUncheckedUpdateWithoutUsedBoostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentUpsertWithoutBoostsInput = {
@@ -58013,6 +65766,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutBoostsInput = {
@@ -58046,6 +65800,393 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type UserCreateWithoutBoostBundlesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleCreateNestedManyWithoutUserInput
+    properties?: PropertyCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBoostBundlesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    properties?: PropertyUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationUncheckedCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationUncheckedCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewUncheckedCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBoostBundlesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBoostBundlesInput, UserUncheckedCreateWithoutBoostBundlesInput>
+  }
+
+  export type PropertyBoostCreateWithoutBundleInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    startDate?: Date | string
+    endDate: Date | string
+    status?: $Enums.BoostStatus
+    amountPaid: bigint | number
+    priceReference: bigint | number
+    previousTier?: $Enums.BoostTier | null
+    isUpgrade?: boolean
+    upgradeAmountPaid?: bigint | number | null
+    expirationNotificationSent?: boolean
+    notificationSentAt?: Date | string | null
+    totalImpressions?: number
+    totalClicks?: number
+    property: PropertyCreateNestedOneWithoutBoostInput
+    user: UserCreateNestedOneWithoutBoostsInput
+    payment?: PaymentCreateNestedOneWithoutBoostsInput
+  }
+
+  export type PropertyBoostUncheckedCreateWithoutBundleInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propertyId: string
+    userId: string
+    boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    startDate?: Date | string
+    endDate: Date | string
+    status?: $Enums.BoostStatus
+    amountPaid: bigint | number
+    priceReference: bigint | number
+    previousTier?: $Enums.BoostTier | null
+    isUpgrade?: boolean
+    upgradeAmountPaid?: bigint | number | null
+    paymentId?: string | null
+    expirationNotificationSent?: boolean
+    notificationSentAt?: Date | string | null
+    totalImpressions?: number
+    totalClicks?: number
+  }
+
+  export type PropertyBoostCreateOrConnectWithoutBundleInput = {
+    where: PropertyBoostWhereUniqueInput
+    create: XOR<PropertyBoostCreateWithoutBundleInput, PropertyBoostUncheckedCreateWithoutBundleInput>
+  }
+
+  export type PropertyBoostCreateManyBundleInputEnvelope = {
+    data: PropertyBoostCreateManyBundleInput | PropertyBoostCreateManyBundleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutBoostBundlesInput = {
+    update: XOR<UserUpdateWithoutBoostBundlesInput, UserUncheckedUpdateWithoutBoostBundlesInput>
+    create: XOR<UserCreateWithoutBoostBundlesInput, UserUncheckedCreateWithoutBoostBundlesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBoostBundlesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBoostBundlesInput, UserUncheckedUpdateWithoutBoostBundlesInput>
+  }
+
+  export type UserUpdateWithoutBoostBundlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    properties?: PropertyUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBoostBundlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    properties?: PropertyUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUncheckedUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUncheckedUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUncheckedUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PropertyBoostUpsertWithWhereUniqueWithoutBundleInput = {
+    where: PropertyBoostWhereUniqueInput
+    update: XOR<PropertyBoostUpdateWithoutBundleInput, PropertyBoostUncheckedUpdateWithoutBundleInput>
+    create: XOR<PropertyBoostCreateWithoutBundleInput, PropertyBoostUncheckedCreateWithoutBundleInput>
+  }
+
+  export type PropertyBoostUpdateWithWhereUniqueWithoutBundleInput = {
+    where: PropertyBoostWhereUniqueInput
+    data: XOR<PropertyBoostUpdateWithoutBundleInput, PropertyBoostUncheckedUpdateWithoutBundleInput>
+  }
+
+  export type PropertyBoostUpdateManyWithWhereWithoutBundleInput = {
+    where: PropertyBoostScalarWhereInput
+    data: XOR<PropertyBoostUpdateManyMutationInput, PropertyBoostUncheckedUpdateManyWithoutBundleInput>
   }
 
   export type PropertyCreateWithoutLocationRequestsInput = {
@@ -58219,14 +66360,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -58262,9 +66411,13 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLocationRequestsSentInput = {
@@ -58281,14 +66434,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -58324,9 +66485,13 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLocationRequestsSentInput = {
@@ -58348,14 +66513,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -58391,9 +66564,13 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLocationRequestsReceivedInput = {
@@ -58410,14 +66587,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -58453,9 +66638,13 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLocationRequestsReceivedInput = {
@@ -58651,14 +66840,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -58694,9 +66891,13 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLocationRequestsSentInput = {
@@ -58713,14 +66914,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -58756,9 +66965,13 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutLocationRequestsReceivedInput = {
@@ -58786,14 +66999,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -58829,9 +67050,13 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLocationRequestsReceivedInput = {
@@ -58848,14 +67073,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -58891,9 +67124,13 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFavoritesInput = {
@@ -58910,14 +67147,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -58952,10 +67197,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -58972,14 +67221,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -59014,10 +67271,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -59207,14 +67468,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59249,10 +67518,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -59269,14 +67542,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59311,10 +67592,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PropertyUpsertWithoutFavoritesInput = {
@@ -59494,14 +67779,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -59536,10 +67829,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSavedSearchesInput = {
@@ -59556,14 +67853,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -59598,10 +67903,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSavedSearchesInput = {
@@ -59660,14 +67969,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59702,10 +68019,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSavedSearchesInput = {
@@ -59722,14 +68043,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59764,10 +68093,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SavedSearchMatchUpsertWithWhereUniqueWithoutSavedSearchInput = {
@@ -60200,14 +68533,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -60242,10 +68583,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationsAsBuyerInput = {
@@ -60262,14 +68607,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -60304,10 +68657,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationsAsBuyerInput = {
@@ -60329,14 +68686,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -60371,10 +68736,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationsAsSellerInput = {
@@ -60391,14 +68760,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -60433,10 +68810,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationsAsSellerInput = {
@@ -60555,14 +68936,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60597,10 +68986,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsAsBuyerInput = {
@@ -60617,14 +69010,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60659,10 +69060,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutConversationsAsSellerInput = {
@@ -60690,14 +69095,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60732,10 +69145,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsAsSellerInput = {
@@ -60752,14 +69169,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60794,10 +69219,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
@@ -60897,14 +69326,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -60939,10 +69376,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesSentInput = {
@@ -60959,14 +69400,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -61001,10 +69450,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesSentInput = {
@@ -61026,14 +69479,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -61068,10 +69529,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesReceivedInput = {
@@ -61088,14 +69553,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -61130,10 +69603,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesReceivedInput = {
@@ -61380,14 +69857,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61422,10 +69907,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesSentInput = {
@@ -61442,14 +69931,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61484,10 +69981,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutMessagesReceivedInput = {
@@ -61515,14 +70016,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61557,10 +70066,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesReceivedInput = {
@@ -61577,14 +70090,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61619,10 +70140,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PropertyUpsertWithoutMessagesInput = {
@@ -62010,14 +70535,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -62052,10 +70585,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsReceivedInput = {
@@ -62072,14 +70609,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -62114,10 +70659,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsReceivedInput = {
@@ -62139,14 +70688,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -62181,10 +70738,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsGivenInput = {
@@ -62201,14 +70762,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -62243,10 +70812,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsGivenInput = {
@@ -62499,14 +71072,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62541,10 +71122,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsReceivedInput = {
@@ -62561,14 +71146,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62603,10 +71196,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReviewsGivenInput = {
@@ -62634,14 +71231,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62676,10 +71281,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsGivenInput = {
@@ -62696,14 +71305,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62738,10 +71355,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReportsSubmittedInput = {
@@ -62758,14 +71379,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -62800,10 +71429,14 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportsSubmittedInput = {
@@ -62820,14 +71453,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -62862,10 +71503,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportsSubmittedInput = {
@@ -63044,14 +71689,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -63086,10 +71739,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportsReceivedInput = {
@@ -63106,14 +71763,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -63148,10 +71813,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportsReceivedInput = {
@@ -63184,14 +71853,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63226,10 +71903,14 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportsSubmittedInput = {
@@ -63246,14 +71927,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63288,10 +71977,14 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PropertyUpsertWithoutReportsInput = {
@@ -63482,14 +72175,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63524,10 +72225,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportsReceivedInput = {
@@ -63544,14 +72249,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63586,10 +72299,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -63606,14 +72323,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -63648,10 +72373,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -63668,14 +72397,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -63710,10 +72447,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -63726,6 +72467,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -63740,6 +72483,7 @@ export namespace Prisma {
     totalClicks?: number
     property: PropertyCreateNestedOneWithoutBoostInput
     user: UserCreateNestedOneWithoutBoostsInput
+    bundle?: BoostBundleCreateNestedOneWithoutUsedBoostsInput
   }
 
   export type PropertyBoostUncheckedCreateWithoutPaymentInput = {
@@ -63749,6 +72493,9 @@ export namespace Prisma {
     propertyId: string
     userId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -63770,6 +72517,52 @@ export namespace Prisma {
 
   export type PropertyBoostCreateManyPaymentInputEnvelope = {
     data: PropertyBoostCreateManyPaymentInput | PropertyBoostCreateManyPaymentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SubscriptionCreateWithoutPaymentInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+    user: UserCreateNestedOneWithoutSubscriptionsInput
+  }
+
+  export type SubscriptionUncheckedCreateWithoutPaymentInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+  }
+
+  export type SubscriptionCreateOrConnectWithoutPaymentInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutPaymentInput, SubscriptionUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type SubscriptionCreateManyPaymentInputEnvelope = {
+    data: SubscriptionCreateManyPaymentInput | SubscriptionCreateManyPaymentInput[]
     skipDuplicates?: boolean
   }
 
@@ -63798,14 +72591,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63840,10 +72641,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -63860,14 +72665,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63902,10 +72715,14 @@ export namespace Prisma {
     reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PropertyBoostUpsertWithWhereUniqueWithoutPaymentInput = {
@@ -63924,7 +72741,23 @@ export namespace Prisma {
     data: XOR<PropertyBoostUpdateManyMutationInput, PropertyBoostUncheckedUpdateManyWithoutPaymentInput>
   }
 
-  export type UserCreateWithoutNotificationsInput = {
+  export type SubscriptionUpsertWithWhereUniqueWithoutPaymentInput = {
+    where: SubscriptionWhereUniqueInput
+    update: XOR<SubscriptionUpdateWithoutPaymentInput, SubscriptionUncheckedUpdateWithoutPaymentInput>
+    create: XOR<SubscriptionCreateWithoutPaymentInput, SubscriptionUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type SubscriptionUpdateWithWhereUniqueWithoutPaymentInput = {
+    where: SubscriptionWhereUniqueInput
+    data: XOR<SubscriptionUpdateWithoutPaymentInput, SubscriptionUncheckedUpdateWithoutPaymentInput>
+  }
+
+  export type SubscriptionUpdateManyWithWhereWithoutPaymentInput = {
+    where: SubscriptionScalarWhereInput
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutPaymentInput>
+  }
+
+  export type UserCreateWithoutSubscriptionsInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -63938,14 +72771,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -63981,12 +72822,16 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutNotificationsInput = {
+  export type UserUncheckedCreateWithoutSubscriptionsInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -64000,14 +72845,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -64043,28 +72896,105 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
     propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutNotificationsInput = {
+  export type UserCreateOrConnectWithoutSubscriptionsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+    create: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
   }
 
-  export type UserUpsertWithoutNotificationsInput = {
-    update: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
-    create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+  export type PaymentCreateWithoutSubscriptionsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    amount: bigint | number
+    currency?: string
+    method: $Enums.PaymentMethod
+    status?: $Enums.PaymentStatus
+    chargilyTransactionId?: string | null
+    chargilyPaymentUrl?: string | null
+    chargilyInvoiceId?: string | null
+    chargilyWebhookData?: NullableJsonNullValueInput | InputJsonValue
+    productType: $Enums.PaymentProductType
+    productDetails?: NullableJsonNullValueInput | InputJsonValue
+    failureReason?: string | null
+    failureCode?: string | null
+    retryCount?: number
+    lastRetryAt?: Date | string | null
+    maxRetries?: number
+    webhookReceivedAt?: Date | string | null
+    webhookVerified?: boolean
+    refundedAt?: Date | string | null
+    refundAmount?: bigint | number | null
+    refundReason?: string | null
+    refundedBy?: string | null
+    invoiceNumber?: string | null
+    invoiceUrl?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    ipAddress?: string | null
+    userAgent?: string | null
+    user: UserCreateNestedOneWithoutPaymentsInput
+    boosts?: PropertyBoostCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateWithoutSubscriptionsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    amount: bigint | number
+    currency?: string
+    method: $Enums.PaymentMethod
+    status?: $Enums.PaymentStatus
+    chargilyTransactionId?: string | null
+    chargilyPaymentUrl?: string | null
+    chargilyInvoiceId?: string | null
+    chargilyWebhookData?: NullableJsonNullValueInput | InputJsonValue
+    productType: $Enums.PaymentProductType
+    productDetails?: NullableJsonNullValueInput | InputJsonValue
+    failureReason?: string | null
+    failureCode?: string | null
+    retryCount?: number
+    lastRetryAt?: Date | string | null
+    maxRetries?: number
+    webhookReceivedAt?: Date | string | null
+    webhookVerified?: boolean
+    refundedAt?: Date | string | null
+    refundAmount?: bigint | number | null
+    refundReason?: string | null
+    refundedBy?: string | null
+    invoiceNumber?: string | null
+    invoiceUrl?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    ipAddress?: string | null
+    userAgent?: string | null
+    boosts?: PropertyBoostUncheckedCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutSubscriptionsInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutSubscriptionsInput, PaymentUncheckedCreateWithoutSubscriptionsInput>
+  }
+
+  export type UserUpsertWithoutSubscriptionsInput = {
+    update: XOR<UserUpdateWithoutSubscriptionsInput, UserUncheckedUpdateWithoutSubscriptionsInput>
+    create: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  export type UserUpdateToOneWithWhereWithoutSubscriptionsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
+    data: XOR<UserUpdateWithoutSubscriptionsInput, UserUncheckedUpdateWithoutSubscriptionsInput>
   }
 
-  export type UserUpdateWithoutNotificationsInput = {
+  export type UserUpdateWithoutSubscriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64078,14 +73008,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -64121,12 +73059,16 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutNotificationsInput = {
+  export type UserUncheckedUpdateWithoutSubscriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64140,14 +73082,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -64183,9 +73133,404 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PaymentUpsertWithoutSubscriptionsInput = {
+    update: XOR<PaymentUpdateWithoutSubscriptionsInput, PaymentUncheckedUpdateWithoutSubscriptionsInput>
+    create: XOR<PaymentCreateWithoutSubscriptionsInput, PaymentUncheckedCreateWithoutSubscriptionsInput>
+    where?: PaymentWhereInput
+  }
+
+  export type PaymentUpdateToOneWithWhereWithoutSubscriptionsInput = {
+    where?: PaymentWhereInput
+    data: XOR<PaymentUpdateWithoutSubscriptionsInput, PaymentUncheckedUpdateWithoutSubscriptionsInput>
+  }
+
+  export type PaymentUpdateWithoutSubscriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    chargilyTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    chargilyPaymentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    chargilyInvoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    chargilyWebhookData?: NullableJsonNullValueInput | InputJsonValue
+    productType?: EnumPaymentProductTypeFieldUpdateOperationsInput | $Enums.PaymentProductType
+    productDetails?: NullableJsonNullValueInput | InputJsonValue
+    failureReason?: NullableStringFieldUpdateOperationsInput | string | null
+    failureCode?: NullableStringFieldUpdateOperationsInput | string | null
+    retryCount?: IntFieldUpdateOperationsInput | number
+    lastRetryAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxRetries?: IntFieldUpdateOperationsInput | number
+    webhookReceivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    webhookVerified?: BoolFieldUpdateOperationsInput | boolean
+    refundedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refundAmount?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    refundReason?: NullableStringFieldUpdateOperationsInput | string | null
+    refundedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
+    boosts?: PropertyBoostUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutSubscriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    chargilyTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    chargilyPaymentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    chargilyInvoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    chargilyWebhookData?: NullableJsonNullValueInput | InputJsonValue
+    productType?: EnumPaymentProductTypeFieldUpdateOperationsInput | $Enums.PaymentProductType
+    productDetails?: NullableJsonNullValueInput | InputJsonValue
+    failureReason?: NullableStringFieldUpdateOperationsInput | string | null
+    failureCode?: NullableStringFieldUpdateOperationsInput | string | null
+    retryCount?: IntFieldUpdateOperationsInput | number
+    lastRetryAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxRetries?: IntFieldUpdateOperationsInput | number
+    webhookReceivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    webhookVerified?: BoolFieldUpdateOperationsInput | boolean
+    refundedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refundAmount?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    refundReason?: NullableStringFieldUpdateOperationsInput | string | null
+    refundedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    boosts?: PropertyBoostUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type UserCreateWithoutNotificationsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleCreateNestedManyWithoutUserInput
+    properties?: PropertyCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotificationsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    properties?: PropertyUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationUncheckedCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationUncheckedCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewUncheckedCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotificationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type UserUpsertWithoutNotificationsInput = {
+    update: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type UserUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    properties?: PropertyUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    properties?: PropertyUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUncheckedUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUncheckedUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUncheckedUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PropertyCreateWithoutViewStatsInput = {
@@ -64679,14 +74024,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -64722,9 +74075,13 @@ export namespace Prisma {
     reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPropertyViewDetailsInput = {
@@ -64741,14 +74098,22 @@ export namespace Prisma {
     avatar?: string | null
     accountTier?: $Enums.AccountTier
     status?: $Enums.AccountStatus
-    proActivatedAt?: Date | string | null
-    proExpiresAt?: Date | string | null
-    proAutoRenew?: boolean
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
     companyName?: string | null
     companyLogo?: string | null
     companyDescription?: string | null
     commerceRegister?: string | null
     taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
     showPhone?: boolean
     showWhatsApp?: boolean
     whatsappNumber?: string | null
@@ -64784,9 +74149,13 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
     locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPropertyViewDetailsInput = {
@@ -64982,14 +74351,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -65025,9 +74402,13 @@ export namespace Prisma {
     reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPropertyViewDetailsInput = {
@@ -65044,14 +74425,22 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    proActivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    proAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
     companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
     commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
     taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
     whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -65087,9 +74476,13 @@ export namespace Prisma {
     reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
     locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommuneCreateWithoutWilayaInput = {
@@ -65336,6 +74729,630 @@ export namespace Prisma {
   export type PropertyUpdateManyWithWhereWithoutWilayaInput = {
     where: PropertyScalarWhereInput
     data: XOR<PropertyUpdateManyMutationInput, PropertyUncheckedUpdateManyWithoutWilayaInput>
+  }
+
+  export type UserCreateWithoutUpgradeBannersInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleCreateNestedManyWithoutUserInput
+    properties?: PropertyCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUpgradeBannersInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    properties?: PropertyUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationUncheckedCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationUncheckedCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewUncheckedCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUpgradeBannersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpgradeBannersInput, UserUncheckedCreateWithoutUpgradeBannersInput>
+  }
+
+  export type UserUpsertWithoutUpgradeBannersInput = {
+    update: XOR<UserUpdateWithoutUpgradeBannersInput, UserUncheckedUpdateWithoutUpgradeBannersInput>
+    create: XOR<UserCreateWithoutUpgradeBannersInput, UserUncheckedCreateWithoutUpgradeBannersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpgradeBannersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpgradeBannersInput, UserUncheckedUpdateWithoutUpgradeBannersInput>
+  }
+
+  export type UserUpdateWithoutUpgradeBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    properties?: PropertyUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpgradeBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    properties?: PropertyUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUncheckedUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUncheckedUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUncheckedUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutEmailCampaignsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleCreateNestedManyWithoutUserInput
+    properties?: PropertyCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutEmailCampaignsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cognitoId: string
+    email: string
+    phone?: string | null
+    emailVerified?: boolean
+    phoneVerified?: boolean
+    firstName?: string | null
+    lastName?: string | null
+    avatar?: string | null
+    accountTier?: $Enums.AccountTier
+    status?: $Enums.AccountStatus
+    subscriptionStartedAt?: Date | string | null
+    subscriptionExpiresAt?: Date | string | null
+    subscriptionAutoRenew?: boolean
+    subscriptionCancelledAt?: Date | string | null
+    trialStartedAt?: Date | string | null
+    trialEndsAt?: Date | string | null
+    trialUsed?: boolean
+    propertyLimit?: number
+    imagesPerPropertyLimit?: number
+    videosPerPropertyLimit?: number
+    companyName?: string | null
+    companyLogo?: string | null
+    companyDescription?: string | null
+    commerceRegister?: string | null
+    taxId?: string | null
+    teamMemberEmails?: UserCreateteamMemberEmailsInput | string[]
+    showPhone?: boolean
+    showWhatsApp?: boolean
+    whatsappNumber?: string | null
+    preferredContact?: $Enums.ContactPreference
+    language?: string
+    emailNotifications?: boolean
+    smsNotifications?: boolean
+    pushNotifications?: boolean
+    autoApproveProperties?: boolean
+    warningCount?: number
+    bannedAt?: Date | string | null
+    banReason?: string | null
+    totalProperties?: number
+    activeProperties?: number
+    totalViews?: number
+    totalFavorites?: number
+    averageRating?: Decimal | DecimalJsLike | number | string | null
+    totalReviews?: number
+    lastLoginAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    deletedAt?: Date | string | null
+    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    properties?: PropertyUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    conversationsAsBuyer?: ConversationUncheckedCreateNestedManyWithoutBuyerInput
+    conversationsAsSeller?: ConversationUncheckedCreateNestedManyWithoutSellerInput
+    messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    reviewsGiven?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    reviewsReceived?: ReviewUncheckedCreateNestedManyWithoutOwnerInput
+    reportsSubmitted?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: ReportUncheckedCreateNestedManyWithoutReportedUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    boosts?: PropertyBoostUncheckedCreateNestedManyWithoutUserInput
+    boostBundles?: BoostBundleUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    propertyViewDetails?: PropertyViewDetailUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    locationRequestsSent?: LocationRequestUncheckedCreateNestedManyWithoutRequesterInput
+    locationRequestsReceived?: LocationRequestUncheckedCreateNestedManyWithoutOwnerInput
+    upgradeBanners?: UpgradeBannerUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutEmailCampaignsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEmailCampaignsInput, UserUncheckedCreateWithoutEmailCampaignsInput>
+  }
+
+  export type UserUpsertWithoutEmailCampaignsInput = {
+    update: XOR<UserUpdateWithoutEmailCampaignsInput, UserUncheckedUpdateWithoutEmailCampaignsInput>
+    create: XOR<UserCreateWithoutEmailCampaignsInput, UserUncheckedCreateWithoutEmailCampaignsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEmailCampaignsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEmailCampaignsInput, UserUncheckedUpdateWithoutEmailCampaignsInput>
+  }
+
+  export type UserUpdateWithoutEmailCampaignsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    properties?: PropertyUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEmailCampaignsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    accountTier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    subscriptionStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionAutoRenew?: BoolFieldUpdateOperationsInput | boolean
+    subscriptionCancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialStartedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialUsed?: BoolFieldUpdateOperationsInput | boolean
+    propertyLimit?: IntFieldUpdateOperationsInput | number
+    imagesPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    videosPerPropertyLimit?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    commerceRegister?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    teamMemberEmails?: UserUpdateteamMemberEmailsInput | string[]
+    showPhone?: BoolFieldUpdateOperationsInput | boolean
+    showWhatsApp?: BoolFieldUpdateOperationsInput | boolean
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredContact?: EnumContactPreferenceFieldUpdateOperationsInput | $Enums.ContactPreference
+    language?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    smsNotifications?: BoolFieldUpdateOperationsInput | boolean
+    pushNotifications?: BoolFieldUpdateOperationsInput | boolean
+    autoApproveProperties?: BoolFieldUpdateOperationsInput | boolean
+    warningCount?: IntFieldUpdateOperationsInput | number
+    bannedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    totalProperties?: IntFieldUpdateOperationsInput | number
+    activeProperties?: IntFieldUpdateOperationsInput | number
+    totalViews?: IntFieldUpdateOperationsInput | number
+    totalFavorites?: IntFieldUpdateOperationsInput | number
+    averageRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalReviews?: IntFieldUpdateOperationsInput | number
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    properties?: PropertyUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    conversationsAsBuyer?: ConversationUncheckedUpdateManyWithoutBuyerNestedInput
+    conversationsAsSeller?: ConversationUncheckedUpdateManyWithoutSellerNestedInput
+    messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    reviewsGiven?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    reviewsReceived?: ReviewUncheckedUpdateManyWithoutOwnerNestedInput
+    reportsSubmitted?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    boosts?: PropertyBoostUncheckedUpdateManyWithoutUserNestedInput
+    boostBundles?: BoostBundleUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    propertyViewDetails?: PropertyViewDetailUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    locationRequestsSent?: LocationRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    locationRequestsReceived?: LocationRequestUncheckedUpdateManyWithoutOwnerNestedInput
+    upgradeBanners?: UpgradeBannerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WilayaCreateWithoutCommunesInput = {
@@ -65855,6 +75872,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     propertyId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -65868,6 +75888,36 @@ export namespace Prisma {
     notificationSentAt?: Date | string | null
     totalImpressions?: number
     totalClicks?: number
+  }
+
+  export type BoostBundleCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tierLevel: number
+    quantity: number
+    remaining: number
+    pricePaid: bigint | number
+    purchasedAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type SubscriptionCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    paymentId?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
   }
 
   export type PropertyViewDetailCreateManyUserInput = {
@@ -65940,6 +75990,29 @@ export namespace Prisma {
     revokedBy?: string | null
     viewedAt?: Date | string | null
     viewCount?: number
+  }
+
+  export type UpgradeBannerCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerType: string
+    dismissedAt?: Date | string | null
+    impressions?: number
+    clicked?: boolean
+    expiresAt: Date | string
+  }
+
+  export type EmailCampaignCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignType: string
+    sentAt?: Date | string
+    opened?: boolean
+    openedAt?: Date | string | null
+    clicked?: boolean
+    clickedAt?: Date | string | null
   }
 
   export type UserRoleUpdateWithoutUserInput = {
@@ -66708,6 +76781,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     boosts?: PropertyBoostUpdateManyWithoutPaymentNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutUserInput = {
@@ -66741,6 +76815,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     boosts?: PropertyBoostUncheckedUpdateManyWithoutPaymentNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateManyWithoutUserInput = {
@@ -66780,6 +76855,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -66793,6 +76870,7 @@ export namespace Prisma {
     totalImpressions?: IntFieldUpdateOperationsInput | number
     totalClicks?: IntFieldUpdateOperationsInput | number
     property?: PropertyUpdateOneRequiredWithoutBoostNestedInput
+    bundle?: BoostBundleUpdateOneWithoutUsedBoostsNestedInput
     payment?: PaymentUpdateOneWithoutBoostsNestedInput
   }
 
@@ -66802,6 +76880,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     propertyId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -66823,6 +76904,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     propertyId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -66836,6 +76920,98 @@ export namespace Prisma {
     notificationSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     totalImpressions?: IntFieldUpdateOperationsInput | number
     totalClicks?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BoostBundleUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedBoosts?: PropertyBoostUpdateManyWithoutBundleNestedInput
+  }
+
+  export type BoostBundleUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedBoosts?: PropertyBoostUncheckedUpdateManyWithoutBundleNestedInput
+  }
+
+  export type BoostBundleUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tierLevel?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    remaining?: IntFieldUpdateOperationsInput | number
+    pricePaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+    payment?: PaymentUpdateOneWithoutSubscriptionsNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PropertyViewDetailUpdateWithoutUserInput = {
@@ -67052,6 +77228,75 @@ export namespace Prisma {
     revokedBy?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UpgradeBannerUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpgradeBannerUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpgradeBannerUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerType?: StringFieldUpdateOperationsInput | string
+    dismissedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EmailCampaignUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EmailCampaignUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignType?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    opened?: BoolFieldUpdateOperationsInput | boolean
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clicked?: BoolFieldUpdateOperationsInput | boolean
+    clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserRoleCreateManyRoleInput = {
@@ -67754,6 +77999,102 @@ export namespace Prisma {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PropertyBoostCreateManyBundleInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propertyId: string
+    userId: string
+    boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    startDate?: Date | string
+    endDate: Date | string
+    status?: $Enums.BoostStatus
+    amountPaid: bigint | number
+    priceReference: bigint | number
+    previousTier?: $Enums.BoostTier | null
+    isUpgrade?: boolean
+    upgradeAmountPaid?: bigint | number | null
+    paymentId?: string | null
+    expirationNotificationSent?: boolean
+    notificationSentAt?: Date | string | null
+    totalImpressions?: number
+    totalClicks?: number
+  }
+
+  export type PropertyBoostUpdateWithoutBundleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceReference?: BigIntFieldUpdateOperationsInput | bigint | number
+    previousTier?: NullableEnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier | null
+    isUpgrade?: BoolFieldUpdateOperationsInput | boolean
+    upgradeAmountPaid?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    expirationNotificationSent?: BoolFieldUpdateOperationsInput | boolean
+    notificationSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalImpressions?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    property?: PropertyUpdateOneRequiredWithoutBoostNestedInput
+    user?: UserUpdateOneRequiredWithoutBoostsNestedInput
+    payment?: PaymentUpdateOneWithoutBoostsNestedInput
+  }
+
+  export type PropertyBoostUncheckedUpdateWithoutBundleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propertyId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceReference?: BigIntFieldUpdateOperationsInput | bigint | number
+    previousTier?: NullableEnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier | null
+    isUpgrade?: BoolFieldUpdateOperationsInput | boolean
+    upgradeAmountPaid?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    expirationNotificationSent?: BoolFieldUpdateOperationsInput | boolean
+    notificationSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalImpressions?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PropertyBoostUncheckedUpdateManyWithoutBundleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propertyId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    priceReference?: BigIntFieldUpdateOperationsInput | bigint | number
+    previousTier?: NullableEnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier | null
+    isUpgrade?: BoolFieldUpdateOperationsInput | boolean
+    upgradeAmountPaid?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    expirationNotificationSent?: BoolFieldUpdateOperationsInput | boolean
+    notificationSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalImpressions?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+  }
+
   export type SavedSearchMatchCreateManySavedSearchInput = {
     id?: string
     createdAt?: Date | string
@@ -67925,6 +78266,9 @@ export namespace Prisma {
     propertyId: string
     userId: string
     boostTier: $Enums.BoostTier
+    durationDays: number
+    fromBundle?: boolean
+    bundleId?: string | null
     startDate?: Date | string
     endDate: Date | string
     status?: $Enums.BoostStatus
@@ -67939,11 +78283,31 @@ export namespace Prisma {
     totalClicks?: number
   }
 
+  export type SubscriptionCreateManyPaymentInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    tier: $Enums.AccountTier
+    startDate: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    autoRenew?: boolean
+    amountPaid: bigint | number
+    currency?: string
+    billingCycle?: string
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    expiryWarningSenitAt?: boolean
+  }
+
   export type PropertyBoostUpdateWithoutPaymentInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -67958,6 +78322,7 @@ export namespace Prisma {
     totalClicks?: IntFieldUpdateOperationsInput | number
     property?: PropertyUpdateOneRequiredWithoutBoostNestedInput
     user?: UserUpdateOneRequiredWithoutBoostsNestedInput
+    bundle?: BoostBundleUpdateOneWithoutUsedBoostsNestedInput
   }
 
   export type PropertyBoostUncheckedUpdateWithoutPaymentInput = {
@@ -67967,6 +78332,9 @@ export namespace Prisma {
     propertyId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -67988,6 +78356,9 @@ export namespace Prisma {
     propertyId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     boostTier?: EnumBoostTierFieldUpdateOperationsInput | $Enums.BoostTier
+    durationDays?: IntFieldUpdateOperationsInput | number
+    fromBundle?: BoolFieldUpdateOperationsInput | boolean
+    bundleId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumBoostStatusFieldUpdateOperationsInput | $Enums.BoostStatus
@@ -68000,6 +78371,60 @@ export namespace Prisma {
     notificationSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     totalImpressions?: IntFieldUpdateOperationsInput | number
     totalClicks?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SubscriptionUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tier?: EnumAccountTierFieldUpdateOperationsInput | $Enums.AccountTier
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    autoRenew?: BoolFieldUpdateOperationsInput | boolean
+    amountPaid?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    billingCycle?: StringFieldUpdateOperationsInput | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryWarningSenitAt?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CommuneCreateManyWilayaInput = {

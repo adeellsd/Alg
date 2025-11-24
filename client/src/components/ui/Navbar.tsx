@@ -5,13 +5,55 @@ import { NAVBAR_HEIGHT } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 import MobileMenu from './MobileMenu';
-import { Menu } from 'lucide-react';
+import { Menu, LogOut, User, Settings, LayoutDashboard, MessageSquare, Heart, Bell, ChevronDown, Plus } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const pathname = usePathname();
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
+  
+  const isAuthPage = pathname === '/signin' || pathname === '/signup';
+
+  // Handle sign out with redirect
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      window.location.href = '/landing';
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
+  // Fetch user role from Cognito attributes
+  useEffect(() => {
+    const getUserRole = async () => {
+      if (user) {
+        try {
+          const attributes = await fetchUserAttributes();
+          setUserRole(attributes['custom:role'] || null);
+        } catch (error) {
+          console.error('Error fetching user attributes:', error);
+        }
+      } else {
+        setUserRole(null);
+      }
+    };
+
+    getUserRole();
+  }, [user]);
 
   // Détection du scroll
   useEffect(() => {
@@ -29,6 +71,26 @@ const Navbar = () => {
     { href: '/about', label: 'À propos' },
     { href: '/contact', label: 'Contact' },
   ];
+
+  // User menu items based on authentication and role
+  // Get dashboard link based on role
+  const getDashboardLink = () => {
+    if (!user || !userRole) return '/dashboard';
+    return userRole === 'Professionnel' ? '/pro' : '/particulier';
+  };
+
+  // Get publish link based on role
+  const getPublishLink = () => {
+    if (!user || !userRole) return '/properties/new';
+    return userRole === 'Professionnel' ? '/pro/properties/new' : '/properties/new';
+  };
+
+  const userMenuItems = user ? [
+    { href: getDashboardLink(), label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
+    { href: '/messages', label: 'Messages', icon: <MessageSquare className="w-4 h-4" /> },
+    { href: '/favorites', label: 'Favoris', icon: <Heart className="w-4 h-4" /> },
+    { href: '/notifications', label: 'Notifications', icon: <Bell className="w-4 h-4" /> },
+  ] : [];
 
   // Check if a link is active
   const isActive = (href: string) => pathname === href;
@@ -191,39 +253,131 @@ const Navbar = () => {
             {/* RIGHT SIDE - CTA Buttons & Mobile Menu */}
             <div className="flex items-center gap-3 ml-auto lg:ml-0">
               {/* Desktop CTA Buttons */}
-              <div className="hidden md:flex items-center gap-3">
-                <Link href="/signin">
-                  <Button 
-                    variant="ghost"
-                    size="sm"
-                    className="
-                      px-5 py-2
-                      text-gray-700 font-semibold text-[15px]
-                      hover:text-blue-electric hover:bg-blue-pale/30
-                      rounded-full
-                      transition-all duration-200
-                    "
-                  >
-                    Sign in
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button 
-                    size="sm"
-                    className="
-                      px-6 py-2.5
-                      bg-gradient-to-r from-green-vibrant to-green-fresh
-                      text-white font-bold text-[15px]
-                      rounded-full
-                      shadow-md hover:shadow-green
-                      transition-all duration-200
-                      hover:scale-105
-                    "
-                  >
-                    Sign Up
-                  </Button>
-                </Link>
-              </div>
+              {!isAuthPage && (
+                <div className="hidden md:flex items-center gap-3">
+                  {!user ? (
+                    <>
+                      <Link href="/signin">
+                        <Button 
+                          variant="ghost"
+                          size="sm"
+                          className="
+                            px-5 py-2
+                            text-gray-700 font-semibold text-[15px]
+                            hover:text-blue-electric hover:bg-blue-pale/30
+                            rounded-full
+                            transition-all duration-200
+                          "
+                        >
+                          Sign in
+                        </Button>
+                      </Link>
+                      <Link href="/signup">
+                        <Button 
+                          size="sm"
+                          className="
+                            px-6 py-2.5
+                            bg-gradient-to-r from-green-vibrant to-green-fresh
+                            text-white font-bold text-[15px]
+                            rounded-full
+                            shadow-md hover:shadow-green
+                            transition-all duration-200
+                            hover:scale-105
+                          "
+                        >
+                          Sign Up
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      {/* Quick Actions for Authenticated Users */}
+                      <Link href={getPublishLink()}>
+                        <Button 
+                          size="sm"
+                          className="
+                            flex items-center gap-2
+                            px-6 py-2.5
+                            bg-gradient-to-r from-green-vibrant to-green-fresh
+                            text-white font-bold text-[15px]
+                            rounded-full
+                            shadow-md hover:shadow-green
+                            transition-all duration-200
+                            hover:scale-105
+                          "
+                        >
+                          <Plus className="w-4 h-4" />
+                          Publier
+                        </Button>
+                      </Link>
+
+                      {/* User Dropdown Menu */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button 
+                            variant="ghost"
+                            size="sm"
+                            className="
+                              px-4 py-2
+                              text-gray-700 font-semibold text-[15px]
+                              hover:text-blue-electric hover:bg-blue-pale/30
+                              rounded-full
+                              transition-all duration-200
+                              flex items-center gap-2
+                            "
+                          >
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-electric to-blue-bright flex items-center justify-center text-white text-sm font-bold">
+                              {user.username?.charAt(0).toUpperCase() || 'U'}
+                            </div>
+                            <ChevronDown className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-56 bg-white border-gray-200 shadow-lg">
+                          <DropdownMenuLabel className="font-semibold text-gray-900">
+                            Mon compte
+                          </DropdownMenuLabel>
+                          <DropdownMenuSeparator className="bg-gray-200" />
+                          
+                          {userMenuItems.map((item) => (
+                            <DropdownMenuItem key={item.href} asChild className="text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900">
+                              <Link href={item.href} className="flex items-center gap-3 cursor-pointer">
+                                {item.icon}
+                                <span>{item.label}</span>
+                              </Link>
+                            </DropdownMenuItem>
+                          ))}
+                          
+                          <DropdownMenuSeparator className="bg-gray-200" />
+                          
+                          <DropdownMenuItem asChild className="text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900">
+                            <Link href="/profile" className="flex items-center gap-3 cursor-pointer">
+                              <User className="w-4 h-4" />
+                              <span>Profile</span>
+                            </Link>
+                          </DropdownMenuItem>
+                          
+                          <DropdownMenuItem asChild className="text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900">
+                            <Link href="/settings" className="flex items-center gap-3 cursor-pointer">
+                              <Settings className="w-4 h-4" />
+                              <span>Paramètres</span>
+                            </Link>
+                          </DropdownMenuItem>
+                          
+                          <DropdownMenuSeparator className="bg-gray-200" />
+                          
+                          <DropdownMenuItem 
+                            onClick={handleSignOut}
+                            className="flex items-center gap-3 cursor-pointer text-red-600 hover:bg-red-50 focus:bg-red-50 focus:text-red-700"
+                          >
+                            <LogOut className="w-4 h-4" />
+                            <span>Déconnexion</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </>
+                  )}
+                </div>
+              )}
 
               {/* Mobile Menu Button */}
               <button
@@ -234,7 +388,7 @@ const Navbar = () => {
                   text-gray-700 hover:text-blue-electric
                   hover:bg-blue-pale/30
                   transition-all duration-200
-                  focus:outline-none focus:ring-2 focus:ring-blue-electric/50
+                  focus:outline-none 
                 "
                 aria-label="Ouvrir le menu"
               >
@@ -273,7 +427,11 @@ const Navbar = () => {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         navItems={navItems}
+        userMenuItems={userMenuItems}
         pathname={pathname}
+        user={user}
+        signOut={handleSignOut}
+        isAuthPage={isAuthPage}
       />
     </>
   );

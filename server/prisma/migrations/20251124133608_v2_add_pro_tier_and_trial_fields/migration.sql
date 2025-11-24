@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "postgis";
 CREATE TYPE "AccountStatus" AS ENUM ('ACTIVE', 'SUSPENDED', 'PENDING_VERIFICATION', 'BANNED');
 
 -- CreateEnum
-CREATE TYPE "AccountTier" AS ENUM ('PARTICULIER', 'PROFESSIONNEL');
+CREATE TYPE "AccountTier" AS ENUM ('FREE', 'STARTER', 'PRO', 'ELITE');
 
 -- CreateEnum
 CREATE TYPE "PropertyType" AS ENUM ('APARTMENT_F1', 'APARTMENT_F2', 'APARTMENT_F3', 'APARTMENT_F4', 'APARTMENT_F5_PLUS', 'VILLA', 'DUPLEX', 'STUDIO', 'TERRAIN_CONSTRUCTIBLE', 'TERRAIN_AGRICOLE', 'LOCAL_COMMERCIAL', 'BUREAU', 'GARAGE_BOX', 'FERME', 'OTHER');
@@ -74,16 +74,24 @@ CREATE TABLE "users" (
     "firstName" TEXT,
     "lastName" TEXT,
     "avatar" TEXT,
-    "accountTier" "AccountTier" NOT NULL DEFAULT 'PARTICULIER',
+    "accountTier" "AccountTier" NOT NULL DEFAULT 'FREE',
     "status" "AccountStatus" NOT NULL DEFAULT 'PENDING_VERIFICATION',
-    "proActivatedAt" TIMESTAMP(3),
-    "proExpiresAt" TIMESTAMP(3),
-    "proAutoRenew" BOOLEAN NOT NULL DEFAULT false,
+    "subscriptionStartedAt" TIMESTAMP(3),
+    "subscriptionExpiresAt" TIMESTAMP(3),
+    "subscriptionAutoRenew" BOOLEAN NOT NULL DEFAULT false,
+    "subscriptionCancelledAt" TIMESTAMP(3),
+    "trialStartedAt" TIMESTAMP(3),
+    "trialEndsAt" TIMESTAMP(3),
+    "trialUsed" BOOLEAN NOT NULL DEFAULT false,
+    "propertyLimit" INTEGER NOT NULL DEFAULT 5,
+    "imagesPerPropertyLimit" INTEGER NOT NULL DEFAULT 10,
+    "videosPerPropertyLimit" INTEGER NOT NULL DEFAULT 0,
     "companyName" TEXT,
     "companyLogo" TEXT,
     "companyDescription" TEXT,
     "commerceRegister" TEXT,
     "taxId" TEXT,
+    "teamMemberEmails" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "showPhone" BOOLEAN NOT NULL DEFAULT true,
     "showWhatsApp" BOOLEAN NOT NULL DEFAULT false,
     "whatsappNumber" TEXT,
@@ -290,9 +298,13 @@ CREATE TABLE "boost_pricing" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "tier" "BoostTier" NOT NULL,
-    "pricePerWeek" BIGINT NOT NULL,
-    "pricePerMonth" BIGINT,
+    "pricing" JSONB NOT NULL,
     "features" JSONB NOT NULL,
+    "visibilityBoostPercentage" INTEGER NOT NULL,
+    "availableForFree" BOOLEAN NOT NULL DEFAULT false,
+    "availableForStarter" BOOLEAN NOT NULL DEFAULT false,
+    "availableForPro" BOOLEAN NOT NULL DEFAULT true,
+    "availableForElite" BOOLEAN NOT NULL DEFAULT false,
     "validFrom" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "validUntil" TIMESTAMP(3),
     "isActive" BOOLEAN NOT NULL DEFAULT true,
@@ -308,6 +320,9 @@ CREATE TABLE "property_boosts" (
     "propertyId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "boostTier" "BoostTier" NOT NULL,
+    "durationDays" INTEGER NOT NULL,
+    "fromBundle" BOOLEAN NOT NULL DEFAULT false,
+    "bundleId" TEXT,
     "startDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "endDate" TIMESTAMP(3) NOT NULL,
     "status" "BoostStatus" NOT NULL DEFAULT 'PENDING',
@@ -323,6 +338,22 @@ CREATE TABLE "property_boosts" (
     "totalClicks" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "property_boosts_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "boost_bundles" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" TEXT NOT NULL,
+    "tierLevel" INTEGER NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "remaining" INTEGER NOT NULL,
+    "pricePaid" BIGINT NOT NULL,
+    "purchasedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "boost_bundles_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -512,6 +543,28 @@ CREATE TABLE "payments" (
 );
 
 -- CreateTable
+CREATE TABLE "subscriptions" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" TEXT NOT NULL,
+    "tier" "AccountTier" NOT NULL,
+    "startDate" TIMESTAMP(3) NOT NULL,
+    "endDate" TIMESTAMP(3) NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "autoRenew" BOOLEAN NOT NULL DEFAULT false,
+    "amountPaid" BIGINT NOT NULL,
+    "currency" TEXT NOT NULL DEFAULT 'DZD',
+    "billingCycle" TEXT NOT NULL DEFAULT 'MONTHLY',
+    "paymentId" TEXT,
+    "cancelledAt" TIMESTAMP(3),
+    "cancellationReason" TEXT,
+    "expiryWarningSenitAt" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "subscriptions_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "notifications" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -607,6 +660,37 @@ CREATE TABLE "wilayas" (
 );
 
 -- CreateTable
+CREATE TABLE "upgrade_banners" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" TEXT NOT NULL,
+    "bannerType" TEXT NOT NULL,
+    "dismissedAt" TIMESTAMP(3),
+    "impressions" INTEGER NOT NULL DEFAULT 0,
+    "clicked" BOOLEAN NOT NULL DEFAULT false,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "upgrade_banners_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "email_campaigns" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" TEXT NOT NULL,
+    "campaignType" TEXT NOT NULL,
+    "sentAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "opened" BOOLEAN NOT NULL DEFAULT false,
+    "openedAt" TIMESTAMP(3),
+    "clicked" BOOLEAN NOT NULL DEFAULT false,
+    "clickedAt" TIMESTAMP(3),
+
+    CONSTRAINT "email_campaigns_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "communes" (
     "id" TEXT NOT NULL,
     "code" TEXT NOT NULL,
@@ -644,7 +728,7 @@ CREATE INDEX "users_accountTier_idx" ON "users"("accountTier");
 CREATE INDEX "users_status_idx" ON "users"("status");
 
 -- CreateIndex
-CREATE INDEX "users_proExpiresAt_idx" ON "users"("proExpiresAt");
+CREATE INDEX "users_subscriptionExpiresAt_idx" ON "users"("subscriptionExpiresAt");
 
 -- CreateIndex
 CREATE INDEX "users_deletedAt_idx" ON "users"("deletedAt");
@@ -795,6 +879,18 @@ CREATE INDEX "property_boosts_endDate_idx" ON "property_boosts"("endDate");
 
 -- CreateIndex
 CREATE INDEX "property_boosts_status_endDate_idx" ON "property_boosts"("status", "endDate");
+
+-- CreateIndex
+CREATE INDEX "property_boosts_bundleId_idx" ON "property_boosts"("bundleId");
+
+-- CreateIndex
+CREATE INDEX "boost_bundles_userId_idx" ON "boost_bundles"("userId");
+
+-- CreateIndex
+CREATE INDEX "boost_bundles_userId_remaining_idx" ON "boost_bundles"("userId", "remaining");
+
+-- CreateIndex
+CREATE INDEX "boost_bundles_expiresAt_idx" ON "boost_bundles"("expiresAt");
 
 -- CreateIndex
 CREATE INDEX "location_requests_propertyId_idx" ON "location_requests"("propertyId");
@@ -959,6 +1055,21 @@ CREATE INDEX "payments_createdAt_idx" ON "payments"("createdAt" DESC);
 CREATE INDEX "payments_chargilyTransactionId_idx" ON "payments"("chargilyTransactionId");
 
 -- CreateIndex
+CREATE INDEX "subscriptions_userId_idx" ON "subscriptions"("userId");
+
+-- CreateIndex
+CREATE INDEX "subscriptions_tier_idx" ON "subscriptions"("tier");
+
+-- CreateIndex
+CREATE INDEX "subscriptions_isActive_idx" ON "subscriptions"("isActive");
+
+-- CreateIndex
+CREATE INDEX "subscriptions_endDate_idx" ON "subscriptions"("endDate");
+
+-- CreateIndex
+CREATE INDEX "subscriptions_userId_isActive_idx" ON "subscriptions"("userId", "isActive");
+
+-- CreateIndex
 CREATE INDEX "notifications_userId_idx" ON "notifications"("userId");
 
 -- CreateIndex
@@ -1028,6 +1139,18 @@ CREATE INDEX "wilayas_code_idx" ON "wilayas"("code");
 CREATE INDEX "wilayas_name_idx" ON "wilayas"("name");
 
 -- CreateIndex
+CREATE INDEX "upgrade_banners_userId_bannerType_idx" ON "upgrade_banners"("userId", "bannerType");
+
+-- CreateIndex
+CREATE INDEX "upgrade_banners_userId_dismissedAt_idx" ON "upgrade_banners"("userId", "dismissedAt");
+
+-- CreateIndex
+CREATE INDEX "email_campaigns_userId_campaignType_idx" ON "email_campaigns"("userId", "campaignType");
+
+-- CreateIndex
+CREATE INDEX "email_campaigns_sentAt_idx" ON "email_campaigns"("sentAt");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "communes_code_key" ON "communes"("code");
 
 -- CreateIndex
@@ -1082,7 +1205,13 @@ ALTER TABLE "property_boosts" ADD CONSTRAINT "property_boosts_propertyId_fkey" F
 ALTER TABLE "property_boosts" ADD CONSTRAINT "property_boosts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "property_boosts" ADD CONSTRAINT "property_boosts_bundleId_fkey" FOREIGN KEY ("bundleId") REFERENCES "boost_bundles"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "property_boosts" ADD CONSTRAINT "property_boosts_paymentId_fkey" FOREIGN KEY ("paymentId") REFERENCES "payments"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "boost_bundles" ADD CONSTRAINT "boost_bundles_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "location_requests" ADD CONSTRAINT "location_requests_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "properties"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1151,6 +1280,12 @@ ALTER TABLE "reports" ADD CONSTRAINT "reports_reportedUserId_fkey" FOREIGN KEY (
 ALTER TABLE "payments" ADD CONSTRAINT "payments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_paymentId_fkey" FOREIGN KEY ("paymentId") REFERENCES "payments"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "notifications" ADD CONSTRAINT "notifications_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -1161,6 +1296,12 @@ ALTER TABLE "property_view_details" ADD CONSTRAINT "property_view_details_proper
 
 -- AddForeignKey
 ALTER TABLE "property_view_details" ADD CONSTRAINT "property_view_details_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "upgrade_banners" ADD CONSTRAINT "upgrade_banners_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "email_campaigns" ADD CONSTRAINT "email_campaigns_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "communes" ADD CONSTRAINT "communes_wilayaId_fkey" FOREIGN KEY ("wilayaId") REFERENCES "wilayas"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

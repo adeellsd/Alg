@@ -1,19 +1,24 @@
 // ============================================================================
-// RENTALG - SCHEMA PRISMA v6.0 (PRODUCTION-READY OPTIMIZED)
+// RENTALG - SCHEMA PRISMA v7.0 (NOUVELLE STRATÉGIE MONÉTISATION)
 // Marketplace Immobilier Algérien
 // Stack: Next.js 14 + Express + PostgreSQL 16 + PostGIS 3.4 + AWS
 // 
-// CHANGEMENTS MAJEURS v6.0:
+// CHANGEMENTS MAJEURS v7.0:
+// ✅ Nouveau système de comptes: FREE / STARTER / ELITE
+// ✅ Limites d'annonces par tier (3 FREE, 25 STARTER, ∞ ELITE)
+// ✅ Limites d'images par tier (8 FREE, 15 STARTER, ∞ ELITE)
+// ✅ Vidéos: 0 FREE, 1 STARTER, 3 ELITE
+// ✅ Boost tiers avec pricing différencié par compte
+// ✅ Features exclusives par tier (analytics, templates, multi-users)
+// ✅ Abonnements: 2500 DA STARTER, 5000 DA ELITE
+// ✅ Dashboard adaptatif unique selon accountType
+// 
+// CHANGEMENTS v6.0 (conservés):
 // ✅ Conversation refactorisée (1 par paire buyer/seller)
 // ✅ Property coordinates avec privacy zones
-// ✅ SavedSearch table dédiée (remplace JSON)
-// ✅ PropertyPriceHistory pour tracking changements
-// ✅ BoostPricing table de référence
-// ✅ Review avec conversation OBLIGATOIRE
-// ✅ PropertyMedia avec données typées JSON
-// ✅ LocationRequest avec enum status et audit
-// ✅ Payment avec gestion erreurs/retry
-// ✅ Analytics enrichies (sources, devices)
+// ✅ SavedSearch table dédiée
+// ✅ PropertyPriceHistory pour tracking
+// ✅ Analytics enrichies
 // ============================================================================
 
 generator client {
@@ -39,8 +44,10 @@ enum AccountStatus {
 }
 
 enum AccountTier {
-  PARTICULIER
-  PROFESSIONNEL
+  FREE
+  STARTER
+  PRO // ← NOUVEAU TIER entre STARTER et ELITE
+  ELITE
 }
 
 enum PropertyType {
@@ -224,8 +231,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   // ===== COGNITO =====
-  cognitoId String @unique
-  email     String @unique
+  cognitoId String  @unique
+  email     String  @unique
   phone     String? @unique
 
   emailVerified Boolean @default(false)
@@ -237,24 +244,44 @@ model User {
   avatar    String?
 
   // ===== ACCOUNT =====
-  accountTier AccountTier   @default(PARTICULIER)
+  accountTier AccountTier   @default(FREE)
   status      AccountStatus @default(PENDING_VERIFICATION)
 
-  // ===== PRO =====
-  proActivatedAt     DateTime?
-  proExpiresAt       DateTime?
-  proAutoRenew       Boolean   @default(false)
+  // ===== SUBSCRIPTION (STARTER/ELITE) =====
+  subscriptionStartedAt   DateTime?
+  subscriptionExpiresAt   DateTime?
+  subscriptionAutoRenew   Boolean   @default(false)
+  subscriptionCancelledAt DateTime?
+
+  // ===== TRIAL (STARTER 14 jours) =====
+  trialStartedAt DateTime?
+  trialEndsAt    DateTime?
+  trialUsed      Boolean   @default(false)
+
+  // ===== LIMITS PAR TIER =====
+  // FREE: 5 annonces, 10 images, 0 vidéos
+  // STARTER: 15 annonces, 15 images, 1 vidéo
+  // PRO: 50 annonces, 20 images, 2 vidéos
+  // ELITE: ∞ annonces, ∞ images, 3 vidéos
+  propertyLimit          Int @default(5) // Calculé dynamiquement selon tier
+  imagesPerPropertyLimit Int @default(10)
+  videosPerPropertyLimit Int @default(0)
+
+  // ===== PRO (STARTER/ELITE) =====
   companyName        String?
   companyLogo        String?
-  companyDescription String?   @db.Text
+  companyDescription String? @db.Text
   commerceRegister   String?
   taxId              String?
 
+  // ELITE uniquement: Multi-users
+  teamMemberEmails String[] @default([]) // Max 3 pour ELITE
+
   // ===== CONTACT =====
-  showPhone           Boolean           @default(true)
-  showWhatsApp        Boolean           @default(false)
-  whatsappNumber      String?
-  preferredContact    ContactPreference @default(BOTH)
+  showPhone        Boolean           @default(true)
+  showWhatsApp     Boolean           @default(false)
+  whatsappNumber   String?
+  preferredContact ContactPreference @default(BOTH)
 
   // ===== PREFERENCES =====
   language           String  @default("fr")
@@ -263,10 +290,10 @@ model User {
   pushNotifications  Boolean @default(true)
 
   // ===== MODERATION =====
-  autoApproveProperties Boolean @default(false)
-  warningCount          Int     @default(0)
+  autoApproveProperties Boolean   @default(false)
+  warningCount          Int       @default(0)
   bannedAt              DateTime?
-  banReason             String? @db.Text
+  banReason             String?   @db.Text
 
   // ===== STATS (Dénormalisé) =====
   totalProperties  Int      @default(0)
@@ -284,15 +311,15 @@ model User {
   deletedAt DateTime?
 
   // ===== RELATIONS =====
-  roles        UserRole[]
-  properties   Property[]
-  favorites    Favorite[]
+  roles         UserRole[]
+  properties    Property[]
+  favorites     Favorite[]
   savedSearches SavedSearch[]
-  
+
   // Conversations (buyer ou seller)
   conversationsAsBuyer  Conversation[] @relation("BuyerConversations")
   conversationsAsSeller Conversation[] @relation("SellerConversations")
-  
+
   // Messages
   messagesSent     Message[] @relation("SenderMessages")
   messagesReceived Message[] @relation("ReceiverMessages")
@@ -306,8 +333,12 @@ model User {
   reportsReceived  Report[] @relation("ReportedUser")
 
   // Payments & Boosts
-  payments Payment[]
-  boosts   PropertyBoost[]
+  payments     Payment[]
+  boosts       PropertyBoost[]
+  boostBundles BoostBundle[]
+
+  // Subscriptions (STARTER/ELITE)
+  subscriptions Subscription[]
 
   // Analytics
   propertyViewDetails PropertyViewDetail[]
@@ -319,11 +350,15 @@ model User {
   locationRequestsSent     LocationRequest[] @relation("LocationRequester")
   locationRequestsReceived LocationRequest[] @relation("PropertyOwner")
 
+  // Tracking (v2.0)
+  upgradeBanners UpgradeBanner[]
+  emailCampaigns EmailCampaign[]
+
   @@index([cognitoId])
   @@index([email])
   @@index([accountTier])
   @@index([status])
-  @@index([proExpiresAt])
+  @@index([subscriptionExpiresAt])
   @@index([deletedAt])
   @@map("users")
 }
@@ -370,7 +405,7 @@ model Permission {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
 
-  code        String @unique
+  code        String  @unique
   description String?
   category    String?
 
@@ -411,11 +446,11 @@ model Property {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // ===== BASIC =====
-  title           String         @db.VarChar(200)
-  description     String         @db.Text
+  title           String          @db.VarChar(200)
+  description     String          @db.Text
   propertyType    PropertyType
   transactionType TransactionType
-  status          PropertyStatus @default(PENDING_REVIEW)
+  status          PropertyStatus  @default(PENDING_REVIEW)
 
   // ===== PRICING =====
   priceAmount     BigInt
@@ -467,12 +502,12 @@ model Property {
 
   // ===== LOCATION (REFACTORÉ) =====
   // Relations normalisées
-  wilayaId  String
-  wilaya    Wilaya  @relation(fields: [wilayaId], references: [id])
-  
+  wilayaId String
+  wilaya   Wilaya @relation(fields: [wilayaId], references: [id])
+
   communeId String?
   commune   Commune? @relation(fields: [communeId], references: [id])
-  
+
   // Adresse textuelle
   quartier    String?
   fullAddress String? // Générée: "Rue X, Hydra, Alger"
@@ -486,10 +521,10 @@ model Property {
   publicLatitude  Decimal @db.Decimal(10, 8)
   publicLongitude Decimal @db.Decimal(11, 8)
 
-  showExactLocation Boolean           @default(false)
-  privacyRadiusMeters Int            @default(500) // Rayon de flou si privacy=true
-  locationInputMode LocationInputMode @default(DROPDOWN_MANUAL)
-  mapboxPlaceId     String?
+  showExactLocation   Boolean           @default(false)
+  privacyRadiusMeters Int               @default(500) // Rayon de flou si privacy=true
+  locationInputMode   LocationInputMode @default(DROPDOWN_MANUAL)
+  mapboxPlaceId       String?
 
   // ===== STATS (Dénormalisé) =====
   viewsCount     Int @default(0)
@@ -505,7 +540,7 @@ model Property {
   // ===== MODERATION =====
   moderatedAt     DateTime?
   moderatedBy     String?
-  rejectionReason String? @db.Text
+  rejectionReason String?   @db.Text
 
   // ===== EXPIRATION =====
   expiresAt DateTime?
@@ -515,17 +550,17 @@ model Property {
   deletedAt DateTime?
 
   // ===== RELATIONS =====
-  media             PropertyMedia[]
-  boost             PropertyBoost?
-  favorites         Favorite[]
+  media              PropertyMedia[]
+  boost              PropertyBoost?
+  favorites          Favorite[]
   savedSearchMatches SavedSearchMatch[]
-  priceHistory      PropertyPriceHistory[]
-  viewStats         PropertyViewStats[]
-  viewDetails       PropertyViewDetail[]
-  reports           Report[]
-  messages          Message[]
-  reviews           Review[]
-  locationRequests  LocationRequest[]
+  priceHistory       PropertyPriceHistory[]
+  viewStats          PropertyViewStats[]
+  viewDetails        PropertyViewDetail[]
+  reports            Report[]
+  messages           Message[]
+  reviews            Review[]
+  locationRequests   LocationRequest[]
 
   @@index([userId])
   @@index([status])
@@ -558,13 +593,13 @@ model PropertyPriceHistory {
 
   oldPrice BigInt
   newPrice BigInt
-  
+
   changePercent Decimal @db.Decimal(5, 2) // -15.50 ou +20.00
 
   changedBy String? // userId qui a fait le changement
 
   // Notifications envoyées aux favoris
-  notificationsSent Int @default(0)
+  notificationsSent Int       @default(0)
   notifiedAt        DateTime?
 
   @@index([propertyId, createdAt(sort: Desc)])
@@ -587,42 +622,44 @@ model PropertyMedia {
   mediaType MediaType
 
   // ===== IMAGE DATA (JSON typé) =====
-  imageData Json? 
-  /* Structure:
-  {
-    "url": "https://cdn.../original.jpg",
-    "thumbnailUrl": "https://cdn.../thumb_300x200.jpg",
-    "mediumUrl": "https://cdn.../medium_800x600.jpg",
-    "largeUrl": "https://cdn.../large_1920x1080.jpg",
-    "blurhash": "LKO2?V%2Tw=w]~RBVZRi};RPxuwH",
-    "dominantColor": "#3b82f6",
-    "width": 1920,
-    "height": 1080,
-    "format": "jpeg",
-    "sizeBytes": 245678,
-    "altText": "Salon moderne avec vue"
-  }
-  */
+  imageData Json?
+  /**
+   * Structure:
+   * {
+   * "url": "https://cdn.../original.jpg",
+   * "thumbnailUrl": "https://cdn.../thumb_300x200.jpg",
+   * "mediumUrl": "https://cdn.../medium_800x600.jpg",
+   * "largeUrl": "https://cdn.../large_1920x1080.jpg",
+   * "blurhash": "LKO2?V%2Tw=w]~RBVZRi};RPxuwH",
+   * "dominantColor": "#3b82f6",
+   * "width": 1920,
+   * "height": 1080,
+   * "format": "jpeg",
+   * "sizeBytes": 245678,
+   * "altText": "Salon moderne avec vue"
+   * }
+   */
 
   // ===== VIDEO DATA (JSON typé) =====
   videoData Json?
-  /* Structure:
-  {
-    "platform": "TIKTOK" | "INSTAGRAM_REEL" | "YOUTUBE" | "S3_UPLOAD",
-    "url": "https://...",
-    "embedUrl": "https://...",
-    "thumbnailUrl": "https://...",
-    "duration": 45,
-    "width": 1080,
-    "height": 1920,
-    "format": "mp4",
-    "sizeBytes": 5678901
-  }
-  */
+  /**
+   * Structure:
+   * {
+   * "platform": "TIKTOK" | "INSTAGRAM_REEL" | "YOUTUBE" | "S3_UPLOAD",
+   * "url": "https://...",
+   * "embedUrl": "https://...",
+   * "thumbnailUrl": "https://...",
+   * "duration": 45,
+   * "width": 1080,
+   * "height": 1920,
+   * "format": "mp4",
+   * "sizeBytes": 5678901
+   * }
+   */
 
   // ===== ORDERING =====
-  order        Int     @default(0)
-  isThumbnail  Boolean @default(false)
+  order       Int     @default(0)
+  isThumbnail Boolean @default(false)
 
   // ===== SOFT DELETE =====
   deletedAt DateTime?
@@ -640,11 +677,11 @@ model PropertyMedia {
 // ============================================================================
 
 model Amenity {
-  id        String   @id @default(cuid())
-  name      String   @unique // Ex: "Piscine", "Jardin", "Ascenseur"
-  category  String   // Ex: "Équipement", "Sécurité", "Extérieur"
-  icon      String?  // Nom de l'icône (ex: Lucide icon name)
-  
+  id       String  @id @default(cuid())
+  name     String  @unique // Ex: "Piscine", "Jardin", "Ascenseur"
+  category String // Ex: "Équipement", "Sécurité", "Extérieur"
+  icon     String? // Nom de l'icône (ex: Lucide icon name)
+
   properties AmenitiesOnProperties[]
 
   @@index([category])
@@ -655,8 +692,8 @@ model AmenitiesOnProperties {
   propertyId String
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
-  amenityId  String
-  amenity    Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+  amenityId String
+  amenity   Amenity @relation(fields: [amenityId], references: [id], onDelete: Cascade)
 
   assignedAt DateTime @default(now())
 
@@ -688,10 +725,10 @@ model SeasonalRate {
 }
 
 // ============================================================================
-// BOOST SYSTEM
+// BOOST SYSTEM (v7.0 - Prix différenciés par AccountTier)
 // ============================================================================
 
-// Table de référence des prix (NOUVEAU)
+// Table de référence des prix par tier de compte
 model BoostPricing {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -699,12 +736,22 @@ model BoostPricing {
 
   tier BoostTier @unique
 
-  pricePerWeek BigInt
-  pricePerMonth BigInt?
-  
-  features Json // ["Top résultats", "Badge doré", etc.]
+  // ===== PRICING FLEXIBLE (v2.0) =====
+  // Structure JSON pour tous les tiers et durées
+  // Exemple: { "FREE": { "3days": 30000, "7days": 50000 }, "STARTER": {...}, "PRO": {...}, "ELITE": {...} }
+  pricing Json
 
-  validFrom  DateTime @default(now())
+  features Json // ["Top résultats", "Badge doré", "Homepage carousel", etc.]
+
+  visibilityBoostPercentage Int // 150%, 300%, 500%
+
+  // Restrictions par tier
+  availableForFree    Boolean @default(false)
+  availableForStarter Boolean @default(false)
+  availableForPro     Boolean @default(true)
+  availableForElite   Boolean @default(false)
+
+  validFrom  DateTime  @default(now())
   validUntil DateTime?
 
   isActive Boolean @default(true)
@@ -726,6 +773,12 @@ model PropertyBoost {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   boostTier BoostTier
+
+  // ===== NOUVEAUX CHAMPS v2.0 =====
+  durationDays Int // 3, 7, ou 30 jours
+  fromBundle   Boolean      @default(false) // true si vient d'un bundle
+  bundleId     String? // ID du bundle (si applicable)
+  bundle       BoostBundle? @relation(fields: [bundleId], references: [id])
 
   startDate DateTime    @default(now())
   endDate   DateTime
@@ -753,7 +806,38 @@ model PropertyBoost {
   @@index([boostTier])
   @@index([endDate])
   @@index([status, endDate])
+  @@index([bundleId])
   @@map("property_boosts")
+}
+
+// ============================================================================
+// BOOST BUNDLES (v2.0)
+// ============================================================================
+
+model BoostBundle {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tierLevel Int // 1 (EN_AVANT), 2 (PREMIUM), 3 (ULTRA)
+  quantity  Int // Nombre de boosts achetés (ex: 5, 10)
+  remaining Int // Nombre restant à utiliser
+
+  pricePaid BigInt // Prix total en centimes DA
+
+  purchasedAt DateTime @default(now())
+  expiresAt   DateTime // 6 mois après achat
+
+  // Relation inverse vers les boosts utilisés depuis ce bundle
+  usedBoosts PropertyBoost[]
+
+  @@index([userId])
+  @@index([userId, remaining])
+  @@index([expiresAt])
+  @@map("boost_bundles")
 }
 
 // ============================================================================
@@ -777,7 +861,7 @@ model LocationRequest {
   message String? @db.Text
 
   status LocationRequestStatus @default(PENDING)
-  
+
   approvedAt DateTime?
   rejectedAt DateTime?
   expiresAt  DateTime? // 24h après approval
@@ -788,7 +872,7 @@ model LocationRequest {
 
   // Audit trail
   viewedAt  DateTime?
-  viewCount Int      @default(0)
+  viewCount Int       @default(0)
 
   @@unique([propertyId, requesterId])
   @@index([propertyId])
@@ -824,7 +908,7 @@ model Favorite {
 }
 
 // ============================================================================
-// SAVED SEARCHES (NOUVEAU - Remplace JSON)
+// SAVED SEARCHES (v7.0 - Limité à 3 pour FREE)
 // ============================================================================
 
 model SavedSearch {
@@ -839,30 +923,33 @@ model SavedSearch {
 
   // Critères de recherche
   filters Json
-  /* Structure:
-  {
-    "wilayaId": "...",
-    "communeId": "...",
-    "propertyType": ["APARTMENT_F3", "APARTMENT_F4"],
-    "transactionType": "SALE",
-    "minPrice": 5000000,
-    "maxPrice": 10000000,
-    "minSurface": 80,
-    "amenities": ["pool", "garden"],
-    ...
-  }
-  */
+  /**
+   * Structure:
+   * {
+   * "wilayaId": "...",
+   * "communeId": "...",
+   * "propertyType": ["APARTMENT_F3", "APARTMENT_F4"],
+   * "transactionType": "SALE",
+   * "minPrice": 5000000,
+   * "maxPrice": 10000000,
+   * "minSurface": 80,
+   * "amenities": ["pool", "garden"],
+   * ...
+   * }
+   */
 
   notifyByEmail Boolean @default(true)
   notifyInApp   Boolean @default(true)
   isActive      Boolean @default(true)
 
   // Stats
-  lastCheckedAt DateTime @default(now()) // Quand le système a vérifié pour la dernière fois
+  lastCheckedAt DateTime  @default(now()) // Quand le système a vérifié pour la dernière fois
   lastMatchedAt DateTime?
-  matchCount    Int      @default(0)
-  
-  // Dernière notification envoyée
+  matchCount    Int       @default(0)
+
+  // Dernière notification envoyée (limité selon tier)
+  // FREE: 1 email par semaine
+  // STARTER/ELITE: Temps réel
   lastNotifiedAt DateTime?
 
   matches SavedSearchMatch[]
@@ -1008,7 +1095,7 @@ model Review {
   // ===== DERIVED FROM CONVERSATION =====
   propertyId String
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  
+
   ownerId String
   owner   User   @relation("PropertyOwner", fields: [ownerId], references: [id], onDelete: Cascade)
 
@@ -1016,13 +1103,13 @@ model Review {
   reviewer   User   @relation("ReviewAuthor", fields: [reviewerId], references: [id], onDelete: Cascade)
 
   rating  Int // 1-5
-  comment String? @db.Text
+  comment String?  @db.Text
   tags    String[] // ["Réactif", "Sérieux", "Prix négociable"]
 
   helpfulCount Int @default(0)
 
-  isReported Boolean @default(false)
-  isHidden   Boolean @default(false)
+  isReported Boolean   @default(false)
+  isHidden   Boolean   @default(false)
   hiddenAt   DateTime?
   hiddenBy   String?
 
@@ -1065,7 +1152,7 @@ model Report {
 
   reviewedAt  DateTime?
   reviewedBy  String?
-  adminNotes  String? @db.Text
+  adminNotes  String?   @db.Text
   actionTaken String?
 
   @@index([propertyId])
@@ -1103,18 +1190,19 @@ model Payment {
   productType    PaymentProductType
   productDetails Json?
 
-  boosts PropertyBoost[]
+  boosts        PropertyBoost[]
+  subscriptions Subscription[]
 
   // ===== FAILURE HANDLING (NOUVEAU) =====
-  failureReason String? @db.Text
+  failureReason String?   @db.Text
   failureCode   String?
-  retryCount    Int      @default(0)
+  retryCount    Int       @default(0)
   lastRetryAt   DateTime?
-  maxRetries    Int      @default(3)
+  maxRetries    Int       @default(3)
 
   // ===== WEBHOOK TRACKING (NOUVEAU) =====
   webhookReceivedAt DateTime?
-  webhookVerified   Boolean  @default(false)
+  webhookVerified   Boolean   @default(false)
 
   // ===== REFUND =====
   refundedAt   DateTime?
@@ -1138,6 +1226,51 @@ model Payment {
   @@index([createdAt(sort: Desc)])
   @@index([chargilyTransactionId])
   @@map("payments")
+}
+
+// ============================================================================
+// SUBSCRIPTIONS (v7.0 - STARTER/ELITE)
+// ============================================================================
+
+model Subscription {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tier AccountTier // STARTER ou ELITE uniquement
+
+  startDate DateTime
+  endDate   DateTime
+  isActive  Boolean  @default(true)
+  autoRenew Boolean  @default(false)
+
+  // Prix payé (peut changer dans le temps)
+  amountPaid BigInt
+  currency   String @default("DZD")
+
+  // Billing
+  billingCycle String @default("MONTHLY") // MONTHLY ou YEARLY
+
+  // Paiement lié
+  paymentId String?
+  payment   Payment? @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
+  // Annulation
+  cancelledAt        DateTime?
+  cancellationReason String?   @db.Text
+
+  // Notifications
+  expiryWarningSenitAt Boolean @default(false)
+
+  @@index([userId])
+  @@index([tier])
+  @@index([isActive])
+  @@index([endDate])
+  @@index([userId, isActive])
+  @@map("subscriptions")
 }
 
 // ============================================================================
@@ -1203,25 +1336,27 @@ model PropertyViewStats {
 
   // ===== SOURCES (NOUVEAU) =====
   sourceBreakdown Json?
-  /* Structure:
-  {
-    "direct": 45,
-    "google": 30,
-    "boost": 25,
-    "social": 15,
-    "referral": 10
-  }
-  */
+  /**
+   * Structure:
+   * {
+   * "direct": 45,
+   * "google": 30,
+   * "boost": 25,
+   * "social": 15,
+   * "referral": 10
+   * }
+   */
 
   // ===== DEVICES (NOUVEAU) =====
   deviceBreakdown Json?
-  /* Structure:
-  {
-    "mobile": 60,
-    "desktop": 35,
-    "tablet": 5
-  }
-  */
+  /**
+   * Structure:
+   * {
+   * "mobile": 60,
+   * "desktop": 35,
+   * "tablet": 5
+   * }
+   */
 
   @@unique([propertyId, date])
   @@index([propertyId, date(sort: Desc)])
@@ -1280,7 +1415,7 @@ model PopularSearch {
 
   cachedResults  Json?
   cacheExpiresAt DateTime?
-  cacheTTL       Int      @default(3600) // 1h en secondes
+  cacheTTL       Int       @default(3600) // 1h en secondes
 
   @@unique([wilayaId, propertyType, transactionType, minPrice, maxPrice])
   @@index([searchCount(sort: Desc)])
@@ -1294,9 +1429,9 @@ model PopularSearch {
 // ============================================================================
 
 model Wilaya {
-  id   String @id @default(cuid())
-  code String @unique
-  name String @unique
+  id     String  @id @default(cuid())
+  code   String  @unique
+  name   String  @unique
   nameAr String?
   nameFr String?
 
@@ -1314,10 +1449,62 @@ model Wilaya {
   @@map("wilayas")
 }
 
+// ============================================================================
+// TRACKING & CONVERSION (v2.0)
+// ============================================================================
+
+model UpgradeBanner {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  bannerType String // "LIMIT_REACHED", "PERFORMANCE", "SOCIAL_PROOF"
+
+  dismissedAt DateTime?
+  impressions Int       @default(0)
+  clicked     Boolean   @default(false)
+
+  expiresAt DateTime
+
+  @@index([userId, bannerType])
+  @@index([userId, dismissedAt])
+  @@map("upgrade_banners")
+}
+
+model EmailCampaign {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  campaignType String // "WELCOME_INACTIVE", "TRIAL_J7", "POST_TRIAL", etc.
+
+  sentAt DateTime @default(now())
+
+  opened   Boolean   @default(false)
+  openedAt DateTime?
+
+  clicked   Boolean   @default(false)
+  clickedAt DateTime?
+
+  @@index([userId, campaignType])
+  @@index([sentAt])
+  @@map("email_campaigns")
+}
+
+// ============================================================================
+// GEOGRAPHY
+// ============================================================================
+
 model Commune {
-  id   String @id @default(cuid())
-  code String @unique
-  name String
+  id     String  @id @default(cuid())
+  code   String  @unique
+  name   String
   nameAr String?
   nameFr String?
 

@@ -1,0 +1,35 @@
+[
+  {
+    "userId": "user_1",
+    "tier": "ELITE",
+    "startDate": "2024-01-15T10:00:00Z",
+    "endDate": "2025-01-15T10:00:00Z",
+    "isActive": true,
+    "autoRenew": true,
+    "amountPaid": "500000",
+    "currency": "DZD",
+    "billingCycle": "YEARLY"
+  },
+  {
+    "userId": "user_2",
+    "tier": "STARTER",
+    "startDate": "2024-06-01T10:00:00Z",
+    "endDate": "2025-06-01T10:00:00Z",
+    "isActive": true,
+    "autoRenew": true,
+    "amountPaid": "250000",
+    "currency": "DZD",
+    "billingCycle": "YEARLY"
+  },
+  {
+    "userId": "user_5",
+    "tier": "STARTER",
+    "startDate": "2024-09-01T10:00:00Z",
+    "endDate": "2025-09-01T10:00:00Z",
+    "isActive": true,
+    "autoRenew": false,
+    "amountPaid": "25000",
+    "currency": "DZD",
+    "billingCycle": "MONTHLY"
+  }
+]

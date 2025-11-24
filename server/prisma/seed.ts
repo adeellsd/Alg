@@ -111,6 +111,13 @@ function transformItem(modelName: string, item: any): any {
     }
   }
 
+  // ===== SUBSCRIPTION (NOUVEAU v7) =====
+  if (modelName === "Subscription") {
+    if (item.userId && idMappings.user[item.userId]) {
+      transformed.userId = idMappings.user[item.userId];
+    }
+  }
+
   // ===== PROPERTY =====
   if (modelName === "Property") {
     // User FK
@@ -560,6 +567,9 @@ async function main() {
 
     // ===== USERS =====
     { model: "User", file: "users.json" },
+    
+    // ===== SUBSCRIPTIONS (NOUVEAU v7) =====
+    { model: "Subscription", file: "subscriptions.json" },
 
     // ===== RBAC =====
     { model: "RolePermission", file: "rolePermissions.json" },
@@ -603,7 +613,7 @@ async function main() {
     { model: "Report", file: "reports.json" },
   ];
 
-  console.log("🌱 Starting RentAlg seed process (v6.0)...\n");
+  console.log("🌱 Starting RentAlg seed process (v7.0 - NEW ACCOUNT TIERS)...\n");
 
   // Step 1: Delete all data
   const modelNames = seedOrder.map((s) => s.model);

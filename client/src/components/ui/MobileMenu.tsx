@@ -3,21 +3,31 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { X, Home, Building2, Info, Mail } from 'lucide-react';
+import { X, Home, Building2, Info, Mail, LogOut, User, Settings, LayoutDashboard, MessageSquare, Heart, Bell, Plus } from 'lucide-react';
 
 interface NavItem {
   href: string;
   label: string;
 }
 
+interface UserMenuItem {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}
+
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   navItems: NavItem[];
+  userMenuItems: UserMenuItem[];
   pathname: string;
+  user: any;
+  signOut: () => void;
+  isAuthPage: boolean;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, pathname }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, userMenuItems, pathname, user, signOut, isAuthPage }) => {
   // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
@@ -167,7 +177,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, path
               backdrop-blur-sm
               border border-white/30
               transition-all duration-200
-              focus:outline-none focus:ring-2 focus:ring-blue-electric/50
+              focus:outline-none 
             "
             aria-label="Fermer le menu"
           >
@@ -175,7 +185,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, path
           </button>
         </div>
 
-        {/* Navigation Content */}
+          {/* Navigation Content */}
         <div className="flex flex-col h-[calc(100%-5rem)]">
           {/* Navigation Links */}
           <nav className="flex-1 p-6 space-y-2 overflow-y-auto">
@@ -227,70 +237,189 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, path
               </Link>
             ))}
 
-            {/* Tagline avec gradient */}
-            <div 
-              className="
-                mt-8 p-4 rounded-xl
-                backdrop-blur-sm
-                border border-white/30
-                relative overflow-hidden
-              "
-            >
-              <div 
-                className="absolute inset-0 opacity-20"
-                style={{
-                  background: 'linear-gradient(135deg, #0891B2 0%, #38BDF8 100%)',
-                }}
-              />
-              <p className="text-sm font-display font-medium text-gray-700 text-center leading-relaxed relative z-10">
-                Trouve ton bien de rêve en Algérie
-              </p>
-            </div>
-          </nav>
+            {/* User Menu Items (if authenticated) */}
+            {user && userMenuItems.length > 0 && (
+              <>
+                <div className="pt-4 pb-2">
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4">
+                    Mon Espace
+                  </p>
+                </div>
+                {userMenuItems.map((item, index) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={onClose}
+                    className={`
+                      flex items-center gap-4 
+                      px-4 py-3.5 rounded-xl
+                      font-semibold text-base
+                      backdrop-blur-sm
+                      border
+                      transition-all duration-200
+                      ${isActive(item.href)
+                        ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
+                        : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
+                      }
+                    `}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
 
-          {/* CTA Buttons (Bottom) avec effet glass */}
-          <div 
-            className="
-              p-6 
-              border-t border-white/30 
-              space-y-3
-              backdrop-blur-sm
-              bg-white/10
-            "
-          >
-            <Link href="/signin" onClick={onClose} className="block">
-              <Button 
-                variant="ghost"
+                <Link
+                  href="/profile"
+                  onClick={onClose}
+                  className={`
+                    flex items-center gap-4 
+                    px-4 py-3.5 rounded-xl
+                    font-semibold text-base
+                    backdrop-blur-sm
+                    border
+                    transition-all duration-200
+                    ${isActive('/profile')
+                      ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
+                      : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
+                    }
+                  `}
+                >
+                  <User className="w-5 h-5" />
+                  <span>Profile</span>
+                </Link>
+
+                <Link
+                  href="/settings"
+                  onClick={onClose}
+                  className={`
+                    flex items-center gap-4 
+                    px-4 py-3.5 rounded-xl
+                    font-semibold text-base
+                    backdrop-blur-sm
+                    border
+                    transition-all duration-200
+                    ${isActive('/settings')
+                      ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
+                      : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
+                    }
+                  `}
+                >
+                  <Settings className="w-5 h-5" />
+                  <span>Paramètres</span>
+                </Link>
+              </>
+            )}
+
+            {/* Tagline avec gradient */}
+            {!user && (
+              <div 
                 className="
-                  w-full py-3
-                  text-gray-700 font-semibold
-                  bg-white/20 hover:bg-white/40
+                  mt-8 p-4 rounded-xl
                   backdrop-blur-sm
                   border border-white/30
-                  rounded-full
-                  transition-all duration-200
+                  relative overflow-hidden
                 "
               >
-                Sign in
-              </Button>
-            </Link>
-            <Link href="/signup" onClick={onClose} className="block">
-              <Button 
-                className="
-                  w-full py-3
-                  bg-gradient-to-r from-green-vibrant to-green-fresh
-                  text-white font-bold
-                  rounded-full
-                  shadow-md hover:shadow-green
-                  transition-all duration-200
-                  hover:scale-[1.02]
-                  border border-green-vibrant/20
-                "
-              >
-                Try free
-              </Button>
-            </Link>
-          </div>
+                <div 
+                  className="absolute inset-0 opacity-20"
+                  style={{
+                    background: 'linear-gradient(135deg, #0891B2 0%, #38BDF8 100%)',
+                  }}
+                />
+                <p className="text-sm font-display font-medium text-gray-700 text-center leading-relaxed relative z-10">
+                  Trouve ton bien de rêve en Algérie
+                </p>
+              </div>
+            )}
+          </nav>          {/* CTA Buttons (Bottom) avec effet glass */}
+          {!isAuthPage && (
+            <div 
+              className="
+                p-6 
+                border-t border-white/30 
+                space-y-3
+                backdrop-blur-sm
+                bg-white/10
+              "
+            >
+              {!user ? (
+                <>
+                  <Link href="/signin" onClick={onClose} className="block">
+                    <Button 
+                      variant="ghost"
+                      className="
+                        w-full py-3
+                        text-gray-700 font-semibold
+                        bg-white/20 hover:bg-white/40
+                        backdrop-blur-sm
+                        border border-white/30
+                        rounded-full
+                        transition-all duration-200
+                      "
+                    >
+                      Sign in
+                    </Button>
+                  </Link>
+                  <Link href="/signup" onClick={onClose} className="block">
+                    <Button 
+                      className="
+                        w-full py-3
+                        bg-gradient-to-r from-green-vibrant to-green-fresh
+                        text-white font-bold
+                        rounded-full
+                        shadow-md hover:shadow-green
+                        transition-all duration-200
+                        hover:scale-[1.02]
+                        border border-green-vibrant/20
+                      "
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/properties/new" onClick={onClose} className="block">
+                    <Button 
+                      className="
+                        w-full py-3
+                        bg-gradient-to-r from-green-vibrant to-green-fresh
+                        text-white font-bold
+                        rounded-full
+                        shadow-md hover:shadow-green
+                        transition-all duration-200
+                        hover:scale-[1.02]
+                        flex items-center justify-center gap-2
+                      "
+                    >
+                      <Plus className="w-4 h-4" />
+                      Publier une annonce
+                    </Button>
+                  </Link>
+                  <Button 
+                    onClick={() => {
+                      signOut();
+                      onClose();
+                    }}
+                    variant="ghost"
+                    className="
+                      w-full py-3
+                      text-red-600 font-semibold
+                      bg-white/20 hover:bg-red-50
+                      backdrop-blur-sm
+                      border border-white/30
+                      rounded-full
+                      transition-all duration-200
+                      flex items-center justify-center gap-2
+                    "
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Déconnexion
+                  </Button>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

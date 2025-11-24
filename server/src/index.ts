@@ -4,9 +4,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-
+import { AuthMiddleware } from './middleware/authMiddleware';
 
 /*Routes Imports*/
+import particulierRoutes from './routes/particulierRoutes';
+import proRoutes from './routes/proRoutes';
 
 
 /*Configuration*/
@@ -25,7 +27,11 @@ app.get("/", (req, res) => {
     res.send("Ca marche yakho....");
 });
 
+// Particulier routes (protected) - FREE tier users
+app.use("/particulier", AuthMiddleware(["FREE"]), particulierRoutes);
 
+// Pro routes (protected) - STARTER, PRO and ELITE tier users
+app.use("/pro", AuthMiddleware(["STARTER", "PRO", "ELITE"]), proRoutes);
 
 /* Server */
 const PORT = process.env.PORT || 3002;

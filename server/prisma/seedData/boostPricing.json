@@ -1,23 +1,102 @@
 [
   {
     "tier": "TIER_1_EN_AVANT",
-    "pricePerWeek": "50000",
-    "pricePerMonth": "180000",
-    "features": ["Position en avant", "Badge bleu"],
+    "pricing": {
+      "FREE": {
+        "3days": 30000,
+        "7days": 50000
+      },
+      "STARTER": {
+        "3days": 25000,
+        "7days": 45000,
+        "bundle5x": 200000
+      },
+      "PRO": {
+        "3days": 20000,
+        "7days": 40000,
+        "30days": 150000,
+        "bundle5x": 175000,
+        "freeMonthly": true
+      },
+      "ELITE": {
+        "3days": 15000,
+        "7days": 35000,
+        "30days": 120000,
+        "unlimited": true
+      }
+    },
+    "availableForFree": true,
+    "availableForStarter": true,
+    "availableForPro": true,
+    "availableForElite": true,
+    "features": [
+      "Haut des résultats de recherche",
+      "Badge 'En avant' bleu",
+      "+150% de visibilité",
+      "Affichage prioritaire dans votre wilaya"
+    ],
+    "visibilityBoostPercentage": 150,
     "isActive": true
   },
   {
     "tier": "TIER_2_PREMIUM",
-    "pricePerWeek": "100000",
-    "pricePerMonth": "360000",
-    "features": ["Top résultats", "Badge doré"],
+    "pricing": {
+      "FREE": {},
+      "STARTER": {
+        "7days": 90000,
+        "30days": 300000
+      },
+      "PRO": {
+        "7days": 75000,
+        "30days": 250000
+      },
+      "ELITE": {
+        "7days": 70000,
+        "30days": 230000,
+        "freeMonthly": true
+      }
+    },
+    "availableForFree": false,
+    "availableForStarter": true,
+    "availableForPro": true,
+    "availableForElite": true,
+    "features": [
+      "Top des résultats (après TIER 3)",
+      "Badge 'Premium' doré",
+      "+300% de visibilité",
+      "Section 'Premium' sur homepage",
+      "Notification push aux followers"
+    ],
+    "visibilityBoostPercentage": 300,
     "isActive": true
   },
   {
     "tier": "TIER_3_ULTRA",
-    "pricePerWeek": "200000",
-    "pricePerMonth": "720000",
-    "features": ["Carousel homepage", "Badge violet"],
+    "pricing": {
+      "FREE": {},
+      "STARTER": {},
+      "PRO": {
+        "7days": 180000,
+        "30days": 600000
+      },
+      "ELITE": {
+        "7days": 150000,
+        "30days": 500000
+      }
+    },
+    "availableForFree": false,
+    "availableForStarter": false,
+    "availableForPro": true,
+    "availableForElite": true,
+    "features": [
+      "Homepage carousel (rotation)",
+      "Badge 'Ultra' violet",
+      "+500% de visibilité",
+      "Priorité absolue dans recherche",
+      "Push notification tous utilisateurs",
+      "Mise en avant réseaux sociaux"
+    ],
+    "visibilityBoostPercentage": 500,
     "isActive": true
   }
 ]
