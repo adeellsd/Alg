@@ -573,6 +573,12 @@ const SettingsPage = () => {
                   }
                   placeholder="Nom de votre entreprise"
                   disabled={!isEditingCompany}
+                  required
+                  validate={(value) => {
+                    if (!value.trim()) return 'Le nom de l\'entreprise est requis';
+                    if (value.trim().length < 2) return 'Le nom doit contenir au moins 2 caractères';
+                    return undefined;
+                  }}
                 />
 
                 <FormField
@@ -589,6 +595,11 @@ const SettingsPage = () => {
                   }
                   placeholder="Décrivez votre activité..."
                   disabled={!isEditingCompany}
+                  validate={(value) => {
+                    if (value && value.length > 500) return 'Maximum 500 caractères';
+                    return undefined;
+                  }}
+                  helperText={`${companyData.companyDescription.length}/500 caractères`}
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
