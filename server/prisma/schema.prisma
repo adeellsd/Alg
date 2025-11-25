@@ -1524,3 +1524,494 @@ model Commune {
   @@index([name])
   @@map("communes")
 }
+
+// ============================================
+// CONFIGURATION MODULAIRE (v2.0)
+// Tables de configuration dynamique pour admin interface
+// ============================================
+
+model AccountTierConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  nameFr          String
+  nameAr          String?
+  displayOrder    Int      @default(0)
+  isActive        Boolean  @default(true)
+  
+  priceMonthly    BigInt
+  priceYearly     BigInt?
+  discountYearly  Int?
+  
+  limits          Json
+  features        Json
+  boostDiscounts  Json?
+  
+  badgeColor      String
+  badgeIcon       String?
+  description     String?
+  descriptionFr   String?
+  descriptionAr   String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  createdBy       String?
+  updatedBy       String?
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("account_tier_configs")
+}
+
+model PropertyTypeConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  nameFr          String
+  nameAr          String?
+  category        String
+  displayOrder    Int      @default(0)
+  isActive        Boolean  @default(true)
+  
+  defaultValues   Json?
+  requiredFields  Json?
+  
+  icon            String?
+  iconColor       String?
+  description     String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([category])
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("property_type_configs")
+}
+
+model TransactionTypeConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  nameFr          String
+  nameAr          String?
+  displayOrder    Int      @default(0)
+  isActive        Boolean  @default(true)
+  
+  icon            String?
+  color           String?
+  description     String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("transaction_type_configs")
+}
+
+model AmenityConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  nameFr          String
+  nameAr          String?
+  category        String
+  displayOrder    Int      @default(0)
+  isActive        Boolean  @default(true)
+  
+  icon            String?
+  iconColor       String?
+  description     String?
+  
+  isFilterable    Boolean  @default(true)
+  filterPriority  Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([category])
+  @@index([isActive])
+  @@index([isFilterable])
+  @@map("amenity_configs")
+}
+
+model FeatureConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  nameFr          String
+  nameAr          String?
+  category        String
+  description     String?
+  
+  isActive        Boolean  @default(true)
+  requiredTierMin String?
+  rolloutPercent  Int      @default(100)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([category])
+  @@map("feature_configs")
+}
+
+model PlatformConfig {
+  id              String   @id @default(cuid())
+  key             String   @unique
+  value           String
+  type            String
+  category        String
+  description     String?
+  isEditable      Boolean  @default(true)
+  
+  validation      Json?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  updatedBy       String?
+  
+  @@index([category])
+  @@map("platform_configs")
+}
+
+model ConfigAuditLog {
+  id              String   @id @default(cuid())
+  adminId         String
+  adminEmail      String
+  
+  action          String
+  resource        String
+  resourceId      String
+  
+  changes         Json
+  
+  ipAddress       String?
+  userAgent       String?
+  timestamp       DateTime @default(now())
+  
+  @@index([adminId])
+  @@index([resource])
+  @@index([timestamp])
+  @@map("config_audit_logs")
+}
+
+// ============================================================================
+// PHASE 2: ADDITIONAL MODULAR CONFIGURATIONS
+// ============================================================================
+// These tables make property attributes, statuses, boost system, search filters,
+// roles, email templates, and UI customizations all configurable via admin interface.
+
+// --- PROPERTY ATTRIBUTES ---
+
+model BuildingAgeConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  minYears        Int?
+  maxYears        Int?
+  
+  icon            String?
+  color           String?
+  displayOrder    Int      @default(999)
+  
+  isActive        Boolean  @default(true)
+  isFilterable    Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("building_age_configs")
+}
+
+model ViewTypeConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  icon            String?
+  color           String?
+  displayOrder    Int      @default(999)
+  
+  isActive        Boolean  @default(true)
+  isFilterable    Boolean  @default(true)
+  isPremium       Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("view_type_configs")
+}
+
+model HeatingTypeConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  icon            String?
+  color           String?
+  displayOrder    Int      @default(999)
+  
+  isActive        Boolean  @default(true)
+  isFilterable    Boolean  @default(true)
+  energyEfficiency String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("heating_type_configs")
+}
+
+model OrientationConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  degrees         Int?
+  icon            String?
+  color           String?
+  displayOrder    Int      @default(999)
+  
+  isActive        Boolean  @default(true)
+  isFilterable    Boolean  @default(true)
+  isPremium       Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("orientation_configs")
+}
+
+model FlooringTypeConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  icon            String?
+  color           String?
+  displayOrder    Int      @default(999)
+  
+  isActive        Boolean  @default(true)
+  isFilterable    Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("flooring_type_configs")
+}
+
+// --- STATUS SYSTEMS ---
+
+model PropertyStatusConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  color           String
+  icon            String?
+  displayOrder    Int      @default(999)
+  
+  isPublic        Boolean  @default(false)
+  canEdit         Boolean  @default(true)
+  canDelete       Boolean  @default(true)
+  autoExpireDays  Int?
+  
+  isActive        Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([isPublic])
+  @@map("property_status_configs")
+}
+
+// --- BOOST SYSTEM ---
+
+model BoostTierConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  visibilityBoost Int
+  priority        Int      @default(0)
+  
+  color           String
+  icon            String?
+  displayOrder    Int      @default(999)
+  
+  features        Json?
+  
+  isActive        Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("boost_tier_configs")
+}
+
+model BoostPricingConfig {
+  id              String   @id @default(cuid())
+  
+  boostTierCode   String
+  accountTierCode String
+  durationDays    Int
+  
+  price           BigInt
+  discountPercent Int?
+  
+  isPromoActive   Boolean  @default(false)
+  promoPrice      BigInt?
+  promoStartDate  DateTime?
+  promoEndDate    DateTime?
+  
+  isActive        Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([boostTierCode, accountTierCode, durationDays])
+  @@index([isActive])
+  @@index([isPromoActive])
+  @@map("boost_pricing_configs")
+}
+
+// --- SEARCH & FILTERS ---
+
+model SearchFilterConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  category        String
+  inputType       String
+  
+  options         Json?
+  validation      Json?
+  
+  displayOrder    Int      @default(999)
+  showOnMobile    Boolean  @default(true)
+  showOnDesktop   Boolean  @default(true)
+  
+  isPremiumOnly   Boolean  @default(false)
+  
+  isActive        Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([category])
+  @@index([displayOrder])
+  @@map("search_filter_configs")
+}
+
+// --- ROLES & PERMISSIONS ---
+
+model RoleConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  permissions     Json
+  
+  color           String?
+  icon            String?
+  displayOrder    Int      @default(999)
+  
+  isActive        Boolean  @default(true)
+  isDefault       Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@map("role_configs")
+}
+
+// --- COMMUNICATION ---
+
+model EmailTemplateConfig {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  nameFr          String
+  nameAr          String
+  description     String?
+  
+  category        String
+  
+  subjectFr       String
+  subjectAr       String
+  
+  bodyFr          String   @db.Text
+  bodyAr          String   @db.Text
+  
+  variables       Json?
+  
+  isActive        Boolean  @default(true)
+  isSystem        Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([isActive])
+  @@index([category])
+  @@map("email_template_configs")
+}
+
+// --- UI CUSTOMIZATION ---
+
+model UIConfig {
+  id              String   @id @default(cuid())
+  key             String   @unique
+  category        String
+  
+  valueFr         String?
+  valueAr         String?
+  
+  type            String
+  
+  description     String?
+  
+  isActive        Boolean  @default(true)
+  isEditable      Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([category])
+  @@index([isActive])
+  @@map("ui_configs")
+}

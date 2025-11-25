@@ -1,0 +1,123 @@
+[
+  {
+    "key": "trial_duration_days",
+    "value": "14",
+    "type": "number",
+    "category": "TRIAL",
+    "description": "Durée du trial STARTER en jours",
+    "isEditable": true,
+    "validation": { "min": 7, "max": 30 }
+  },
+  {
+    "key": "trial_trigger_property_count",
+    "value": "2",
+    "type": "number",
+    "category": "TRIAL",
+    "description": "Nombre d'annonces publiées avant de déclencher le trial",
+    "isEditable": true,
+    "validation": { "min": 1, "max": 5 }
+  },
+  {
+    "key": "trial_discount_percent",
+    "value": "25",
+    "type": "number",
+    "category": "TRIAL",
+    "description": "Discount % si upgrade pendant trial",
+    "isEditable": true,
+    "validation": { "min": 0, "max": 50 }
+  },
+  {
+    "key": "boost_tier1_price_free_3d",
+    "value": "30000",
+    "type": "number",
+    "category": "PRICING",
+    "description": "Prix boost TIER_1 pour FREE (3 jours) en centimes DA",
+    "isEditable": true,
+    "validation": { "min": 10000, "max": 100000 }
+  },
+  {
+    "key": "boost_tier1_price_free_7d",
+    "value": "50000",
+    "type": "number",
+    "category": "PRICING",
+    "description": "Prix boost TIER_1 pour FREE (7 jours) en centimes DA",
+    "isEditable": true,
+    "validation": { "min": 20000, "max": 150000 }
+  },
+  {
+    "key": "properties_per_page",
+    "value": "30",
+    "type": "number",
+    "category": "SEARCH",
+    "description": "Nombre d'annonces par page dans les résultats de recherche",
+    "isEditable": true,
+    "validation": { "min": 10, "max": 100 }
+  },
+  {
+    "key": "max_search_results",
+    "value": "300",
+    "type": "number",
+    "category": "SEARCH",
+    "description": "Nombre maximum de résultats de recherche",
+    "isEditable": true,
+    "validation": { "min": 100, "max": 1000 }
+  },
+  {
+    "key": "email_notifications_enabled",
+    "value": "true",
+    "type": "boolean",
+    "category": "EMAIL",
+    "description": "Activer les notifications email globalement",
+    "isEditable": true
+  },
+  {
+    "key": "email_welcome_sequence_enabled",
+    "value": "true",
+    "type": "boolean",
+    "category": "EMAIL",
+    "description": "Activer la séquence d'emails de bienvenue",
+    "isEditable": true
+  },
+  {
+    "key": "email_trial_reminders_enabled",
+    "value": "true",
+    "type": "boolean",
+    "category": "EMAIL",
+    "description": "Activer les rappels trial par email",
+    "isEditable": true
+  },
+  {
+    "key": "upgrade_banner_max_per_session",
+    "value": "3",
+    "type": "number",
+    "category": "UI",
+    "description": "Nombre maximum de banners upgrade par session",
+    "isEditable": true,
+    "validation": { "min": 1, "max": 10 }
+  },
+  {
+    "key": "upgrade_banner_dismiss_duration_days",
+    "value": "7",
+    "type": "number",
+    "category": "UI",
+    "description": "Durée en jours avant de réafficher un banner dismissé",
+    "isEditable": true,
+    "validation": { "min": 1, "max": 30 }
+  },
+  {
+    "key": "maintenance_mode",
+    "value": "false",
+    "type": "boolean",
+    "category": "SYSTEM",
+    "description": "Activer le mode maintenance",
+    "isEditable": true
+  },
+  {
+    "key": "maintenance_message",
+    "value": "Site en maintenance. Retour prévu dans 1 heure.",
+    "type": "string",
+    "category": "SYSTEM",
+    "description": "Message affiché en mode maintenance",
+    "isEditable": true
+  }
+]

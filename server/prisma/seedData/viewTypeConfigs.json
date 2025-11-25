@@ -1,0 +1,62 @@
+[
+  {
+    "code": "SEA",
+    "nameFr": "Vue Mer",
+    "nameAr": "إطلالة على البحر",
+    "description": "Vue sur la mer",
+    "icon": "🌊",
+    "color": "#0EA5E9",
+    "displayOrder": 1,
+    "isActive": true,
+    "isFilterable": true,
+    "isPremium": true
+  },
+  {
+    "code": "MOUNTAIN",
+    "nameFr": "Vue Montagne",
+    "nameAr": "إطلالة على الجبل",
+    "description": "Vue sur les montagnes",
+    "icon": "⛰️",
+    "color": "#10B981",
+    "displayOrder": 2,
+    "isActive": true,
+    "isFilterable": true,
+    "isPremium": true
+  },
+  {
+    "code": "CITY",
+    "nameFr": "Vue Ville",
+    "nameAr": "إطلالة على المدينة",
+    "description": "Vue sur la ville",
+    "icon": "🏙️",
+    "color": "#6366F1",
+    "displayOrder": 3,
+    "isActive": true,
+    "isFilterable": true,
+    "isPremium": false
+  },
+  {
+    "code": "GARDEN",
+    "nameFr": "Vue Jardin",
+    "nameAr": "إطلالة على الحديقة",
+    "description": "Vue sur jardin ou espace vert",
+    "icon": "🌳",
+    "color": "#22C55E",
+    "displayOrder": 4,
+    "isActive": true,
+    "isFilterable": true,
+    "isPremium": false
+  },
+  {
+    "code": "STREET",
+    "nameFr": "Vue Rue",
+    "nameAr": "إطلالة على الشارع",
+    "description": "Vue sur la rue",
+    "icon": "🛣️",
+    "color": "#6B7280",
+    "displayOrder": 5,
+    "isActive": true,
+    "isFilterable": true,
+    "isPremium": false
+  }
+]

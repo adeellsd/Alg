@@ -9,6 +9,7 @@ import { AuthMiddleware } from './middleware/authMiddleware';
 /*Routes Imports*/
 import particulierRoutes from './routes/particulierRoutes';
 import proRoutes from './routes/proRoutes';
+import propertyRoutes from './routes/propertyRoutes';
 
 
 /*Configuration*/
@@ -32,6 +33,9 @@ app.use("/particulier", AuthMiddleware(["FREE"]), particulierRoutes);
 
 // Pro routes (protected) - STARTER, PRO and ELITE tier users
 app.use("/pro", AuthMiddleware(["STARTER", "PRO", "ELITE"]), proRoutes);
+
+// Property routes (public and protected)
+app.use("/api/properties", propertyRoutes);
 
 /* Server */
 const PORT = process.env.PORT || 3002;

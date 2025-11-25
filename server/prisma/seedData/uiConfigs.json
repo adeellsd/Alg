@@ -1,0 +1,152 @@
+[
+  {
+    "key": "homepage_hero_title",
+    "category": "HOMEPAGE",
+    "valueFr": "Trouvez votre bien idéal en Algérie",
+    "valueAr": "اعثر على منزل أحلامك في الجزائر",
+    "type": "TEXT",
+    "description": "Titre principal page d'accueil",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "homepage_hero_subtitle",
+    "category": "HOMEPAGE",
+    "valueFr": "Des milliers d'annonces immobilières vérifiées",
+    "valueAr": "آلاف الإعلانات العقارية المعتمدة",
+    "type": "TEXT",
+    "description": "Sous-titre page d'accueil",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "cta_search_now",
+    "category": "CTA",
+    "valueFr": "Rechercher maintenant",
+    "valueAr": "ابحث الآن",
+    "type": "TEXT",
+    "description": "CTA principal recherche",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "cta_publish_property",
+    "category": "CTA",
+    "valueFr": "Publier une annonce",
+    "valueAr": "نشر إعلان",
+    "type": "TEXT",
+    "description": "CTA publier annonce",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "cta_boost_now",
+    "category": "CTA",
+    "valueFr": "Booster maintenant",
+    "valueAr": "عزز الآن",
+    "type": "TEXT",
+    "description": "CTA boost",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "pricing_free_badge",
+    "category": "PRICING",
+    "valueFr": "Gratuit",
+    "valueAr": "مجاني",
+    "type": "TEXT",
+    "description": "Badge tier gratuit",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "pricing_popular_badge",
+    "category": "PRICING",
+    "valueFr": "Populaire",
+    "valueAr": "شائع",
+    "type": "TEXT",
+    "description": "Badge tier populaire",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "property_card_boost_badge",
+    "category": "PROPERTY",
+    "valueFr": "En vedette",
+    "valueAr": "مميز",
+    "type": "TEXT",
+    "description": "Badge annonce boostée",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "property_status_draft",
+    "category": "PROPERTY",
+    "valueFr": "Brouillon",
+    "valueAr": "مسودة",
+    "type": "TEXT",
+    "description": "Statut brouillon",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "property_status_active",
+    "category": "PROPERTY",
+    "valueFr": "Actif",
+    "valueAr": "نشط",
+    "type": "TEXT",
+    "description": "Statut actif",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "footer_tagline",
+    "category": "FOOTER",
+    "valueFr": "RentAlg - La plateforme immobilière #1 en Algérie",
+    "valueAr": "RentAlg - منصة العقارات رقم 1 في الجزائر",
+    "type": "TEXT",
+    "description": "Tagline footer",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "primary_color",
+    "category": "THEME",
+    "valueFr": "#0891b2",
+    "valueAr": "#0891b2",
+    "type": "COLOR",
+    "description": "Couleur primaire (cyan-600)",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "secondary_color",
+    "category": "THEME",
+    "valueFr": "#3B82F6",
+    "valueAr": "#3B82F6",
+    "type": "COLOR",
+    "description": "Couleur secondaire (blue-500)",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "success_color",
+    "category": "THEME",
+    "valueFr": "#10B981",
+    "valueAr": "#10B981",
+    "type": "COLOR",
+    "description": "Couleur succès (green-500)",
+    "isActive": true,
+    "isEditable": true
+  },
+  {
+    "key": "error_color",
+    "category": "THEME",
+    "valueFr": "#EF4444",
+    "valueAr": "#EF4444",
+    "type": "COLOR",
+    "description": "Couleur erreur (red-500)",
+    "isActive": true,
+    "isEditable": true
+  }
+]

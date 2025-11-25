@@ -1,0 +1,62 @@
+[
+  {
+    "code": "CENTRAL",
+    "nameFr": "Chauffage central",
+    "nameAr": "تدفئة مركزية",
+    "description": "Système de chauffage central",
+    "icon": "🔥",
+    "color": "#EF4444",
+    "displayOrder": 1,
+    "isActive": true,
+    "isFilterable": true,
+    "energyEfficiency": "B"
+  },
+  {
+    "code": "INDIVIDUAL",
+    "nameFr": "Chauffage individuel",
+    "nameAr": "تدفئة فردية",
+    "description": "Système de chauffage individuel (gaz, électrique)",
+    "icon": "🔥",
+    "color": "#F97316",
+    "displayOrder": 2,
+    "isActive": true,
+    "isFilterable": true,
+    "energyEfficiency": "C"
+  },
+  {
+    "code": "ELECTRIC",
+    "nameFr": "Électrique",
+    "nameAr": "كهربائي",
+    "description": "Chauffage électrique",
+    "icon": "⚡",
+    "color": "#3B82F6",
+    "displayOrder": 3,
+    "isActive": true,
+    "isFilterable": true,
+    "energyEfficiency": "D"
+  },
+  {
+    "code": "GAS",
+    "nameFr": "Gaz naturel",
+    "nameAr": "غاز طبيعي",
+    "description": "Chauffage au gaz naturel",
+    "icon": "💨",
+    "color": "#06B6D4",
+    "displayOrder": 4,
+    "isActive": true,
+    "isFilterable": true,
+    "energyEfficiency": "B"
+  },
+  {
+    "code": "NONE",
+    "nameFr": "Sans chauffage",
+    "nameAr": "بدون تدفئة",
+    "description": "Pas de système de chauffage",
+    "icon": "❌",
+    "color": "#6B7280",
+    "displayOrder": 5,
+    "isActive": true,
+    "isFilterable": true,
+    "energyEfficiency": null
+  }
+]

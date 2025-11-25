@@ -1,0 +1,67 @@
+[
+  {
+    "code": "NEW",
+    "nameFr": "Construction Neuve",
+    "nameAr": "بناء جديد",
+    "description": "Bien neuf (0-1 an)",
+    "minYears": 0,
+    "maxYears": 1,
+    "icon": "🆕",
+    "color": "#10B981",
+    "displayOrder": 1,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "0_5_YEARS",
+    "nameFr": "0-5 ans",
+    "nameAr": "0-5 سنوات",
+    "description": "Construction récente",
+    "minYears": 0,
+    "maxYears": 5,
+    "icon": "⭐",
+    "color": "#3B82F6",
+    "displayOrder": 2,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "5_10_YEARS",
+    "nameFr": "5-10 ans",
+    "nameAr": "5-10 سنوات",
+    "description": "Construction moderne",
+    "minYears": 5,
+    "maxYears": 10,
+    "icon": "🏢",
+    "color": "#06B6D4",
+    "displayOrder": 3,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "10_20_YEARS",
+    "nameFr": "10-20 ans",
+    "nameAr": "10-20 سنة",
+    "description": "Construction établie",
+    "minYears": 10,
+    "maxYears": 20,
+    "icon": "🏛️",
+    "color": "#8B5CF6",
+    "displayOrder": 4,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "20_PLUS_YEARS",
+    "nameFr": "20+ ans",
+    "nameAr": "20+ سنة",
+    "description": "Construction ancienne",
+    "minYears": 20,
+    "maxYears": null,
+    "icon": "🏰",
+    "color": "#92400E",
+    "displayOrder": 5,
+    "isActive": true,
+    "isFilterable": true
+  }
+]

@@ -946,3 +946,663 @@ app/
 - Profile and Settings pages
 - Property search and listing pages
 - Connect dashboards to backend APIs
+
+---
+
+## 🎨 UI/UX WORLD-CLASS STANDARDS
+
+### **Design Philosophy: "Alger Vibrante Meets Airbnb"**
+
+RentAlg follows a modern, Mediterranean-inspired design system that combines:
+- **Visual Hierarchy**: Clear typographic scales, purposeful white space
+- **Micro-interactions**: Subtle animations that delight without distraction
+- **Performance**: 60fps animations, lazy loading, optimized images
+- **Accessibility**: WCAG 2.1 AA minimum, keyboard navigation, screen reader friendly
+
+### **Component Architecture Principles**
+
+#### **Atomic Design**
+```
+Atoms → Button, Input, Badge, Avatar
+Molecules → PropertyCard, FilterSection, SearchBar
+Organisms → PropertyGrid, FilterSidebar, PropertyDetails
+Templates → PropertiesPage, DashboardLayout
+Pages → /properties, /properties/[slug]
+```
+
+#### **Component Standards**
+
+**All interactive components MUST have:**
+- `default` state
+- `hover` state (200-300ms transition)
+- `focus` state (visible ring for keyboard nav)
+- `active/pressed` state
+- `disabled` state
+- `loading` state (where applicable)
+- `error` state (for forms/inputs)
+
+**Example: Button Component**
+```tsx
+// ❌ BAD - Missing states
+<button className="bg-[#0891B2] text-white px-4 py-2">
+  Click me
+</button>
+
+// ✅ GOOD - All states defined
+<Button
+  variant="primary"
+  size="md"
+  disabled={isLoading}
+  className={cn(
+    "bg-gradient-to-r from-[#0891B2] to-[#38BDF8]",
+    "hover:from-[#0369A1] hover:to-[#0891B2]",
+    "focus:ring-4 focus:ring-[#0891B2]/30",
+    "active:scale-95",
+    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "transition-all duration-200 ease-out",
+    "shadow-md hover:shadow-lg"
+  )}
+>
+  {isLoading ? (
+    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+  ) : (
+    <Icon className="w-4 h-4 mr-2" />
+  )}
+  {label}
+</Button>
+```
+
+### **Animation Standards**
+
+#### **Duration Guidelines**
+- **Micro** (150ms): Button hover, checkbox toggle, badge appearance
+- **Normal** (200-300ms): Card hover, dropdown open, modal fade
+- **Complex** (400-500ms): Page transitions, slide-in panels
+- **Never exceed 500ms** unless critical UX reason
+
+#### **Easing Functions**
+- **ease-out**: Entrances (elements appearing)
+- **ease-in**: Exits (elements disappearing)
+- **ease-in-out**: State changes (hover, active)
+- **spring**: Delightful interactions (Framer Motion)
+
+#### **Performance Rules**
+- **Only animate**: `transform`, `opacity`, `filter`
+- **NEVER animate**: `width`, `height`, `top`, `left`, `margin`, `padding`
+- **Use**: `will-change` sparingly (only during animation)
+- **GPU acceleration**: `transform: translateZ(0)` if needed
+
+#### **Framer Motion Patterns**
+```tsx
+// Stagger children cards
+<motion.div
+  variants={{
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  }}
+  initial="hidden"
+  animate="show"
+>
+  {properties.map(property => (
+    <motion.div
+      key={property.id}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0 }
+      }}
+    >
+      <PropertyCard property={property} />
+    </motion.div>
+  ))}
+</motion.div>
+
+// Hover scale (subtle)
+<motion.div
+  whileHover={{ scale: 1.02 }}
+  whileTap={{ scale: 0.98 }}
+  transition={{ duration: 0.2, ease: "easeOut" }}
+>
+  <Card />
+</motion.div>
+```
+
+### **Spacing & Layout**
+
+#### **Spacing System (Tailwind scale)**
+```
+1 = 4px   → Tight gaps (icon + text)
+2 = 8px   → Small gaps (form fields)
+3 = 12px  → Medium gaps (card content)
+4 = 16px  → Standard gaps (sections)
+6 = 24px  → Large gaps (major sections)
+8 = 32px  → XL gaps (page sections)
+12 = 48px → 2XL gaps (hero sections)
+16 = 64px → 3XL gaps (landing sections)
+```
+
+#### **White Space Rules**
+- **Minimum**: 48px between major sections (py-12)
+- **Cards**: 16-24px padding (p-4 to p-6)
+- **Buttons**: 12px horizontal, 8px vertical (px-3 py-2)
+- **Inputs**: 16px horizontal, 12px vertical (px-4 py-3)
+
+#### **Container Widths**
+```tsx
+// Max widths by context
+<div className="max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-8">
+  {/* Full site width */}
+</div>
+
+<div className="max-w-7xl mx-auto">
+  {/* Content-focused width */}
+</div>
+
+<div className="max-w-3xl mx-auto">
+  {/* Reading width (blog, forms) */}
+</div>
+```
+
+### **Typography**
+
+#### **Font Stacks**
+```css
+/* Latin (Primary) */
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+/* Headings/Display */
+font-family: 'Poppins', 'Inter', sans-serif;
+
+/* Arabic (RTL) */
+font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+
+/* Monospace (code) */
+font-family: 'JetBrains Mono', 'Courier New', monospace;
+```
+
+#### **Type Scale**
+```tsx
+// Headings
+<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">Hero</h1>
+<h2 className="text-3xl md:text-4xl font-bold">Section</h2>
+<h3 className="text-2xl md:text-3xl font-semibold">Subsection</h3>
+<h4 className="text-xl md:text-2xl font-semibold">Card Title</h4>
+
+// Body
+<p className="text-base md:text-lg">Large body</p>
+<p className="text-sm md:text-base">Standard body</p>
+<span className="text-xs md:text-sm">Small text</span>
+
+// Prices (Poppins, bold)
+<p className="text-2xl md:text-3xl font-bold font-poppins">
+  2,500,000 DA
+</p>
+```
+
+#### **Line Heights**
+- Headings: `leading-tight` (1.25)
+- Body: `leading-relaxed` (1.625)
+- Small text: `leading-normal` (1.5)
+
+### **Color Usage Rules**
+
+#### **Primary Actions (Cyan/Blue)**
+```tsx
+// CTA Buttons
+bg-gradient-to-r from-[#0891B2] to-[#38BDF8]
+hover:from-[#0369A1] hover:to-[#0891B2]
+
+// Links
+text-[#0891B2] hover:text-[#0369A1]
+
+// Badges (Info)
+bg-[#CFFAFE] text-[#0891B2] border border-[#38BDF8]
+```
+
+#### **Success (Green)**
+```tsx
+// À Louer, Success states
+bg-[#059669] text-white
+bg-[#D1FAE5] text-[#059669] // Light version
+```
+
+#### **Warning/Urgent (Amber)**
+```tsx
+// Urgent, Featured
+bg-[#F59E0B] text-white
+bg-[#FFEDD5] text-[#F59E0B] // Light version
+```
+
+#### **Error/Sold (Red)**
+```tsx
+// Vendu, Error states
+bg-[#DC2626] text-white
+bg-[#FEE2E2] text-[#DC2626] // Light version
+```
+
+#### **Premium/Exclusive (Fuchsia)**
+```tsx
+// ELITE features, Premium boosts
+bg-gradient-to-r from-[#DB2777] to-[#EC4899] text-white
+bg-[#FCE7F3] text-[#DB2777] // Light version
+```
+
+### **Responsive Design**
+
+#### **Mobile-First Approach**
+```tsx
+// ❌ BAD - Desktop first
+<div className="grid grid-cols-3 md:grid-cols-1">
+
+// ✅ GOOD - Mobile first
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+```
+
+#### **Breakpoint Strategy**
+```
+sm (640px)  → Mobile landscape, small tablets
+md (768px)  → Tablets portrait
+lg (1024px) → Tablets landscape, small laptops
+xl (1280px) → Desktop
+2xl (1536px)→ Large desktop
+```
+
+#### **Touch Targets**
+- **Minimum**: 44x44px on mobile (Apple HIG)
+- **Recommended**: 48x48px for primary actions
+- **Spacing**: 8px minimum between touch targets
+
+```tsx
+// ✅ GOOD - Proper touch target
+<Button className="h-12 min-w-12 px-4">
+  <Icon className="w-5 h-5" />
+</Button>
+```
+
+### **Loading States**
+
+#### **Skeleton Loaders**
+```tsx
+// Property card skeleton
+<div className="bg-white rounded-2xl p-6 animate-pulse">
+  <div className="aspect-[4/3] bg-gray-200 rounded-xl mb-4" />
+  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
+  <div className="h-4 bg-gray-200 rounded w-1/2 mb-4" />
+  <div className="h-6 bg-gray-200 rounded w-1/3" />
+</div>
+```
+
+#### **Spinner Pattern**
+```tsx
+import { Loader2 } from "lucide-react";
+
+// Inline spinner
+{isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+
+// Full screen loader
+<div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+  <Loader2 className="w-12 h-12 text-[#0891B2] animate-spin" />
+</div>
+```
+
+### **Empty States**
+
+#### **Pattern**
+```tsx
+<div className="text-center py-16 px-4">
+  {/* Icon */}
+  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#CFFAFE] to-[#38BDF8]/20 rounded-2xl flex items-center justify-center">
+    <Icon className="w-10 h-10 text-[#0891B2]" />
+  </div>
+  
+  {/* Title */}
+  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+    Aucun bien trouvé
+  </h3>
+  
+  {/* Description */}
+  <p className="text-gray-600 max-w-md mx-auto mb-6">
+    Essayez de modifier vos filtres ou explorez d'autres quartiers
+  </p>
+  
+  {/* Action */}
+  <Button
+    variant="outline"
+    onClick={handleReset}
+    className="border-2 border-[#0891B2] text-[#0891B2] hover:bg-[#CFFAFE]"
+  >
+    Réinitialiser les filtres
+  </Button>
+</div>
+```
+
+### **Error States**
+
+#### **Pattern**
+```tsx
+<div className="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+  <div className="flex items-start gap-4">
+    <AlertCircle className="w-6 h-6 text-red-600 shrink-0 mt-0.5" />
+    <div className="flex-1">
+      <h4 className="font-semibold text-red-900 mb-2">
+        Une erreur est survenue
+      </h4>
+      <p className="text-sm text-red-700 mb-4">
+        {errorMessage}
+      </p>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={handleRetry}
+        className="border-red-300 text-red-700 hover:bg-red-100"
+      >
+        Réessayer
+      </Button>
+    </div>
+  </div>
+</div>
+```
+
+### **Accessibility (A11Y)**
+
+#### **Keyboard Navigation**
+```tsx
+// Focus visible
+<Button className="focus:ring-4 focus:ring-[#0891B2]/30 focus:outline-none">
+
+// Skip to content
+<a href="#main-content" className="sr-only focus:not-sr-only">
+  Aller au contenu principal
+</a>
+
+// Trap focus in modals
+import { Dialog } from "@radix-ui/react-dialog"; // Auto focus trap
+```
+
+#### **ARIA Labels**
+```tsx
+// Descriptive labels
+<button aria-label="Ajouter aux favoris">
+  <Heart className="w-5 h-5" />
+</button>
+
+// Live regions
+<div aria-live="polite" aria-atomic="true">
+  {totalResults} biens trouvés
+</div>
+
+// Loading states
+<Button disabled aria-busy={isLoading}>
+  {isLoading ? "Chargement..." : "Rechercher"}
+</Button>
+```
+
+#### **Color Contrast**
+- **Large text** (18px+): 3:1 minimum (WCAG AA)
+- **Normal text**: 4.5:1 minimum (WCAG AA)
+- **AAA target**: 7:1 for critical text
+
+**Test with**: Chrome DevTools → Lighthouse → Accessibility
+
+### **Performance Optimization**
+
+#### **Image Optimization**
+```tsx
+import Image from "next/image";
+
+// ✅ GOOD - Optimized
+<Image
+  src={property.thumbnail}
+  alt={property.title}
+  width={400}
+  height={300}
+  className="object-cover rounded-xl"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  loading="lazy"
+  placeholder="blur"
+  blurDataURL="data:image/jpeg;base64,/9j/4AAQ..." // Generated
+/>
+
+// ❌ BAD - Unoptimized
+<img src={property.thumbnail} alt={property.title} />
+```
+
+#### **Code Splitting**
+```tsx
+import dynamic from "next/dynamic";
+
+// Lazy load heavy components
+const MapView = dynamic(() => import("@/components/MapView"), {
+  loading: () => <Skeleton className="h-96" />,
+  ssr: false, // Disable SSR for client-only components
+});
+```
+
+#### **Debouncing/Throttling**
+```tsx
+import { useDebouncedCallback } from "use-debounce";
+
+// Search input
+const handleSearch = useDebouncedCallback((query: string) => {
+  triggerSearch(query);
+}, 300);
+
+// Scroll events
+const handleScroll = useThrottledCallback(() => {
+  // Infinite scroll logic
+}, 100);
+```
+
+### **Form Validation**
+
+#### **React Hook Form + Zod**
+```tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const schema = z.object({
+  wilayaId: z.string().min(1, "Wilaya requise"),
+  minPrice: z.number().min(0).optional(),
+  maxPrice: z.number().min(0).optional(),
+}).refine(data => !data.maxPrice || data.maxPrice >= (data.minPrice || 0), {
+  message: "Le prix max doit être supérieur au prix min",
+  path: ["maxPrice"],
+});
+
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema),
+});
+```
+
+### **Toast Notifications**
+
+#### **Sonner Pattern**
+```tsx
+import { toast } from "sonner";
+
+// Success
+toast.success("Bien ajouté aux favoris", {
+  description: property.title,
+  icon: <Heart className="w-5 h-5" />,
+});
+
+// Error
+toast.error("Erreur lors de l'ajout", {
+  description: "Veuillez réessayer plus tard",
+  action: {
+    label: "Réessayer",
+    onClick: () => handleRetry(),
+  },
+});
+
+// Loading → Success
+const toastId = toast.loading("Chargement...");
+// ... async operation
+toast.success("Terminé!", { id: toastId });
+```
+
+### **Code Quality Standards**
+
+#### **TypeScript**
+```tsx
+// ❌ BAD - any types
+const handleClick = (data: any) => { ... }
+
+// ✅ GOOD - Strict types
+interface PropertyCardProps {
+  property: Property;
+  viewMode: "grid" | "list";
+  onFavorite?: (id: string) => void;
+  onShare?: (id: string) => void;
+}
+
+const PropertyCard: React.FC<PropertyCardProps> = ({ ... }) => { ... }
+```
+
+#### **Component Size**
+- **Maximum**: 300 lines per component
+- **If larger**: Split into sub-components
+- **Functions**: Maximum 50 lines
+
+#### **Naming Conventions**
+```
+Components → PascalCase (PropertyCard.tsx)
+Functions → camelCase (handleFavoriteToggle)
+Constants → UPPER_SNAKE_CASE (MAX_PROPERTIES)
+Files → kebab-case for utils (format-price.ts)
+Hooks → camelCase with "use" prefix (usePropertyFilters)
+```
+
+#### **Import Order**
+```tsx
+// 1. External libraries
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+// 2. Internal absolute imports
+import { Button } from "@/components/ui/button";
+import { useGetPropertiesQuery } from "@/state/api";
+
+// 3. Relative imports
+import { PropertyCard } from "./PropertyCard";
+
+// 4. Types
+import type { Property } from "@/types/prismaTypes";
+
+// 5. Styles (if any)
+import "./styles.css";
+```
+
+### **Testing Standards**
+
+#### **Unit Tests (Vitest)**
+```tsx
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+
+describe("PropertyCard", () => {
+  it("renders property title", () => {
+    render(<PropertyCard property={mockProperty} />);
+    expect(screen.getByText(mockProperty.title)).toBeInTheDocument();
+  });
+
+  it("calls onFavorite when heart clicked", () => {
+    const onFavorite = vi.fn();
+    render(<PropertyCard property={mockProperty} onFavorite={onFavorite} />);
+    
+    fireEvent.click(screen.getByLabelText("Ajouter aux favoris"));
+    expect(onFavorite).toHaveBeenCalledWith(mockProperty.id);
+  });
+});
+```
+
+### **Documentation Standards**
+
+#### **Component Documentation**
+```tsx
+/**
+ * PropertyCard displays a single property with image, title, price, and metadata.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <PropertyCard
+ *   property={property}
+ *   viewMode="grid"
+ *   onFavorite={(id) => handleFavorite(id)}
+ * />
+ * ```
+ * 
+ * @param {Property} property - Property data from API
+ * @param {"grid" | "list"} viewMode - Display mode
+ * @param {function} [onFavorite] - Optional favorite toggle callback
+ */
+export const PropertyCard: React.FC<PropertyCardProps> = ({ ... }) => {
+```
+
+#### **Complex Logic Comments**
+```tsx
+// Calculate boost priority score based on tier and recency
+// TIER_3_ULTRA (weight: 1000) > TIER_2_PREMIUM (500) > TIER_1 (100)
+// + Recency bonus: 10 points per day (max 100)
+const calculatePriority = (property: Property): number => {
+  const tierWeights = { TIER_3_ULTRA: 1000, TIER_2_PREMIUM: 500, TIER_1_EN_AVANT: 100 };
+  const tierScore = tierWeights[property.boostTier] || 0;
+  
+  const daysSinceBoost = differenceInDays(new Date(), new Date(property.boostStartedAt));
+  const recencyBonus = Math.max(0, 100 - daysSinceBoost * 10);
+  
+  return tierScore + recencyBonus;
+};
+```
+
+---
+
+## 🚀 QUICK REFERENCE: Property Card Implementation
+
+**Perfect PropertyCard checklist:**
+- ✅ Aspect ratio locked (4:3 or 16:9)
+- ✅ Image lazy loaded with Next/Image
+- ✅ Hover scale (1.02-1.05) with smooth transition
+- ✅ Gradient overlay on image for text readability
+- ✅ Boost badge (top-left, color-coded)
+- ✅ Property type badge (top-right)
+- ✅ Favorite/Share buttons (bottom-right, opacity 0 → 100 on hover)
+- ✅ Location with MapPin icon (cyan color)
+- ✅ Title (line-clamp-2, hover color change to cyan)
+- ✅ Metadata (surface, rooms, bedrooms) with icons
+- ✅ Price (gradient text, large, bold, Poppins)
+- ✅ Owner badge (PRO + verified checkmark)
+- ✅ Stats (views, favorites) with icons
+- ✅ Shadow elevation on hover
+- ✅ All animations 60fps (transform/opacity only)
+- ✅ Accessible (keyboard nav, ARIA labels)
+- ✅ Responsive (adapts to grid/list view)
+
+**Perfect FilterSidebar checklist:**
+- ✅ Sticky positioning (top-[Xpx])
+- ✅ Scrollable with max-height
+- ✅ Section headers (bold, cyan bullet, border separator)
+- ✅ All inputs h-12 for consistency
+- ✅ Hover states (border-cyan-400)
+- ✅ Active filters chips with remove button
+- ✅ Results count live update
+- ✅ Reset button clearly visible
+- ✅ Mobile: Bottom sheet or modal
+- ✅ Tablet: Collapsible sidebar
+- ✅ Desktop: Always visible
+
+---
+
+## 📚 REFERENCES
+
+**Inspiration Platforms:**
+- Airbnb → Card design, filters, micro-interactions
+- Zillow → Property metadata, pricing display
+- Booking.com → Filters, badges, loading states
+- Rightmove → Responsive layout, search UX
+- Linear → Animations, modern design
+- Vercel → Performance, transitions

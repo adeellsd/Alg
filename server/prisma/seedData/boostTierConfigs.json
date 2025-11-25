@@ -1,0 +1,57 @@
+[
+  {
+    "code": "TIER_1",
+    "nameFr": "Boost Standard",
+    "nameAr": "تعزيز عادي",
+    "description": "Boost standard - Visibilité +200%",
+    "visibilityBoost": 200,
+    "priority": 1,
+    "color": "#3B82F6",
+    "icon": "⭐",
+    "displayOrder": 1,
+    "features": {
+      "topResults": true,
+      "highlightBorder": false,
+      "featuredBadge": false
+    },
+    "isActive": true
+  },
+  {
+    "code": "TIER_2",
+    "nameFr": "Boost Premium",
+    "nameAr": "تعزيز مميز",
+    "description": "Boost premium - Visibilité +400%",
+    "visibilityBoost": 400,
+    "priority": 2,
+    "color": "#8B5CF6",
+    "icon": "💎",
+    "displayOrder": 2,
+    "features": {
+      "topResults": true,
+      "highlightBorder": true,
+      "featuredBadge": true,
+      "socialShare": true
+    },
+    "isActive": true
+  },
+  {
+    "code": "TIER_3",
+    "nameFr": "Boost Ultra",
+    "nameAr": "تعزيز فائق",
+    "description": "Boost ultra - Visibilité +600%",
+    "visibilityBoost": 600,
+    "priority": 3,
+    "color": "#F59E0B",
+    "icon": "🔥",
+    "displayOrder": 3,
+    "features": {
+      "topResults": true,
+      "highlightBorder": true,
+      "featuredBadge": true,
+      "socialShare": true,
+      "homepageCarousel": true,
+      "emailCampaign": true
+    },
+    "isActive": true
+  }
+]

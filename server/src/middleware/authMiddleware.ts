@@ -155,3 +155,66 @@ export const AuthMiddleware = (allowedRoles: string[]) => {
         }
     };
 };        
+
+/**
+ * Optional Auth Middleware - attache l'utilisateur si token valide, mais ne bloque pas
+ * Utile pour les routes publiques qui ont un comportement différent si l'utilisateur est connecté
+ */
+export const optionalAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+    const token = req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+        // Pas de token = continuer sans user
+        next();
+        return;
+    }
+
+    try {
+        jwt.verify(
+            token,
+            getKey,
+            {
+                algorithms: ['RS256'],
+                issuer: process.env.AWS_COGNITO_ISSUER
+            },
+            async (err, decoded) => {
+                if (err) {
+                    // Token invalide = continuer sans user
+                    next();
+                    return;
+                }
+
+                const decodedToken = decoded as DecodedToken;
+
+                try {
+                    const user = await prisma.user.findUnique({
+                        where: { cognitoId: decodedToken.sub },
+                        select: { 
+                            id: true, 
+                            accountTier: true, 
+                            email: true,
+                            status: true
+                        }
+                    });
+
+                    if (user && user.status !== 'BANNED' && user.status !== 'SUSPENDED') {
+                        req.user = {
+                            id: decodedToken.sub,
+                            role: user.accountTier,
+                            email: user.email || decodedToken.email
+                        };
+                        // Aussi ajouter userId pour compatibilité
+                        (req as unknown as { userId: string }).userId = user.id;
+                    }
+                } catch {
+                    // Erreur DB = continuer sans user
+                }
+
+                next();
+            }
+        );
+    } catch {
+        // Erreur de traitement = continuer sans user
+        next();
+    }
+};

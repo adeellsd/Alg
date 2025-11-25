@@ -1,0 +1,57 @@
+[
+  {
+    "code": "TILES",
+    "nameFr": "Carrelage",
+    "nameAr": "بلاط",
+    "description": "Sol en carrelage",
+    "icon": "🏺",
+    "color": "#06B6D4",
+    "displayOrder": 1,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "MARBLE",
+    "nameFr": "Marbre",
+    "nameAr": "رخام",
+    "description": "Sol en marbre",
+    "icon": "💎",
+    "color": "#8B5CF6",
+    "displayOrder": 2,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "PARQUET",
+    "nameFr": "Parquet",
+    "nameAr": "باركيه",
+    "description": "Sol en parquet",
+    "icon": "🪵",
+    "color": "#92400E",
+    "displayOrder": 3,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "LAMINATE",
+    "nameFr": "Stratifié",
+    "nameAr": "خشب مضغوط",
+    "description": "Sol stratifié",
+    "icon": "📦",
+    "color": "#78350F",
+    "displayOrder": 4,
+    "isActive": true,
+    "isFilterable": true
+  },
+  {
+    "code": "CONCRETE",
+    "nameFr": "Béton",
+    "nameAr": "خرسانة",
+    "description": "Sol en béton",
+    "icon": "🏗️",
+    "color": "#6B7280",
+    "displayOrder": 5,
+    "isActive": true,
+    "isFilterable": true
+  }
+]

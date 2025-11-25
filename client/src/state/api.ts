@@ -24,7 +24,7 @@ export const api = createApi({
     },
   }),
   reducerPath: "api",
-  tagTypes: ["User"],
+  tagTypes: ["User", "Properties", "FiltersConfig"],
   endpoints: (build) => ({
     getAuthUser: build.query<AuthUserResponse, void>({
         providesTags: ["User"],
@@ -115,6 +115,67 @@ export const api = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+
+    // =========================================================================
+    // PROPERTIES ENDPOINTS
+    // =========================================================================
+
+    // Get filters configuration
+    getFiltersConfig: build.query<any, void>({
+      query: () => "/api/properties/filters",
+      providesTags: ["FiltersConfig"],
+    }),
+
+    // Search properties
+    searchProperties: build.query<any, Record<string, any>>({
+      query: (params) => ({
+        url: "/api/properties",
+        params,
+      }),
+      providesTags: ["Properties"],
+    }),
+
+    // Get property details
+    getProperty: build.query<any, string>({
+      query: (slugOrId) => `/api/properties/${slugOrId}`,
+    }),
+
+    // Get popular properties
+    getPopularProperties: build.query<any, { limit?: number; transactionType?: string }>({
+      query: (params) => ({
+        url: "/api/properties/popular",
+        params,
+      }),
+    }),
+
+    // Get boosted properties
+    getBoostedProperties: build.query<any, { limit?: number }>({
+      query: (params) => ({
+        url: "/api/properties/boosted",
+        params,
+      }),
+    }),
+
+    // Get recent properties
+    getRecentProperties: build.query<any, { limit?: number; wilayaId?: string }>({
+      query: (params) => ({
+        url: "/api/properties/recent",
+        params,
+      }),
+    }),
+
+    // Get communes by wilaya
+    getCommunesByWilaya: build.query<any, string>({
+      query: (wilayaId) => `/api/properties/communes/${wilayaId}`,
+    }),
+
+    // Get similar properties
+    getSimilarProperties: build.query<any, { propertyId: string; limit?: number }>({
+      query: ({ propertyId, limit }) => ({
+        url: `/api/properties/similar/${propertyId}`,
+        params: { limit },
+      }),
+    }),
     }),
 });
 
@@ -123,4 +184,13 @@ export const {
   useUpdateUserProfileMutation,
   useUpdateParticulierProfileMutation,
   useUpdateNotificationsMutation,
+  useGetFiltersConfigQuery,
+  useSearchPropertiesQuery,
+  useLazySearchPropertiesQuery,
+  useGetPropertyQuery,
+  useGetPopularPropertiesQuery,
+  useGetBoostedPropertiesQuery,
+  useGetRecentPropertiesQuery,
+  useGetCommunesByWilayaQuery,
+  useGetSimilarPropertiesQuery,
 } = api;

@@ -1,0 +1,170 @@
+[
+  {
+    "code": "FREE",
+    "name": "Free",
+    "nameFr": "Gratuit",
+    "nameAr": "مجاني",
+    "displayOrder": 1,
+    "isActive": true,
+    "priceMonthly": 0,
+    "priceYearly": 0,
+    "discountYearly": 0,
+    "limits": {
+      "properties": 5,
+      "images": 10,
+      "videos": 0,
+      "savedSearches": 5,
+      "teamMembers": 0
+    },
+    "features": [
+      "basic_stats",
+      "mini_chart_3days",
+      "notifications_6h",
+      "template_default",
+      "boost_tier1"
+    ],
+    "boostDiscounts": {
+      "tier1": { "3d": 0, "7d": 0 },
+      "tier2": null,
+      "tier3": null
+    },
+    "badgeColor": "#64748B",
+    "badgeIcon": "🆓",
+    "description": "Parfait pour tester la plateforme",
+    "descriptionFr": "Parfait pour tester la plateforme",
+    "descriptionAr": "مثالي لتجربة المنصة"
+  },
+  {
+    "code": "STARTER",
+    "name": "Starter",
+    "nameFr": "Starter",
+    "nameAr": "المبتدئ",
+    "displayOrder": 2,
+    "isActive": true,
+    "priceMonthly": 180000,
+    "priceYearly": 1800000,
+    "discountYearly": 17,
+    "limits": {
+      "properties": 15,
+      "images": 15,
+      "videos": 1,
+      "savedSearches": 999999,
+      "teamMembers": 0
+    },
+    "features": [
+      "stats_14days",
+      "top_5_properties",
+      "templates_10",
+      "notifications_instant",
+      "boost_tier1",
+      "boost_tier2",
+      "export_csv",
+      "priority_review"
+    ],
+    "boostDiscounts": {
+      "tier1": { "3d": -17, "7d": -10 },
+      "tier2": { "7d": 0, "30d": -17 },
+      "tier3": null
+    },
+    "badgeColor": "#3B82F6",
+    "badgeIcon": "💼",
+    "description": "Développez votre activité immobilière",
+    "descriptionFr": "Développez votre activité immobilière",
+    "descriptionAr": "طور نشاطك العقاري"
+  },
+  {
+    "code": "PRO",
+    "name": "Pro",
+    "nameFr": "Pro",
+    "nameAr": "المحترف",
+    "displayOrder": 3,
+    "isActive": true,
+    "priceMonthly": 350000,
+    "priceYearly": 3500000,
+    "discountYearly": 17,
+    "limits": {
+      "properties": 50,
+      "images": 20,
+      "videos": 2,
+      "savedSearches": 999999,
+      "teamMembers": 0
+    },
+    "features": [
+      "stats_30days",
+      "heatmap",
+      "traffic_source",
+      "top_10_properties",
+      "templates_unlimited",
+      "auto_replies",
+      "notifications_instant",
+      "boost_tier1",
+      "boost_tier2",
+      "boost_tier3",
+      "boost_free_monthly",
+      "export_csv",
+      "auto_approve",
+      "virtual_tour_360"
+    ],
+    "boostDiscounts": {
+      "tier1": { "3d": -33, "7d": -20 },
+      "tier2": { "7d": -17, "30d": -17 },
+      "tier3": { "7d": 0, "30d": -17 }
+    },
+    "badgeColor": "#EAB308",
+    "badgeIcon": "⭐",
+    "description": "Pour les professionnels qui veulent performer",
+    "descriptionFr": "Pour les professionnels qui veulent performer",
+    "descriptionAr": "للمحترفين الذين يريدون الأداء"
+  },
+  {
+    "code": "ELITE",
+    "name": "Elite",
+    "nameFr": "Elite",
+    "nameAr": "النخبة",
+    "displayOrder": 4,
+    "isActive": true,
+    "priceMonthly": 600000,
+    "priceYearly": 6000000,
+    "discountYearly": 17,
+    "limits": {
+      "properties": 999999,
+      "images": 999999,
+      "videos": 3,
+      "savedSearches": 999999,
+      "teamMembers": 2
+    },
+    "features": [
+      "stats_unlimited",
+      "heatmap",
+      "traffic_source",
+      "benchmarking",
+      "top_unlimited",
+      "templates_unlimited",
+      "auto_replies",
+      "crm_basic",
+      "multi_users",
+      "notifications_instant",
+      "notifications_sms",
+      "boost_tier1",
+      "boost_tier2",
+      "boost_tier3",
+      "boost_free_tier2_monthly",
+      "export_pdf",
+      "auto_approve",
+      "virtual_tour_unlimited",
+      "api_access",
+      "account_manager",
+      "priority_support_1h"
+    ],
+    "boostDiscounts": {
+      "tier1": { "3d": -50, "7d": -30 },
+      "tier2": { "7d": -22, "30d": -23 },
+      "tier3": { "7d": -17, "30d": -17 }
+    },
+    "badgeColor": "#9333EA",
+    "badgeIcon": "👑",
+    "description": "La solution complète pour les professionnels d'élite",
+    "descriptionFr": "La solution complète pour les professionnels d'élite",
+    "descriptionAr": "الحل الكامل للمحترفين النخبة"
+  }
+]

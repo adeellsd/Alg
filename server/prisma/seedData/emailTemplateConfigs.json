@@ -1,0 +1,72 @@
+[
+  {
+    "code": "WELCOME",
+    "nameFr": "Email de bienvenue",
+    "nameAr": "بريد الترحيب",
+    "description": "Email envoyé lors de l'inscription",
+    "category": "ONBOARDING",
+    "subjectFr": "Bienvenue sur RentAlg ! 🏠",
+    "subjectAr": "مرحبا بك في RentAlg! 🏠",
+    "bodyFr": "Bonjour {{userName}},\n\nBienvenue sur RentAlg, la plateforme #1 de l'immobilier en Algérie !\n\nVous pouvez maintenant :\n- Publier jusqu'à {{maxProperties}} annonces\n- Accéder à {{trialDays}} jours d'essai gratuit\n\nCommencez dès maintenant : {{ctaLink}}\n\nL'équipe RentAlg",
+    "bodyAr": "مرحبا {{userName}}،\n\nمرحبا بك في RentAlg، المنصة رقم 1 للعقارات في الجزائر!\n\nيمكنك الآن:\n- نشر ما يصل إلى {{maxProperties}} إعلانات\n- الوصول إلى {{trialDays}} أيام تجريبية مجانية\n\nابدأ الآن: {{ctaLink}}\n\nفريق RentAlg",
+    "variables": {"userName": "string", "maxProperties": "number", "trialDays": "number", "ctaLink": "string"},
+    "isActive": true,
+    "isSystem": true
+  },
+  {
+    "code": "TRIAL_EXPIRING_SOON",
+    "nameFr": "Trial expire bientôt",
+    "nameAr": "تنتهي الفترة التجريبية قريبا",
+    "description": "Email 2 jours avant fin du trial",
+    "category": "TRIAL",
+    "subjectFr": "⏰ Votre essai gratuit expire dans 2 jours",
+    "subjectAr": "⏰ تنتهي فترة التجربة المجانية خلال يومين",
+    "bodyFr": "Bonjour {{userName}},\n\nVotre essai gratuit expire dans 2 jours !\n\nNe perdez pas vos avantages :\n- {{featuresUsed}} features utilisées\n- {{propertiesPublished}} annonces publiées\n\nPassez à {{recommendedTier}} pour seulement {{price}} DA/mois.\n\nUpgrade maintenant : {{ctaLink}}",
+    "bodyAr": "مرحبا {{userName}}،\n\nتنتهي فترة التجربة المجانية خلال يومين!\n\nلا تفقد مزاياك:\n- {{featuresUsed}} ميزات مستخدمة\n- {{propertiesPublished}} إعلانات منشورة\n\nالترقية إلى {{recommendedTier}} مقابل {{price}} دج/شهر فقط.\n\nالترقية الآن: {{ctaLink}}",
+    "variables": {"userName": "string", "featuresUsed": "number", "propertiesPublished": "number", "recommendedTier": "string", "price": "number", "ctaLink": "string"},
+    "isActive": true,
+    "isSystem": true
+  },
+  {
+    "code": "PROPERTY_APPROVED",
+    "nameFr": "Annonce approuvée",
+    "nameAr": "تمت الموافقة على الإعلان",
+    "description": "Email confirmation validation annonce",
+    "category": "PROPERTY",
+    "subjectFr": "✅ Votre annonce \"{{propertyTitle}}\" est en ligne !",
+    "subjectAr": "✅ إعلانك \"{{propertyTitle}}\" الآن متاح!",
+    "bodyFr": "Félicitations {{userName}} !\n\nVotre annonce \"{{propertyTitle}}\" a été validée et est maintenant visible.\n\nBoostez votre visibilité :\n- Boost Standard : +200% vues\n- Boost Premium : +400% vues\n- Boost Ultra : +600% vues\n\nBooster maintenant : {{ctaLink}}",
+    "bodyAr": "تهانينا {{userName}}!\n\nتمت الموافقة على إعلانك \"{{propertyTitle}}\" وهو الآن مرئي.\n\nعزز ظهورك:\n- تعزيز عادي: +200% مشاهدات\n- تعزيز مميز: +400% مشاهدات\n- تعزيز فائق: +600% مشاهدات\n\nعزز الآن: {{ctaLink}}",
+    "variables": {"userName": "string", "propertyTitle": "string", "ctaLink": "string"},
+    "isActive": true,
+    "isSystem": false
+  },
+  {
+    "code": "NEW_MESSAGE",
+    "nameFr": "Nouveau message",
+    "nameAr": "رسالة جديدة",
+    "description": "Notification nouveau message",
+    "category": "COMMUNICATION",
+    "subjectFr": "💬 Nouveau message concernant \"{{propertyTitle}}\"",
+    "subjectAr": "💬 رسالة جديدة بخصوص \"{{propertyTitle}}\"",
+    "bodyFr": "Bonjour {{userName}},\n\nVous avez reçu un message de {{senderName}} concernant votre annonce \"{{propertyTitle}}\".\n\nMessage :\n{{messagePreview}}\n\nRépondre : {{ctaLink}}",
+    "bodyAr": "مرحبا {{userName}}،\n\nلقد تلقيت رسالة من {{senderName}} بخصوص إعلانك \"{{propertyTitle}}\".\n\nالرسالة:\n{{messagePreview}}\n\nالرد: {{ctaLink}}",
+    "variables": {"userName": "string", "senderName": "string", "propertyTitle": "string", "messagePreview": "string", "ctaLink": "string"},
+    "isActive": true,
+    "isSystem": false
+  },
+  {
+    "code": "BOOST_EXPIRING",
+    "nameFr": "Boost expire bientôt",
+    "nameAr": "ينتهي التعزيز قريبا",
+    "description": "Email 1 jour avant fin boost",
+    "category": "MONETIZATION",
+    "subjectFr": "⚡ Votre boost expire demain",
+    "subjectAr": "⚡ ينتهي تعزيزك غدا",
+    "bodyFr": "Bonjour {{userName}},\n\nVotre boost {{boostTier}} pour \"{{propertyTitle}}\" expire demain.\n\nRésultats :\n- {{totalViews}} vues (+{{boostPercent}}%)\n- {{totalContacts}} contacts\n\nRenouveler maintenant avec -{{discountPercent}}% : {{ctaLink}}",
+    "bodyAr": "مرحبا {{userName}}،\n\nينتهي تعزيزك {{boostTier}} لـ \"{{propertyTitle}}\" غدا.\n\nالنتائج:\n- {{totalViews}} مشاهدة (+{{boostPercent}}%)\n- {{totalContacts}} اتصالات\n\nجدد الآن مع خصم {{discountPercent}}%: {{ctaLink}}",
+    "variables": {"userName": "string", "boostTier": "string", "propertyTitle": "string", "totalViews": "number", "boostPercent": "number", "totalContacts": "number", "discountPercent": "number", "ctaLink": "string"},
+    "isActive": true,
+    "isSystem": false
+  }
+]

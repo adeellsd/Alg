@@ -188,7 +188,7 @@ const HeroSection = ({ user, userRole }: HeroSectionProps) => {
           >
             {[
               { value: 'Nouveau', label: 'Plateforme en lancement' },
-              { value: '58 Wilayas', label: 'Couverture nationale' },
+              { value: '69 Wilayas', label: 'Couverture nationale' },
               { value: '100%', label: 'Annonces vérifiées' },
               { value: 'Gratuit', label: 'Publication d\'annonces' },
             ].map((stat, index) => (

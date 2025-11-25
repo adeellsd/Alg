@@ -97,46 +97,25 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Wrapper avec padding pour l'effet floating */}
+      {/* Navbar fixed avec hauteur exacte */}
       <div 
-        className="fixed top-0 left-0 w-full z-50"
-        style={{ height: `${NAVBAR_HEIGHT + 16}px` }}
+        className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-white/80 via-white/60 to-transparent backdrop-blur-sm"
+        style={{ height: `${NAVBAR_HEIGHT}px` }}
       >
         <nav 
           className={`
-            mx-auto mt-4
+            mx-auto
             max-w-[1400px] px-4 md:px-6
+            h-full
+            flex items-center
             transition-all duration-500 ease-out
             relative
           `}
         >
-          {/* Glow subtil optionnel en arrière-plan */}
-          <div 
-            className={`
-              absolute inset-0
-              h-16 md:h-[4.5rem]
-              rounded-full
-              transition-all duration-500 ease-out
-              pointer-events-none
-              -z-20
-              px-6 md:px-10
-              ${isScrolled 
-                ? 'opacity-20 blur-2xl' 
-                : 'opacity-15 blur-xl'
-              }
-            `}
-          >
-            <div
-              className="w-full h-full rounded-full"
-              style={{
-                background: 'radial-gradient(ellipse at center, rgba(8, 145, 178, 0.3) 0%, rgba(56, 189, 248, 0.2) 50%, transparent 100%)',
-              }}
-            />
-          </div>
-
           {/* Container principal avec effet glass */}
           <div 
             className={`
+              w-full
               flex justify-between items-center
               h-16 md:h-[4.5rem]
               px-6 md:px-10
@@ -396,31 +375,8 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-
-          {/* Tagline flottant minimaliste */}
-          <div 
-            className="
-              hidden xl:flex
-              absolute top-full left-1/2 -translate-x-1/2 mt-2
-              px-6 py-2.5 rounded-full
-              bg-[rgba(8,145,178,0.05)] backdrop-blur-lg
-              border border-white/20
-              shadow-[0_4px_16px_rgba(8,145,178,0.1)]
-              animate-fade-in
-            "
-            style={{
-              backdropFilter: 'blur(16px) saturate(150%)',
-              WebkitBackdropFilter: 'blur(16px) saturate(150%)',
-            }}
-          >
-            <p className="text-sm font-display font-medium text-gray-700 tracking-wide whitespace-nowrap">
-              Trouve ton bien de rêve en Algérie
-            </p>
-          </div>
         </nav>
       </div>
-
-
 
       {/* Mobile Menu Component */}
       <MobileMenu 

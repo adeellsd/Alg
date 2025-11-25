@@ -1,0 +1,46 @@
+[
+  {"boostTierCode": "TIER_1", "accountTierCode": "FREE", "durationDays": 3, "price": 30000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "STARTER", "durationDays": 3, "price": 30000, "discountPercent": 10, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "PRO", "durationDays": 3, "price": 30000, "discountPercent": 20, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "ELITE", "durationDays": 3, "price": 30000, "discountPercent": 33, "isActive": true},
+  
+  {"boostTierCode": "TIER_1", "accountTierCode": "FREE", "durationDays": 7, "price": 60000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "STARTER", "durationDays": 7, "price": 60000, "discountPercent": 10, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "PRO", "durationDays": 7, "price": 60000, "discountPercent": 15, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "ELITE", "durationDays": 7, "price": 60000, "discountPercent": 25, "isActive": true},
+  
+  {"boostTierCode": "TIER_1", "accountTierCode": "FREE", "durationDays": 30, "price": 200000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "STARTER", "durationDays": 30, "price": 200000, "discountPercent": 15, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "PRO", "durationDays": 30, "price": 200000, "discountPercent": 25, "isActive": true},
+  {"boostTierCode": "TIER_1", "accountTierCode": "ELITE", "durationDays": 30, "price": 200000, "discountPercent": 35, "isActive": true},
+  
+  {"boostTierCode": "TIER_2", "accountTierCode": "FREE", "durationDays": 3, "price": 60000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "STARTER", "durationDays": 3, "price": 60000, "discountPercent": 10, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "PRO", "durationDays": 3, "price": 60000, "discountPercent": 20, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "ELITE", "durationDays": 3, "price": 60000, "discountPercent": 33, "isActive": true},
+  
+  {"boostTierCode": "TIER_2", "accountTierCode": "FREE", "durationDays": 7, "price": 120000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "STARTER", "durationDays": 7, "price": 120000, "discountPercent": 10, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "PRO", "durationDays": 7, "price": 120000, "discountPercent": 15, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "ELITE", "durationDays": 7, "price": 120000, "discountPercent": 25, "isActive": true},
+  
+  {"boostTierCode": "TIER_2", "accountTierCode": "FREE", "durationDays": 30, "price": 400000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "STARTER", "durationDays": 30, "price": 400000, "discountPercent": 15, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "PRO", "durationDays": 30, "price": 400000, "discountPercent": 25, "isActive": true},
+  {"boostTierCode": "TIER_2", "accountTierCode": "ELITE", "durationDays": 30, "price": 400000, "discountPercent": 35, "isActive": true},
+  
+  {"boostTierCode": "TIER_3", "accountTierCode": "FREE", "durationDays": 3, "price": 100000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "STARTER", "durationDays": 3, "price": 100000, "discountPercent": 10, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "PRO", "durationDays": 3, "price": 100000, "discountPercent": 20, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "ELITE", "durationDays": 3, "price": 100000, "discountPercent": 33, "isActive": true},
+  
+  {"boostTierCode": "TIER_3", "accountTierCode": "FREE", "durationDays": 7, "price": 200000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "STARTER", "durationDays": 7, "price": 200000, "discountPercent": 10, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "PRO", "durationDays": 7, "price": 200000, "discountPercent": 15, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "ELITE", "durationDays": 7, "price": 200000, "discountPercent": 25, "isActive": true},
+  
+  {"boostTierCode": "TIER_3", "accountTierCode": "FREE", "durationDays": 30, "price": 700000, "discountPercent": 0, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "STARTER", "durationDays": 30, "price": 700000, "discountPercent": 15, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "PRO", "durationDays": 30, "price": 700000, "discountPercent": 25, "isActive": true},
+  {"boostTierCode": "TIER_3", "accountTierCode": "ELITE", "durationDays": 30, "price": 700000, "discountPercent": 35, "isActive": true}
+]

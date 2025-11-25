@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * PropertyCard Component - Alger Vibrante v4
  * 
