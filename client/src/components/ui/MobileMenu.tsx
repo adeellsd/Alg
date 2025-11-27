@@ -122,7 +122,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, user
             {/* Logo */}
             <div className="
               w-10 h-10 rounded-full 
-              bg-gradient-to-br from-blue-electric via-blue-bright to-blue-sky
+              bg-linear-to-br from-blue-electric via-blue-bright to-blue-sky
               flex items-center justify-center 
               shadow-sm
             ">
@@ -153,13 +153,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, user
             <div className="text-xl font-bold font-display leading-none">
               <span className="
                 text-transparent bg-clip-text 
-                bg-gradient-to-r from-blue-electric to-blue-bright
+                bg-linear-to-r from-blue-electric to-blue-bright
               ">
                 RENT
               </span>
               <span className="
                 text-transparent bg-clip-text 
-                bg-gradient-to-r from-green-vibrant to-green-fresh
+                bg-linear-to-r from-green-vibrant to-green-fresh
               ">
                 ALG
               </span>
@@ -364,7 +364,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, user
                     <Button 
                       className="
                         w-full py-3
-                        bg-gradient-to-r from-green-vibrant to-green-fresh
+                        bg-linear-to-r from-green-vibrant to-green-fresh
                         text-white font-bold
                         rounded-full
                         shadow-md hover:shadow-green
@@ -383,7 +383,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, user
                     <Button 
                       className="
                         w-full py-3
-                        bg-gradient-to-r from-green-vibrant to-green-fresh
+                        bg-linear-to-r from-green-vibrant to-green-fresh
                         text-white font-bold
                         rounded-full
                         shadow-md hover:shadow-green

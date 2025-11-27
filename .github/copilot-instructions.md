@@ -1,4 +1,111 @@
+# Copilot Instructions - RentAlg Platform
+
+## Standards UI/UX
+
+### Design System
+- Toujours utiliser la palette de couleurs définie dans tailwind.config
+- Respecter le système d'espacement (multiples de 4px)
+- Appliquer les animations subtiles et performantes
+- Garantir l'accessibilité WCAG AA minimum
+
+### Composants
+- Créer des composants atomiques réutilisables
+- Implémenter tous les états: default, hover, focus, active, disabled, loading, error
+- Utiliser TypeScript strict avec interfaces complètes
+- Documenter les props complexes
+
+### Performance
+- Lazy loading systématique pour images et composants lourds
+- Mémoïsation appropriée avec React hooks
+- Code splitting par route
+- Optimisation des bundles
+
+### Responsive
+- Mobile-first approach obligatoire
+- Tester sur 320px, 768px, 1024px, 1440px minimum
+- Touch targets 44x44px minimum sur mobile
+- Pas de scroll horizontal
+
+### Animations
+- Durées standard: 150ms (micro), 300ms (normal), 500ms (complexe)
+- Easing: ease-in-out pour la plupart, ease-out pour les entrées
+- 60fps garanti (utiliser transform et opacity)
+- Respecter prefers-reduced-motion
+
+### Accessibilité
+- Navigation clavier complète
+- Focus visible et logique
+- ARIA labels sur éléments interactifs
+- Contraste minimum 4.5:1
+- Alt text descriptifs sur images
+
+### Code Quality
+- ESLint + Prettier respectés
+- Pas de any en TypeScript
+- Composants < 300 lignes
+- Fonctions < 50 lignes
+- DRY principle
+
+## Références
+Toujours s'inspirer de: Airbnb, Zillow, Booking.com, Linear, Vercel
+
+---
+
 # RENTALG v2.0 Copilot Instructions
+
+# SUMMARY
+
+Copilot must always generate code and UI consistent with RENTALG v2.0: a Next.js + Express + Prisma marketplace using a strict 3-tier account model (FREE / STARTER / ELITE) and the “Alger Vibrante” design system. All generations must be self-correcting, type-safe, accessible and production-ready.
+
+Notes for Copilot: always prefer existing patterns and components under client/src/components and client/src/components/ui. When adding tokens or tokens files, add to client/src/config/designTokens.ts and mirror on server at server/src/config/designTokens.ts if needed for SSR emails/templates.
+
+8. UI / Design System (ALGER VIBRANTE) — authoritative tokens
+
+Colors (only use these HEX) — enforce via tokens, do not use raw hex inline in components.
+
+Primary / Mediterranean Blues
+
+--color-primary: #0891B2
+
+--color-primary-600: #0369A1
+
+--color-primary-400: #06B6D4
+
+--color-accent: #38BDF8
+
+--color-bg-soft: #CFFAFE
+
+Success / Greens
+
+--color-success: #10B981
+
+--color-success-700: #059669
+
+Warm accents
+
+--color-warm-1: #F97316
+
+--color-warning: #F59E0B
+
+Neutrals / Text
+
+--text-900: #1F2937
+
+--text-700: #4B5563
+
+--border-300: #E5E7EB
+
+Design tokens file: client/src/config/designTokens.ts with exported constants and Tailwind config referencing them (tailwind.config.js -> theme.extend.colors).
+
+Typography & spacing
+
+Headings: Poppins; Body: Inter; Arabic fallback: Noto Sans Arabic
+
+Type scale and spacing follow the rules in /docs/typography.md (create if missing)
+
+Gradients (named)
+
+ocean, garden, sunset, premium — centrally defined in tokens and Tailwind plugin.
 
 ## 🧠 Project Context
 **RENTALG v2.0** is an Algerian real estate marketplace with a 3-tier account strategy (FREE, STARTER, ELITE).
@@ -219,10 +326,10 @@ export const UpgradeBanner = ({ currentTier, targetTier, trigger }: UpgradeBanne
   const perDay = targetTier === 'STARTER' ? '83 DA/jour' : '167 DA/jour';
 
   return (
-    <Card className="border-2 border-[#0891B2] bg-gradient-to-r from-[#CFFAFE] to-white">
+    <Card className="border-2 border-[#0891B2] bg-linear-to-r from-[#CFFAFE] to-white">
       <div className="p-6">
         <div className="flex items-center gap-2 mb-2">
-          <Badge className="bg-gradient-to-r from-[#0891B2] to-[#06B6D4] text-white">
+          <Badge className="bg-linear-to-r from-[#0891B2] to-[#06B6D4] text-white">
             {targetTier}
           </Badge>
           <span className="text-sm font-semibold text-gray-600">
@@ -245,7 +352,7 @@ export const UpgradeBanner = ({ currentTier, targetTier, trigger }: UpgradeBanne
         
         <div className="flex items-center gap-3">
           <Link href="/upgrade">
-            <Button className="bg-gradient-to-r from-[#0891B2] to-[#06B6D4]">
+            <Button className="bg-linear-to-r from-[#0891B2] to-[#06B6D4]">
               Passer {targetTier} - {price}
             </Button>
           </Link>
@@ -279,7 +386,7 @@ export const FeatureLock = ({
       </div>
       
       {/* Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-white/80 to-white/95 backdrop-blur-sm">
+      <div className="absolute inset-0 flex items-center justify-center bg-linear-to-b from-white/80 to-white/95 backdrop-blur-sm">
         <div className="text-center max-w-md p-8">
           <Lock className="w-12 h-12 mx-auto mb-4 text-[#0891B2]" />
           
@@ -303,7 +410,7 @@ export const FeatureLock = ({
           )}
           
           <Button 
-            className="bg-gradient-to-r from-[#0891B2] to-[#06B6D4]"
+            className="bg-linear-to-r from-[#0891B2] to-[#06B6D4]"
             onClick={() => window.location.href = '/upgrade'}
           >
             Passer {requiredTier}
@@ -695,7 +802,7 @@ await prisma.$transaction([
 - NEVER use custom color names like "blue-electric", "blue-pale" in code
 - ALWAYS use HEX values: `#0891B2`, `#38BDF8`, etc.
 - For Tailwind classes, use standard names: `text-gray-900`, `bg-cyan-600`
-- Buttons should use gradients: `bg-gradient-to-r from-[#0891B2] to-[#38BDF8]`
+- Buttons should use gradients: `bg-linear-to-r from-[#0891B2] to-[#38BDF8]`
 
 ### Gradients (Mediterranean Spirit)
 ```
@@ -751,7 +858,7 @@ colored: 0 8px 16px rgba(8,145,178,0.3) // For hover states
 ### Components Style Guide
 
 **Buttons**
-- Primary: `bg-gradient-to-r from-[#0891B2] to-[#38BDF8]` white text
+- Primary: `bg-linear-to-r from-[#0891B2] to-[#38BDF8]` white text
 - Secondary: `bg-[#10B981]` white text
 - Tertiary: `bg-[#F97316]` white text
 - Outline: `border-2 border-[#0891B2] text-[#0891B2]`
@@ -994,7 +1101,7 @@ Pages → /properties, /properties/[slug]
   size="md"
   disabled={isLoading}
   className={cn(
-    "bg-gradient-to-r from-[#0891B2] to-[#38BDF8]",
+    "bg-linear-to-r from-[#0891B2] to-[#38BDF8]",
     "hover:from-[#0369A1] hover:to-[#0891B2]",
     "focus:ring-4 focus:ring-[#0891B2]/30",
     "active:scale-95",
@@ -1151,7 +1258,7 @@ font-family: 'JetBrains Mono', 'Courier New', monospace;
 #### **Primary Actions (Cyan/Blue)**
 ```tsx
 // CTA Buttons
-bg-gradient-to-r from-[#0891B2] to-[#38BDF8]
+bg-linear-to-r from-[#0891B2] to-[#38BDF8]
 hover:from-[#0369A1] hover:to-[#0891B2]
 
 // Links
@@ -1185,7 +1292,7 @@ bg-[#FEE2E2] text-[#DC2626] // Light version
 #### **Premium/Exclusive (Fuchsia)**
 ```tsx
 // ELITE features, Premium boosts
-bg-gradient-to-r from-[#DB2777] to-[#EC4899] text-white
+bg-linear-to-r from-[#DB2777] to-[#EC4899] text-white
 bg-[#FCE7F3] text-[#DB2777] // Light version
 ```
 
@@ -1253,7 +1360,7 @@ import { Loader2 } from "lucide-react";
 ```tsx
 <div className="text-center py-16 px-4">
   {/* Icon */}
-  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#CFFAFE] to-[#38BDF8]/20 rounded-2xl flex items-center justify-center">
+  <div className="w-20 h-20 mx-auto mb-6 bg-linear-to-br from-[#CFFAFE] to-[#38BDF8]/20 rounded-2xl flex items-center justify-center">
     <Icon className="w-10 h-10 text-[#0891B2]" />
   </div>
   

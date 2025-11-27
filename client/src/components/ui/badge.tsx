@@ -17,30 +17,30 @@ export type BadgeVariant =
   | "elite"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-full border-2 px-3 py-1 text-xs font-bold uppercase tracking-wide w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-all overflow-hidden",
+  "inline-flex items-center justify-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-widest w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none transition-all overflow-hidden",
   {
     variants: {
       variant: {
         default:
-          "border-blue-electric bg-blue-electric text-white shadow-blue [a&]:hover:bg-blue-deep",
+          "border-transparent bg-cyan-600 text-white shadow-sm [a&]:hover:bg-cyan-700",
         secondary:
-          "border-green-vibrant bg-green-vibrant text-white shadow-green [a&]:hover:bg-green-fresh",
+          "border-transparent bg-emerald-500 text-white shadow-sm [a&]:hover:bg-emerald-600",
         destructive:
-          "border-terracotta bg-terracotta text-white shadow-md [a&]:hover:bg-terracotta-light focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "border-transparent bg-rose-500 text-white shadow-sm [a&]:hover:bg-rose-600",
         outline:
-          "border-blue-electric bg-transparent text-blue-electric [a&]:hover:bg-blue-pale",
+          "border-cyan-600 bg-transparent text-cyan-600 [a&]:hover:bg-cyan-50",
         coral:
-          "border-coral bg-coral text-white shadow-coral [a&]:hover:bg-coral-light",
+          "border-transparent bg-coral text-white shadow-sm [a&]:hover:bg-coral-light",
         sunshine:
-          "border-sunshine bg-sunshine text-white shadow-md [a&]:hover:opacity-90",
+          "border-transparent bg-sunshine text-white shadow-sm [a&]:hover:opacity-90",
         premium:
-          "border-transparent bg-gradient-to-r from-rose to-sunshine text-white shadow-rose [a&]:hover:opacity-90 animate-pulse",
+          "border-transparent bg-linear-to-r from-rose to-sunshine text-white shadow-md [a&]:hover:opacity-90 animate-pulse",
         free:
-          "border-blue-sky bg-blue-pale text-blue-deep [a&]:hover:bg-blue-pale/80",
+          "border-cyan-200 bg-cyan-50 text-cyan-700 [a&]:hover:bg-cyan-100",
         starter:
-          "border-transparent bg-blue-electric text-white shadow-blue [a&]:hover:bg-blue-deep",
+          "border-transparent bg-cyan-600 text-white shadow-sm [a&]:hover:bg-cyan-700",
         elite:
-          "border-transparent bg-gradient-to-r from-rose to-sunshine text-white shadow-rose animate-pulse",
+          "border-transparent bg-linear-to-r from-rose to-sunshine text-white shadow-md animate-pulse",
       },
     },
     defaultVariants: {

@@ -5,7 +5,7 @@ import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Home } from 'lucide-
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <footer className="relative bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       {/* Pattern subtil en arrière-plan */}
       <div 
         className="absolute inset-0 opacity-[0.02]"
@@ -22,14 +22,14 @@ const Footer = () => {
           <div className="lg:col-span-1">
             {/* Logo */}
             <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-electric via-blue-bright to-blue-sky flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-electric via-blue-bright to-blue-sky flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                 <Home className="w-6 h-6 text-white" strokeWidth={2.5} />
               </div>
               <div className="text-2xl font-bold font-display">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-electric to-blue-bright">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-electric to-blue-bright">
                   RENT
                 </span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-vibrant to-green-fresh">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-green-vibrant to-green-fresh">
                   ALG
                 </span>
               </div>
@@ -53,7 +53,7 @@ const Footer = () => {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-gradient-to-br hover:from-pink-500 hover:to-orange-500 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-linear-to-br hover:from-pink-500 hover:to-orange-500 flex items-center justify-center transition-all duration-300 hover:scale-110"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -123,17 +123,17 @@ const Footer = () => {
             <h3 className="text-lg font-bold font-display mb-6">Contact</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-gray-400">
-                <MapPin className="w-5 h-5 text-blue-electric flex-shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-blue-electric shrink-0 mt-0.5" />
                 <span>Alger, Algérie</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
-                <Phone className="w-5 h-5 text-green-vibrant flex-shrink-0 mt-0.5" />
+                <Phone className="w-5 h-5 text-green-vibrant shrink-0 mt-0.5" />
                 <a href="tel:+213000000000" className="hover:text-white transition-colors">
                   +213 (0) 00 00 00 00
                 </a>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
-                <Mail className="w-5 h-5 text-coral flex-shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-coral shrink-0 mt-0.5" />
                 <a href="mailto:contact@rentalg.dz" className="hover:text-white transition-colors">
                   contact@rentalg.dz
                 </a>
@@ -149,7 +149,7 @@ const Footer = () => {
                   placeholder="Votre email"
                   className="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-electric transition-colors"
                 />
-                <button className="px-4 py-2 bg-gradient-to-r from-blue-electric to-blue-bright rounded-lg hover:scale-105 transition-transform duration-300">
+                <button className="px-4 py-2 bg-linear-to-r from-blue-electric to-blue-bright rounded-lg hover:scale-105 transition-transform duration-300">
                   <Mail className="w-5 h-5" />
                 </button>
               </div>
@@ -182,7 +182,7 @@ const Footer = () => {
       </div>
 
       {/* Decoration en bas */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-electric via-green-vibrant to-coral" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-blue-electric via-green-vibrant to-coral" />
     </footer>
   );
 };

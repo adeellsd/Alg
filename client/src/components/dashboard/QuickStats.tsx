@@ -39,7 +39,7 @@ export function QuickStats({ stats }: QuickStatsProps) {
                   </p>
                 )}
               </div>
-              <div className={`p-3 rounded-[14px] bg-linear-to-br ${colorClass} text-white shadow-md`}>
+              <div className={`p-3 rounded-lg bg-linear-to-br ${colorClass} text-white shadow-md`}>
                 <Icon className="w-6 h-6" />
               </div>
             </div>

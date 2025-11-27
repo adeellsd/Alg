@@ -46,13 +46,13 @@ export function TierInfo({ tier, stats, trialInfo }: TierInfoProps) {
             )}
             <h3 className="text-lg font-semibold text-gray-900">Votre abonnement</h3>
           </div>
-          <Badge className={`${config.bgColor} ${config.color} border-0 rounded-[14px]`}>
+          <Badge className={`${config.bgColor} ${config.color} border-0 rounded-lg`}>
             {config.label}
           </Badge>
         </div>
         {canUpgrade && (
           <Link href="/pricing">
-            <Button size="sm" variant="outline" className="rounded-[14px]">
+            <Button size="sm" variant="outline" className="rounded-lg">
               Améliorer
             </Button>
           </Link>
@@ -61,7 +61,7 @@ export function TierInfo({ tier, stats, trialInfo }: TierInfoProps) {
 
       {/* Trial info for FREE users */}
       {tier === 'FREE' && trialInfo?.isEligible && (
-        <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-[14px]">
+        <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <p className="text-sm text-blue-900 font-medium">
             🎁 Essai gratuit disponible !
           </p>

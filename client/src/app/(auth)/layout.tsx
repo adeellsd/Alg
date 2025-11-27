@@ -22,7 +22,7 @@ export default function AuthLayout({
   // Show loading while checking auth
   if (authStatus === 'configuring') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-blue-pale/10">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 via-white to-blue-pale/10">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-blue-electric border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-600 font-medium">Chargement...</p>

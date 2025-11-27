@@ -82,3 +82,41 @@ export const createNewUserInDatabase = async (
 
   return createUserResponse;
 };
+
+export const formatPrice = (amount: string, transactionType: string) => {
+  const num = parseInt(amount);
+  if (isNaN(num)) return amount;
+  if (num >= 10000000) {
+    return `${(num / 1000000).toFixed(1)}M DA${
+      transactionType === "RENT" ? "/mois" : ""
+    }`;
+  }
+  if (num >= 1000000) {
+    return `${(num / 1000000).toFixed(2)}M DA${
+      transactionType === "RENT" ? "/mois" : ""
+    }`;
+  }
+  if (num >= 1000) {
+    return `${Math.round(num / 1000)}K DA${
+      transactionType === "RENT" ? "/mois" : ""
+    }`;
+  }
+  return `${num.toLocaleString("fr-DZ")} DA${
+    transactionType === "RENT" ? "/mois" : ""
+  }`;
+};
+
+export const getPropertyTypeLabel = (type: string) => {
+  const labels: Record<string, string> = {
+    APARTMENT_F2: "F2",
+    APARTMENT_F3: "F3",
+    APARTMENT_F4: "F4",
+    APARTMENT_F5: "F5+",
+    VILLA: "Villa",
+    STUDIO: "Studio",
+    DUPLEX: "Duplex",
+    TERRAIN: "Terrain",
+    LOCAL_COMMERCIAL: "Local Commercial",
+  };
+  return labels[type] || type;
+};

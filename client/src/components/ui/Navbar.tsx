@@ -99,7 +99,7 @@ const Navbar = () => {
     <>
       {/* Navbar fixed avec hauteur exacte */}
       <div 
-        className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-white/80 via-white/60 to-transparent backdrop-blur-sm"
+        className="fixed top-0 left-0 w-full z-50 bg-linear-to-b from-white/80 via-white/60 to-transparent backdrop-blur-sm"
         style={{ height: `${NAVBAR_HEIGHT}px` }}
       >
         <nav 
@@ -117,7 +117,7 @@ const Navbar = () => {
             className={`
               w-full
               flex justify-between items-center
-              h-16 md:h-[4.5rem]
+              h-16 md:h-18
               px-6 md:px-10
               rounded-full
               border border-white/20
@@ -136,7 +136,7 @@ const Navbar = () => {
           >
             {/* Effet de reflet subtil en haut */}
             <div 
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
+              className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/30 to-transparent"
             />
             
             {/* LEFT SIDE - Navigation Links (Desktop) */}
@@ -181,7 +181,7 @@ const Navbar = () => {
               {/* Logo minimaliste */}
               <div className="
                 w-9 h-9 rounded-full 
-                bg-gradient-to-br from-blue-electric via-blue-bright to-blue-sky
+                bg-linear-to-br from-blue-electric via-blue-bright to-blue-sky
                 flex items-center justify-center 
                 shadow-sm
                 transition-all duration-300
@@ -214,14 +214,14 @@ const Navbar = () => {
               <div className="hidden sm:block text-xl md:text-2xl font-bold font-display tracking-tight leading-none">
                 <span className="
                   text-transparent bg-clip-text 
-                  bg-gradient-to-r from-blue-electric to-blue-bright
+                  bg-linear-to-r from-blue-electric to-blue-bright
                   transition-all duration-300
                 ">
                   RENT
                 </span>
                 <span className="
                   text-transparent bg-clip-text 
-                  bg-gradient-to-r from-green-vibrant to-green-fresh
+                  bg-linear-to-r from-green-vibrant to-green-fresh
                   transition-all duration-300
                 ">
                   ALG
@@ -256,7 +256,7 @@ const Navbar = () => {
                           size="sm"
                           className="
                             px-6 py-2.5
-                            bg-gradient-to-r from-green-vibrant to-green-fresh
+                            bg-linear-to-r from-green-vibrant to-green-fresh
                             text-white font-bold text-[15px]
                             rounded-full
                             shadow-md hover:shadow-green
@@ -277,7 +277,7 @@ const Navbar = () => {
                           className="
                             flex items-center gap-2
                             px-6 py-2.5
-                            bg-gradient-to-r from-green-vibrant to-green-fresh
+                            bg-linear-to-r from-green-vibrant to-green-fresh
                             text-white font-bold text-[15px]
                             rounded-full
                             shadow-md hover:shadow-green
@@ -305,7 +305,7 @@ const Navbar = () => {
                               flex items-center gap-2
                             "
                           >
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-electric to-blue-bright flex items-center justify-center text-white text-sm font-bold">
+                            <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-electric to-blue-bright flex items-center justify-center text-white text-sm font-bold">
                               {user.username?.charAt(0).toUpperCase() || 'U'}
                             </div>
                             <ChevronDown className="w-4 h-4" />

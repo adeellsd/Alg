@@ -233,7 +233,7 @@ export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, Form
                 inputClasses,
                 'appearance-none bg-white cursor-pointer',
                 'bg-[url(\'data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3e%3cpath fill=%27%234B5563%27 d=%27M6 9L1 4h10z%27/%3e%3c/svg%3e\')]',
-                'bg-no-repeat bg-[right_0.75rem_center]',
+                'bg-no-repeat bg-position-[right_0.75rem_center]',
                 'pr-10'
               )}
               aria-invalid={!!displayError}

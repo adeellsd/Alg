@@ -34,7 +34,7 @@ const SearchBar = React.forwardRef<HTMLDivElement, SearchBarProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-[20px] p-6 relative overflow-hidden",
+          "rounded-xl p-6 relative overflow-hidden",
           variantClasses[variant],
           className
         )}
@@ -62,7 +62,7 @@ const SearchBar = React.forwardRef<HTMLDivElement, SearchBarProps>(
               type="text"
               placeholder="Alger, Oran, Constantine..."
               className={cn(
-                "w-full px-4 py-3 rounded-[14px]",
+                "w-full px-4 py-3 rounded-lg",
                 "border border-gray-300",
                 "focus:outline-none focus:border-cyan-600",
                 "transition-all duration-200",
@@ -76,13 +76,13 @@ const SearchBar = React.forwardRef<HTMLDivElement, SearchBarProps>(
               </label>
               <select
                 className={cn(
-                  "w-full px-4 py-3 rounded-[14px]",
+                  "w-full px-4 py-3 rounded-lg",
                   "border border-gray-300",
                   "focus:outline-none focus:border-cyan-600",
                   "transition-all duration-200",
                   "text-gray-900 appearance-none bg-white cursor-pointer",
                   "bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3e%3cpath fill=%27%234B5563%27 d=%27M6 9L1 4h10z%27/%3e%3c/svg%3e')]",
-                  "bg-no-repeat bg-[right_0.75rem_center]"
+                  "bg-no-repeat bg-position-[right_0.75rem_center]"
                 )}
               >
                 <option>Appartement</option>
@@ -102,7 +102,7 @@ const SearchBar = React.forwardRef<HTMLDivElement, SearchBarProps>(
               type="text"
               placeholder="50 000 DA"
               className={cn(
-                "w-full px-4 py-3 rounded-[14px]",
+                "w-full px-4 py-3 rounded-lg",
                 "border border-gray-300",
                 "focus:outline-none focus:border-cyan-600",
                 "transition-all duration-200",

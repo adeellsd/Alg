@@ -362,7 +362,7 @@ const SettingsPage = () => {
                   <Button
                     onClick={handleSaveProfile}
                     disabled={isSaving}
-                    className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg px-4"
+                    className="bg-linear-to-r from-cyan-600 to-blue-600 text-white rounded-lg px-4"
                   >
                     {isSaving ? (
                       <>
@@ -384,7 +384,7 @@ const SettingsPage = () => {
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 mb-6 md:mb-8 pb-6 md:pb-8 border-b border-gray-200">
               <Avatar className="w-20 h-20 md:w-24 md:h-24 border-4 border-cyan-100">
                 <AvatarImage src={profileData.avatar || userInfo?.avatar} />
-                <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-xl md:text-2xl font-bold">
+                <AvatarFallback className="bg-linear-to-br from-cyan-500 to-blue-600 text-white text-xl md:text-2xl font-bold">
                   {getInitials()}
                 </AvatarFallback>
               </Avatar>
@@ -522,7 +522,7 @@ const SettingsPage = () => {
                     <Button
                       onClick={handleSaveCompany}
                       disabled={isSaving}
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4"
+                      className="bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4"
                     >
                       {isSaving ? (
                         <>
@@ -542,7 +542,7 @@ const SettingsPage = () => {
 
               {/* Company Logo */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 mb-6 md:mb-8 pb-6 md:pb-8 border-b border-gray-200">
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-lg border-4 border-purple-100 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white text-2xl md:text-3xl font-bold">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-lg border-4 border-purple-100 bg-linear-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white text-2xl md:text-3xl font-bold">
                   {companyData.companyName?.charAt(0) || 'E'}
                 </div>
                 <div className="flex-1 text-center sm:text-left">
@@ -645,7 +645,7 @@ const SettingsPage = () => {
             <div className="space-y-4 md:space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-cyan-600 flex-shrink-0" />
+                  <Phone className="w-5 h-5 text-cyan-600 shrink-0" />
                   <div>
                     <p className="font-medium text-gray-900 text-sm md:text-base">Afficher mon téléphone</p>
                     <p className="text-xs md:text-sm text-gray-600">
@@ -659,13 +659,13 @@ const SettingsPage = () => {
                   onChange={(e) =>
                     setContactPrefs({ ...contactPrefs, showPhone: e.target.checked })
                   }
-                  className="w-5 h-5 text-cyan-600 rounded flex-shrink-0"
+                  className="w-5 h-5 text-cyan-600 rounded shrink-0"
                 />
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <Phone className="w-5 h-5 text-green-600 shrink-0" />
                   <div>
                     <p className="font-medium text-gray-900 text-sm md:text-base">Contact WhatsApp</p>
                     <p className="text-xs md:text-sm text-gray-600">
@@ -682,7 +682,7 @@ const SettingsPage = () => {
                       showWhatsApp: e.target.checked,
                     })
                   }
-                  className="w-5 h-5 text-cyan-600 rounded flex-shrink-0"
+                  className="w-5 h-5 text-cyan-600 rounded shrink-0"
                 />
               </div>
 
@@ -709,7 +709,7 @@ const SettingsPage = () => {
               <Button
                 onClick={handleSaveContact}
                 disabled={isSaving}
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg px-4 md:px-6"
+                className="bg-linear-to-r from-cyan-600 to-blue-600 text-white rounded-lg px-4 md:px-6"
               >
                 {isSaving ? (
                   <>
@@ -809,7 +809,7 @@ const SettingsPage = () => {
               <Button
                 onClick={handleSaveNotifications}
                 disabled={isSaving}
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg px-4 md:px-6"
+                className="bg-linear-to-r from-cyan-600 to-blue-600 text-white rounded-lg px-4 md:px-6"
               >
                 {isSaving ? (
                   <>

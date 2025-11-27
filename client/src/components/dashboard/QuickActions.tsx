@@ -29,7 +29,7 @@ export function QuickActions({ title, actions }: QuickActionsProps) {
             <Link key={index} href={action.href}>
               <Button
                 variant={action.variant || 'outline'}
-                className="w-full h-auto py-4 flex-col items-start gap-2 rounded-[14px] border-2"
+                className="w-full h-auto py-4 flex-col items-start gap-2 rounded-lg border-2"
               >
                 <div className="flex items-center gap-2 w-full">
                   <Icon className="w-5 h-5" />

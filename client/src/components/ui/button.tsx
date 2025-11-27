@@ -5,34 +5,34 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[14px] text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-bold tracking-tight transition-all duration-200 outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 focus-ring",
   {
     variants: {
       variant: {
-        default: "bg-blue-electric text-white hover:bg-blue-deep shadow-blue hover:shadow-lg hover:-translate-y-0.5",
+        default: "bg-cyan-600 text-white hover:bg-cyan-700 shadow-md hover:shadow-blue active:scale-[0.98]",
         destructive:
-          "bg-terracotta text-white hover:bg-terracotta-light shadow-md hover:shadow-lg focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 hover:-translate-y-0.5",
+          "bg-rose-500 text-white hover:bg-rose-600 shadow-md hover:shadow-rose active:scale-[0.98]",
         outline:
-          "border-2 border-blue-electric bg-transparent text-blue-electric hover:bg-blue-pale dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border border-cyan-600 bg-transparent text-cyan-600 hover:bg-cyan-50 hover:border-cyan-700",
         secondary:
-          "bg-green-vibrant text-white hover:bg-green-fresh shadow-green hover:shadow-lg hover:-translate-y-0.5",
+          "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-green active:scale-[0.98]",
         tertiary:
-          "bg-coral text-white hover:bg-coral-light shadow-coral hover:shadow-lg hover:-translate-y-0.5",
+          "bg-coral text-white hover:bg-coral-light shadow-md hover:shadow-coral active:scale-[0.98]",
         premium:
-          "bg-gradient-to-r from-rose to-sunshine text-white shadow-rose hover:shadow-lg hover:-translate-y-0.5",
+          "bg-linear-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:shadow-blue active:scale-[0.98]",
         ghost:
-          "hover:bg-blue-pale hover:text-blue-electric dark:hover:bg-accent/50",
-        link: "text-blue-electric underline-offset-4 hover:underline",
+          "hover:bg-cyan-50 hover:text-cyan-700",
+        link: "text-cyan-600 underline-offset-4 hover:underline",
         glass:
-          "glass-standard text-blue-electric hover:bg-white/20",
+          "backdrop-blur-md bg-white/70 text-cyan-600 hover:bg-white/90 border border-transparent",
       },
       size: {
-        default: "h-11 px-6 py-3 has-[>svg]:px-4",
-        sm: "h-9 rounded-[12px] gap-1.5 px-4 has-[>svg]:px-3",
-        lg: "h-12 rounded-[14px] px-8 text-base has-[>svg]:px-6",
-        icon: "size-11",
-        "icon-sm": "size-9",
-        "icon-lg": "size-12",
+        default: "h-11 px-6 py-3 rounded-2xl has-[>svg]:px-4",
+        sm: "h-9 rounded-xl gap-1.5 px-4 text-xs has-[>svg]:px-3",
+        lg: "h-14 rounded-2xl px-8 text-base has-[>svg]:px-6",
+        icon: "size-11 rounded-2xl",
+        "icon-sm": "size-9 rounded-xl",
+        "icon-lg": "size-14 rounded-2xl",
       },
     },
     defaultVariants: {

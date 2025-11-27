@@ -37,13 +37,13 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
   const getIconBg = (type: ActivityItem['type']) => {
     switch (type) {
       case 'favorite':
-        return 'bg-gradient-to-br from-red-50 to-red-100';
+        return 'bg-linear-to-br from-red-50 to-red-100';
       case 'message':
-        return 'bg-gradient-to-br from-[#D1FAE5] to-[#10B981]/20';
+        return 'bg-linear-to-br from-[#D1FAE5] to-[#10B981]/20';
       case 'search':
-        return 'bg-gradient-to-br from-[#CFFAFE] to-[#06B6D4]/20';
+        return 'bg-linear-to-br from-[#CFFAFE] to-[#06B6D4]/20';
       case 'alert':
-        return 'bg-gradient-to-br from-[#FFEDD5] to-[#F97316]/20';
+        return 'bg-linear-to-br from-[#FFEDD5] to-[#F97316]/20';
       default:
         return 'bg-gray-100';
     }
@@ -84,7 +84,7 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
   return (
     <Card className="relative border-0 shadow-lg overflow-hidden">
       {/* Gradient header */}
-      <div className="relative p-6 bg-gradient-to-r from-[#0891B2] via-[#06B6D4] to-[#10B981]">
+      <div className="relative p-6 bg-linear-to-r from-[#0891B2] via-[#06B6D4] to-[#10B981]">
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
         <h3 className="relative text-xl font-bold text-white flex items-center gap-2">
           <Bell className="w-5 h-5" />
@@ -92,12 +92,12 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
         </h3>
       </div>
       
-      <div className="p-6 space-y-4 bg-gradient-to-b from-gray-50/50 to-white">
+      <div className="p-6 space-y-4 bg-linear-to-b from-gray-50/50 to-white">
         {activities.length === 0 ? (
           <div className="text-center py-12">
             <div className="relative w-20 h-20 mx-auto mb-4">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full blur-xl opacity-50" />
-              <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+              <div className="absolute inset-0 bg-linear-to-br from-gray-100 to-gray-200 rounded-full blur-xl opacity-50" />
+              <div className="relative w-20 h-20 rounded-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                 <Bell className="w-10 h-10 text-gray-400" />
               </div>
             </div>
@@ -113,7 +113,7 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
               className="group relative"
             >
               {/* Glow effect on hover */}
-              <div className={`absolute -inset-2 bg-gradient-to-r ${getGlowColor(activity.type)} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl`} />
+              <div className={`absolute -inset-2 bg-linear-to-r ${getGlowColor(activity.type)} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl`} />
               
               <div className="relative flex gap-4 p-4 bg-white rounded-xl border border-gray-100 group-hover:border-gray-200 group-hover:shadow-md transition-all duration-300">
                 {/* Icon with gradient background */}
