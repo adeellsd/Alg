@@ -1,56 +1,76 @@
-/**
- * TierBadge Component - Alger Vibrante v4
- * 
- * Badges pour les tiers FREE, STARTER, ELITE
- * Utilisé dans les dashboards, pricing, cartes utilisateur
- */
+"use client"
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { Crown, Star, Sparkles } from "lucide-react"
 
-export type TierType = "free" | "starter" | "elite"
+export type TierType = "free" | "starter" | "pro" | "elite"
 
 export interface TierBadgeProps extends React.ComponentProps<"span"> {
   tier: TierType
   size?: "sm" | "md" | "lg"
+  showIcon?: boolean
 }
 
-const TierBadge = React.forwardRef<HTMLSpanElement, TierBadgeProps>(
-  ({ className, tier, size = "md", ...props }, ref) => {
-    const sizeClasses = {
-      sm: "px-2 py-1 text-[10px]",
-      md: "px-3 py-1.5 text-xs",
-      lg: "px-4 py-2 text-sm",
-    }
-
-    const tierClasses = {
-      free: "tier-badge-free",
-      starter: "tier-badge-starter",
-      elite: "tier-badge-elite",
-    }
-
-    const tierLabels = {
-      free: "FREE",
-      starter: "STARTER",
-      elite: "ELITE",
-    }
-
-    return (
-      <span
-        ref={ref}
-        className={cn(
-          tierClasses[tier],
-          sizeClasses[size],
-          className
-        )}
-        {...props}
-      >
-        {tierLabels[tier]}
-      </span>
-    )
+function TierBadge({
+  className,
+  tier,
+  size = "md",
+  showIcon = true,
+  ...props
+}: TierBadgeProps) {
+  const sizeClasses = {
+    sm: "px-2 py-0.5 text-xs gap-1",
+    md: "px-2.5 py-1 text-xs gap-1.5",
+    lg: "px-3 py-1.5 text-sm gap-2",
   }
-)
 
-TierBadge.displayName = "TierBadge"
+  const iconSizes = {
+    sm: "size-3",
+    md: "size-3.5",
+    lg: "size-4",
+  }
+
+  const tierConfig = {
+    free: {
+      label: "Free",
+      className: "bg-gray-100 text-gray-700 border-gray-200",
+      icon: null,
+    },
+    starter: {
+      label: "Starter",
+      className: "bg-cyan-50 text-cyan-700 border-cyan-200",
+      icon: Star,
+    },
+    pro: {
+      label: "Pro",
+      className: "bg-purple-50 text-purple-700 border-purple-200",
+      icon: Sparkles,
+    },
+    elite: {
+      label: "Elite",
+      className: "bg-amber-50 text-amber-700 border-amber-200",
+      icon: Crown,
+    },
+  }
+
+  const config = tierConfig[tier]
+  const Icon = config.icon
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center font-medium rounded-full border",
+        sizeClasses[size],
+        config.className,
+        className
+      )}
+      {...props}
+    >
+      {showIcon && Icon && <Icon className={iconSizes[size]} />}
+      {config.label}
+    </span>
+  )
+}
 
 export { TierBadge }

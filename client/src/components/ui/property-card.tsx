@@ -1,33 +1,49 @@
-"use client";
-
 /**
- * PropertyCard Component - Alger Vibrante v4
+ * PropertyCardCasbah - Carte propriété "Alger Authentique v5.0"
  * 
- * Carte de propriété premium avec:
- * - Border-radius XL (20px)
- * - Ombres colorées
- * - Animations douces
- * - Variantes: standard, glass, featured, elite
- * - Zellige pattern subtil au hover
+ * @features
+ * - Gradient beige Casbah (from-sable to-beige-casbah)
+ * - Pattern Zellige subtil (pattern-mosaic-elite sur hover)
+ * - Hover border doré (border-or)
+ * - Border-radius arrondi (rounded-[24px])
+ * - Badges avec gradients colorés
+ * - Features pills avec fond beige
+ * - Animations méditerranéennes (200ms)
+ * 
+ * @variants
+ * - default: Card standard avec hover effects
+ * - featured: Ring bleu turquoise + shadow-blue
+ * - elite: Pattern Zellige visible + gradient doré
+ * - compact: Version horizontale pour mobile
+ * 
+ * @palette
+ * - Beige: sable, beige-casbah (Casbah)
+ * - Bleu: blue-electric, turquoise-mer (Méditerranée)
+ * - Or: or (Zellige premium)
+ * - Corail: corail-vif (Sunset)
+ * 
+ * @version 5.0 - Alger Authentique
  */
+"use client"
 
 import * as React from "react"
 import Image from "next/image"
-import { Heart } from "lucide-react"
+import { Heart, MapPin, Bed, Bath, Maximize } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Badge } from "./badge"
 
-export type PropertyCardVariant = "standard" | "glass" | "featured" | "elite"
+export type PropertyCardVariant = "default" | "featured" | "elite" | "compact"
 
 export interface PropertyCardProps extends React.ComponentProps<"div"> {
   variant?: PropertyCardVariant
   image?: string
   title?: string
   location?: string
-  price?: string
+  price?: string | number
   priceUnit?: string
   badge?: string
-  badgeVariant?: "default" | "secondary" | "coral" | "sunshine" | "premium"
+  badgeVariant?: "default" | "secondary" | "outline" | "success" | "destructive" | "rent" | "sale" | "new" | "urgent"
+  boostTier?: "TIER_1" | "TIER_2" | "TIER_3_ULTRA" | null
   rooms?: number
   bathrooms?: number
   surface?: number
@@ -35,214 +51,212 @@ export interface PropertyCardProps extends React.ComponentProps<"div"> {
   onFavoriteClick?: () => void
 }
 
-const PropertyCard = React.forwardRef<HTMLDivElement, PropertyCardProps>(
-  (
-    {
-      className,
-      variant = "standard",
-      image,
-      title,
-      location,
-      price,
-      priceUnit = "DA/mois",
-      badge,
-      badgeVariant = "default",
-      rooms,
-      bathrooms,
-      surface,
-      isFavorite = false,
-      onFavoriteClick,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const variantClasses = {
-      standard:
-        "bg-white border-2 border-gray-200 shadow-blue hover:shadow-lg",
-      glass:
-        "property-card-glass",
-      featured:
-        "bg-cream border-3 border-sunshine shadow-coral hover:shadow-xl",
-      elite:
-        "property-card-elite",
-    }
+function PropertyCard({
+  className,
+  variant = "default",
+  image,
+  title,
+  location,
+  price,
+  priceUnit = "DA/mois",
+  badge,
+  badgeVariant = "secondary",
+  boostTier,
+  rooms,
+  bathrooms,
+  surface,
+  isFavorite = false,
+  onFavoriteClick,
+  children,
+  ...props
+}: PropertyCardProps) {
+  const formatPrice = (p: string | number | undefined) => {
+    if (!p) return null
+    const num = typeof p === "string" ? parseFloat(p) : p
+    return new Intl.NumberFormat("fr-DZ").format(num)
+  }
 
-    return (
+  // Détection variant elite automatique si boostTier ULTRA
+  const isElite = variant === "elite" || boostTier === "TIER_3_ULTRA"
+
+  return (
+    <div
+      className={cn(
+  "group relative flex flex-col overflow-hidden rounded-3xl border-2 border-transparent",
+  "bg-linear-to-br from-white to-sable",
+        "transition-all duration-200",
+        "shadow-lg hover:shadow-2xl",
+        // Hover effects
+        "hover:border-or hover:-translate-y-2 hover:scale-[1.02]",
+        // Variant styles
+        variant === "featured" && "ring-2 ring-turquoise-mer ring-offset-2 shadow-blue",
+        isElite && "border-or shadow-[0_20px_60px_-10px_rgba(255,215,0,0.3)]",
+  variant === "compact" && "flex-row rounded-xl",
+        className
+      )}
+      {...props}
+    >
+      {/* Decorative overlay disabled (zellige paused) */}
+      {/* Intentionally removed pattern overlay for a cleaner look */}
+      {/* Image Container avec gradient overlay */}
       <div
-        ref={ref}
         className={cn(
-          "rounded-xl overflow-hidden transition-all duration-300 cursor-pointer group relative",
-          "hover:-translate-y-2",
-          variantClasses[variant],
-          // Zellige pattern on hover
-          variant === "elite" && "zellige-coral",
-          className
+          "relative overflow-hidden bg-gray-100",
+          variant === "compact" ? "w-32 sm:w-40 shrink-0" : "aspect-4/3"
         )}
-        {...props}
       >
-        {/* Image Container */}
-        <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
-          {image ? (
+        {image ? (
+          <>
             <Image
               src={image}
               alt={title || "Property"}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
-              No Image
-            </div>
-          )}
+            
+            {/* Gradient overlay sunset (apparaît au hover) */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-beige-casbah to-beige-chaud">
+            <span className="text-xs font-medium uppercase tracking-wide text-gray-500">
+              Aucune image
+            </span>
+          </div>
+        )}
 
-          {/* Badge */}
-          {badge && (
-            <div className="absolute top-3 right-3 z-10">
-              <Badge variant={badgeVariant}>{badge}</Badge>
-            </div>
+        {/* Badges avec nouveau style */}
+        <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-10 gap-2">
+          {badge && variant !== "compact" && (
+            <Badge 
+              variant={badgeVariant} 
+              className={cn(
+                "shadow-lg backdrop-blur-md",
+                badgeVariant === "rent" && "bg-green-vibrant/90",
+                badgeVariant === "sale" && "bg-blue-electric/90"
+              )}
+            >
+              {badge}
+            </Badge>
           )}
+          
+          {/* Badge ULTRA pour boost tier elite */}
+          {isElite && variant !== "compact" && (
+            <Badge className="bg-linear-to-r from-or via-orange-brulant to-corail-vif text-white shadow-lg">
+              ⭐ ULTRA
+            </Badge>
+          )}
+        </div>
 
-          {/* Favorite Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              onFavoriteClick?.()
-            }}
+        {/* Favorite Button avec effet Zellige */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            onFavoriteClick?.()
+          }}
+          className={cn(
+            "absolute top-4 right-4 z-10",
+            "flex size-12 items-center justify-center rounded-full",
+            "bg-white/90 backdrop-blur-md shadow-lg border border-white/50",
+            "transition-all duration-200",
+            "hover:bg-or hover:text-white hover:scale-110 active:scale-95",
+            isFavorite ? "text-terracotta-fonce" : "text-gray-600"
+          )}
+          aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+        >
+          <Heart
             className={cn(
-              "absolute top-3 left-3 z-10",
-              "w-11 h-11 rounded-full bg-white border-2 border-gray-200",
-              "flex items-center justify-center",
-              "transition-all duration-200",
-              "hover:scale-110 hover:border-rose hover:shadow-md",
-              isFavorite && "border-rose"
+              "size-5",
+              isFavorite && "fill-current"
+            )}
+          />
+        </button>
+      </div>
+
+      {/* Content avec nouveau spacing v5.0 */}
+      <div
+        className={cn(
+          "relative z-10 flex flex-1 flex-col",
+          variant === "compact" ? "p-3 sm:p-4" : "p-6 space-y-4"
+        )}
+      >
+        {/* Prix avec style doré premium */}
+        {price && (
+          <div className="flex items-baseline justify-between">
+            <p className="text-3xl font-bold bg-linear-to-r from-blue-electric to-turquoise-mer bg-clip-text text-transparent">
+              {formatPrice(price)}
+            </p>
+            <span className="text-sm text-gray-500 font-medium px-3 py-1 bg-sable rounded-full">
+              {priceUnit}
+            </span>
+          </div>
+        )}
+
+        {/* Titre avec hover bleu turquoise */}
+        {title && (
+          <h3
+            className={cn(
+              "font-semibold text-gray-900 line-clamp-2 transition-colors duration-200",
+              "group-hover:text-blue-electric",
+              variant === "compact" ? "text-sm" : "text-xl"
             )}
           >
-            <Heart
-              className={cn(
-                "w-5 h-5 transition-all",
-                isFavorite ? "fill-rose stroke-rose" : "stroke-rose stroke-[2.5]"
-              )}
-            />
-          </button>
-        </div>
+            {title}
+          </h3>
+        )}
 
-        {/* Content */}
-        <div className="p-6 space-y-4 relative z-1">
-          {/* Price */}
-          {price && (
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-blue-electric font-display">
-                {price}
-              </span>
-              <span className="text-sm text-gray-600">{priceUnit}</span>
+        {/* Location avec icône stylisée */}
+        {location && (
+          <div className="flex items-center gap-2 text-gray-600">
+            <div className="w-8 h-8 rounded-full bg-linear-to-br from-turquoise-mer to-blue-electric flex items-center justify-center shrink-0">
+              <MapPin className="w-4 h-4 text-white" />
             </div>
-          )}
+            <span className="text-sm truncate">{location}</span>
+          </div>
+        )}
 
-          {/* Title */}
-          {title && (
-            <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 font-display">
-              {title}
-            </h3>
-          )}
+        {/* Features pills avec fond beige Casbah */}
+        {(rooms || bathrooms || surface) && variant !== "compact" && (
+          <div className="flex items-center gap-4 pt-4 border-t border-beige-casbah">
+            {rooms !== undefined && (
+              <div className="flex items-center gap-2 px-3 py-2 bg-linear-to-br from-sable to-beige-casbah rounded-[12px]">
+                <Bed className="w-4 h-4 text-blue-electric" />
+                <span className="text-sm font-medium text-gray-700">{rooms}</span>
+              </div>
+            )}
+            {bathrooms !== undefined && (
+              <div className="flex items-center gap-2 px-3 py-2 bg-linear-to-br from-sable to-beige-casbah rounded-[12px]">
+                <Bath className="w-4 h-4 text-blue-electric" />
+                <span className="text-sm font-medium text-gray-700">{bathrooms}</span>
+              </div>
+            )}
+            {surface !== undefined && (
+              <div className="flex items-center gap-2 px-3 py-2 bg-linear-to-br from-sable to-beige-casbah rounded-[12px]">
+                <Maximize className="w-4 h-4 text-blue-electric" />
+                <span className="text-sm font-medium text-gray-700">{surface} m²</span>
+              </div>
+            )}
+          </div>
+        )}
 
-          {/* Location */}
-          {location && (
-            <div className="flex items-center gap-2 text-gray-600 text-sm">
-              <svg
-                className="w-4 h-4 text-coral shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-              <span className="line-clamp-1">{location}</span>
-            </div>
-          )}
+        {/* Badge pour compact variant */}
+        {badge && variant === "compact" && (
+          <div className="mt-2">
+            <Badge variant={badgeVariant} className="text-xs">
+              {badge}
+            </Badge>
+          </div>
+        )}
 
-          {/* Specs */}
-          {(rooms || bathrooms || surface) && (
-            <div className="flex items-center gap-4 pt-3 border-t-2 border-gray-200">
-              {rooms && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-4 h-4 text-green-vibrant"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                  <span className="font-medium">{rooms} ch.</span>
-                </div>
-              )}
-
-              {bathrooms && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-4 h-4 text-green-vibrant"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
-                    />
-                  </svg>
-                  <span className="font-medium">{bathrooms} sdb</span>
-                </div>
-              )}
-
-              {surface && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-4 h-4 text-green-vibrant"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"
-                    />
-                  </svg>
-                  <span className="font-medium">{surface} m²</span>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Custom Children */}
-          {children}
-        </div>
+        {children}
       </div>
-    )
-  }
-)
-
-PropertyCard.displayName = "PropertyCard"
+      
+      {/* Hover effect border Zellige doré (animation méditerranéenne) */}
+  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-or transition-all duration-200 pointer-events-none" />
+    </div>
+  )
+}
 
 export { PropertyCard }
+

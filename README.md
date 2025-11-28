@@ -1,12 +1,85 @@
 # 🏠 RENTALG - Marketplace Immobilier Algérien
 
+> Plateforme moderne de publication et recherche d'annonces immobilières en Algérie  
+> **Design System v5.0 "Alger Authentique"** - 100% Tailwind CSS
 
-> Plateforme moderne de publication et recherche d'annonces immobilières en Algérie
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](/)
+[![Design System](https://img.shields.io/badge/design%20system-v5.0-blue)](/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-v4-38bdf8)](/)
+[![Production Ready](https://img.shields.io/badge/production-ready-success)](/)
 
 ---
 
-## 📋 Table des matières
+## 🎨 Design System v5.0 "Alger Authentique"
 
+**Nouveau** : RentAlg utilise maintenant un design system complet inspiré de l'architecture algéroise et de la Méditerranée.
+
+### 🌊 Caractéristiques principales
+
+- ✅ **60+ couleurs sémantiques** (bleus méditerranéens, beiges Casbah, sunset, jardins)
+- ✅ **5 patterns Zellige** traditionnels (Khatam, Floral, Mosaic Elite, Hexagons, Arabesque)
+- ✅ **6 variants Glassmorphism** (effets de verre dépoli modernes)
+- ✅ **150+ gradients** cohérents à travers toute l'interface
+- ✅ **100% Tailwind v4** (0 couleurs HEX hardcodées)
+- ✅ **Production-ready** (172KB CSS optimisé, 304KB largest JS chunk)
+
+### � Documentation Design System
+
+- [Design System Complet](./design-system.md) - Spécifications complètes v5.0
+- [Migration Guide](./MIGRATION_HEX_TO_TAILWIND.md) - Guide de migration HEX → Tailwind
+- [Sprint 10 Summary](./SPRINT_10_COMPLETE.md) - Résumé de la refonte finale
+
+### 🎨 Palette de couleurs principales
+
+```typescript
+// Bleus Méditerranéens
+blue-electric: #0891B2    // PRIMARY CTA
+turquoise-mer: #40E0D0    // Accents lumineux
+bleu-ciel: #87CEEB        // Backgrounds
+
+// Beiges & Terres (Architecture Casbah)
+beige-casbah: #E8D5B7     // Cards
+sable: #F5E6D3            // Backgrounds clairs
+
+// Sunset (Couchers de soleil)
+or: #FFD700               // ELITE tier
+orange-brulant: #FF8C42   // CTA premium
+corail-vif: #FF6B4A       // Promotions
+
+// Verts Jardin
+green-vibrant: #059669    // Success states
+vert-jardin: #2D5016      // Végétation
+
+// Accents Premium
+fuchsia: #DB2777          // ELITE gradients
+terracotta-fonce: #DC2626 // Erreurs
+```
+
+### ✨ Usage des patterns
+
+```tsx
+// Pattern Khatam (Étoile à 8 branches) - Hero sections
+<section className="relative bg-linear-to-br from-bleu-ciel to-turquoise-mer">
+  <div className="absolute inset-0 pattern-khatam opacity-[0.03]" />
+  {/* Contenu */}
+</section>
+
+// Glassmorphism - Cards premium
+<Card className="glass-white-strong border-or/30">
+  {/* Contenu */}
+</Card>
+
+// Gradient doré - CTA ELITE
+<Button className="bg-linear-to-r from-or to-orange-brulant">
+  Publier une annonce ELITE
+</Button>
+```
+
+---
+
+## �📋 Table des matières
+
+- [Design System v5.0](#-design-system-v50-alger-authentique)
 - [Vue d'ensemble](#vue-densemble)
 - [Stack Technique](#stack-technique)
 - [Architecture](#architecture)
@@ -25,15 +98,6 @@
 
 **RentAlg** est une marketplace immobilière moderne spécialement conçue pour le marché algérien, permettant aux particuliers et professionnels de publier et rechercher des biens immobiliers (vente, location).
 
-### **Problème résolu**
-
-- ❌ Plateformes actuelles obsolètes et peu intuitives
-- ❌ Pas de système de géolocalisation précis
-- ❌ Recherche limitée et peu pertinente
-- ❌ Manque de confiance (annonces frauduleuses)
-- ❌ Expérience mobile médiocre
-
-### **Notre solution**
 
 - ✅ Interface moderne et intuitive (Next.js 14)
 - ✅ Recherche avancée avec carte interactive (Mapbox)

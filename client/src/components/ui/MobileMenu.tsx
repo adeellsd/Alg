@@ -1,419 +1,285 @@
-'use client';
+/**
+ * MobileMenuGlass - Menu mobile "Alger Authentique v5.0"
+ * 
+ * @features
+ * - Glassmorphism overlay full-screen
+ * - Drawer avec pattern Zellige
+ * - Slide animations fluides
+ * - Links avec spacing généreux
+ * - Close button doré
+ * - CTA gradient doré
+ * 
+ * @palette
+ * - Background: gradient beige + glassmorphism
+ * - Overlay: bg-black/50 backdrop-blur
+ * - Active: bleu électrique blue-electric
+ * - CTA: gradient doré or → orange-brulant
+ * 
+ * @version 5.0 - Alger Authentique
+ */
+"use client"
 
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { X, Home, Building2, Info, Mail, LogOut, User, Settings, LayoutDashboard, MessageSquare, Heart, Bell, Plus } from 'lucide-react';
+import React, { useEffect } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import {
+  X,
+  Home,
+  Building2,
+  Info,
+  Mail,
+  LogOut,
+  User,
+  Settings,
+  Plus,
+  LucideIcon,
+} from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface NavItem {
-  href: string;
-  label: string;
+  href: string
+  label: string
 }
 
 interface UserMenuItem {
-  href: string;
-  label: string;
-  icon: React.ReactNode;
+  href: string
+  label: string
+  icon: LucideIcon
 }
 
 interface MobileMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
-  navItems: NavItem[];
-  userMenuItems: UserMenuItem[];
-  pathname: string;
-  user: any;
-  signOut: () => void;
-  isAuthPage: boolean;
+  isOpen: boolean
+  onClose: () => void
+  navItems: NavItem[]
+  userMenuItems: UserMenuItem[]
+  pathname: string
+  user: { username?: string } | null | undefined
+  signOut: () => void
+  isAuthPage: boolean
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, userMenuItems, pathname, user, signOut, isAuthPage }) => {
-  // Lock body scroll when menu is open
+const iconMap: Record<string, LucideIcon> = {
+  "/": Home,
+  "/properties": Building2,
+  "/about": Info,
+  "/contact": Mail,
+}
+
+export default function MobileMenu({
+  isOpen,
+  onClose,
+  navItems,
+  userMenuItems,
+  pathname,
+  user,
+  signOut,
+  isAuthPage,
+}: MobileMenuProps) {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset"
     }
-
     return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
+      document.body.style.overflow = "unset"
+    }
+  }, [isOpen])
 
-  // Close menu on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
+      if (e.key === "Escape" && isOpen) onClose()
+    }
+    document.addEventListener("keydown", handleEscape)
+    return () => document.removeEventListener("keydown", handleEscape)
+  }, [isOpen, onClose])
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen, onClose]);
-
-  // Icons mapping
-  const iconMap: Record<string, React.ReactNode> = {
-    '/': <Home className="w-5 h-5" />,
-    '/properties': <Building2 className="w-5 h-5" />,
-    '/about': <Info className="w-5 h-5" />,
-    '/contact': <Mail className="w-5 h-5" />,
-  };
-
-  const isActive = (href: string) => pathname === href;
+  const isActive = (href: string) => pathname === href
 
   return (
     <>
-      {/* Overlay avec effet glass */}
-      <div 
-        className={`
-          fixed inset-0 
-          bg-blue-electric/20 backdrop-blur-md
-          z-[60]
-          transition-all duration-400
-          ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-        `}
+      {/* Overlay avec glassmorphism */}
+      <div
+        className={cn(
+          "fixed inset-0 z-[60] bg-linear-to-br from-black/60 to-black/40 backdrop-blur-md transition-opacity duration-300",
+          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        )}
         onClick={onClose}
         aria-hidden="true"
-        style={{
-          backdropFilter: 'blur(12px) saturate(120%)',
-          WebkitBackdropFilter: 'blur(12px) saturate(120%)',
-        }}
       />
 
-      {/* Drawer avec effet glass */}
-      <div 
-        className={`
-          fixed top-0 right-0 h-full w-full sm:w-96
-          bg-white/80 backdrop-blur-3xl
-          border-l border-white/30
-          shadow-[-8px_0_32px_rgba(8,145,178,0.15)]
-          z-[70]
-          transform transition-all duration-400 ease-out
-          ${isOpen ? 'translate-x-0' : 'translate-x-full'}
-        `}
+      {/* Drawer avec effet glass et pattern Zellige */}
+      <div
+        className={cn(
+          "fixed right-0 top-0 z-[70] h-full w-full max-w-md transform bg-linear-to-br from-sable/95 to-beige-casbah/95 backdrop-blur-2xl border-l-2 border-or/30 shadow-2xl transition-all duration-300 ease-out overflow-hidden",
+          isOpen ? "translate-x-0" : "translate-x-full"
+        )}
         role="dialog"
         aria-modal="true"
         aria-label="Menu de navigation mobile"
-        style={{
-          backdropFilter: 'blur(40px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-        }}
       >
+        {/* Pattern Zellige background */}
+        <div className="absolute inset-0 pattern-khatam opacity-[0.03] pointer-events-none" />
+        
         {/* Header avec gradient */}
-        <div 
-          className="
-            flex items-center justify-between 
-            p-6 
-            border-b border-white/30
-            relative overflow-hidden
-          "
-        >
-          {/* Gradient background header */}
-          <div 
-            className="absolute inset-0 opacity-30"
-            style={{
-              background: 'linear-gradient(135deg, #0891B2 0%, #06B6D4 50%, #38BDF8 100%)',
-            }}
-          />
-          
-          <div className="flex items-center gap-3 relative z-10">
-            {/* Logo */}
-            <div className="
-              w-10 h-10 rounded-full 
-              bg-linear-to-br from-blue-electric via-blue-bright to-blue-sky
-              flex items-center justify-center 
-              shadow-sm
-            ">
-              <svg 
-                className="w-5 h-5 text-white"
-                viewBox="0 0 24 24" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-                <path 
-                  d="M9 22V12H15V22" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
+        <div className="relative flex items-center justify-between border-b-2 border-or/20 p-6 bg-gradient-to-r from-sable to-beige-casbah">
+          <div className="flex items-center gap-3">
+            {/* Logo avec pattern */}
+            <div className="relative">
+              <div className="absolute inset-0 pattern-khatam opacity-20 scale-125" />
+              <div className="relative flex size-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-blue-electric to-turquoise-mer shadow-lg">
+                <Home className="size-6 text-white" />
+              </div>
             </div>
-            
-            {/* Brand text */}
-            <div className="text-xl font-bold font-display leading-none">
-              <span className="
-                text-transparent bg-clip-text 
-                bg-linear-to-r from-blue-electric to-blue-bright
-              ">
-                RENT
-              </span>
-              <span className="
-                text-transparent bg-clip-text 
-                bg-linear-to-r from-green-vibrant to-green-fresh
-              ">
-                ALG
-              </span>
-            </div>
+            <span className="text-xl font-bold font-display">
+              Rent<span className="text-or">Alg</span>
+            </span>
           </div>
 
-          {/* Close button avec effet glass */}
+          {/* Close button doré */}
           <button
             onClick={onClose}
-            className="
-              relative z-10
-              p-2 rounded-full
-              text-gray-600 hover:text-gray-900
-              bg-white/20 hover:bg-white/40
-              backdrop-blur-sm
-              border border-white/30
-              transition-all duration-200
-              focus:outline-none 
-            "
+            className="flex size-12 items-center justify-center rounded-full bg-white/60 backdrop-blur-sm text-gray-700 transition-all duration-200 hover:bg-or hover:text-white hover:scale-110 shadow-md"
             aria-label="Fermer le menu"
           >
-            <X className="w-5 h-5" />
+            <X className="size-6" />
           </button>
         </div>
 
-          {/* Navigation Content */}
-        <div className="flex flex-col h-[calc(100%-5rem)]">
-          {/* Navigation Links */}
-          <nav className="flex-1 p-6 space-y-2 overflow-y-auto">
+        {/* Content */}
+        <div className="relative z-10 flex h-[calc(100%-6rem)] flex-col">
+          {/* Navigation Links avec spacing généreux */}
+          <nav className="flex-1 space-y-2 overflow-y-auto p-6">
             {/* Home Link */}
             <Link
               href="/"
               onClick={onClose}
-              className={`
-                flex items-center gap-4 
-                px-4 py-3.5 rounded-xl
-                font-semibold text-base
-                backdrop-blur-sm
-                border
-                transition-all duration-200
-                ${isActive('/') 
-                  ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm' 
-                  : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
-                }
-              `}
+              className={cn(
+                "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                isActive("/")
+                  ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
+                  : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+              )}
             >
-              <Home className="w-5 h-5" />
-              <span>Accueil</span>
+              <Home className="size-5" />
+              Accueil
             </Link>
 
-            {/* Dynamic Nav Items */}
-            {navItems.map((item, index) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={onClose}
-                className={`
-                  flex items-center gap-4 
-                  px-4 py-3.5 rounded-xl
-                  font-semibold text-base
-                  backdrop-blur-sm
-                  border
-                  transition-all duration-200
-                  ${isActive(item.href)
-                    ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
-                    : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
-                  }
-                `}
-                style={{
-                  animationDelay: `${(index + 1) * 50}ms`,
-                }}
-              >
-                {iconMap[item.href]}
-                <span>{item.label}</span>
-              </Link>
-            ))}
+            {/* Nav Items */}
+            {navItems.map((item) => {
+              const Icon = iconMap[item.href] || Building2
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className={cn(
+                    "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                    isActive(item.href)
+                      ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
+                      : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                  )}
+                >
+                  <Icon className="size-5" />
+                  {item.label}
+                </Link>
+              )
+            })}
 
-            {/* User Menu Items (if authenticated) */}
+            {/* User Menu (Authenticated) */}
             {user && userMenuItems.length > 0 && (
               <>
-                <div className="pt-4 pb-2">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4">
+                <div className="pb-2 pt-6">
+                  <p className="px-5 text-xs font-bold uppercase tracking-wider text-gray-600">
                     Mon Espace
                   </p>
                 </div>
-                {userMenuItems.map((item, index) => (
+
+                {userMenuItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={onClose}
-                    className={`
-                      flex items-center gap-4 
-                      px-4 py-3.5 rounded-xl
-                      font-semibold text-base
-                      backdrop-blur-sm
-                      border
-                      transition-all duration-200
-                      ${isActive(item.href)
-                        ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
-                        : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
-                      }
-                    `}
+                    className={cn(
+                      "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                      isActive(item.href)
+                        ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
+                        : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                    )}
                   >
-                    {item.icon}
-                    <span>{item.label}</span>
+                    <item.icon className="size-5" />
+                    {item.label}
                   </Link>
                 ))}
 
                 <Link
                   href="/profile"
                   onClick={onClose}
-                  className={`
-                    flex items-center gap-4 
-                    px-4 py-3.5 rounded-xl
-                    font-semibold text-base
-                    backdrop-blur-sm
-                    border
-                    transition-all duration-200
-                    ${isActive('/profile')
-                      ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
-                      : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
-                    }
-                  `}
+                  className={cn(
+                    "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                    isActive("/profile")
+                      ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
+                      : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                  )}
                 >
-                  <User className="w-5 h-5" />
-                  <span>Profile</span>
+                  <User className="size-5" />
+                  Profil
                 </Link>
 
                 <Link
                   href="/settings"
                   onClick={onClose}
-                  className={`
-                    flex items-center gap-4 
-                    px-4 py-3.5 rounded-xl
-                    font-semibold text-base
-                    backdrop-blur-sm
-                    border
-                    transition-all duration-200
-                    ${isActive('/settings')
-                      ? 'bg-blue-electric/10 text-blue-electric border-blue-electric/30 shadow-sm'
-                      : 'bg-white/20 text-gray-700 border-white/30 hover:bg-white/40'
-                    }
-                  `}
+                  className={cn(
+                    "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                    isActive("/settings")
+                      ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
+                      : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                  )}
                 >
-                  <Settings className="w-5 h-5" />
-                  <span>Paramètres</span>
+                  <Settings className="size-5" />
+                  Paramètres
                 </Link>
               </>
             )}
+          </nav>
 
-            {/* Tagline avec gradient */}
-            {!user && (
-              <div 
-                className="
-                  mt-8 p-4 rounded-xl
-                  backdrop-blur-sm
-                  border border-white/30
-                  relative overflow-hidden
-                "
-              >
-                <div 
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    background: 'linear-gradient(135deg, #0891B2 0%, #38BDF8 100%)',
-                  }}
-                />
-                <p className="text-sm font-display font-medium text-gray-700 text-center leading-relaxed relative z-10">
-                  Trouve ton bien de rêve en Algérie
-                </p>
-              </div>
-            )}
-          </nav>          {/* CTA Buttons (Bottom) avec effet glass */}
+          {/* Footer CTA avec gradient doré */}
           {!isAuthPage && (
-            <div 
-              className="
-                p-6 
-                border-t border-white/30 
-                space-y-3
-                backdrop-blur-sm
-                bg-white/10
-              "
-            >
+            <div className="space-y-3 border-t-2 border-or/20 p-6 bg-gradient-to-r from-sable to-beige-casbah">
               {!user ? (
                 <>
                   <Link href="/signin" onClick={onClose} className="block">
-                    <Button 
-                      variant="ghost"
-                      className="
-                        w-full py-3
-                        text-gray-700 font-semibold
-                        bg-white/20 hover:bg-white/40
-                        backdrop-blur-sm
-                        border border-white/30
-                        rounded-full
-                        transition-all duration-200
-                      "
-                    >
-                      Sign in
+                    <Button variant="outline" className="w-full h-12 text-base font-semibold border-2 border-gray-300 hover:border-blue-electric hover:text-blue-electric">
+                      Connexion
                     </Button>
                   </Link>
                   <Link href="/signup" onClick={onClose} className="block">
-                    <Button 
-                      className="
-                        w-full py-3
-                        bg-linear-to-r from-green-vibrant to-green-fresh
-                        text-white font-bold
-                        rounded-full
-                        shadow-md hover:shadow-green
-                        transition-all duration-200
-                        hover:scale-[1.02]
-                        border border-green-vibrant/20
-                      "
-                    >
-                      Sign Up
+                    <Button className="w-full h-12 text-base font-semibold bg-gradient-to-r from-or to-orange-brulant text-gray-900 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+                      Inscription
                     </Button>
                   </Link>
                 </>
               ) : (
                 <>
-                  <Link href="/properties/new" onClick={onClose} className="block">
-                    <Button 
-                      className="
-                        w-full py-3
-                        bg-linear-to-r from-green-vibrant to-green-fresh
-                        text-white font-bold
-                        rounded-full
-                        shadow-md hover:shadow-green
-                        transition-all duration-200
-                        hover:scale-[1.02]
-                        flex items-center justify-center gap-2
-                      "
-                    >
-                      <Plus className="w-4 h-4" />
+                  <Link
+                    href="/properties/new"
+                    onClick={onClose}
+                    className="block"
+                  >
+                    <Button className="w-full h-12 gap-2 text-base font-semibold bg-gradient-to-r from-or to-orange-brulant text-gray-900 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+                      <Plus className="size-5" />
                       Publier une annonce
                     </Button>
                   </Link>
-                  <Button 
-                    onClick={() => {
-                      signOut();
-                      onClose();
-                    }}
+                  <Button
                     variant="ghost"
-                    className="
-                      w-full py-3
-                      text-red-600 font-semibold
-                      bg-white/20 hover:bg-red-50
-                      backdrop-blur-sm
-                      border border-white/30
-                      rounded-full
-                      transition-all duration-200
-                      flex items-center justify-center gap-2
-                    "
+                    onClick={() => {
+                      signOut()
+                      onClose()
+                    }}
+                    className="w-full h-12 gap-2 text-base font-semibold text-terracotta-fonce hover:bg-red-50 hover:text-terracotta-fonce"
                   >
-                    <LogOut className="w-4 h-4" />
+                    <LogOut className="size-5" />
                     Déconnexion
                   </Button>
                 </>
@@ -423,7 +289,5 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, user
         </div>
       </div>
     </>
-  );
-};
-
-export default MobileMenu;
+  )
+}

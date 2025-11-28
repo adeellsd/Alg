@@ -1,28 +1,36 @@
+/**
+ * DiscoverSection.tsx
+ * Design System v5.1 "Alger Vibrante Refined"
+ * 
+ * Section "Comment ça marche" avec timeline moderne,
+ * cards épurées et numérotation claire sur fond blanc.
+ * 
+ * @version 5.1 - Refined & Modern
+ */
+
 "use client";
 import React from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, MessageCircle, Key, ArrowRight } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { MapPin, MessageCircle, Key } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { 
     opacity: 1, 
     transition: { 
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
       delayChildren: 0.1
     } 
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
-    y: 0, 
-    scale: 1,
+    y: 0,
     transition: { 
-      duration: 0.6
+      duration: 0.5
     } 
   }
 };
@@ -31,101 +39,78 @@ const steps = [
   {
     icon: MapPin,
     number: "01",
-    title: "Recherchez sur la carte",
-    description: "Explorez les biens disponibles avec notre carte interactive. Filtres avancés par localisation, prix, surface et caractéristiques pour trouver exactement ce que vous cherchez.",
-    color: "blue-electric",
-    bg: "bg-blue-pale",
-    text: "text-blue-electric"
+    title: "Recherchez",
+    description: "Explorez les biens disponibles avec nos filtres avancés par localisation, prix et caractéristiques.",
+    iconColor: "bg-blue-electric",
+    numberColor: "text-blue-electric"
   },
   {
     icon: MessageCircle,
     number: "02",
-    title: "Contactez le propriétaire",
-    description: "Échangez directement avec les propriétaires ou agences. Posez vos questions, planifiez des visites et négociez en toute simplicité via notre messagerie sécurisée.",
-    color: "green-vibrant",
-    bg: "bg-green-pale",
-    text: "text-green-vibrant"
+    title: "Contactez",
+    description: "Échangez directement avec les propriétaires. Posez vos questions et planifiez vos visites.",
+    iconColor: "bg-green-vibrant",
+    numberColor: "text-green-vibrant"
   },
   {
     icon: Key,
     number: "03",
-    title: "Concrétisez votre projet",
-    description: "Emménagez dans votre nouveau chez-vous, lancez votre activité ou démarrez votre projet immobilier. Votre nouvelle vie commence ici.",
-    color: "coral",
-    bg: "bg-coral-pale",
-    text: "text-coral"
+    title: "Concrétisez",
+    description: "Emménagez dans votre nouveau chez-vous. Votre nouvelle vie commence ici.",
+    iconColor: "bg-coral",
+    numberColor: "text-coral"
   }
 ];
 
 const DiscoverSection = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-white">
-      {/* Pattern zellige subtil */}
-      <div className="absolute inset-0 zellige-bg opacity-5" />
-
+    <section className="relative py-20 sm:py-24 lg:py-28 bg-white">
       <motion.div 
         initial="hidden" 
         whileInView="visible" 
         viewport={{ once: true, amount: 0.2 }} 
         variants={containerVariants} 
-        className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12"
+        className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12"
       >
-        {/* En-tête de section */}
-        <div className="text-center mb-16 lg:mb-20">
-          <motion.div 
-            variants={itemVariants}
-            className="inline-block mb-4"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-pale text-green-vibrant font-semibold text-sm border border-green-vibrant/20">
-              🚀 Comment ça marche
-            </span>
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div variants={itemVariants}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Comment <span className="text-blue-electric">ça marche</span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600">
+              De la recherche à l'emménagement, en 3 étapes simples
+            </p>
           </motion.div>
-          
-          <motion.h2 
-            variants={itemVariants} 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-6 leading-tight"
-          >
-            Trouvez votre bien en <br/>
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-electric to-green-vibrant">
-              3 étapes simples
-            </span>
-          </motion.h2>
-          
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
-          >
-            De la recherche à l'emménagement, nous vous accompagnons à chaque étape de votre parcours immobilier.
-          </motion.p>
         </div>
 
-        {/* Timeline des étapes */}
+        {/* Steps Grid */}
         <div className="relative">
-          {/* Ligne de connexion (desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gray-100 -translate-y-1/2 z-0" />
+          {/* Ligne de connexion desktop */}
+          <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gray-100 z-0" />
 
-          {/* Grille de cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 relative z-10">
             {steps.map((step, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="h-full border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-white rounded-2xl group overflow-hidden relative">
-                  <CardContent className="p-8 flex flex-col items-center text-center h-full">
-                    <div className={`w-16 h-16 rounded-2xl ${step.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10`}>
-                      <step.icon className={`w-8 h-8 ${step.text}`} />
-                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white border-2 border-white shadow-sm flex items-center justify-center text-xs font-bold text-gray-400">
-                        {step.number}
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 font-display">
-                      {step.title}
-                    </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div className="relative bg-white rounded-2xl p-8 text-center">
+                  {/* Numéro grand et visible */}
+                  <div className={`text-6xl font-bold ${step.numberColor} opacity-20 mb-4`}>
+                    {step.number}
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className={`w-16 h-16 rounded-2xl ${step.iconColor} flex items-center justify-center mx-auto mb-6 shadow-md`}>
+                    <step.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {step.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

@@ -40,11 +40,27 @@ interface AppSidebarProps {
   userInfo: UserType;
 }
 
-const tierLabels: Record<AccountTier, { label: string; color: string }> = {
-  FREE: { label: 'Particulier', color: 'bg-gray-500' },
-  STARTER: { label: 'Pro Starter', color: 'bg-blue-500' },
-  PRO: { label: 'Pro', color: 'bg-purple-500' },
-  ELITE: { label: 'Elite', color: 'bg-amber-500' },
+const tierLabels: Record<AccountTier, { label: string; gradient: string; badge: string }> = {
+  FREE: { 
+    label: 'Particulier', 
+    gradient: 'from-beige-casbah to-beige-chaud',
+    badge: 'bg-gray-500'
+  },
+  STARTER: { 
+    label: 'Pro Starter', 
+    gradient: 'from-blue-electric to-turquoise-mer',
+    badge: 'bg-linear-to-r from-blue-electric to-turquoise-mer shadow-blue'
+  },
+  PRO: { 
+    label: 'Pro', 
+    gradient: 'from-purple-500 to-purple-700',
+    badge: 'bg-linear-to-r from-purple-500 to-purple-700 shadow-lg'
+  },
+  ELITE: { 
+    label: 'Elite', 
+    gradient: 'from-or to-orange-brulant',
+    badge: 'bg-linear-to-r from-or to-orange-brulant shadow-2xl'
+  },
 };
 
 // Menu items based on tier
@@ -89,19 +105,22 @@ export function AppSidebar({ accountTier, userInfo }: AppSidebarProps) {
   };
 
   return (
-    <Sidebar collapsible="icon" className="border-r">
+    <Sidebar collapsible="icon" className="border-r border-gray-200/50 glass-sidebar">
+      {/* Pattern Checkers background subtil */}
+      <div className="absolute inset-0 pattern-checkers opacity-[0.02] pointer-events-none" />
+      
       {/* Header */}
-      <SidebarHeader>
+      <SidebarHeader className="relative z-10">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton size="lg" asChild className="group">
               <Link href="/landing">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-md bg-linear-to-br from-blue-electric to-blue-bright text-white shadow-md">
+                <div className={`flex aspect-square size-8 items-center justify-center rounded-[12px] bg-linear-to-br ${tierInfo.gradient} text-white shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-200`}>
                   <Home className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold text-foreground">RENTALG</span>
-                  <Badge variant="secondary" className={`text-[10px] ${tierInfo.color} text-white border-0`}>
+                  <span className="font-bold text-gray-900 font-display">RENT<span className="text-or">ALG</span></span>
+                  <Badge variant="secondary" className={`text-[10px] ${tierInfo.badge} text-white border-0 font-semibold`}>
                     {tierInfo.label}
                   </Badge>
                 </div>
@@ -112,21 +131,29 @@ export function AppSidebar({ accountTier, userInfo }: AppSidebarProps) {
       </SidebarHeader>
 
       {/* Main Navigation */}
-      <SidebarContent>
+      <SidebarContent className="relative z-10">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-gray-600">Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-600 font-semibold">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
                 const isActive = pathname === item.url;
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={isActive} className="transition-colors">
+                    <SidebarMenuButton 
+                      asChild 
+                      isActive={isActive} 
+                      className={`transition-all duration-200 group ${
+                        isActive 
+                          ? `bg-linear-to-r ${tierInfo.gradient} text-white shadow-md hover:shadow-lg` 
+                          : 'hover:bg-blue-pale/50'
+                      }`}
+                    >
                       <Link href={item.url}>
-                        <item.icon className="size-4" />
-                        <span>{item.title}</span>
+                        <item.icon className={`size-4 ${isActive ? 'text-white' : 'text-blue-electric'} group-hover:scale-110 transition-transform duration-200`} />
+                        <span className="font-medium">{item.title}</span>
                         {item.badge && (
-                          <Badge variant="outline" className="ml-auto text-[10px]">
+                          <Badge variant="outline" className="ml-auto text-[10px] bg-white/90 backdrop-blur-sm border-blue-electric/20 text-blue-electric font-semibold">
                             {item.badge}
                           </Badge>
                         )}
@@ -139,21 +166,29 @@ export function AppSidebar({ accountTier, userInfo }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarSeparator />
+        <SidebarSeparator className="bg-linear-to-r from-transparent via-gray-300 to-transparent" />
 
         {/* Bottom Menu */}
         <SidebarGroup>
-          <SidebarGroupLabel className="text-gray-600">Compte</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-600 font-semibold">Compte</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {bottomMenuItems.map((item) => {
                 const isActive = pathname === item.url;
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={isActive} className="transition-colors">
+                    <SidebarMenuButton 
+                      asChild 
+                      isActive={isActive} 
+                      className={`transition-all duration-200 group ${
+                        isActive 
+                          ? 'bg-linear-to-r from-purple-100 to-purple-200 text-purple-700' 
+                          : 'hover:bg-beige-pale/50'
+                      }`}
+                    >
                       <Link href={item.url}>
-                        <item.icon className="size-4" />
-                        <span>{item.title}</span>
+                        <item.icon className={`size-4 ${isActive ? 'text-purple-700' : 'text-gray-600'} group-hover:scale-110 transition-transform duration-200`} />
+                        <span className="font-medium">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -165,11 +200,14 @@ export function AppSidebar({ accountTier, userInfo }: AppSidebarProps) {
       </SidebarContent>
 
       {/* Footer */}
-      <SidebarFooter>
+      <SidebarFooter className="relative z-10">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleSignOut} className="text-terracotta hover:bg-terracotta/10 hover:text-terracotta transition-colors">
-              <LogOut className="size-4" />
+            <SidebarMenuButton 
+              onClick={handleSignOut} 
+              className="text-terracotta-fonce hover:bg-terracotta-fonce/10 hover:text-terracotta-fonce hover:scale-105 transition-all duration-200 font-medium group"
+            >
+              <LogOut className="size-4 group-hover:rotate-12 transition-transform duration-200" />
               <span>Déconnexion</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

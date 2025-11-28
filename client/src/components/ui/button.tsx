@@ -1,3 +1,24 @@
+/**
+ * Button Component - Alger Authentique v5.1 Refined
+ * 
+ * Variants:
+ * - default: Bleu électrique (blue-electric) - PRIMARY CTA
+ * - success: Vert jardin (green-vibrant) - Actions positives
+ * - coral: Corail vif (corail-vif) - Promotions, urgence
+ * - destructive: Terracotta (terracotta-fonce) - Actions destructives
+ * - outline: Bordure bleue - Actions secondaires
+ * - secondary: Gris neutre - Actions tertiaires
+ * - ghost: Transparent - Actions subtiles
+ * - link: Texte souligné - Liens inline
+ * 
+ * Sizes: sm (h-8), default (h-10), lg (h-12), xl (h-14), icon variants
+ * Border-radius: rounded-[14px] (strict design system)
+ * Focus ring: ring-blue-pale
+ * Animations: 200ms, scale on hover
+ * 
+ * REMOVED: variant 'premium' (trop de gradient doré)
+ */
+
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -5,34 +26,36 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-bold tracking-tight transition-all duration-200 outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 focus-ring",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-all duration-200 outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 shrink-0 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-blue-pale",
   {
     variants: {
       variant: {
-        default: "bg-cyan-600 text-white hover:bg-cyan-700 shadow-md hover:shadow-blue active:scale-[0.98]",
+        default: 
+          "bg-blue-electric text-white shadow-blue hover:bg-blue-deep hover:shadow-lg hover:scale-[1.02]",
         destructive:
-          "bg-rose-500 text-white hover:bg-rose-600 shadow-md hover:shadow-rose active:scale-[0.98]",
+          "bg-terracotta-fonce text-white shadow-sm hover:bg-rouge hover:shadow-md hover:scale-[1.02]",
         outline:
-          "border border-cyan-600 bg-transparent text-cyan-600 hover:bg-cyan-50 hover:border-cyan-700",
+          "border-2 border-blue-electric bg-white text-blue-electric hover:bg-blue-pale hover:border-blue-deep",
         secondary:
-          "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-green active:scale-[0.98]",
-        tertiary:
-          "bg-coral text-white hover:bg-coral-light shadow-md hover:shadow-coral active:scale-[0.98]",
-        premium:
-          "bg-linear-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:shadow-blue active:scale-[0.98]",
+          "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900",
+        success:
+          "bg-green-vibrant text-white shadow-green hover:bg-green-fresh hover:shadow-lg hover:scale-[1.02]",
         ghost:
-          "hover:bg-cyan-50 hover:text-cyan-700",
-        link: "text-cyan-600 underline-offset-4 hover:underline",
-        glass:
-          "backdrop-blur-md bg-white/70 text-cyan-600 hover:bg-white/90 border border-transparent",
+          "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+        link: 
+          "text-blue-electric underline-offset-4 hover:underline p-0 h-auto",
+        // Variant coral conservé pour promotions
+        coral:
+          "bg-corail-vif text-white shadow-coral hover:bg-orange-brulant hover:shadow-lg hover:scale-[1.02]",
       },
       size: {
-        default: "h-11 px-6 py-3 rounded-2xl has-[>svg]:px-4",
-        sm: "h-9 rounded-xl gap-1.5 px-4 text-xs has-[>svg]:px-3",
-        lg: "h-14 rounded-2xl px-8 text-base has-[>svg]:px-6",
-        icon: "size-11 rounded-2xl",
-        "icon-sm": "size-9 rounded-xl",
-        "icon-lg": "size-14 rounded-2xl",
+  default: "h-10 px-5 text-sm rounded-lg [&_svg]:size-4",
+  sm: "h-8 px-3 text-xs rounded-lg [&_svg]:size-3.5",
+  lg: "h-12 px-6 text-base rounded-lg [&_svg]:size-5",
+  xl: "h-14 px-8 text-lg rounded-lg [&_svg]:size-5",
+  icon: "size-10 rounded-lg [&_svg]:size-4",
+  "icon-sm": "size-8 rounded-lg [&_svg]:size-4",
+  "icon-lg": "size-12 rounded-lg [&_svg]:size-5",
       },
     },
     defaultVariants: {

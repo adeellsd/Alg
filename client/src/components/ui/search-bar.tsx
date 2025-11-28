@@ -1,130 +1,106 @@
-/**
- * SearchBar Component - Alger Vibrante v4
- * 
- * Barre de recherche premium avec glassmorphism
- * Utilisée dans le hero de la landing page
- */
+"use client"
 
 import * as React from "react"
-import { Search } from "lucide-react"
+import { Search, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "./button"
+import { Input } from "./input"
 
 export interface SearchBarProps extends React.ComponentProps<"div"> {
-  variant?: "standard" | "glass" | "premium"
   onSearch?: (query: string) => void
 }
 
-const SearchBar = React.forwardRef<HTMLDivElement, SearchBarProps>(
-  ({ className, variant = "standard", onSearch, ...props }, ref) => {
-    const [query, setQuery] = React.useState("")
+function SearchBar({
+  className,
+  onSearch,
+  ...props
+}: SearchBarProps) {
+  const [query, setQuery] = React.useState("")
 
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault()
-      onSearch?.(query)
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSearch?.(query)
+  }
 
-    const variantClasses = {
-      standard: "bg-white border-2 border-gray-200 shadow-xl",
-      glass: "search-bar-glass",
-      premium: "search-bar-glass-premium",
-    }
-
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "rounded-xl p-6 relative overflow-hidden",
-          variantClasses[variant],
-          className
-        )}
-        {...props}
-      >
-        {/* Zellige pattern decoratif */}
-        {variant !== "standard" && (
-          <div
-            className="absolute -top-5 -right-5 w-32 h-32 opacity-100 pointer-events-none"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E")`,
-              backgroundSize: "40px 40px",
-            }}
-          />
-        )}
-
-        <form onSubmit={handleSubmit} className="relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-[2fr_1.5fr_1fr_auto] gap-4 items-end">
-            {/* Localisation */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 block">
+  return (
+    <div
+      className={cn(
+  "rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-xl p-6 shadow-xl sm:p-8",
+        className
+      )}
+      {...props}
+    >
+      <form onSubmit={handleSubmit}>
+  <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-[1fr_1fr_auto] lg:grid-cols-[2fr_1.5fr_1fr_auto]">
+          {/* Location */}
+          <div className="space-y-1.5">
+            <label className="block text-sm font-semibold text-gray-700">
               Localisation
             </label>
-            <input
-              type="text"
-              placeholder="Alger, Oran, Constantine..."
-              className={cn(
-                "w-full px-4 py-3 rounded-lg",
-                "border border-gray-300",
-                "focus:outline-none focus:border-cyan-600",
-                "transition-all duration-200",
-                "text-gray-900 placeholder:text-gray-500"
-              )}
-            />
-          </div>            {/* Type de bien */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-700 block">
-                Type de bien
-              </label>
+            <div className="relative">
+              <Input
+                type="text"
+                placeholder="Alger, Oran, Constantine..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="h-12 sm:h-12 rounded-lg"
+              />
+            </div>
+          </div>
+
+          {/* Property Type */}
+          <div className="space-y-1.5">
+            <label className="block text-sm font-semibold text-gray-700">
+              Type de bien
+            </label>
+            <div className="relative">
               <select
                 className={cn(
-                  "w-full px-4 py-3 rounded-lg",
-                  "border border-gray-300",
-                  "focus:outline-none focus:border-cyan-600",
-                  "transition-all duration-200",
-                  "text-gray-900 appearance-none bg-white cursor-pointer",
-                  "bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3e%3cpath fill=%27%234B5563%27 d=%27M6 9L1 4h10z%27/%3e%3c/svg%3e')]",
-                  "bg-no-repeat bg-position-[right_0.75rem_center]"
+                  "flex h-12 w-full appearance-none rounded-lg border border-gray-200 bg-white px-3 pr-10 text-sm text-gray-900",
+                  "transition-colors duration-150",
+                  "focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20",
+                  "sm:h-12"
                 )}
               >
-                <option>Appartement</option>
-                <option>Villa</option>
-                <option>Studio</option>
-                <option>Terrain</option>
-                <option>Local commercial</option>
+                <option value="">Tous types</option>
+                <option value="apartment">Appartement</option>
+                <option value="villa">Villa</option>
+                <option value="studio">Studio</option>
+                <option value="land">Terrain</option>
+                <option value="commercial">Local commercial</option>
               </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
             </div>
+          </div>
 
-          {/* Budget */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 block">
+          {/* Budget - Hidden on smallest screens */}
+          <div className="hidden space-y-1.5 lg:block">
+            <label className="block text-sm font-medium text-gray-700">
               Budget max
             </label>
-            <input
+            <Input
               type="text"
               placeholder="50 000 DA"
-              className={cn(
-                "w-full px-4 py-3 rounded-lg",
-                "border border-gray-300",
-                "focus:outline-none focus:border-cyan-600",
-                "transition-all duration-200",
-                "text-gray-900 placeholder:text-gray-500"
-              )}
+              className="h-12 sm:h-12 rounded-lg"
             />
-          </div>            {/* Button */}
+          </div>
+
+          {/* Search Button */}
+          <div className="flex items-end">
             <Button
               type="submit"
               size="lg"
-              className="w-full md:w-auto"
+              className="h-12 w-full gap-2 md:w-auto"
             >
-              <Search className="w-5 h-5" />
-              Rechercher
+              <Search className="size-4" />
+              <span className="sm:hidden">Rechercher</span>
+              <span className="hidden sm:inline">Rechercher</span>
             </Button>
           </div>
-        </form>
-      </div>
-    )
-  }
-)
-
-SearchBar.displayName = "SearchBar"
+        </div>
+      </form>
+    </div>
+  )
+}
 
 export { SearchBar }

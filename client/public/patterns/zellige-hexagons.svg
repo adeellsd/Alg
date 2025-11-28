@@ -1,0 +1,16 @@
+<svg width="88" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexagon-pattern" x="0" y="0" width="88" height="100" patternUnits="userSpaceOnUse">
+      <!-- Hexagone central -->
+      <polygon points="44,10 72,30 72,70 44,90 16,70 16,30" 
+               fill="none" stroke="#0891B2" stroke-width="2" opacity="0.2"/>
+      <polygon points="44,20 66,35 66,65 44,80 22,65 22,35" 
+               fill="#E8D5B7" opacity="0.15"/>
+      
+      <!-- Centre -->
+      <circle cx="44" cy="50" r="8" fill="#FFD700" opacity="0.25"/>
+      <circle cx="44" cy="50" r="4" fill="#0047AB" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="88" height="100" fill="url(#hexagon-pattern)"/>
+</svg>

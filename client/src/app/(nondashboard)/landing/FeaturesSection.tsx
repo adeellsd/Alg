@@ -1,31 +1,46 @@
+/**
+ * FeaturesSection.tsx
+ * Design System v5.1 "Alger Vibrante Refined"
+ * 
+ * Section features avec background beige Casbah inspiré de l'architecture algéroise.
+ * 
+ * @colors
+ * - Background: beige-casbah (couleur du design system)
+ * - Icon backgrounds: blue-electric, green-vibrant, coral
+ * - Cards: bg-white avec border subtile
+ * 
+ * @patterns
+ * - Aucun pattern décoratif (clean, performant)
+ * 
+ * @version 5.1 - Alger Authentique
+ */
+
 "use client";
 import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link';
 import { Search, Upload, Briefcase, ArrowRight } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
 
 const containerVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0, 
     transition: { 
-      duration: 0.6, 
-      staggerChildren: 0.15,
-      delayChildren: 0.2 
+      duration: 0.5, 
+      staggerChildren: 0.1,
+      delayChildren: 0.1 
     } 
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
-    y: 0, 
-    scale: 1,
+    y: 0,
     transition: { 
-      duration: 0.5
+      duration: 0.4
     } 
   }
 };
@@ -34,107 +49,95 @@ const features = [
   {
     icon: Search,
     title: "Recherche intelligente",
-    description: "Filtres avancés par localisation, prix, type de bien et caractéristiques. Interface intuitive pour trouver exactement ce que vous cherchez.",
+    description: "Trouvez votre bien idéal grâce à nos filtres avancés par localisation, prix, type et caractéristiques.",
     linkText: "Découvrir",
-    linkHref: "/search",
-    color: "blue-electric",
-    bg: "bg-blue-pale",
-    text: "text-blue-electric"
+    linkHref: "/properties",
+    iconBg: "bg-blue-electric"
   },
   {
     icon: Upload,
     title: "Publication gratuite",
-    description: "Créez votre annonce en quelques minutes avec photos, localisation précise et description détaillée. Visibilité garantie.",
-    linkText: "Publier gratuitement",
+    description: "Publiez votre annonce en quelques minutes avec photos, localisation et description détaillée.",
+    linkText: "Publier",
     linkHref: "/post-listing",
-    color: "green-vibrant",
-    bg: "bg-green-pale",
-    text: "text-green-vibrant"
+    iconBg: "bg-green-vibrant"
   },
   {
     icon: Briefcase,
     title: "Outils professionnels",
-    description: "Solutions complètes pour agences immobilières et promoteurs : gestion centralisée, statistiques détaillées et options de mise en avant.",
+    description: "Solutions complètes pour agences : gestion centralisée, statistiques et options de boost.",
     linkText: "En savoir plus",
     linkHref: "/pro",
-    color: "coral",
-    bg: "bg-coral-pale",
-    text: "text-coral"
+    iconBg: "bg-coral"
   }
 ];
 
 const FeaturesSection = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-off-white">
-      {/* Pattern zellige subtil */}
-      <div className="absolute inset-0 zellige-bg opacity-5" />
-
+    <section className="relative py-20 sm:py-24 lg:py-28 bg-beige-casbah overflow-hidden">
+      {/* Subtle gradient wash to add depth over beige background */}
+  <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-sable/60 via-transparent to-beige-casbah/70" />
+      
       <motion.div 
         initial="hidden" 
         whileInView="visible" 
         viewport={{ once: true, amount: 0.2 }} 
         variants={containerVariants} 
-        className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12"
+        className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12"
       >
-        {/* En-tête de section */}
-        <div className="text-center mb-16 lg:mb-20">
-          <motion.div 
-            variants={itemVariants}
-            className="inline-block mb-4"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-pale text-blue-electric font-semibold text-sm border border-blue-electric/20">
-              ✨ Pourquoi nous choisir
-            </span>
+        {/* Header moderne et minimaliste */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div variants={itemVariants}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Tout pour réussir votre{' '}
+              <span className="bg-linear-to-r from-blue-electric to-turquoise-mer bg-clip-text text-transparent">
+                projet immobilier
+              </span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-700">
+              Une plateforme conçue pour simplifier vos démarches en Algérie
+            </p>
           </motion.div>
-          
-          <motion.h2 
-            variants={itemVariants} 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-6 leading-tight"
-          >
-            Tout ce dont vous avez besoin <br/>
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-electric to-blue-bright">
-              pour votre projet immobilier
-            </span>
-          </motion.h2>
-          
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
-          >
-            Une plateforme conçue pour simplifier vos démarches et sécuriser vos transactions en Algérie.
-          </motion.p>
         </div>
 
-        {/* Grille de fonctionnalités */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Grid moderne avec cards épurées */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Card className="h-full border-none shadow-blue hover:shadow-xl transition-all duration-300 bg-white rounded-xl group overflow-hidden">
-                <CardContent className="p-8 flex flex-col h-full">
-                  <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className={`w-7 h-7 ${feature.text}`} />
+            <motion.div 
+              key={index} 
+              variants={itemVariants}
+            >
+              <Link href={feature.linkHref}>
+                <div className="group h-full bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden">
+                  
+                  <div className="relative z-10">
+                    {/* Icon circulaire moderne */}
+                    <div className={`w-14 h-14 rounded-2xl ${feature.iconBg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md ring-4 ring-black/5`}>
+                      <feature.icon className="w-7 h-7 text-white drop-shadow-sm" strokeWidth={2.5} />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {feature.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {feature.description}
+                    </p>
+                    
+                    {/* CTA avec animation */}
+                    <div className="inline-flex items-center gap-2 font-semibold text-blue-electric transition-all duration-200">
+                      {feature.linkText}
+                      <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
+                    </div>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 font-display">
-                    {feature.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-8 leading-relaxed grow">
-                    {feature.description}
-                  </p>
-                  
-                  <Link 
-                    href={feature.linkHref}
-                    className={`inline-flex items-center gap-2 font-semibold ${feature.text} group-hover:gap-3 transition-all`}
-                  >
-                    {feature.linkText} <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
       </motion.div>
+      {/* Decorative fade to connect with next section */}
+  <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-beige-casbah to-transparent" />
     </section>
   )
 }

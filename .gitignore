@@ -21,3 +21,5 @@ server/.env.production
 server/.next/
 server/node_modules/
 server/dist/    
+
+README_V2.md

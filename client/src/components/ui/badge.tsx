@@ -1,46 +1,72 @@
+/**
+ * Badge Component - Alger Authentique v5.1 Refined
+ * 
+ * Variants de base:
+ * - default: Bleu électrique (blue-electric)
+ * - success: Vert jardin (green-vibrant)
+ * - warning: Sunshine (sunshine)
+ * - destructive: Terracotta (terracotta-fonce)
+ * - secondary: Gris neutre
+ * - outline: Bordure grise
+ * 
+ * Variants immobiliers:
+ * - rent: Vert (À louer)
+ * - sale: Bleu (Vente)
+ * - new: Corail avec pulse (Nouveau)
+ * - urgent: Terracotta avec pulse (Urgent)
+ * 
+ * Variants tiers (abonnements):
+ * - free: Bleu pâle
+ * - starter: Bleu électrique
+ * - pro: Bleu électrique
+ * - elite: Gradient bleu Méditerranée (blue-electric → turquoise-mer) + pattern Zellige
+ * 
+ * Border-radius: rounded-[8px] (badges)
+ */
+
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-export type BadgeVariant = 
-  | "default"
-  | "secondary" 
-  | "destructive"
-  | "outline"
-  | "coral"
-  | "sunshine"
-  | "premium"
-  | "free"
-  | "starter"
-  | "elite"
-
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-widest w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none transition-all overflow-hidden",
+  "inline-flex items-center justify-center gap-1 rounded-[8px] border px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap transition-colors [&>svg]:size-3 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-cyan-600 text-white shadow-sm [a&]:hover:bg-cyan-700",
+          "border-transparent bg-blue-electric text-white shadow-blue",
         secondary:
-          "border-transparent bg-emerald-500 text-white shadow-sm [a&]:hover:bg-emerald-600",
+          "border-transparent bg-gray-100 text-gray-700",
         destructive:
-          "border-transparent bg-rose-500 text-white shadow-sm [a&]:hover:bg-rose-600",
+          "border-transparent bg-terracotta-fonce text-white",
+        success:
+          "border-transparent bg-green-vibrant text-white shadow-green",
+        warning:
+          "border-transparent bg-sunshine text-white shadow-coral",
         outline:
-          "border-cyan-600 bg-transparent text-cyan-600 [a&]:hover:bg-cyan-50",
-        coral:
-          "border-transparent bg-coral text-white shadow-sm [a&]:hover:bg-coral-light",
-        sunshine:
-          "border-transparent bg-sunshine text-white shadow-sm [a&]:hover:opacity-90",
-        premium:
-          "border-transparent bg-linear-to-r from-rose to-sunshine text-white shadow-md [a&]:hover:opacity-90 animate-pulse",
+          "border-gray-200 bg-transparent text-gray-700",
+        
+        // Variants immobiliers v5.0
+        rent:
+          "border-transparent bg-green-vibrant text-white shadow-green font-bold",
+        sale:
+          "border-transparent bg-blue-electric text-white shadow-blue font-bold",
+        new:
+          "border-transparent bg-corail-vif text-white shadow-coral font-bold animate-pulse",
+        urgent:
+          "border-transparent bg-terracotta-fonce text-white shadow-sm font-bold animate-pulse",
+        
+        // Tier badges
         free:
-          "border-cyan-200 bg-cyan-50 text-cyan-700 [a&]:hover:bg-cyan-100",
+          "border-blue-sky bg-blue-pale text-blue-deep",
         starter:
-          "border-transparent bg-cyan-600 text-white shadow-sm [a&]:hover:bg-cyan-700",
+          "border-transparent bg-blue-electric text-white shadow-blue",
+        pro:
+          "border-transparent bg-blue-electric text-white shadow-blue",
         elite:
-          "border-transparent bg-linear-to-r from-rose to-sunshine text-white shadow-md animate-pulse",
+          "border-transparent bg-gradient-to-r from-blue-electric to-turquoise-mer text-white shadow-blue font-bold relative overflow-hidden",
       },
     },
     defaultVariants: {
@@ -67,4 +93,29 @@ function Badge({
   )
 }
 
-export { Badge, badgeVariants }
+/**
+ * BadgeElite - Badge ELITE avec pattern Zellige
+ * Usage: <BadgeElite>ELITE</BadgeElite>
+ */
+function BadgeElite({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"span">) {
+  return (
+    <span
+      className={cn(
+        "relative inline-flex items-center justify-center gap-1 rounded-[8px] border-transparent bg-gradient-to-r from-blue-electric to-turquoise-mer text-white shadow-blue font-bold px-2.5 py-0.5 text-xs overflow-hidden",
+        className
+      )}
+      {...props}
+    >
+      {/* Pattern Zellige subtil en arrière-plan */}
+      <span className="absolute inset-0 pattern-mosaic-elite opacity-[0.15] pointer-events-none" />
+      {/* Contenu */}
+      <span className="relative z-10">{children}</span>
+    </span>
+  )
+}
+
+export { Badge, BadgeElite, badgeVariants }

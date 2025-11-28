@@ -1,138 +1,141 @@
-"use client";
+"use client"
 
-import React from "react";
-import {
-  X,
-  Filter,
-  Check,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import React from "react"
+import { RotateCcw } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
-import { FiltersConfig, SearchFilters } from "@/types/property-frontend";
+} from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import { cn } from "@/lib/utils"
+import { FiltersConfig, SearchFilters } from "@/types/property-frontend"
 
 interface FilterSidebarProps {
-  filters: SearchFilters;
-  filtersConfig: FiltersConfig;
-  onFiltersChange: (filters: Partial<SearchFilters>) => void;
-  onReset: () => void;
-  className?: string;
+  filters: SearchFilters
+  filtersConfig: FiltersConfig
+  onFiltersChange: (filters: Partial<SearchFilters>) => void
+  onReset: () => void
+  className?: string
+  showHeader?: boolean
 }
 
-export const FilterSidebar = ({
+export function FilterSidebar({
   filters,
   filtersConfig,
   onFiltersChange,
   onReset,
   className,
-}: FilterSidebarProps) => {
+  showHeader = true,
+}: FilterSidebarProps) {
   return (
-    <div className={cn("space-y-8", className)}>
+    <div className={cn("space-y-6", className)}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h3 className="font-bold text-lg flex items-center gap-2 text-gray-900">
-          <Filter className="h-5 w-5 text-cyan-600" />
-          Filtres
-        </h3>
-        <Button
-            variant="ghost"
-            size="sm"
-            onClick={onReset}
-            className="text-rose-500 hover:text-rose-600 hover:bg-rose-50 h-8 px-3 text-xs font-bold rounded-full"
-        >
-            Réinitialiser
-        </Button>
-      </div>
+      {showHeader && (
+        <>
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-gray-900">Filtres</h3>
+            <button
+              onClick={onReset}
+              className="flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-gray-700"
+            >
+              <RotateCcw className="size-3.5" />
+              Réinitialiser
+            </button>
+          </div>
+          <div className="h-px bg-gray-200" />
+        </>
+      )}
 
       {/* Transaction Type */}
-      <div className="space-y-4">
-        <h4 className="font-bold text-xs text-gray-500 uppercase tracking-widest">
+      <div className="space-y-3">
+        <h4 className="text-sm font-medium text-gray-700">
           Type de transaction
         </h4>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2">
           {filtersConfig.transactionTypes.map((type) => (
-            <Button
+            <button
               key={type.code}
-              variant={filters.transactionType === type.code ? "default" : "outline"}
-              size="sm"
               onClick={() => onFiltersChange({ transactionType: type.code })}
               className={cn(
-                "h-12 font-bold text-sm transition-all rounded-2xl border",
+                "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 filters.transactionType === type.code
-                  ? "bg-cyan-600 hover:bg-cyan-700 text-white border-transparent shadow-lg shadow-cyan-500/20"
-                  : "border-gray-200 hover:border-cyan-300 hover:bg-cyan-50/50 text-gray-600 bg-white"
+                  ? "bg-cyan-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               )}
             >
               {type.nameFr}
-            </Button>
+            </button>
           ))}
         </div>
       </div>
 
       {/* Property Types */}
-      <div className="space-y-4 pt-6 border-t border-gray-100">
-        <h4 className="font-bold text-xs text-gray-500 uppercase tracking-widest">
-          Type de bien
-        </h4>
+      <div className="space-y-3">
+        <h4 className="text-sm font-medium text-gray-700">Type de bien</h4>
         <div className="space-y-2">
           {filtersConfig.propertyTypes.map((type) => {
-             const isSelected = filters.propertyTypes.includes(type.code);
-             return (
-            <label
-              key={type.code}
-              className={cn(
-                "flex items-center gap-3 p-3 rounded-2xl border cursor-pointer transition-all group",
-                isSelected
-                  ? "border-cyan-500 bg-cyan-50 shadow-sm"
-                  : "border-gray-100 hover:border-cyan-300 hover:bg-white bg-white"
-              )}
-            >
-              <Checkbox
-                checked={isSelected}
-                onCheckedChange={(checked) => {
-                  const newTypes = checked
-                    ? [...filters.propertyTypes, type.code]
-                    : filters.propertyTypes.filter((t) => t !== type.code);
-                  onFiltersChange({ propertyTypes: newTypes });
-                }}
-                className="data-[state=checked]:bg-cyan-600 data-[state=checked]:border-cyan-600 border-gray-300 rounded-md"
-              />
-              <span className="text-xl group-hover:scale-110 transition-transform duration-200">{type.icon}</span>
-              <span className={cn("text-sm font-medium flex-1", isSelected ? "text-cyan-900" : "text-gray-600")}>{type.nameFr}</span>
-              {isSelected && <Check className="h-4 w-4 text-cyan-600" />}
-            </label>
-          )})}
+            const isSelected = filters.propertyTypes.includes(type.code)
+            return (
+              <label
+                key={type.code}
+                className={cn(
+                  "flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors",
+                  isSelected
+                    ? "border-cyan-200 bg-cyan-50"
+                    : "border-gray-200 bg-white hover:bg-gray-50"
+                )}
+              >
+                <Checkbox
+                  checked={isSelected}
+                  onCheckedChange={(checked) => {
+                    const newTypes = checked
+                      ? [...filters.propertyTypes, type.code]
+                      : filters.propertyTypes.filter((t) => t !== type.code)
+                    onFiltersChange({ propertyTypes: newTypes })
+                  }}
+                />
+                {type.icon && <span className="text-base">{type.icon}</span>}
+                <span
+                  className={cn(
+                    "flex-1 text-sm font-medium",
+                    isSelected ? "text-cyan-700" : "text-gray-700"
+                  )}
+                >
+                  {type.nameFr}
+                </span>
+              </label>
+            )
+          })}
         </div>
       </div>
 
       {/* Wilaya */}
-      <div className="space-y-4 pt-6 border-t border-gray-100">
-        <h4 className="font-bold text-xs text-gray-500 uppercase tracking-widest">
-          Localisation
-        </h4>
+      <div className="space-y-3">
+        <h4 className="text-sm font-medium text-gray-700">Localisation</h4>
         <Select
           value={filters.wilayaId || "all"}
-          onValueChange={(value) => onFiltersChange({ wilayaId: value === "all" ? "" : value, communeId: "" })}
+          onValueChange={(value) =>
+            onFiltersChange({
+              wilayaId: value === "all" ? "" : value,
+              communeId: "",
+            })
+          }
         >
-          <SelectTrigger className="h-12 rounded-2xl bg-white/80 shadow-sm">
+          <SelectTrigger className="h-11">
             <SelectValue placeholder="Toutes les wilayas" />
           </SelectTrigger>
-          <SelectContent className="max-h-[300px] rounded-xl border-gray-100 shadow-xl">
-            <SelectItem value="all" className="rounded-lg my-1">Toutes les wilayas</SelectItem>
+          <SelectContent>
+            <SelectItem value="all">Toutes les wilayas</SelectItem>
             {filtersConfig.wilayas.map((wilaya) => (
-              <SelectItem key={wilaya.id} value={wilaya.id} className="rounded-lg my-1">
-                <div className="flex items-center justify-between w-full gap-3">
-                  <span className="truncate">{wilaya.nameFr}</span>
-                  <Badge variant="secondary" className="text-[10px] h-5 px-1.5 min-w-[1.5rem] justify-center bg-gray-100 text-gray-600">
+              <SelectItem key={wilaya.id} value={wilaya.id}>
+                <div className="flex w-full items-center justify-between gap-2">
+                  <span>{wilaya.nameFr}</span>
+                  <Badge variant="secondary" className="text-xs">
                     {wilaya.propertyCount}
                   </Badge>
                 </div>
@@ -143,87 +146,99 @@ export const FilterSidebar = ({
       </div>
 
       {/* Price Range */}
-      <div className="space-y-4 pt-6 border-t border-gray-100">
-        <h4 className="font-bold text-xs text-gray-500 uppercase tracking-widest">
-          Budget (DA)
-        </h4>
+      <div className="space-y-3">
+        <h4 className="text-sm font-medium text-gray-700">Budget (DA)</h4>
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <label className="text-[10px] text-gray-400 font-bold uppercase ml-1">Minimum</label>
-      <Input
-        type="number"
-        placeholder="0"
-        value={filters.minPrice || ""}
-        onChange={(e) => onFiltersChange({ minPrice: parseInt(e.target.value) || undefined })}
-        className="h-11 rounded-2xl bg-white/80 shadow-sm"
-      />
+            <label className="block text-xs text-gray-500">Min</label>
+            <Input
+              type="number"
+              placeholder="0"
+              value={filters.minPrice || ""}
+              onChange={(e) =>
+                onFiltersChange({
+                  minPrice: parseInt(e.target.value) || undefined,
+                })
+              }
+              className="h-10"
+            />
           </div>
           <div className="space-y-1.5">
-            <label className="text-[10px] text-gray-400 font-bold uppercase ml-1">Maximum</label>
-      <Input
-        type="number"
-        placeholder="Illimité"
-        value={filters.maxPrice || ""}
-        onChange={(e) => onFiltersChange({ maxPrice: parseInt(e.target.value) || undefined })}
-        className="h-11 rounded-2xl bg-white/80 shadow-sm"
-      />
+            <label className="block text-xs text-gray-500">Max</label>
+            <Input
+              type="number"
+              placeholder="Illimité"
+              value={filters.maxPrice || ""}
+              onChange={(e) =>
+                onFiltersChange({
+                  maxPrice: parseInt(e.target.value) || undefined,
+                })
+              }
+              className="h-10"
+            />
           </div>
         </div>
       </div>
 
       {/* Surface */}
-      <div className="space-y-4 pt-6 border-t border-gray-100">
-        <h4 className="font-bold text-xs text-gray-500 uppercase tracking-widest">
-          Surface (m²)
-        </h4>
+      <div className="space-y-3">
+        <h4 className="text-sm font-medium text-gray-700">Surface (m²)</h4>
         <div className="grid grid-cols-2 gap-3">
-           <div className="space-y-1.5">
-            <label className="text-[10px] text-gray-400 font-bold uppercase ml-1">Min</label>
-      <Input
-        type="number"
-        placeholder="0"
-        value={filters.minSurface || ""}
-        onChange={(e) => onFiltersChange({ minSurface: parseInt(e.target.value) || undefined })}
-        className="h-11 rounded-2xl bg-white/80 shadow-sm"
-      />
+          <div className="space-y-1.5">
+            <label className="block text-xs text-gray-500">Min</label>
+            <Input
+              type="number"
+              placeholder="0"
+              value={filters.minSurface || ""}
+              onChange={(e) =>
+                onFiltersChange({
+                  minSurface: parseInt(e.target.value) || undefined,
+                })
+              }
+              className="h-10"
+            />
           </div>
           <div className="space-y-1.5">
-            <label className="text-[10px] text-gray-400 font-bold uppercase ml-1">Max</label>
-      <Input
-        type="number"
-        placeholder="Illimité"
-        value={filters.maxSurface || ""}
-        onChange={(e) => onFiltersChange({ maxSurface: parseInt(e.target.value) || undefined })}
-        className="h-11 rounded-2xl bg-white/80 shadow-sm"
-      />
+            <label className="block text-xs text-gray-500">Max</label>
+            <Input
+              type="number"
+              placeholder="Illimité"
+              value={filters.maxSurface || ""}
+              onChange={(e) =>
+                onFiltersChange({
+                  maxSurface: parseInt(e.target.value) || undefined,
+                })
+              }
+              className="h-10"
+            />
           </div>
         </div>
       </div>
 
       {/* Rooms */}
-      <div className="space-y-4 pt-6 border-t border-gray-100">
-        <h4 className="font-bold text-xs text-gray-500 uppercase tracking-widest">
-          Pièces minimum
-        </h4>
+      <div className="space-y-3">
+        <h4 className="text-sm font-medium text-gray-700">Pièces minimum</h4>
         <div className="flex flex-wrap gap-2">
           {[1, 2, 3, 4, 5].map((num) => (
-            <Button
+            <button
               key={num}
-              variant={filters.minRooms === num ? "default" : "outline"}
-              size="sm"
+              onClick={() =>
+                onFiltersChange({
+                  minRooms: filters.minRooms === num ? undefined : num,
+                })
+              }
               className={cn(
-                "h-10 w-10 p-0 font-bold text-sm transition-all rounded-xl border",
+                "flex size-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors",
                 filters.minRooms === num
-                  ? "bg-cyan-600 hover:bg-cyan-700 text-white border-transparent shadow-lg shadow-cyan-500/20"
-                  : "border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 text-gray-600 bg-white"
+                  ? "bg-cyan-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               )}
-              onClick={() => onFiltersChange({ minRooms: filters.minRooms === num ? undefined : num })}
             >
               {num}+
-            </Button>
+            </button>
           ))}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

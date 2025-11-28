@@ -22,13 +22,13 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
   const getIcon = (type: ActivityItem['type']) => {
     switch (type) {
       case 'favorite':
-        return <Heart className="w-5 h-5 text-[#DC2626]" />;
+        return <Heart className="w-5 h-5 text-terracotta-fonce" />;
       case 'message':
-        return <MessageSquare className="w-5 h-5 text-[#10B981]" />;
+        return <MessageSquare className="w-5 h-5 text-green-fresh" />;
       case 'search':
-        return <Search className="w-5 h-5 text-[#0891B2]" />;
+        return <Search className="w-5 h-5 text-blue-electric" />;
       case 'alert':
-        return <Bell className="w-5 h-5 text-[#F97316]" />;
+        return <Bell className="w-5 h-5 text-coral" />;
       default:
         return <Plus className="w-5 h-5 text-gray-400" />;
     }
@@ -39,11 +39,11 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
       case 'favorite':
         return 'bg-linear-to-br from-red-50 to-red-100';
       case 'message':
-        return 'bg-linear-to-br from-[#D1FAE5] to-[#10B981]/20';
+        return 'bg-linear-to-br from-green-pale to-green-vibrant/20';
       case 'search':
-        return 'bg-linear-to-br from-[#CFFAFE] to-[#06B6D4]/20';
+        return 'bg-linear-to-br from-blue-pale to-blue-bright/20';
       case 'alert':
-        return 'bg-linear-to-br from-[#FFEDD5] to-[#F97316]/20';
+        return 'bg-linear-to-br from-orange-50 to-coral/20';
       default:
         return 'bg-gray-100';
     }
@@ -52,13 +52,13 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
   const getGlowColor = (type: ActivityItem['type']) => {
     switch (type) {
       case 'favorite':
-        return 'from-[#DC2626]/20 to-transparent';
+        return 'from-terracotta-fonce/20 to-transparent';
       case 'message':
-        return 'from-[#10B981]/20 to-transparent';
+        return 'from-green-fresh/20 to-transparent';
       case 'search':
-        return 'from-[#0891B2]/20 to-transparent';
+        return 'from-blue-electric/20 to-transparent';
       case 'alert':
-        return 'from-[#F97316]/20 to-transparent';
+        return 'from-coral/20 to-transparent';
       default:
         return 'from-gray-200/20 to-transparent';
     }
@@ -84,7 +84,7 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
   return (
     <Card className="relative border-0 shadow-lg overflow-hidden">
       {/* Gradient header */}
-      <div className="relative p-6 bg-linear-to-r from-[#0891B2] via-[#06B6D4] to-[#10B981]">
+      <div className="relative p-6 bg-linear-to-r from-blue-electric via-blue-bright to-green-fresh">
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
         <h3 className="relative text-xl font-bold text-white flex items-center gap-2">
           <Bell className="w-5 h-5" />
@@ -139,7 +139,7 @@ const ActivityTimeline = ({ activities }: ActivityTimelineProps) => {
                   {activity.link && (
                     <a
                       href={activity.link}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#0891B2] hover:text-[#06B6D4] mt-2 group-hover:gap-2 transition-all"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-blue-electric hover:text-blue-bright mt-2 group-hover:gap-2 transition-all"
                     >
                       Voir plus
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
