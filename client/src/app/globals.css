@@ -4,11 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ========================================
-   ALGERIAN REAL ESTATE PLATFORM
-   Design System - "Alger Authentique" v5.0
-   Inspiré par les photos aériennes d'Alger et l'architecture traditionnelle
-   Tailwind CSS v4 compatible
-   Date: 28 novembre 2025
+   RENTALG DESIGN SYSTEM v6.0 — "Alger Nouvelle Vague"
+   Complete UI Redesign - Fresh & Modern
+   Date: 29 novembre 2025
    ======================================== */
 
 /* ========================================
@@ -17,399 +15,148 @@
 
 @theme {
   /* ========================================
-     COULEURS PRINCIPALES - ALGER AUTHENTIQUE v5.0
-     Inspirées des photos aériennes d'Alger et architecture Casbah
+     COLOR PALETTE - Modern & Vibrant
      ======================================== */
+
+  /* Primary Blue Palette - Mediterranean Inspired */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  --color-primary-950: #082f49;
+
+  /* Secondary Teal Palette - Fresh & Modern */
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+
+  /* Accent Orange Palette - Warm & Inviting */
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
+  /* Success Green */
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+
+  /* Error Red */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+
+  /* Neutral Slate */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Pure Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
 
   /* ========================================
-     1. BLEUS MÉDITERRANÉENS (Palette étendue)
-     Mer & Ciel des photos aériennes d'Alger
+     SEMANTIC COLORS
      ======================================== */
   
-  /* Mer & Ciel */
-  --color-turquoise-mer: #40E0D0;     /* Eau cristalline visible sur photos */
-  --color-aqua-marine: #7FDBDA;       /* Reflets lumineux */
-  --color-bleu-ciel: #87CEEB;         /* Ciel d'Alger ensoleillé */
-  --color-blue-electric: #0891B2;     /* PRIMARY CTA (conservé) */
-  --color-blue-deep: #0369A1;         /* Hover states (conservé) */
-  --color-blue-bright: #06B6D4;       /* Accents (conservé) */
-  --color-blue-pale: #CFFAFE;         /* Backgrounds (conservé) */
-  --color-blue-nuit: #1E3A5F;         /* Headers, navigation sombre */
-  --color-blue-cobalt: #0047AB;       /* Zellige, badges premium */
-  --color-blue-sky: #38BDF8;          /* Sky bright (conservé) */
-
-  /* ========================================
-     2. BEIGES & TERRES (Architecture Casbah)
-     Inspirés des façades de la Casbah d'Alger
-     ======================================== */
-  
-  /* Façades Casbah */
-  --color-beige-casbah: #E8D5B7;      /* Backgrounds chauds, cards */
-  --color-beige-chaud: #D4B896;       /* Hover states sur beige */
-  --color-terracotta-warm: #C19A6B;   /* Accents chaleureux (renamed to avoid conflict) */
-  --color-sable: #F5E6D3;             /* Backgrounds très clairs */
-  --color-creme: #FFF8E7;             /* Off-white premium */
-  
-  /* Toits & Architecture */
-  --color-tuile-orange: #CD5C5C;      /* Toits traditionnels (visible photos) */
-  --color-pierre-claire: #F0E6D2;     /* Pierres blanches Casbah */
-
-  /* Blanc & Neutres (conservés) */
-  --color-white: #FFFFFF;
-  --color-off-white: #FAFAFA;
-  
-  /* Anciennes variables (compatibilité) */
-  --color-cream: #FEF3C7;
-  --color-beige: #FDE68A;
-
-  /* ========================================
-     3. SUNSET PALETTE (Couchers de soleil méditerranéens)
-     Inspirés des couchers de soleil sur la baie d'Alger
-     ======================================== */
-  
-  --color-corail-vif: #FF6B4A;        /* Couchers de soleil intenses */
-  --color-orange-brulant: #FF8C42;    /* Horizon embrasé */
-  --color-peche: #FFB88C;             /* Lueur chaude */
-  --color-ambre: #FFAB4C;             /* Golden hour */
-  --color-coral: #F97316;             /* Promotions (conservé) */
-  --color-coral-light: #FB923C;       /* Coral light (conservé) */
-  --color-coral-pale: #FFEDD5;        /* Coral pale (conservé) */
-  --color-sunshine: #F59E0B;          /* Warnings (conservé) */
-  
-  /* Palette Sunshine étendue */
-  --color-sunshine-dark: #ff8100;
-  --color-sunshine-amber: #ffc100;
-  --color-sunshine-gold: #ffdb00;
-  --color-sunshine-bright: #ffe700;
-
-  /* ========================================
-     4. VERTS JARDIN (Végétation luxuriante)
-     Inspirés de la végétation méditerranéenne d'Alger
-     ======================================== */
-  
-  --color-vert-jardin: #2D5016;       /* Cyprès, pins (photos) */
-  --color-green-vibrant: #059669;     /* Success (conservé) */
-  --color-green-fresh: #10B981;       /* CTA secondaire (conservé) */
-  --color-green-emerald: #34D399;     /* Zellige vert */
-  --color-green-pale: #D1FAE5;        /* Backgrounds (conservé) */
-  --color-vert-olive: #6B8E23;        /* Végétation méditerranéenne */
-
-  /* ========================================
-     5. ACCENTS PREMIUM (ELITE tier)
-     ======================================== */
-  
-  --color-or: #FFD700;                /* Zellige doré, badges ELITE */
-  --color-fuchsia: #DB2777;           /* Gradient ELITE (conservé) */
-  --color-amethyste: #9333EA;         /* Premium accents */
-  
-  /* Urgence & Erreurs */
-  --color-terracotta-fonce: #DC2626;  /* Errors (conservé) */
-  --color-rouge: #B91C1C;             /* Critical */
-  
-  /* Anciennes variables Rose/Terracotta (compatibilité) */
-  --color-terracotta: #DC2626;        /* Error/destructive semantic */
-  --color-terracotta-light: #EF4444;
-  --color-rose: #DB2777;
-  --color-rose-light: #EC4899;
-  --color-rose-pale: #FCE7F3;
-
-  /* Gris - Palette complète */
-  --color-gray-50: #F9FAFB;
-  --color-gray-100: #F3F4F6;
-  --color-gray-200: #E5E7EB;
-  --color-gray-300: #D1D5DB;
-  --color-gray-400: #9CA3AF;
-  --color-gray-500: #6B7280;
-  --color-gray-600: #4B5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1F2937;
-  --color-gray-900: #111827;
-  --color-gray-950: #030712;
-
-  /* ========================================
-     PALETTE PRIMARY/SECONDARY (du tuto)
-     Adaptée au thème Alger
-     ======================================== */
-
-  /* Primary - Gamme de gris du tuto */
-  --color-primary-50: #fcfcfc;
-  --color-primary-100: #f1f1f2;
-  --color-primary-200: #e0e0e2;
-  --color-primary-300: #c7c7cc;
-  --color-primary-400: #a8a8af;
-  --color-primary-500: #82828b;
-  --color-primary-600: #57575f;
-  --color-primary-700: #27272a;
-  --color-primary-800: #111113;
-  --color-primary-900: #040405;
-  --color-primary-950: #000000;
-
-  /* Secondary - Gamme de rouge du tuto */
-  --color-secondary-50: #fefcfc;
-  --color-secondary-100: #fdf2f2;
-  --color-secondary-200: #fae1e1;
-  --color-secondary-300: #f6c9c9;
-  --color-secondary-400: #f1abab;
-  --color-secondary-500: #eb8686;
-  --color-secondary-600: #e45a5a;
-  --color-secondary-700: #dc2828;
-  --color-secondary-800: #7c1414;
-  --color-secondary-900: #400a0a;
-  --color-secondary-950: #2c0707;
-
-  /* ========================================
-     SHADCN/UI SEMANTIC COLORS
-     Adaptées au thème Alger Vintage
-     ======================================== */
-
   --color-background: var(--color-white);
-  --color-foreground: var(--color-gray-900);
-
-  --color-card: var(--color-white);
-  --color-card-foreground: var(--color-gray-900);
-
-  --color-popover: var(--color-white);
-  --color-popover-foreground: var(--color-gray-900);
-
-  --color-primary: var(--color-blue-electric);
-  --color-primary-foreground: var(--color-white);
-
-  --color-secondary: var(--color-green-vibrant);
-  --color-secondary-foreground: var(--color-white);
-
-  --color-muted: var(--color-gray-100);
-  --color-muted-foreground: var(--color-gray-600);
-
-  --color-accent: var(--color-coral);
-  --color-accent-foreground: var(--color-white);
-
-  --color-destructive: var(--color-terracotta);
-  --color-destructive-foreground: var(--color-white);
-
-  --color-border: var(--color-gray-300);
-  --color-input: var(--color-gray-300);
-  --color-ring: var(--color-blue-electric);
-
-  /* Couleurs sémantiques */
-  --color-success: var(--color-green-vibrant);
-  --color-warning: var(--color-sunshine);
-  --color-error: var(--color-terracotta);
-  --color-info: var(--color-blue-bright);
-
-  /* Chart colors */
-  --color-chart-1: #0891B2;
-  --color-chart-2: #059669;
-  --color-chart-3: #F97316;
-  --color-chart-4: #DB2777;
-  --color-chart-5: #ff9a00;
-
-  /* Sidebar colors */
-  --color-sidebar-background: var(--color-off-white);
-  --color-sidebar-foreground: var(--color-gray-700);
-  --color-sidebar-primary: var(--color-blue-electric);
-  --color-sidebar-primary-foreground: var(--color-white);
-  --color-sidebar-accent: var(--color-gray-200);
-  --color-sidebar-accent-foreground: var(--color-gray-900);
-  --color-sidebar-border: var(--color-gray-300);
-  --color-sidebar-ring: var(--color-blue-electric);
-
-  /* ========================================
-     BORDER RADIUS
-     ======================================== */
-  --radius-sm: 0.25rem; /* 4px */
-  --radius-md: 0.5rem; /* 8px */
-  --radius-lg: 0.875rem; /* 14px */
-  --radius-xl: 1.25rem; /* 20px */
-  --radius-2xl: 1.75rem; /* 28px */
-  --radius-full: 9999px;
+  --color-foreground: var(--color-slate-900);
   
-  /* Default radius for shadcn components - Set to XL (20px) as per design system */
-  --radius: 1.25rem;
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-slate-900);
+  
+  --color-popover: var(--color-white);
+  --color-popover-foreground: var(--color-slate-900);
+  
+  --color-primary: var(--color-primary-600);
+  --color-primary-foreground: var(--color-white);
+  
+  --color-secondary: var(--color-teal-600);
+  --color-secondary-foreground: var(--color-white);
+  
+  --color-muted: var(--color-slate-100);
+  --color-muted-foreground: var(--color-slate-500);
+  
+  --color-accent: var(--color-orange-500);
+  --color-accent-foreground: var(--color-white);
+  
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-white);
+  
+  --color-border: var(--color-slate-200);
+  --color-input: var(--color-slate-200);
+  --color-ring: var(--color-primary-500);
 
   /* ========================================
-     SHADOWS
+     DESIGN TOKENS
      ======================================== */
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-  --shadow: 0 4px 8px -2px rgb(0 0 0 / 0.15);
-  --shadow-md: 0 4px 8px -2px rgb(0 0 0 / 0.15);
-  --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.2);
-  --shadow-xl: 0 20px 32px -8px rgb(0 0 0 / 0.25);
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+  --radius: 0.75rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 
-  /* Ombres colorées Alger */
-  --shadow-blue: 0 8px 16px -4px rgb(8 145 178 / 0.3);
-  --shadow-green: 0 8px 16px -4px rgb(5 150 105 / 0.3);
-  --shadow-coral: 0 8px 16px -4px rgb(249 115 22 / 0.3);
-  --shadow-rose: 0 8px 16px -4px rgb(219 39 119 / 0.3);
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  /* ========================================
-     TYPOGRAPHY
-     ======================================== */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Poppins', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-arabic: 'Noto Sans Arabic', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-
-  /* Font sizes */
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
-  --font-size-6xl: 3.75rem;
-
-  /* ========================================
-     SPACING
-     ======================================== */
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-5: 1.25rem;
-  --spacing-6: 1.5rem;
-  --spacing-8: 2rem;
-  --spacing-10: 2.5rem;
-  --spacing-12: 3rem;
-  --spacing-16: 4rem;
-  --spacing-20: 5rem;
-  --spacing-24: 6rem;
-
-  /* ========================================
-     ANIMATIONS & TRANSITIONS
-     ======================================== */
+  /* Transitions */
   --transition-fast: 150ms;
   --transition-base: 200ms;
   --transition-slow: 300ms;
-  --transition-slower: 400ms;
-
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Animations pour Navbar */
-  --animation-fade-in: fadeIn 0.6s ease-out;
-  --animation-slide-down: slideDown 0.4s ease-out;
-  --animation-pulse-ring: pulseRing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-
-  /* Backdrop blur levels */
-  --blur-xs: blur(2px);
-  --blur-sm: blur(4px);
-  --blur-md: blur(8px);
-  --blur-lg: blur(12px);
-  --blur-xl: blur(16px);
-  --blur-2xl: blur(20px);
-
-  /* ========================================
-     GLASSMORPHISM - ALGER VINTAGE
-     ======================================== */
-  --glass-white: rgba(255, 255, 255, 0.15);
-  --glass-white-strong: rgba(255, 255, 255, 0.85);
-  --glass-blue: rgba(8, 145, 178, 0.1);
-  --glass-blue-strong: rgba(8, 145, 178, 0.15);
-  --glass-green: rgba(5, 150, 105, 0.1);
-  --glass-premium: rgba(219, 39, 119, 0.08);
-
-  --glass-border-white: rgba(255, 255, 255, 0.25);
-  --glass-border-blue: rgba(8, 145, 178, 0.2);
-  --glass-border-green: rgba(5, 150, 105, 0.2);
-  --glass-border-premium: rgba(219, 39, 119, 0.15);
-
-  /* ========================================
-     FOCUS RING - Pas de outline bleu par défaut
-     ======================================== */
-  --focus-ring-color: var(--color-blue-electric);
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 2px;
-  --focus-ring: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
-
-  /* ========================================
-     OVERLAY GRADIENTS
-     ======================================== */
-  --gradient-overlay-dark: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-  --gradient-overlay-blue: linear-gradient(135deg, rgba(8, 145, 178, 0.9), rgba(3, 105, 161, 0.9));
-  --gradient-overlay-green: linear-gradient(135deg, rgba(5, 150, 105, 0.9), rgba(16, 185, 129, 0.9));
-  --gradient-overlay-sunset: linear-gradient(135deg, rgba(249, 115, 22, 0.9), rgba(251, 146, 60, 0.9));
-
-}
-
-/* ========================================
-   DARK MODE THEME
-   ======================================== */
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: var(--color-gray-900);
-    --color-foreground: var(--color-white);
-
-    --color-card: var(--color-gray-800);
-    --color-card-foreground: var(--color-white);
-
-    --color-popover: var(--color-gray-800);
-    --color-popover-foreground: var(--color-white);
-
-    --color-primary: var(--color-blue-bright);
-    --color-primary-foreground: var(--color-gray-900);
-
-    --color-secondary: var(--color-green-emerald);
-    --color-secondary-foreground: var(--color-gray-900);
-
-    --color-muted: var(--color-gray-800);
-    --color-muted-foreground: var(--color-gray-400);
-
-    --color-accent: var(--color-coral-light);
-    --color-accent-foreground: var(--color-white);
-
-    --color-border: var(--color-gray-700);
-    --color-input: var(--color-gray-700);
-    --color-ring: var(--color-blue-sky);
-
-    --color-sidebar-background: var(--color-gray-900);
-    --color-sidebar-foreground: var(--color-gray-200);
-    --color-sidebar-accent: var(--color-gray-800);
-    --color-sidebar-border: var(--color-gray-700);
-  }
-}
-
-/* Support manuel du dark mode avec classe .dark */
-.dark {
-  --color-background: var(--color-gray-900);
-  --color-foreground: var(--color-white);
-
-  --color-card: var(--color-gray-800);
-  --color-card-foreground: var(--color-white);
-
-  --color-popover: var(--color-gray-800);
-  --color-popover-foreground: var(--color-white);
-
-  --color-primary: var(--color-blue-bright);
-  --color-primary-foreground: var(--color-gray-900);
-
-  --color-secondary: var(--color-green-emerald);
-  --color-secondary-foreground: var(--color-gray-900);
-
-  --color-muted: var(--color-gray-800);
-  --color-muted-foreground: var(--color-gray-400);
-
-  --color-accent: var(--color-coral-light);
-  --color-accent-foreground: var(--color-white);
-
-  --color-border: var(--color-gray-700);
-  --color-input: var(--color-gray-700);
-  --color-ring: var(--color-blue-sky);
-
-  /* Sidebar Colors - Light Theme */
-  --sidebar: hsl(0 0% 100%);
-  --sidebar-foreground: hsl(240 5.9% 10%);
-  --sidebar-primary: hsl(188 94% 35%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(188 100% 96%);
-  --sidebar-accent-foreground: hsl(188 94% 35%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(188 94% 35%);
 }
 
 /* ========================================
@@ -433,21 +180,31 @@
   body {
     font-family: var(--font-sans);
     line-height: 1.6;
-    font-size: var(--font-size-sm);
+    font-size: 1rem;
     background-color: var(--color-background);
     color: var(--color-foreground);
-  }
-
-  html,
-  body,
-  #root,
-  .app {
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
   }
 
   img {
@@ -468,93 +225,12 @@
 }
 
 /* ========================================
-   MAPBOX STYLES (du tuto)
-   Adapté aux couleurs Alger Vintage
-   ======================================== */
-
-.mapboxgl-popup-content {
-  background-color: var(--color-gray-700) !important;
-  border-radius: var(--radius-lg) !important;
-  padding: var(--spacing-2) var(--spacing-3) !important;
-}
-
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: var(--color-gray-700) !important;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: var(--color-gray-700) !important;
-}
-
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: var(--color-gray-700) !important;
-}
-
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: var(--color-gray-700) !important;
-}
-
-.marker-popup {
-  background-color: var(--color-gray-700);
-  color: var(--color-white);
-  padding: 0;
-  margin: 0;
-  display: flex !important;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-.marker-popup-image {
-  width: 2.5rem;
-  height: 2.5rem;
-  object-fit: cover;
-  background-color: var(--color-white);
-  border-radius: var(--radius-lg);
-}
-
-.marker-popup-price {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-blue-pale);
-}
-
-.marker-popup-title {
-  cursor: pointer;
-}
-
-.marker-popup-title:hover {
-  text-decoration: underline;
-  color: var(--color-blue-bright);
-}
-
-.marker-popup-title:focus {
-  outline: none;
-}
-
-.marker-popup-price-unit {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-400);
-  font-weight: 400;
-}
-
-/* ========================================
-   DASHBOARD CONTAINER (du tuto)
-   ======================================== */
-
-.dashboard-container {
-  padding-top: 2rem;
-  padding-bottom: 1.25rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-/* ========================================
-   SCROLLBAR STYLING - Alger Vintage
+   SCROLLBAR STYLING
    ======================================== */
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -562,3421 +238,241 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(8, 145, 178, 0.3);
-  border-radius: var(--radius-sm);
+  background-color: var(--color-slate-300);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(8, 145, 178, 0.5);
+  background-color: var(--color-slate-400);
 }
 
 /* ========================================
-   AWS AMPLIFY AUTHENTICATOR STYLES (du tuto)
-   Personnalisés avec le thème Alger
-   ======================================== */
-
-[data-amplify-authenticator] {
-  --amplify-components-button-primary-background-color: var(--color-blue-electric);
-  --amplify-components-button-primary-hover-background-color: var(--color-blue-deep);
-  --amplify-components-button-border-radius: var(--radius);
-  --amplify-components-fieldcontrol-border-radius: var(--radius);
-}
-
-[data-amplify-authenticator][data-variation="default"] {
-  height: 100%;
-  padding: 2rem !important;
-}
-
-[data-amplify-authenticator] [data-amplify-router] {
-  border: none !important;
-  box-shadow: none !important;
-  max-width: 400px !important;
-  margin: 0 auto;
-}
-
-[data-amplify-authenticator] [data-amplify-container] {
-  border-radius: var(--radius);
-  padding: 2rem !important;
-  border: 1px solid var(--color-border);
-}
-
-[data-amplify-authenticator] [data-amplify-form] {
-  padding: 0 !important;
-}
-
-[data-amplify-authenticator] .amplify-tabs__list {
-  display: none;
-}
-
-[data-amplify-authenticator] .amplify-button--primary {
-  width: 100%;
-  height: 2.75rem;
-  margin-top: 1rem;
-  background-color: var(--color-blue-electric) !important;
-  color: var(--color-white) !important;
-  font-weight: 500;
-  font-size: var(--font-size-sm);
-}
-
-[data-amplify-authenticator] .amplify-button--primary:hover {
-  background-color: var(--color-blue-deep) !important;
-}
-
-[data-amplify-authenticator] .amplify-field-group__control {
-  border-color: var(--color-input);
-}
-
-[data-amplify-authenticator] .amplify-field-group__control:focus-within {
-  border-color: var(--color-ring) !important;
-  box-shadow: 0 0 0 1px var(--color-ring) !important;
-}
-
-[data-amplify-authenticator] .amplify-field__show-password {
-  color: var(--color-muted-foreground);
-}
-
-[data-amplify-authenticator] .amplify-label {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-foreground);
-}
-
-[data-amplify-authenticator] .amplify-select {
-  border-color: var(--color-input);
-  border-radius: var(--radius);
-  height: 2.5rem;
-  font-size: var(--font-size-sm);
-}
-
-[data-amplify-authenticator] .amplify-text--error {
-  color: var(--color-error);
-}
-
-/* ========================================
-   SONNER TOAST STYLES (du tuto)
-   ======================================== */
-
-[data-close-button="true"] {
-  background-color: var(--color-background);
-  border-color: var(--color-border);
-  color: var(--color-foreground);
-}
-
-[data-close-button="true"]:hover {
-  background-color: var(--color-muted);
-}
-
-/* ========================================
-   UTILITY CLASSES - ALGER VINTAGE
-   ======================================== */
-
-/* Glassmorphism */
-.glass {
-  background: var(--glass-white);
-  backdrop-filter: var(--blur-lg);
-  border: 1px solid var(--glass-border-white);
-}
-
-.glass-blue {
-  background: var(--glass-blue);
-  backdrop-filter: var(--blur-xl);
-  border: 1px solid var(--glass-border-blue);
-}
-
-.glass-blue-strong {
-  background: var(--glass-blue-strong);
-  backdrop-filter: var(--blur-2xl);
-  border: 1px solid var(--glass-border-blue);
-}
-
-.glass-green {
-  background: var(--glass-green);
-  backdrop-filter: var(--blur-lg);
-  border: 1px solid var(--glass-border-green);
-}
-
-.glass-premium {
-  background: var(--glass-premium);
-  backdrop-filter: var(--blur-lg);
-  border: 1px solid var(--glass-border-premium);
-}
-
-/* Focus Ring - Supprime l'outline bleu par défaut */
-.focus-ring {
-  outline: none;
-  transition: box-shadow var(--transition-base) var(--ease-smooth);
-}
-
-.focus-ring:focus,
-.focus-ring:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
-}
-
-.focus-ring-green:focus,
-.focus-ring-green:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) var(--color-green-vibrant);
-}
-
-.focus-ring-coral:focus,
-.focus-ring-coral:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) var(--color-coral);
-}
-
-/* Shadows colorées */
-.shadow-blue {
-  box-shadow: var(--shadow-blue);
-}
-
-.shadow-green {
-  box-shadow: var(--shadow-green);
-}
-
-.shadow-coral {
-  box-shadow: var(--shadow-coral);
-}
-
-.shadow-rose {
-  box-shadow: var(--shadow-rose);
-}
-
-/* Hover lift effect */
-.hover-lift {
-  transition: transform var(--transition-base) var(--ease-smooth),
-              box-shadow var(--transition-base) var(--ease-smooth);
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-}
-
-.hover-lift-sm:hover {
-  transform: translateY(-2px);
-}
-
-.hover-lift-lg:hover {
-  transform: translateY(-8px);
-}
-
-/* Gradient backgrounds */
-.bg-gradient-blue {
-  background: linear-gradient(135deg, var(--color-blue-electric), var(--color-blue-deep));
-}
-
-.bg-gradient-green {
-  background: linear-gradient(135deg, var(--color-green-vibrant), var(--color-green-emerald));
-}
-
-.bg-gradient-sunset {
-  background: linear-gradient(135deg, var(--color-coral), var(--color-coral-light));
-}
-
-.bg-gradient-premium {
-  background: linear-gradient(135deg, var(--color-rose), var(--color-rose-light));
-}
-
-/* Text gradients */
-.text-gradient-blue {
-  background: linear-gradient(135deg, var(--color-blue-electric), var(--color-blue-deep));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-green {
-  background: linear-gradient(135deg, var(--color-green-vibrant), var(--color-green-emerald));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-sunset {
-  background: linear-gradient(135deg, var(--color-coral), var(--color-sunshine));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Smooth transitions */
-.transition-smooth {
-  transition: all var(--transition-base) var(--ease-smooth);
-}
-
-.transition-slow {
-  transition: all var(--transition-slow) var(--ease-smooth);
-}
-
-/* Border radius utilities */
-.rounded-alger {
-  border-radius: var(--radius-xl);
-}
-
-.rounded-alger-lg {
-  border-radius: var(--radius-2xl);
-}
-
-/* ========================================
-   PATTERN KUFIQUE - Alger Vintage
-   Inspiré de l'architecture algérienne
-   ======================================== */
-
-.pattern-kufic {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.02'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 60px 60px;
-}
-
-.pattern-kufic-green {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23059669' fill-opacity='0.02'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 60px 60px;
-}
-
-.pattern-kufic-coral {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F97316' fill-opacity='0.02'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 60px 60px;
-}
-
-.pattern-visible {
-  opacity: 1;
-}
-
-/* ========================================
-   ANIMATIONS - ALGER VINTAGE
-   ======================================== */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slide-in {
-  animation: slideIn 0.5s ease-out;
-}
-
-.loading-shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-200) 0%,
-    var(--color-gray-100) 50%,
-    var(--color-gray-200) 100%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* ========================================
-   PROPERTY CARD - ALGER VINTAGE
-   Avec effets hover et design algérien
-   ======================================== */
-
-.property-card {
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-gray-200);
-  overflow: hidden;
-  transition: all 300ms;
-  cursor: pointer;
-  position: relative;
-  box-shadow: var(--shadow-md);
-}
-
-.property-card:hover {
-  transform: translateY(-0.5rem);
-  border-color: var(--color-blue-bright);
-  box-shadow: var(--shadow-xl);
-}
-
-/* Pattern kufique au hover */
-.property-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.property-card:hover::before {
-  opacity: 1;
-}
-
-.property-card__image-wrapper {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--color-gray-100);
-}
-
-.property-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 300ms;
-}
-
-.property-card:hover .property-card__image {
-  transform: scale(1.1);
-}
-
-/* BADGES - Style Vintage Algérien */
-.property-card__badge {
-  position: absolute;
-  top: var(--spacing-3);
-  right: var(--spacing-3);
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  padding: var(--spacing-2) var(--spacing-4);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--color-white);
-}
-
-.property-card__badge--rent {
-  background: var(--color-green-vibrant);
-}
-
-.property-card__badge--new {
-  background: var(--color-coral);
-  animation: pulse 2s infinite;
-}
-
-.property-card__badge--hot {
-  background: var(--color-rose);
-  animation: pulse 2s infinite;
-}
-
-.property-card__badge--featured {
-  background: var(--color-sunshine);
-  padding-left: var(--spacing-5);
-  position: relative;
-}
-
-.property-card__badge--featured::before {
-  content: '⭐';
-  position: absolute;
-  left: var(--spacing-2);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: var(--font-size-sm);
-}
-
-.property-card__favorite {
-  position: absolute;
-  top: var(--spacing-3);
-  left: var(--spacing-3);
-  width: 44px;
-  height: 44px;
-  background: var(--color-white);
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
-  z-index: 2;
-  border: 2px solid var(--color-gray-200);
-}
-
-.property-card__favorite:hover {
-  transform: scale(1.2);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-rose);
-}
-
-.property-card__favorite svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--color-rose);
-  fill: none;
-  stroke-width: 2.5;
-  transition: all var(--transition-base);
-}
-
-.property-card__favorite.active svg {
-  fill: var(--color-rose);
-  stroke: var(--color-rose);
-}
-
-.property-card__content {
-  padding: var(--spacing-5);
-}
-
-.property-card__price {
-  font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-blue-electric);
-  margin-bottom: var(--spacing-2);
-}
-
-.property-card__location {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  color: var(--color-gray-700);
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--spacing-4);
-}
-
-.property-card__location svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  color: var(--color-coral);
-}
-
-.property-card__specs {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding-top: var(--spacing-3);
-  border-top: 2px solid var(--color-gray-200);
-}
-
-.property-card__spec {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-700);
-  font-weight: 500;
-}
-
-.property-card__spec svg {
-  width: 18px;
-  height: 18px;
-  color: var(--color-green-vibrant);
-}
-
-/* VARIANTS DE CARDS */
-.property-card--featured {
-  border: 3px solid var(--color-sunshine);
-  background: var(--color-cream);
-}
-
-.property-card--featured:hover {
-  border-color: var(--color-sunshine-amber);
-  box-shadow: var(--shadow-coral);
-}
-
-.property-card--featured::before {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F97316' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.property-card--premium {
-  border: 3px solid var(--color-rose);
-  position: relative;
-}
-
-.property-card--premium::after {
-  content: 'PREMIUM';
-  position: absolute;
-  top: 20px;
-  right: -35px;
-  background: var(--color-rose);
-  color: var(--color-white);
-  padding: 5px 40px;
-  transform: rotate(45deg);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1px;
-  box-shadow: var(--shadow-md);
-  z-index: 3;
-}
-
-.property-card--premium:hover {
-  box-shadow: var(--shadow-rose);
-  transform: translateY(-4px);
-}
-
-.property-card--urgent {
-  border: 3px solid var(--color-terracotta);
-  animation: pulse 2s infinite;
-}
-
-.property-card--urgent .property-card__badge {
-  background: var(--color-terracotta);
-}
-
-/* ========================================
-   BUTTONS - ALGER VINTAGE
-   ======================================== */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all 200ms;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-  background: var(--color-blue-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-primary:focus-visible {
-  outline: 3px solid var(--color-blue-pale);
-  outline-offset: 2px;
-}
-
-.btn-secondary {
-  background: var(--color-green-vibrant);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-secondary:hover {
-  background: var(--color-green-fresh);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-tertiary {
-  background: var(--color-coral);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-tertiary:hover {
-  background: var(--color-coral-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-premium {
-  background: var(--color-rose);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-premium:hover {
-  background: var(--color-rose-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-blue-electric);
-  border: 2px solid var(--color-blue-electric);
-  padding: calc(var(--spacing-3) - 2px) calc(var(--spacing-6) - 2px);
-}
-
-.btn-outline:hover {
-  background-color: var(--color-blue-pale);
-  border-color: var(--color-blue-bright);
-}
-
-.btn-sm {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-sm);
-}
-
-.btn-lg {
-  padding: var(--spacing-4) var(--spacing-8);
-  font-size: var(--font-size-lg);
-}
-
-.btn-icon {
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Variants Alger - Alias */
-.btn-primary-alger {
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all 200ms;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary-alger:hover {
-  background: var(--color-blue-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-secondary-alger {
-  background: var(--color-green-vibrant);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all 200ms;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-secondary-alger:hover {
-  background: var(--color-green-fresh);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* ========================================
-   BADGES - ALGER VINTAGE
-   ======================================== */
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-3);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: 2px solid transparent;
-}
-
-.badge-blue {
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  border-color: var(--color-blue-deep);
-}
-
-.badge-green {
-  background: var(--color-green-vibrant);
-  color: var(--color-white);
-  border-color: var(--color-green-fresh);
-}
-
-.badge-coral {
-  background: var(--color-coral);
-  color: var(--color-white);
-  border-color: var(--color-coral-light);
-}
-
-.badge-rose {
-  background: var(--color-rose);
-  color: var(--color-white);
-  border-color: var(--color-rose-light);
-}
-
-.badge-sunshine {
-  background: var(--color-sunshine);
-  color: var(--color-white);
-  border-color: var(--color-sunshine-dark);
-}
-
-.badge-gray {
-  background: var(--color-gray-300);
-  color: var(--color-gray-700);
-  border-color: var(--color-gray-400);
-}
-
-.badge-new {
-  animation: pulse 2s infinite;
-}
-
-.badge-featured {
-  background: var(--color-sunshine);
-  color: var(--color-white);
-  border-color: var(--color-sunshine-dark);
-  padding-left: var(--spacing-4);
-  position: relative;
-}
-
-.badge-featured::before {
-  content: '⭐';
-  position: absolute;
-  left: var(--spacing-1);
-  font-size: var(--font-size-xs);
-}
-
-/* ========================================
-   INPUT FIELDS - ALGER VINTAGE
-   ======================================== */
-
-.input {
-  width: 100%;
-  padding: var(--spacing-3) var(--spacing-4);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-md);
-  background: var(--color-white);
-  transition: all 200ms;
-  border: 2px solid var(--color-gray-300);
-  font-family: var(--font-sans);
-  color: var(--color-gray-900);
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--color-blue-electric);
-  box-shadow: 0 0 0 3px var(--color-blue-pale);
-}
-
-.input::placeholder {
-  color: var(--color-gray-500);
-}
-
-.input-error {
-  border-color: var(--color-error);
-}
-
-.input-error:focus {
-  box-shadow: 0 0 0 3px rgb(220 38 38 / 0.1);
-}
-
-.select {
-  width: 100%;
-  padding: var(--spacing-3) var(--spacing-4);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-md);
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 200ms;
-  border: 2px solid var(--color-gray-300);
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234B5563' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right var(--spacing-3) center;
-  padding-right: var(--spacing-10);
-  color: var(--color-gray-900);
-}
-
-.select:focus {
-  outline: none;
-  border-color: var(--color-blue-electric);
-  box-shadow: 0 0 0 3px var(--color-blue-pale);
-}
-
-/* ========================================
-   NAVIGATION - ALGER VINTAGE
-   ======================================== */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 2px solid var(--color-gray-200);
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  padding: var(--spacing-4) 0;
-  box-shadow: var(--shadow-md);
-}
-
-.nav-alger {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 2px solid var(--color-gray-200);
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  padding: var(--spacing-4) 0;
-  box-shadow: var(--shadow-md);
-}
-
-.nav__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-8);
-}
-
-.nav__logo {
-  font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-blue-electric);
-}
-
-.nav__links {
-  display: none;
-  gap: var(--spacing-8);
-}
-
-@media (min-width: 768px) {
-  .nav__links {
-    display: flex;
-  }
-}
-
-.nav__link {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--color-gray-700);
-  transition: color 200ms;
-  position: relative;
-}
-
-.nav__link:hover {
-  color: var(--color-blue-electric);
-}
-
-.nav__link.active {
-  color: var(--color-blue-electric);
-}
-
-.nav__link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--color-blue-electric);
-  border-radius: 3px;
-}
-
-.nav__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-/* ========================================
-   SEARCH BAR - ALGER VINTAGE
-   ======================================== */
-
-.search-bar {
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-gray-200);
-  padding: var(--spacing-6);
-  display: grid;
-  gap: var(--spacing-4);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-}
-
-.search-bar-alger {
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-gray-200);
-  padding: var(--spacing-6);
-  display: grid;
-  gap: var(--spacing-4);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-}
-
-.search-bar::before,
-.search-bar-alger::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
-@media (min-width: 768px) {
-  .search-bar,
-  .search-bar-alger {
-    grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
-  }
-}
-
-.search-bar__field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  position: relative;
-  z-index: 1;
-}
-
-.search-bar__label {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-gray-700);
-}
-
-/* ========================================
-   MODAL - ALGER VINTAGE
-   ======================================== */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: var(--spacing-4);
-  background: rgba(31, 41, 55, 0.7);
-  backdrop-filter: blur(8px);
-}
-
-.modal {
-  background: var(--color-white);
-  border-radius: var(--radius-2xl);
-  border: 2px solid var(--color-gray-200);
-  max-width: 42rem;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-xl);
-  animation: fadeIn 0.3s ease-out;
-}
-
-.modal__header {
-  padding: var(--spacing-6);
-  border-bottom: 2px solid var(--color-gray-200);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal__title {
-  font-size: var(--font-size-2xl);
-  font-weight: 600;
-  color: var(--color-gray-900);
-}
-
-.modal__close {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 200ms;
-  color: var(--color-gray-600);
-}
-
-.modal__close:hover {
-  background: var(--color-gray-200);
-  color: var(--color-gray-900);
-}
-
-.modal__body {
-  padding: var(--spacing-6);
-}
-
-.modal__footer {
-  padding: var(--spacing-6);
-  border-top: 2px solid var(--color-gray-200);
-  display: flex;
-  gap: var(--spacing-3);
-  justify-content: flex-end;
-}
-
-/* ========================================
-   TOAST NOTIFICATIONS - ALGER VINTAGE
-   ======================================== */
-
-.toast {
-  padding: var(--spacing-4);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  font-size: var(--font-size-sm);
-  max-width: 28rem;
-  animation: slideIn 0.3s ease-out;
-  border-left: 4px solid;
-  box-shadow: var(--shadow-lg);
-  line-height: 1.5;
-}
-
-.toast-success {
-  background: var(--color-green-pale);
-  border-color: var(--color-green-vibrant);
-  color: var(--color-gray-900);
-}
-
-.toast-error {
-  background: var(--color-coral-pale);
-  border-color: var(--color-terracotta);
-  color: var(--color-gray-900);
-}
-
-.toast-info {
-  background: var(--color-blue-pale);
-  border-color: var(--color-blue-electric);
-  color: var(--color-gray-900);
-}
-
-.toast-warning {
-  background: var(--color-cream);
-  border-color: var(--color-sunshine);
-  color: var(--color-gray-900);
-}
-
-/* ========================================
-   HERO SECTIONS - ALGER VINTAGE
-   ======================================== */
-
-.hero-blue {
-  background: var(--color-blue-electric);
-  color: white;
-}
-
-.hero-green {
-  background: var(--color-green-vibrant);
-  color: white;
-}
-
-.hero-coral {
-  background: var(--color-coral);
-  color: white;
-}
-
-.hero-pattern {
-  position: relative;
-  color: white;
-  background-color: var(--color-blue-electric);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.05'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
-
-.hero-alger {
-  position: relative;
-  color: white;
-  background-color: var(--color-blue-electric);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.05'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
-
-/* ========================================
-   LAYOUT - CONTAINERS & SECTIONS
-   ======================================== */
-
-.container {
-  max-width: 1536px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-4);
-}
-
-@media (min-width: 640px) {
-  .container {
-    padding: 0 var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 var(--spacing-8);
-  }
-}
-
-.container-alger {
-  max-width: 1536px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-4);
-}
-
-@media (min-width: 640px) {
-  .container-alger {
-    padding: 0 var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-alger {
-    padding: 0 var(--spacing-8);
-  }
-}
-
-.section {
-  padding: 3rem 0;
-}
-
-@media (min-width: 768px) {
-  .section {
-    padding: 4rem 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section {
-    padding: 5rem 0;
-  }
-}
-
-.section-alger {
-  padding: 3rem 0;
-}
-
-@media (min-width: 768px) {
-  .section-alger {
-    padding: 4rem 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-alger {
-    padding: 5rem 0;
-  }
-}
-
-.section-pattern {
-  position: relative;
-}
-
-/* ========================================
-   GRID SYSTEM
-   ======================================== */
-
-.grid {
-  display: grid;
-  gap: var(--spacing-4);
-}
-
-.grid-2 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-@media (min-width: 768px) {
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-.grid-3 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-/* ========================================
-   PATTERN KUFIQUE (MÉDITERRANÉEN)
-   ======================================== */
-
-.pattern-kufic {
-  position: relative;
-  overflow: hidden;
-}
-
-.pattern-kufic::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 60px 60px;
-  opacity: 1;
-  z-index: 0;
-}
-
-.pattern-kufic > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* ========================================
-   BACKGROUND GRADIENTS (TAILWIND v4)
-   ======================================== */
-
-.bg-linear-to-t {
-  background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-
-.bg-linear-to-b {
-  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-}
-
-.bg-linear-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-linear-to-l {
-  background-image: linear-gradient(to left, var(--tw-gradient-stops));
-}
-
-/* ========================================
-   COULEURS MÉDITERRANÉENNES (PALE)
-   ======================================== */
-
-.bg-blue-pale {
-  background-color: rgba(8, 145, 178, 0.1); /* cyan-600 at 10% */
-}
-
-.bg-green-pale {
-  background-color: rgba(5, 150, 105, 0.1); /* emerald-600 at 10% */
-}
-
-.bg-coral-pale {
-  background-color: rgba(249, 115, 22, 0.1); /* orange-500 at 10% */
-}
-
-.text-blue-pale {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* ========================================
-   GLASS STRONG (plus opaque)
-   ======================================== */
-
-.glass-strong {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* ========================================
-   GRADIENT BACKGROUNDS PRESETS
-   ======================================== */
-
-.bg-gradient-subtle {
-  background: linear-gradient(135deg, 
-    rgba(241, 245, 249, 1) 0%,   /* slate-100 */
-    rgba(248, 250, 252, 1) 50%,  /* slate-50 */
-    rgba(241, 245, 249, 1) 100%  /* slate-100 */
-  );
-}
-
-.bg-gradient-sunset {
-  background: linear-gradient(135deg, 
-    #f97316 0%,    /* coral */
-    #fb923c 50%,   /* lighter coral */
-    #fdba74 100%   /* sunset yellow */
-  );
-}
-
-/* ========================================
-   BUTTON ICON SIZES
-   ======================================== */
-
-.btn-icon-sm {
-  width: 2rem;     /* 32px */
-  height: 2rem;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (min-width: 768px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-8);
-  }
-}
-
-.grid-4 {
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
-}
-
-@media (min-width: 768px) {
-  .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-/* ========================================
-   DECORATIVE ELEMENTS
-   ======================================== */
-
-.kufic-corner {
-  position: relative;
-}
-
-.kufic-corner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.06'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
-/* ========================================
-   FOCUS STATES - ALGER VINTAGE
-   ======================================== */
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid var(--color-blue-electric);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-
-/* ========================================
-   CUSTOM UTILITIES - ALGER VIBRANTE
-   ======================================== */
-
-.zellige-bg {
-  position: relative;
-}
-
-.zellige-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/patterns/zellige.svg');
-  background-size: 60px;
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.glass-standard {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.glass-blue {
-  background: rgba(8, 145, 178, 0.1);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(8, 145, 178, 0.2);
-}
-
-.glass-premium {
-  background: rgba(219, 39, 119, 0.08);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(219, 39, 119, 0.15);
-}
-
-:root {
-  --sidebar: hsl(0 0% 98%);
-  --sidebar-foreground: hsl(240 5.3% 26.1%);
-  --sidebar-primary: hsl(240 5.9% 10%);
-  --sidebar-primary-foreground: hsl(0 0% 98%);
-  --sidebar-accent: hsl(240 4.8% 95.9%);
-  --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
-}
-
-/* ========================================
-   ALGER VINTAGE - REFINED UTILITIES
-   ======================================== */
-
-.glass-panel {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-  }
-
-  .glass-panel-dark {
-    background: rgba(17, 24, 39, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Inputs & Form Elements Override */
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--color-blue-electric);
-    box-shadow: 0 0 0 4px var(--color-blue-pale);
-  }
-
-  /* Custom Scrollbar for Sidebar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray-200);
-    border-radius: 20px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-gray-300);
-  }
-
-  /* Typography Utilities */
-  .text-balance {
-    text-wrap: balance;
-  }
-  
-  /* Alger Vintage Gradients */
-  .bg-gradient-alger {
-    background: linear-gradient(135deg, #FAFAFA 0%, #F0F9FF 100%);
-  }
-  
-  .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-
-/* ========================================
-   DARK MODE THEME
-   ======================================== */
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: var(--color-gray-900);
-    --color-foreground: var(--color-white);
-
-    --color-card: var(--color-gray-800);
-    --color-card-foreground: var(--color-white);
-
-    --color-popover: var(--color-gray-800);
-    --color-popover-foreground: var(--color-white);
-
-    --color-primary: var(--color-blue-bright);
-    --color-primary-foreground: var(--color-gray-900);
-
-    --color-secondary: var(--color-green-emerald);
-    --color-secondary-foreground: var(--color-gray-900);
-
-    --color-muted: var(--color-gray-800);
-    --color-muted-foreground: var(--color-gray-400);
-
-    --color-accent: var(--color-coral-light);
-    --color-accent-foreground: var(--color-white);
-
-    --color-border: var(--color-gray-700);
-    --color-input: var(--color-gray-700);
-    --color-ring: var(--color-blue-sky);
-
-    --color-sidebar-background: var(--color-gray-900);
-    --color-sidebar-foreground: var(--color-gray-200);
-    --color-sidebar-accent: var(--color-gray-800);
-    --color-sidebar-border: var(--color-gray-700);
-  }
-}
-
-/* Support manuel du dark mode avec classe .dark */
-.dark {
-  --color-background: var(--color-gray-900);
-  --color-foreground: var(--color-white);
-
-  --color-card: var(--color-gray-800);
-  --color-card-foreground: var(--color-white);
-
-  --color-popover: var(--color-gray-800);
-  --color-popover-foreground: var(--color-white);
-
-  --color-primary: var(--color-blue-bright);
-  --color-primary-foreground: var(--color-gray-900);
-
-  --color-secondary: var(--color-green-emerald);
-  --color-secondary-foreground: var(--color-gray-900);
-
-  --color-muted: var(--color-gray-800);
-  --color-muted-foreground: var(--color-gray-400);
-
-  --color-accent: var(--color-coral-light);
-  --color-accent-foreground: var(--color-white);
-
-  --color-border: var(--color-gray-700);
-  --color-input: var(--color-gray-700);
-  --color-ring: var(--color-blue-sky);
-
-  /* Sidebar Colors - Light Theme */
-  --sidebar: hsl(0 0% 100%);
-  --sidebar-foreground: hsl(240 5.9% 10%);
-  --sidebar-primary: hsl(188 94% 35%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(188 100% 96%);
-  --sidebar-accent-foreground: hsl(188 94% 35%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(188 94% 35%);
-}
-
-/* ========================================
-   BASE STYLES
-   ======================================== */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-@layer base {
-  html {
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    line-height: 1.6;
-    font-size: var(--font-size-sm);
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
-
-  html,
-  body,
-  #root,
-  .app {
-    height: 100%;
-    width: 100%;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  button {
-    font-family: inherit;
-    cursor: pointer;
-  }
-
-  /* Suppression de l'effet de focus bleu par défaut */
-  input:focus,
-  textarea:focus,
-  select:focus {
-    outline: none;
-    box-shadow: none;
-  }
-  
-  /* Style de focus personnalisé pour meilleure UX */
-  input:focus,
-  textarea:focus {
-    @apply border-cyan-600;
-  }
-}
-
-/* ========================================
-   MAPBOX STYLES (du tuto)
-   Adapté aux couleurs Alger Vintage
-   ======================================== */
-
-.mapboxgl-popup-content {
-  background-color: var(--color-gray-700) !important;
-  border-radius: var(--radius-lg) !important;
-  padding: var(--spacing-2) var(--spacing-3) !important;
-}
-
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: var(--color-gray-700) !important;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: var(--color-gray-700) !important;
-}
-
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: var(--color-gray-700) !important;
-}
-
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: var(--color-gray-700) !important;
-}
-
-.marker-popup {
-  background-color: var(--color-gray-700);
-  color: var(--color-white);
-  padding: 0;
-  margin: 0;
-  display: flex !important;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-.marker-popup-image {
-  width: 2.5rem;
-  height: 2.5rem;
-  object-fit: cover;
-  background-color: var(--color-white);
-  border-radius: var(--radius-lg);
-}
-
-.marker-popup-price {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-blue-pale);
-}
-
-.marker-popup-title {
-  cursor: pointer;
-}
-
-.marker-popup-title:hover {
-  text-decoration: underline;
-  color: var(--color-blue-bright);
-}
-
-.marker-popup-title:focus {
-  outline: none;
-}
-
-.marker-popup-price-unit {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-400);
-  font-weight: 400;
-}
-
-/* ========================================
-   DASHBOARD CONTAINER (du tuto)
-   ======================================== */
-
-.dashboard-container {
-  padding-top: 2rem;
-  padding-bottom: 1.25rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-/* ========================================
-   SCROLLBAR STYLING - Alger Vintage
-   ======================================== */
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(8, 145, 178, 0.3);
-  border-radius: var(--radius-sm);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(8, 145, 178, 0.5);
-}
-
-/* ========================================
-   AWS AMPLIFY AUTHENTICATOR STYLES (du tuto)
-   Personnalisés avec le thème Alger
-   ======================================== */
-
-[data-amplify-authenticator] {
-  --amplify-components-button-primary-background-color: var(--color-blue-electric);
-  --amplify-components-button-primary-hover-background-color: var(--color-blue-deep);
-  --amplify-components-button-border-radius: var(--radius);
-  --amplify-components-fieldcontrol-border-radius: var(--radius);
-}
-
-[data-amplify-authenticator][data-variation="default"] {
-  height: 100%;
-  padding: 2rem !important;
-}
-
-[data-amplify-authenticator] [data-amplify-router] {
-  border: none !important;
-  box-shadow: none !important;
-  max-width: 400px !important;
-  margin: 0 auto;
-}
-
-[data-amplify-authenticator] [data-amplify-container] {
-  border-radius: var(--radius);
-  padding: 2rem !important;
-  border: 1px solid var(--color-border);
-}
-
-[data-amplify-authenticator] [data-amplify-form] {
-  padding: 0 !important;
-}
-
-[data-amplify-authenticator] .amplify-tabs__list {
-  display: none;
-}
-
-[data-amplify-authenticator] .amplify-button--primary {
-  width: 100%;
-  height: 2.75rem;
-  margin-top: 1rem;
-  background-color: var(--color-blue-electric) !important;
-  color: var(--color-white) !important;
-  font-weight: 500;
-  font-size: var(--font-size-sm);
-}
-
-[data-amplify-authenticator] .amplify-button--primary:hover {
-  background-color: var(--color-blue-deep) !important;
-}
-
-[data-amplify-authenticator] .amplify-field-group__control {
-  border-color: var(--color-input);
-}
-
-[data-amplify-authenticator] .amplify-field-group__control:focus-within {
-  border-color: var(--color-ring) !important;
-  box-shadow: 0 0 0 1px var(--color-ring) !important;
-}
-
-[data-amplify-authenticator] .amplify-field__show-password {
-  color: var(--color-muted-foreground);
-}
-
-[data-amplify-authenticator] .amplify-label {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-foreground);
-}
-
-[data-amplify-authenticator] .amplify-select {
-  border-color: var(--color-input);
-  border-radius: var(--radius);
-  height: 2.5rem;
-  font-size: var(--font-size-sm);
-}
-
-[data-amplify-authenticator] .amplify-text--error {
-  color: var(--color-error);
-}
-
-/* ========================================
-   SONNER TOAST STYLES (du tuto)
-   ======================================== */
-
-[data-close-button="true"] {
-  background-color: var(--color-background);
-  border-color: var(--color-border);
-  color: var(--color-foreground);
-}
-
-[data-close-button="true"]:hover {
-  background-color: var(--color-muted);
-}
-
-/* ========================================
-   UTILITY CLASSES - ALGER VINTAGE
-   ======================================== */
-
-/* Glassmorphism */
-.glass {
-  background: var(--glass-white);
-  backdrop-filter: var(--blur-lg);
-  border: 1px solid var(--glass-border-white);
-}
-
-.glass-strong {
-  background: var(--glass-white-strong);
-  backdrop-filter: var(--blur-xl);
-  border: 1px solid var(--glass-border-white);
-}
-
-.glass-blue {
-  background: var(--glass-blue);
-  backdrop-filter: var(--blur-xl);
-  border: 1px solid var(--glass-border-blue);
-}
-
-.glass-blue-strong {
-  background: var(--glass-blue-strong);
-  backdrop-filter: var(--blur-2xl);
-  border: 1px solid var(--glass-border-blue);
-}
-
-.glass-green {
-  background: var(--glass-green);
-  backdrop-filter: var(--blur-lg);
-  border: 1px solid var(--glass-border-green);
-}
-
-.glass-premium {
-  background: var(--glass-premium);
-  backdrop-filter: var(--blur-lg);
-  border: 1px solid var(--glass-border-premium);
-}
-
-/* Focus Ring - Supprime l'outline bleu par défaut */
-.focus-ring {
-  outline: none;
-  transition: box-shadow var(--transition-base) var(--ease-smooth);
-}
-
-.focus-ring:focus,
-.focus-ring:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
-}
-
-.focus-ring-green:focus,
-.focus-ring-green:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) var(--color-green-vibrant);
-}
-
-.focus-ring-coral:focus,
-.focus-ring-coral:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) var(--color-coral);
-}
-
-/* Shadows colorées */
-.shadow-blue {
-  box-shadow: var(--shadow-blue);
-}
-
-.shadow-green {
-  box-shadow: var(--shadow-green);
-}
-
-.shadow-coral {
-  box-shadow: var(--shadow-coral);
-}
-
-.shadow-rose {
-  box-shadow: var(--shadow-rose);
-}
-
-/* Hover lift effect */
-.hover-lift {
-  transition: transform var(--transition-base) var(--ease-smooth),
-              box-shadow var(--transition-base) var(--ease-smooth);
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-}
-
-.hover-lift-sm:hover {
-  transform: translateY(-2px);
-}
-
-.hover-lift-lg:hover {
-  transform: translateY(-8px);
-}
-
-/* Gradient backgrounds */
-.bg-gradient-blue {
-  background: linear-gradient(135deg, var(--color-blue-electric), var(--color-blue-deep));
-}
-
-.bg-gradient-green {
-  background: linear-gradient(135deg, var(--color-green-vibrant), var(--color-green-emerald));
-}
-
-.bg-gradient-sunset {
-  background: linear-gradient(135deg, var(--color-coral), var(--color-coral-light));
-}
-
-.bg-gradient-premium {
-  background: linear-gradient(135deg, var(--color-rose), var(--color-rose-light));
-}
-
-/* Text gradients */
-.text-gradient-blue {
-  background: linear-gradient(135deg, var(--color-blue-electric), var(--color-blue-deep));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-green {
-  background: linear-gradient(135deg, var(--color-green-vibrant), var(--color-green-emerald));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-sunset {
-  background: linear-gradient(135deg, var(--color-coral), var(--color-sunshine));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Smooth transitions */
-.transition-smooth {
-  transition: all var(--transition-base) var(--ease-smooth);
-}
-
-.transition-slow {
-  transition: all var(--transition-slow) var(--ease-smooth);
-}
-
-/* Border radius utilities */
-.rounded-alger {
-  border-radius: var(--radius-xl);
-}
-
-.rounded-alger-lg {
-  border-radius: var(--radius-2xl);
-}
-
-/* ========================================
-   PATTERN KUFIQUE - Alger Vintage
-   Inspiré de l'architecture algérienne
-   ======================================== */
-
-.pattern-kufic {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.02'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 60px 60px;
-}
-
-.pattern-kufic-green {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23059669' fill-opacity='0.02'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 60px 60px;
-}
-
-.pattern-kufic-coral {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F97316' fill-opacity='0.02'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 60px 60px;
-}
-
-.pattern-visible {
-  opacity: 1;
-}
-
-/* ========================================
-   ANIMATIONS - ALGER VINTAGE
-   ======================================== */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slide-in {
-  animation: slideIn 0.5s ease-out;
-}
-
-.loading-shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-200) 0%,
-    var(--color-gray-100) 50%,
-    var(--color-gray-200) 100%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* ========================================
-   PROPERTY CARD - ALGER VINTAGE
-   Avec effets hover et design algérien
-   ======================================== */
-
-.property-card {
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-gray-200);
-  overflow: hidden;
-  transition: all 300ms;
-  cursor: pointer;
-  position: relative;
-  box-shadow: var(--shadow-md);
-}
-
-.property-card:hover {
-  transform: translateY(-0.5rem);
-  border-color: var(--color-blue-bright);
-  box-shadow: var(--shadow-xl);
-}
-
-/* Pattern kufique au hover */
-.property-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.property-card:hover::before {
-  opacity: 1;
-}
-
-.property-card__image-wrapper {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--color-gray-100);
-}
-
-.property-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 300ms;
-}
-
-.property-card:hover .property-card__image {
-  transform: scale(1.1);
-}
-
-/* BADGES - Style Vintage Algérien */
-.property-card__badge {
-  position: absolute;
-  top: var(--spacing-3);
-  right: var(--spacing-3);
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  padding: var(--spacing-2) var(--spacing-4);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--color-white);
-}
-
-.property-card__badge--rent {
-  background: var(--color-green-vibrant);
-}
-
-.property-card__badge--new {
-  background: var(--color-coral);
-  animation: pulse 2s infinite;
-}
-
-.property-card__badge--hot {
-  background: var(--color-rose);
-  animation: pulse 2s infinite;
-}
-
-.property-card__badge--featured {
-  background: var(--color-sunshine);
-  padding-left: var(--spacing-5);
-  position: relative;
-}
-
-.property-card__badge--featured::before {
-  content: '⭐';
-  position: absolute;
-  left: var(--spacing-2);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: var(--font-size-sm);
-}
-
-.property-card__favorite {
-  position: absolute;
-  top: var(--spacing-3);
-  left: var(--spacing-3);
-  width: 44px;
-  height: 44px;
-  background: var(--color-white);
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
-  z-index: 2;
-  border: 2px solid var(--color-gray-200);
-}
-
-.property-card__favorite:hover {
-  transform: scale(1.2);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-rose);
-}
-
-.property-card__favorite svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--color-rose);
-  fill: none;
-  stroke-width: 2.5;
-  transition: all var(--transition-base);
-}
-
-.property-card__favorite.active svg {
-  fill: var(--color-rose);
-  stroke: var(--color-rose);
-}
-
-.property-card__content {
-  padding: var(--spacing-5);
-}
-
-.property-card__price {
-  font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-blue-electric);
-  margin-bottom: var(--spacing-2);
-}
-
-.property-card__location {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  color: var(--color-gray-700);
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--spacing-4);
-}
-
-.property-card__location svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  color: var(--color-coral);
-}
-
-.property-card__specs {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding-top: var(--spacing-3);
-  border-top: 2px solid var(--color-gray-200);
-}
-
-.property-card__spec {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-700);
-  font-weight: 500;
-}
-
-.property-card__spec svg {
-  width: 18px;
-  height: 18px;
-  color: var(--color-green-vibrant);
-}
-
-/* VARIANTS DE CARDS */
-.property-card--featured {
-  border: 3px solid var(--color-sunshine);
-  background: var(--color-cream);
-}
-
-.property-card--featured:hover {
-  border-color: var(--color-sunshine-amber);
-  box-shadow: var(--shadow-coral);
-}
-
-.property-card--featured::before {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F97316' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.property-card--premium {
-  border: 3px solid var(--color-rose);
-  position: relative;
-}
-
-.property-card--premium::after {
-  content: 'PREMIUM';
-  position: absolute;
-  top: 20px;
-  right: -35px;
-  background: var(--color-rose);
-  color: var(--color-white);
-  padding: 5px 40px;
-  transform: rotate(45deg);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1px;
-  box-shadow: var(--shadow-md);
-  z-index: 3;
-}
-
-.property-card--premium:hover {
-  box-shadow: var(--shadow-rose);
-  transform: translateY(-4px);
-}
-
-.property-card--urgent {
-  border: 3px solid var(--color-terracotta);
-  animation: pulse 2s infinite;
-}
-
-.property-card--urgent .property-card__badge {
-  background: var(--color-terracotta);
-}
-
-/* ========================================
-   BUTTONS - ALGER VINTAGE
-   ======================================== */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all 200ms;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-  background: var(--color-blue-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-primary:focus-visible {
-  outline: 3px solid var(--color-blue-pale);
-  outline-offset: 2px;
-}
-
-.btn-secondary {
-  background: var(--color-green-vibrant);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-secondary:hover {
-  background: var(--color-green-fresh);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-tertiary {
-  background: var(--color-coral);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-tertiary:hover {
-  background: var(--color-coral-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-premium {
-  background: var(--color-rose);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-premium:hover {
-  background: var(--color-rose-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-blue-electric);
-  border: 2px solid var(--color-blue-electric);
-  padding: calc(var(--spacing-3) - 2px) calc(var(--spacing-6) - 2px);
-}
-
-.btn-outline:hover {
-  background-color: var(--color-blue-pale);
-  border-color: var(--color-blue-bright);
-}
-
-.btn-sm {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-sm);
-}
-
-.btn-lg {
-  padding: var(--spacing-4) var(--spacing-8);
-  font-size: var(--font-size-lg);
-}
-
-.btn-icon {
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Variants Alger - Alias */
-.btn-primary-alger {
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all 200ms;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary-alger:hover {
-  background: var(--color-blue-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-secondary-alger {
-  background: var(--color-green-vibrant);
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  transition: all 200ms;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-secondary-alger:hover {
-  background: var(--color-green-fresh);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* ========================================
-   BADGES - ALGER VINTAGE
-   ======================================== */
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-3);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: 2px solid transparent;
-}
-
-.badge-blue {
-  background: var(--color-blue-electric);
-  color: var(--color-white);
-  border-color: var(--color-blue-deep);
-}
-
-.badge-green {
-  background: var(--color-green-vibrant);
-  color: var(--color-white);
-  border-color: var(--color-green-fresh);
-}
-
-.badge-coral {
-  background: var(--color-coral);
-  color: var(--color-white);
-  border-color: var(--color-coral-light);
-}
-
-.badge-rose {
-  background: var(--color-rose);
-  color: var(--color-white);
-  border-color: var(--color-rose-light);
-}
-
-.badge-sunshine {
-  background: var(--color-sunshine);
-  color: var(--color-white);
-  border-color: var(--color-sunshine-dark);
-}
-
-.badge-gray {
-  background: var(--color-gray-300);
-  color: var(--color-gray-700);
-  border-color: var(--color-gray-400);
-}
-
-.badge-new {
-  animation: pulse 2s infinite;
-}
-
-.badge-featured {
-  background: var(--color-sunshine);
-  color: var(--color-white);
-  border-color: var(--color-sunshine-dark);
-  padding-left: var(--spacing-4);
-  position: relative;
-}
-
-.badge-featured::before {
-  content: '⭐';
-  position: absolute;
-  left: var(--spacing-1);
-  font-size: var(--font-size-xs);
-}
-
-/* ========================================
-   INPUT FIELDS - ALGER VINTAGE
-   ======================================== */
-
-.input {
-  width: 100%;
-  padding: var(--spacing-3) var(--spacing-4);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-md);
-  background: var(--color-white);
-  transition: all 200ms;
-  border: 2px solid var(--color-gray-300);
-  font-family: var(--font-sans);
-  color: var(--color-gray-900);
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--color-blue-electric);
-  box-shadow: 0 0 0 4px var(--color-blue-pale);
-}
-
-.input::placeholder {
-  color: var(--color-gray-500);
-}
-
-.input-error {
-  border-color: var(--color-error);
-}
-
-.input-error:focus {
-  box-shadow: 0 0 0 3px rgb(220 38 38 / 0.1);
-}
-
-.select {
-  width: 100%;
-  padding: var(--spacing-3) var(--spacing-4);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-md);
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 200ms;
-  border: 2px solid var(--color-gray-300);
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234B5563' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right var(--spacing-3) center;
-  padding-right: var(--spacing-10);
-  color: var(--color-gray-900);
-}
-
-.select:focus {
-  outline: none;
-  border-color: var(--color-blue-electric);
-  box-shadow: 0 0 0 4px var(--color-blue-pale);
-}
-
-/* ========================================
-   NAVIGATION - ALGER VINTAGE
-   ======================================== */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 2px solid var(--color-gray-200);
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  padding: var(--spacing-4) 0;
-  box-shadow: var(--shadow-md);
-}
-
-.nav-alger {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 2px solid var(--color-gray-200);
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  padding: var(--spacing-4) 0;
-  box-shadow: var(--shadow-md);
-}
-
-.nav__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-8);
-}
-
-.nav__logo {
-  font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-blue-electric);
-}
-
-.nav__links {
-  display: none;
-  gap: var(--spacing-8);
-}
-
-@media (min-width: 768px) {
-  .nav__links {
-    display: flex;
-  }
-}
-
-.nav__link {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--color-gray-700);
-  transition: color 200ms;
-  position: relative;
-}
-
-.nav__link:hover {
-  color: var(--color-blue-electric);
-}
-
-.nav__link.active {
-  color: var(--color-blue-electric);
-}
-
-.nav__link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--color-blue-electric);
-  border-radius: 3px;
-}
-
-.nav__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-/* ========================================
-   SEARCH BAR - ALGER VINTAGE
-   ======================================== */
-
-.search-bar {
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-gray-200);
-  padding: var(--spacing-6);
-  display: grid;
-  gap: var(--spacing-4);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-}
-
-.search-bar-alger {
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-gray-200);
-  padding: var(--spacing-6);
-  display: grid;
-  gap: var(--spacing-4);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-}
-
-.search-bar::before,
-.search-bar-alger::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.04'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
-@media (min-width: 768px) {
-  .search-bar,
-  .search-bar-alger {
-    grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
-  }
-}
-
-.search-bar__field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  position: relative;
-  z-index: 1;
-}
-
-.search-bar__label {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-gray-700);
-}
-
-/* ========================================
-   MODAL - ALGER VINTAGE
-   ======================================== */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: var(--spacing-4);
-  background: rgba(31, 41, 55, 0.7);
-  backdrop-filter: blur(8px);
-}
-
-.modal {
-  background: var(--color-white);
-  border-radius: var(--radius-2xl);
-  border: 2px solid var(--color-gray-200);
-  max-width: 42rem;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-xl);
-  animation: fadeIn 0.3s ease-out;
-}
-
-.modal__header {
-  padding: var(--spacing-6);
-  border-bottom: 2px solid var(--color-gray-200);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal__title {
-  font-size: var(--font-size-2xl);
-  font-weight: 600;
-  color: var(--color-gray-900);
-}
-
-.modal__close {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 200ms;
-  color: var(--color-gray-600);
-}
-
-.modal__close:hover {
-  background: var(--color-gray-200);
-  color: var(--color-gray-900);
-}
-
-.modal__body {
-  padding: var(--spacing-6);
-}
-
-.modal__footer {
-  padding: var(--spacing-6);
-  border-top: 2px solid var(--color-gray-200);
-  display: flex;
-  gap: var(--spacing-3);
-  justify-content: flex-end;
-}
-
-/* ========================================
-   TOAST NOTIFICATIONS - ALGER VINTAGE
-   ======================================== */
-
-.toast {
-  padding: var(--spacing-4);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  font-size: var(--font-size-sm);
-  max-width: 28rem;
-  animation: slideIn 0.3s ease-out;
-  border-left: 4px solid;
-  box-shadow: var(--shadow-lg);
-  line-height: 1.5;
-}
-
-.toast-success {
-  background: var(--color-green-pale);
-  border-color: var(--color-green-vibrant);
-  color: var(--color-gray-900);
-}
-
-.toast-error {
-  background: var(--color-coral-pale);
-  border-color: var(--color-terracotta);
-  color: var(--color-gray-900);
-}
-
-.toast-info {
-  background: var(--color-blue-pale);
-  border-color: var(--color-blue-electric);
-  color: var(--color-gray-900);
-}
-
-.toast-warning {
-  background: var(--color-cream);
-  border-color: var(--color-sunshine);
-  color: var(--color-gray-900);
-}
-
-/* ========================================
-   HERO SECTIONS - ALGER VINTAGE
-   ======================================== */
-
-.hero-blue {
-  background: var(--color-blue-electric);
-  color: white;
-}
-
-.hero-green {
-  background: var(--color-green-vibrant);
-  color: white;
-}
-
-.hero-coral {
-  background: var(--color-coral);
-  color: white;
-}
-
-.hero-pattern {
-  position: relative;
-  color: white;
-  background-color: var(--color-blue-electric);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.05'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
-
-.hero-alger {
-  position: relative;
-  color: white;
-  background-color: var(--color-blue-electric);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.05'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
-
-/* ========================================
-   LAYOUT - CONTAINERS & SECTIONS
-   ======================================== */
-
-.container {
-  max-width: 1536px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-4);
-}
-
-@media (min-width: 640px) {
-  .container {
-    padding: 0 var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 var(--spacing-8);
-  }
-}
-
-.container-alger {
-  max-width: 1536px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-4);
-}
-
-@media (min-width: 640px) {
-  .container-alger {
-    padding: 0 var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-alger {
-    padding: 0 var(--spacing-8);
-  }
-}
-
-.section {
-  padding: 3rem 0;
-}
-
-@media (min-width: 768px) {
-  .section {
-    padding: 4rem 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section {
-    padding: 5rem 0;
-  }
-}
-
-.section-alger {
-  padding: 3rem 0;
-}
-
-@media (min-width: 768px) {
-  .section-alger {
-    padding: 4rem 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-alger {
-    padding: 5rem 0;
-  }
-}
-
-.section-pattern {
-  position: relative;
-}
-
-/* ========================================
-   GRID SYSTEM
-   ======================================== */
-
-.grid {
-  display: grid;
-  gap: var(--spacing-4);
-}
-
-.grid-2 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-@media (min-width: 768px) {
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-.grid-3 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-@media (min-width: 768px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-8);
-  }
-}
-
-.grid-4 {
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
-}
-
-@media (min-width: 768px) {
-  .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-/* ========================================
-   PATTERN KUFIQUE (MÉDITERRANÉEN)
-   ======================================== */
-
-.pattern-kufic {
-  position: relative;
-  overflow: hidden;
-}
-
-.pattern-kufic::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 60px 60px;
-  opacity: 1;
-  z-index: 0;
-}
-
-.pattern-kufic > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* ========================================
-   BACKGROUND GRADIENTS (TAILWIND v4)
-   ======================================== */
-
-.bg-linear-to-t {
-  background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-
-.bg-linear-to-b {
-  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-}
-
-.bg-linear-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-linear-to-l {
-  background-image: linear-gradient(to left, var(--tw-gradient-stops));
-}
-
-/* ========================================
-   COULEURS MÉDITERRANÉENNES (PALE)
-   ======================================== */
-
-.bg-blue-pale {
-  background-color: rgba(8, 145, 178, 0.1); /* cyan-600 at 10% */
-}
-
-.bg-green-pale {
-  background-color: rgba(5, 150, 105, 0.1); /* emerald-600 at 10% */
-}
-
-.bg-coral-pale {
-  background-color: rgba(249, 115, 22, 0.1); /* orange-500 at 10% */
-}
-
-.text-blue-pale {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* ========================================
-   GLASS STRONG (plus opaque)
-   ======================================== */
-
-.glass-strong {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* ========================================
-   GRADIENT BACKGROUNDS PRESETS
-   ======================================== */
-
-.bg-gradient-subtle {
-  background: linear-gradient(135deg, 
-    rgba(241, 245, 249, 1) 0%,   /* slate-100 */
-    rgba(248, 250, 252, 1) 50%,  /* slate-50 */
-    rgba(241, 245, 249, 1) 100%  /* slate-100 */
-  );
-}
-
-.bg-gradient-sunset {
-  background: linear-gradient(135deg, 
-    #f97316 0%,    /* coral */
-    #fb923c 50%,   /* lighter coral */
-    #fdba74 100%   /* sunset yellow */
-  );
-}
-
-/* ========================================
-   BUTTON ICON SIZES
-   ======================================== */
-
-.btn-icon-sm {
-  width: 2rem;     /* 32px */
-  height: 2rem;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (min-width: 768px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-8);
-  }
-}
-
-.grid-4 {
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
-}
-
-@media (min-width: 768px) {
-  .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-6);
-  }
-}
-
-/* ========================================
-   DECORATIVE ELEMENTS
-   ======================================== */
-
-.kufic-corner {
-  position: relative;
-}
-
-.kufic-corner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230891B2' fill-opacity='0.06'%3E%3Cpath d='M30 0h10v10h-10zm10 10h10v10h-10zm-10 10h10v10h-10zm-10 10h10v10h-10zm10 10h10v10h-10zm10 10h10v10h-10z'/%3E%3Cpath d='M0 30h10v10h-10zm10 10h10v10h-10zm10-10h10v10h-10zm10-10h10v10h-10zm10 10h10v10h-10z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
-/* ========================================
-   FOCUS STATES - ALGER VINTAGE
-   ======================================== */
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid var(--color-blue-electric);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-/* ========================================
-   CUSTOM TAILWIND UTILITIES - V5.0 "ALGER AUTHENTIQUE"
-   Generate bg-*, text-*, border-* classes for all design system colors
+   UTILITY CLASSES
    ======================================== */
 
 @layer utilities {
-  /* BLUE PALETTE UTILITIES */
-  .bg-turquoise-mer { background-color: var(--color-turquoise-mer); }
-  .bg-aqua-marine { background-color: var(--color-aqua-marine); }
-  .bg-bleu-ciel { background-color: var(--color-bleu-ciel); }
-  .bg-blue-electric { background-color: var(--color-blue-electric); }
-  .bg-blue-deep { background-color: var(--color-blue-deep); }
-  .bg-blue-bright { background-color: var(--color-blue-bright); }
-  .bg-blue-pale { background-color: var(--color-blue-pale); }
-  .bg-blue-nuit { background-color: var(--color-blue-nuit); }
-  .bg-blue-cobalt { background-color: var(--color-blue-cobalt); }
-  .bg-blue-sky { background-color: var(--color-blue-sky); }
+  /* Glass Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 
-  .text-turquoise-mer { color: var(--color-turquoise-mer); }
-  .text-aqua-marine { color: var(--color-aqua-marine); }
-  .text-bleu-ciel { color: var(--color-bleu-ciel); }
-  .text-blue-electric { color: var(--color-blue-electric); }
-  .text-blue-deep { color: var(--color-blue-deep); }
-  .text-blue-bright { color: var(--color-blue-bright); }
-  .text-blue-pale { color: var(--color-blue-pale); }
-  .text-blue-nuit { color: var(--color-blue-nuit); }
-  .text-blue-cobalt { color: var(--color-blue-cobalt); }
-  .text-blue-sky { color: var(--color-blue-sky); }
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 
-  .border-turquoise-mer { border-color: var(--color-turquoise-mer); }
-  .border-aqua-marine { border-color: var(--color-aqua-marine); }
-  .border-bleu-ciel { border-color: var(--color-bleu-ciel); }
-  .border-blue-electric { border-color: var(--color-blue-electric); }
-  .border-blue-deep { border-color: var(--color-blue-deep); }
-  .border-blue-bright { border-color: var(--color-blue-bright); }
-  .border-blue-pale { border-color: var(--color-blue-pale); }
-  .border-blue-nuit { border-color: var(--color-blue-nuit); }
-  .border-blue-cobalt { border-color: var(--color-blue-cobalt); }
-  .border-blue-sky { border-color: var(--color-blue-sky); }
+  /* Gradient Backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+  }
 
-  /* BEIGE & TERRACOTTA UTILITIES */
-  .bg-beige-casbah { background-color: var(--color-beige-casbah); }
-  .bg-beige-chaud { background-color: var(--color-beige-chaud); }
-  .bg-sable { background-color: var(--color-sable); }
-  .bg-creme { background-color: var(--color-creme); }
-  .bg-tuile-orange { background-color: var(--color-tuile-orange); }
-  .bg-pierre-claire { background-color: var(--color-pierre-claire); }
+  .gradient-teal {
+    background: linear-gradient(135deg, var(--color-teal-400) 0%, var(--color-teal-600) 100%);
+  }
 
-  .text-beige-casbah { color: var(--color-beige-casbah); }
-  .text-beige-chaud { color: var(--color-beige-chaud); }
-  .text-sable { color: var(--color-sable); }
-  .text-creme { color: var(--color-creme); }
-  .text-tuile-orange { color: var(--color-tuile-orange); }
-  .text-pierre-claire { color: var(--color-pierre-claire); }
+  .gradient-sunset {
+    background: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-orange-600) 100%);
+  }
 
-  .border-beige-casbah { border-color: var(--color-beige-casbah); }
-  .border-beige-chaud { border-color: var(--color-beige-chaud); }
-  .border-sable { border-color: var(--color-sable); }
-  .border-creme { border-color: var(--color-creme); }
-  .border-tuile-orange { border-color: var(--color-tuile-orange); }
-  .border-pierre-claire { border-color: var(--color-pierre-claire); }
+  .gradient-ocean {
+    background: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-teal-500) 100%);
+  }
 
-  /* SUNSET PALETTE UTILITIES */
-  .bg-corail-vif { background-color: var(--color-corail-vif); }
-  .bg-orange-brulant { background-color: var(--color-orange-brulant); }
-  .bg-peche { background-color: var(--color-peche); }
-  .bg-ambre { background-color: var(--color-ambre); }
-  .bg-coral { background-color: var(--color-coral); }
-  .bg-coral-light { background-color: var(--color-coral-light); }
-  .bg-coral-pale { background-color: var(--color-coral-pale); }
-  .bg-sunshine { background-color: var(--color-sunshine); }
+  /* Text Gradients */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-  .text-corail-vif { color: var(--color-corail-vif); }
-  .text-orange-brulant { color: var(--color-orange-brulant); }
-  .text-peche { color: var(--color-peche); }
-  .text-ambre { color: var(--color-ambre); }
-  .text-coral { color: var(--color-coral); }
-  .text-coral-light { color: var(--color-coral-light); }
-  .text-coral-pale { color: var(--color-coral-pale); }
-  .text-sunshine { color: var(--color-sunshine); }
+  .text-gradient-teal {
+    background: linear-gradient(135deg, var(--color-teal-600) 0%, var(--color-teal-400) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-  .border-corail-vif { border-color: var(--color-corail-vif); }
-  .border-orange-brulant { border-color: var(--color-orange-brulant); }
-  .border-peche { border-color: var(--color-peche); }
-  .border-ambre { border-color: var(--color-ambre); }
-  .border-coral { border-color: var(--color-coral); }
-  .border-coral-light { border-color: var(--color-coral-light); }
-  .border-coral-pale { border-color: var(--color-coral-pale); }
-  .border-sunshine { border-color: var(--color-sunshine); }
+  /* Hover Effects */
+  .hover-lift {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
 
-  /* GREEN PALETTE UTILITIES */
-  .bg-vert-jardin { background-color: var(--color-vert-jardin); }
-  .bg-green-vibrant { background-color: var(--color-green-vibrant); }
-  .bg-green-fresh { background-color: var(--color-green-fresh); }
-  .bg-green-emerald { background-color: var(--color-green-emerald); }
-  .bg-green-pale { background-color: var(--color-green-pale); }
-  .bg-vert-olive { background-color: var(--color-vert-olive); }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
 
-  .text-vert-jardin { color: var(--color-vert-jardin); }
-  .text-green-vibrant { color: var(--color-green-vibrant); }
-  .text-green-fresh { color: var(--color-green-fresh); }
-  .text-green-emerald { color: var(--color-green-emerald); }
-  .text-green-pale { color: var(--color-green-pale); }
-  .text-vert-olive { color: var(--color-vert-olive); }
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
 
-  .border-vert-jardin { border-color: var(--color-vert-jardin); }
-  .border-green-vibrant { border-color: var(--color-green-vibrant); }
-  .border-green-fresh { border-color: var(--color-green-fresh); }
-  .border-green-emerald { border-color: var(--color-green-emerald); }
-  .border-green-pale { border-color: var(--color-green-pale); }
-  .border-vert-olive { border-color: var(--color-vert-olive); }
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
 
-  /* PREMIUM & ACCENT UTILITIES */
-  .bg-or { background-color: var(--color-or); }
-  .bg-fuchsia { background-color: var(--color-fuchsia); }
-  .bg-amethyste { background-color: var(--color-amethyste); }
-  .bg-terracotta-fonce { background-color: var(--color-terracotta-fonce); }
-  .bg-rouge { background-color: var(--color-rouge); }
-  .bg-rose { background-color: var(--color-rose); }
-  .bg-rose-light { background-color: var(--color-rose-light); }
-  .bg-rose-pale { background-color: var(--color-rose-pale); }
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s ease-in-out infinite;
+  }
+}
 
-  .text-or { color: var(--color-or); }
-  .text-fuchsia { color: var(--color-fuchsia); }
-  .text-amethyste { color: var(--color-amethyste); }
-  .text-terracotta-fonce { color: var(--color-terracotta-fonce); }
-  .text-rouge { color: var(--color-rouge); }
-  .text-rose { color: var(--color-rose); }
-  .text-rose-light { color: var(--color-rose-light); }
-  .text-rose-pale { color: var(--color-rose-pale); }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-  .border-or { border-color: var(--color-or); }
-  .border-fuchsia { border-color: var(--color-fuchsia); }
-  .border-amethyste { border-color: var(--color-amethyste); }
-  .border-terracotta-fonce { border-color: var(--color-terracotta-fonce); }
-  .border-rouge { border-color: var(--color-rouge); }
-  .border-rose { border-color: var(--color-rose); }
-  .border-rose-light { border-color: var(--color-rose-light); }
-  .border-rose-pale { border-color: var(--color-rose-pale); }
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  /* OPACITY VARIANTS */
-  .bg-blue-electric\/10 { background-color: rgb(8 145 178 / 0.1); }
-  .bg-blue-electric\/20 { background-color: rgb(8 145 178 / 0.2); }
-  .bg-blue-electric\/30 { background-color: rgb(8 145 178 / 0.3); }
-  .bg-blue-electric\/50 { background-color: rgb(8 145 178 / 0.5); }
-  .bg-blue-electric\/80 { background-color: rgb(8 145 178 / 0.8); }
-  .bg-blue-electric\/90 { background-color: rgb(8 145 178 / 0.9); }
-  .bg-blue-electric\/95 { background-color: rgb(8 145 178 / 0.95); }
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
 
-  .bg-turquoise-mer\/10 { background-color: rgb(64 224 208 / 0.1); }
-  .bg-turquoise-mer\/20 { background-color: rgb(64 224 208 / 0.2); }
-  .bg-turquoise-mer\/30 { background-color: rgb(64 224 208 / 0.3); }
+/* ========================================
+   COMPONENT STYLES
+   ======================================== */
 
-  .bg-green-vibrant\/90 { background-color: rgb(5 150 105 / 0.9); }
-  .bg-green-emerald\/15 { background-color: rgb(52 211 153 / 0.15); }
-  .bg-green-emerald\/20 { background-color: rgb(52 211 153 / 0.2); }
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
-  .bg-sable\/95 { background-color: rgb(245 230 211 / 0.95); }
-  .bg-beige-casbah\/30 { background-color: rgb(232 213 183 / 0.3); }
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
 
-  .bg-or\/20 { background-color: rgb(255 215 0 / 0.2); }
-  .bg-fuchsia\/20 { background-color: rgb(219 39 119 / 0.2); }
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
 
-  .shadow-blue-electric\/10 { box-shadow: 0 4px 8px -2px rgb(8 145 178 / 0.1); }
-  .shadow-blue-electric\/20 { box-shadow: 0 8px 16px -4px rgb(8 145 178 / 0.2); }
-  .shadow-green-vibrant\/10 { box-shadow: 0 4px 8px -2px rgb(5 150 105 / 0.1); }
-  .shadow-green-vibrant\/20 { box-shadow: 0 8px 16px -4px rgb(5 150 105 / 0.2); }
+/* Dashboard Container */
+.dashboard-container {
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-container {
+    padding: 2rem;
+  }
+}
+
+/* ========================================
+   MAPBOX STYLES
+   ======================================== */
+
+.mapboxgl-popup-content {
+  background-color: var(--color-slate-800) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-top-color: var(--color-slate-800) !important;
+}
+
+/* ========================================
+   AWS AMPLIFY AUTHENTICATOR STYLES
+   ======================================== */
+
+[data-amplify-authenticator] {
+  --amplify-components-button-primary-background-color: var(--color-primary-600);
+  --amplify-components-button-primary-hover-background-color: var(--color-primary-700);
+  --amplify-components-button-border-radius: var(--radius);
+  --amplify-components-fieldcontrol-border-radius: var(--radius);
+}
+
+[data-amplify-authenticator][data-variation="default"] {
+  height: 100%;
+  padding: 2rem !important;
+}
+
+[data-amplify-authenticator] [data-amplify-router] {
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 400px !important;
+  margin: 0 auto;
+}
+
+[data-amplify-authenticator] [data-amplify-container] {
+  border-radius: var(--radius-xl);
+  padding: 2rem !important;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+
+[data-amplify-authenticator] .amplify-button--primary {
+  width: 100%;
+  height: 2.75rem;
+  margin-top: 1rem;
+  background-color: var(--color-primary-600) !important;
+  color: var(--color-white) !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+}
+
+[data-amplify-authenticator] .amplify-button--primary:hover {
+  background-color: var(--color-primary-700) !important;
+}
+
+/* ========================================
+   SONNER TOAST STYLES
+   ======================================== */
+
+[data-close-button="true"] {
+  background-color: var(--color-white);
+  border-color: var(--color-border);
+  color: var(--color-foreground);
+}
+
+[data-close-button="true"]:hover {
+  background-color: var(--color-slate-100);
+}
+
+/* ========================================
+   FOCUS STATES
+   ======================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
 }

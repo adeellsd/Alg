@@ -1,21 +1,6 @@
 /**
- * FooterCasbah - Footer "Alger Authentique v5.1 Refined"
- * 
- * @features
- * - Pattern checkers background subtil
- * - Sections avec gradient beige
- * - Links avec hover bleu turquoise
- * - Social icons: bleu Méditerranée (pas de fuchsia/or)
- * - Newsletter avec style glassmorphism + CTA vert
- * - Accent bar: beige Casbah (pas de gradient doré)
- * 
- * @palette
- * - 🌊 Bleu: blue-electric, turquoise-mer (social, links)
- * - 🏛️ Beige: beige-casbah (backgrounds, accents)
- * - 🌿 Vert: green-vibrant (success actions)
- * - NO gradients dorés (theme Alger uniquement)
- * 
- * @version 5.1 - Refined & Elegant
+ * Footer Component - RentAlg Design System v6.0
+ * Fresh, Modern & Clean
  */
 "use client"
 
@@ -29,6 +14,7 @@ import {
   Phone,
   MapPin,
   Home,
+  ArrowRight,
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -53,64 +39,60 @@ const categoryLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-linear-to-br from-beige-casbah via-sable to-beige-chaud overflow-hidden">
-      
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8">
+    <footer className="bg-slate-900 text-slate-300">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Main Content */}
-        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:py-20">
-          {/* Brand Section avec pattern Zellige */}
+        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {/* Brand Section */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="mb-6 inline-flex items-center gap-3 group">
-              {/* Logo avec pattern */}
-              <div className="relative">
-                <div className="relative flex size-12 items-center justify-center rounded-lg bg-linear-to-br from-blue-electric to-turquoise-mer shadow-lg transition-all duration-200 group-hover:scale-105 ring-4 ring-white/10">
-                  <Home className="size-6 text-white" />
-                </div>
+            <Link href="/" className="mb-6 inline-flex items-center gap-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-teal-500 flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-105">
+                <Home className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-bold font-display">
-                Rent<span className="text-or">Alg</span>
+              <span className="text-xl font-bold text-white">
+                Rent<span className="text-primary-400">Alg</span>
               </span>
             </Link>
 
-            <p className="mb-6 text-base leading-relaxed text-gray-700">
-              La plateforme immobilière premium qui célèbre la beauté d'Alger
+            <p className="mb-6 text-sm leading-relaxed text-slate-400">
+              La plateforme immobilière moderne pour trouver votre bien idéal en Algérie.
             </p>
 
-            {/* Social Links avec gradient */}
+            {/* Social Links */}
             <div className="flex items-center gap-3">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center rounded-full bg-linear-to-br from-blue-electric to-turquoise-mer text-white shadow-md transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                className="flex size-10 items-center justify-center rounded-lg bg-slate-800 text-slate-400 transition-all duration-200 hover:bg-primary-600 hover:text-white"
                 aria-label="Facebook"
               >
-                <Facebook className="size-5" />
+                <Facebook className="size-4" />
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center rounded-full bg-linear-to-br from-blue-electric to-turquoise-mer text-white shadow-md transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                className="flex size-10 items-center justify-center rounded-lg bg-slate-800 text-slate-400 transition-all duration-200 hover:bg-primary-600 hover:text-white"
                 aria-label="Instagram"
               >
-                <Instagram className="size-5" />
+                <Instagram className="size-4" />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center rounded-full bg-linear-to-br from-turquoise-mer to-blue-sky text-white shadow-md transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                className="flex size-10 items-center justify-center rounded-lg bg-slate-800 text-slate-400 transition-all duration-200 hover:bg-primary-600 hover:text-white"
                 aria-label="Twitter"
               >
-                <Twitter className="size-5" />
+                <Twitter className="size-4" />
               </a>
             </div>
           </div>
 
           {/* Navigation Section */}
           <div>
-            <h3 className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-900">
+            <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">
               Navigation
             </h3>
             <ul className="space-y-3">
@@ -118,7 +100,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-700 font-medium transition-colors duration-200 hover:text-blue-electric hover:translate-x-1 inline-block"
+                    className="text-sm text-slate-400 transition-colors duration-200 hover:text-primary-400"
                   >
                     {link.label}
                   </Link>
@@ -129,7 +111,7 @@ export default function Footer() {
 
           {/* Categories Section */}
           <div>
-            <h3 className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-900">
+            <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">
               Catégories
             </h3>
             <ul className="space-y-3">
@@ -137,7 +119,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-700 font-medium transition-colors duration-200 hover:text-blue-electric hover:translate-x-1 inline-block"
+                    className="text-sm text-slate-400 transition-colors duration-200 hover:text-primary-400"
                   >
                     {link.label}
                   </Link>
@@ -148,53 +130,47 @@ export default function Footer() {
 
           {/* Contact & Newsletter Section */}
           <div>
-            <h3 className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-900">
+            <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">
               Contact
             </h3>
             <ul className="mb-8 space-y-4">
-              <li className="flex items-start gap-3 text-sm text-gray-700">
-                <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-electric to-turquoise-mer flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 text-white" />
-                </div>
-                <span className="mt-1">Alger, Algérie</span>
+              <li className="flex items-start gap-3 text-sm text-slate-400">
+                <MapPin className="w-4 h-4 mt-0.5 text-primary-400" />
+                <span>Alger, Algérie</span>
               </li>
               <li>
                 <a
                   href="tel:+213000000000"
-                  className="flex items-start gap-3 text-sm text-gray-700 transition-all duration-200 hover:text-blue-electric group"
+                  className="flex items-start gap-3 text-sm text-slate-400 transition-colors duration-200 hover:text-primary-400"
                 >
-                  <div className="w-8 h-8 rounded-full bg-linear-to-br from-green-vibrant to-green-emerald flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
-                    <Phone className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="mt-1">+213 (0) 00 00 00 00</span>
+                  <Phone className="w-4 h-4 mt-0.5" />
+                  <span>+213 (0) 00 00 00 00</span>
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:contact@rentalg.dz"
-                  className="flex items-start gap-3 text-sm text-gray-700 transition-all duration-200 hover:text-blue-electric group"
+                  className="flex items-start gap-3 text-sm text-slate-400 transition-colors duration-200 hover:text-primary-400"
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-electric flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
-                    <Mail className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="mt-1">contact@rentalg.dz</span>
+                  <Mail className="w-4 h-4 mt-0.5" />
+                  <span>contact@rentalg.dz</span>
                 </a>
               </li>
             </ul>
 
-            {/* Newsletter avec glassmorphism */}
-            <div className="relative rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 p-5 shadow-lg">
-              <h4 className="mb-4 text-sm font-semibold text-gray-900">
+            {/* Newsletter */}
+            <div className="rounded-xl bg-slate-800 p-5">
+              <h4 className="mb-3 text-sm font-semibold text-white">
                 Newsletter
               </h4>
               <div className="flex gap-2">
                 <Input
                   type="email"
                   placeholder="Votre email"
-                  className="h-11 border-gray-300 bg-white text-gray-900 placeholder:text-gray-500"
+                  className="h-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
                 />
-                <Button variant="success" className="size-11 shrink-0 hover:scale-105 transition-transform">
-                  <Mail className="size-4" />
+                <Button size="icon" className="shrink-0">
+                  <ArrowRight className="size-4" />
                 </Button>
               </div>
             </div>
@@ -202,36 +178,33 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-gray-300/50 py-8 sm:flex-row">
-          <p className="text-center text-sm text-gray-600 sm:text-left">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-slate-800 py-8 sm:flex-row">
+          <p className="text-center text-sm text-slate-500 sm:text-left">
             © {new Date().getFullYear()} RentAlg. Tous droits réservés.
           </p>
 
           <div className="flex items-center gap-6 text-sm">
             <Link
               href="/privacy"
-              className="text-gray-600 font-medium transition-colors duration-200 hover:text-blue-electric"
+              className="text-slate-500 transition-colors duration-200 hover:text-primary-400"
             >
               Confidentialité
             </Link>
             <Link
               href="/terms"
-              className="text-gray-600 font-medium transition-colors duration-200 hover:text-blue-electric"
+              className="text-slate-500 transition-colors duration-200 hover:text-primary-400"
             >
               CGU
             </Link>
             <Link
               href="/cookies"
-              className="text-gray-600 font-medium transition-colors duration-200 hover:text-blue-electric"
+              className="text-slate-500 transition-colors duration-200 hover:text-primary-400"
             >
               Cookies
             </Link>
           </div>
         </div>
       </div>
-
-      {/* Accent Bar Beige Casbah */}
-      <div className="h-2 bg-beige-casbah" />
     </footer>
   )
 }

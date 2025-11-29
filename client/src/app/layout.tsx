@@ -1,26 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Noto_Sans_Arabic } from "next/font/google";
 import Providers from "./providers";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const notoSansArabic = Noto_Sans_Arabic({
-  subsets: ["arabic"],
-  variable: "--font-arabic",
-  display: "swap",
-});
 
 // Base URL for metadata (must be defined before metadata export)
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rentalg.dz";
@@ -98,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${poppins.variable} ${notoSansArabic.variable} font-sans antialiased`}
+        className="font-sans antialiased"
         suppressHydrationWarning
       >
         <Providers>

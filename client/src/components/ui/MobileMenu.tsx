@@ -1,21 +1,6 @@
 /**
- * MobileMenuGlass - Menu mobile "Alger Authentique v5.0"
- * 
- * @features
- * - Glassmorphism overlay full-screen
- * - Drawer avec pattern Zellige
- * - Slide animations fluides
- * - Links avec spacing généreux
- * - Close button doré
- * - CTA gradient doré
- * 
- * @palette
- * - Background: gradient beige + glassmorphism
- * - Overlay: bg-black/50 backdrop-blur
- * - Active: bleu électrique blue-electric
- * - CTA: gradient doré or → orange-brulant
- * 
- * @version 5.0 - Alger Authentique
+ * MobileMenu Component - RentAlg Design System v6.0
+ * Fresh, Modern & Clean Mobile Navigation
  */
 "use client"
 
@@ -98,67 +83,59 @@ export default function MobileMenu({
 
   return (
     <>
-      {/* Overlay avec glassmorphism */}
+      {/* Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[60] bg-linear-to-br from-black/60 to-black/40 backdrop-blur-md transition-opacity duration-300",
+          "fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm transition-opacity duration-300",
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Drawer avec effet glass et pattern Zellige */}
+      {/* Drawer */}
       <div
         className={cn(
-          "fixed right-0 top-0 z-[70] h-full w-full max-w-md transform bg-linear-to-br from-sable/95 to-beige-casbah/95 backdrop-blur-2xl border-l-2 border-or/30 shadow-2xl transition-all duration-300 ease-out overflow-hidden",
+          "fixed right-0 top-0 z-[70] h-full w-full max-w-sm transform bg-white shadow-2xl transition-transform duration-300 ease-out",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
         role="dialog"
         aria-modal="true"
         aria-label="Menu de navigation mobile"
       >
-        {/* Pattern Zellige background */}
-        <div className="absolute inset-0 pattern-khatam opacity-[0.03] pointer-events-none" />
-        
-        {/* Header avec gradient */}
-        <div className="relative flex items-center justify-between border-b-2 border-or/20 p-6 bg-gradient-to-r from-sable to-beige-casbah">
-          <div className="flex items-center gap-3">
-            {/* Logo avec pattern */}
-            <div className="relative">
-              <div className="absolute inset-0 pattern-khatam opacity-20 scale-125" />
-              <div className="relative flex size-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-blue-electric to-turquoise-mer shadow-lg">
-                <Home className="size-6 text-white" />
-              </div>
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-slate-200 p-5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-teal-500 flex items-center justify-center">
+              <Home className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold font-display">
-              Rent<span className="text-or">Alg</span>
+            <span className="text-xl font-bold text-slate-900">
+              Rent<span className="text-primary-500">Alg</span>
             </span>
           </div>
 
-          {/* Close button doré */}
           <button
             onClick={onClose}
-            className="flex size-12 items-center justify-center rounded-full bg-white/60 backdrop-blur-sm text-gray-700 transition-all duration-200 hover:bg-or hover:text-white hover:scale-110 shadow-md"
+            className="flex size-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"
             aria-label="Fermer le menu"
           >
-            <X className="size-6" />
+            <X className="size-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex h-[calc(100%-6rem)] flex-col">
-          {/* Navigation Links avec spacing généreux */}
-          <nav className="flex-1 space-y-2 overflow-y-auto p-6">
+        <div className="flex h-[calc(100%-5rem)] flex-col">
+          {/* Navigation Links */}
+          <nav className="flex-1 space-y-1 overflow-y-auto p-4">
             {/* Home Link */}
             <Link
               href="/"
               onClick={onClose}
               className={cn(
-                "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                 isActive("/")
-                  ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
-                  : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                  ? "bg-primary-50 text-primary-600"
+                  : "text-slate-600 hover:bg-slate-100"
               )}
             >
               <Home className="size-5" />
@@ -174,10 +151,10 @@ export default function MobileMenu({
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                    "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                     isActive(item.href)
-                      ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
-                      : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                      ? "bg-primary-50 text-primary-600"
+                      : "text-slate-600 hover:bg-slate-100"
                   )}
                 >
                   <Icon className="size-5" />
@@ -189,8 +166,8 @@ export default function MobileMenu({
             {/* User Menu (Authenticated) */}
             {user && userMenuItems.length > 0 && (
               <>
-                <div className="pb-2 pt-6">
-                  <p className="px-5 text-xs font-bold uppercase tracking-wider text-gray-600">
+                <div className="pt-4 pb-2">
+                  <p className="px-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Mon Espace
                   </p>
                 </div>
@@ -201,10 +178,10 @@ export default function MobileMenu({
                     href={item.href}
                     onClick={onClose}
                     className={cn(
-                      "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                      "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                       isActive(item.href)
-                        ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
-                        : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                        ? "bg-primary-50 text-primary-600"
+                        : "text-slate-600 hover:bg-slate-100"
                     )}
                   >
                     <item.icon className="size-5" />
@@ -216,10 +193,10 @@ export default function MobileMenu({
                   href="/profile"
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                    "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                     isActive("/profile")
-                      ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
-                      : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                      ? "bg-primary-50 text-primary-600"
+                      : "text-slate-600 hover:bg-slate-100"
                   )}
                 >
                   <User className="size-5" />
@@ -230,10 +207,10 @@ export default function MobileMenu({
                   href="/settings"
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-4 rounded-[14px] px-5 py-4 text-base font-semibold transition-all duration-200",
+                    "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                     isActive("/settings")
-                      ? "bg-gradient-to-r from-blue-electric/20 to-turquoise-mer/20 text-blue-electric shadow-md"
-                      : "text-gray-700 hover:bg-white/60 hover:shadow-sm"
+                      ? "bg-primary-50 text-primary-600"
+                      : "text-slate-600 hover:bg-slate-100"
                   )}
                 >
                   <Settings className="size-5" />
@@ -243,18 +220,18 @@ export default function MobileMenu({
             )}
           </nav>
 
-          {/* Footer CTA avec gradient doré */}
+          {/* Footer CTA */}
           {!isAuthPage && (
-            <div className="space-y-3 border-t-2 border-or/20 p-6 bg-gradient-to-r from-sable to-beige-casbah">
+            <div className="space-y-2 border-t border-slate-200 p-4">
               {!user ? (
                 <>
                   <Link href="/signin" onClick={onClose} className="block">
-                    <Button variant="outline" className="w-full h-12 text-base font-semibold border-2 border-gray-300 hover:border-blue-electric hover:text-blue-electric">
+                    <Button variant="outline" className="w-full">
                       Connexion
                     </Button>
                   </Link>
                   <Link href="/signup" onClick={onClose} className="block">
-                    <Button className="w-full h-12 text-base font-semibold bg-gradient-to-r from-or to-orange-brulant text-gray-900 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+                    <Button className="w-full">
                       Inscription
                     </Button>
                   </Link>
@@ -266,8 +243,8 @@ export default function MobileMenu({
                     onClick={onClose}
                     className="block"
                   >
-                    <Button className="w-full h-12 gap-2 text-base font-semibold bg-gradient-to-r from-or to-orange-brulant text-gray-900 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
-                      <Plus className="size-5" />
+                    <Button className="w-full gap-2">
+                      <Plus className="size-4" />
                       Publier une annonce
                     </Button>
                   </Link>
@@ -277,9 +254,9 @@ export default function MobileMenu({
                       signOut()
                       onClose()
                     }}
-                    className="w-full h-12 gap-2 text-base font-semibold text-terracotta-fonce hover:bg-red-50 hover:text-terracotta-fonce"
+                    className="w-full gap-2 text-red-600 hover:bg-red-50 hover:text-red-600"
                   >
-                    <LogOut className="size-5" />
+                    <LogOut className="size-4" />
                     Déconnexion
                   </Button>
                 </>

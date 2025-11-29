@@ -1,19 +1,6 @@
 /**
- * HeroSection.tsx
- * Design System v5.1 "Alger Vibrante Refined"
- * 
- * Hero section avec gradient bleu méditerranéen inspiré des photos aériennes d'Alger.
- * 
- * @colors
- * - Gradient mer: bleu-ciel → turquoise-mer (couleurs du design system)
- * - Titre: gray-900 avec accent turquoise-mer
- * - CTAs: blue-electric (couleur primary du design system)
- * - Search glassmorphism: bg-white/90 backdrop-blur-xl
- * 
- * @patterns
- * - Pattern Zellige Khatam opacity-[0.03]
- * 
- * @version 5.1 - Inspired by Alger's aerial photos
+ * HeroSection - RentAlg Design System v6.0
+ * Fresh, Modern & Clean Hero Component
  */
 
 "use client";
@@ -22,7 +9,7 @@ import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion'
 import { Input } from '@/components/ui/input';
-import { Search, MapPin, Home, Sparkles, LayoutDashboard, Plus } from 'lucide-react';
+import { Search, MapPin, Home, Sparkles, LayoutDashboard, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { AuthUser } from 'aws-amplify/auth';
 
@@ -35,177 +22,151 @@ const HeroSection = ({ user, userRole }: HeroSectionProps) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <section className='relative min-h-[90vh] flex items-center overflow-hidden'>
-  {/* Background gradient bleu méditerranéen - Inspiré des photos aériennes d'Alger */}
-  <div className="absolute inset-0 bg-linear-to-br from-bleu-ciel/20 via-turquoise-mer/15 to-aqua-marine/10" />
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-teal-700" />
       
-      {/* Overlay glassmorphism pour profondeur */}
-      <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px]" />
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-72 h-72 bg-orange-400/20 rounded-full blur-3xl" />
+      </div>
 
-      {/* Contenu principal */}
-      <div className='relative z-10 w-full px-6 sm:px-8 lg:px-12 pt-32 pb-20'>
-        <div className='max-w-6xl mx-auto'>
+      {/* Content */}
+      <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12 pt-32 pb-20">
+        <div className="max-w-5xl mx-auto text-center">
           
-          {/* Badge animé */}
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
             className="flex justify-center mb-8"
           >
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-md border border-white/50 shadow-sm">
-              <Sparkles className="w-4 h-4 text-turquoise-mer" />
-              <span className="text-sm font-semibold text-gray-700">
-                {user ? `Bienvenue ${user.username}` : 'La Plateforme Immobilière par Excellence'}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <Sparkles className="w-4 h-4 text-orange-400" />
+              <span className="text-sm font-medium text-white">
+                {user ? `Bienvenue, ${user.username}` : 'La Plateforme Immobilière #1 en Algérie'}
               </span>
             </div>
           </motion.div>
 
-          {/* Titre principal - Style "Alger Vibrante" */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center mb-8"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
           >
-            <h1 className='text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 text-gray-900 drop-shadow-sm'>
-              {user ? (
-                <>
-                  <span>Votre espace</span>
-                  <br />
-                  <span className="text-turquoise-mer drop-shadow-sm">
-                    immobilier
-                  </span>
-                  <br />
-                  <span>{userRole === 'Professionnel' ? 'professionnel' : 'personnel'}</span>
-                </>
-              ) : (
-                <>
-                  <span>Trouvez votre</span>
-                  <br />
-                  <span className="text-turquoise-mer drop-shadow-sm">
-                    chez-vous idéal
-                  </span>
-                  <br />
-                  <span>en Algérie</span>
-                </>
-              )}
-            </h1>
-            
-            <p className='text-xl sm:text-2xl text-gray-700 max-w-3xl mx-auto font-medium leading-relaxed'>
-              {user 
-                ? (userRole === 'Professionnel' 
-                    ? 'Gérez vos annonces et développez votre activité immobilière'
-                    : 'Recherchez, sauvegardez et trouvez votre futur bien en toute simplicité')
-                : 'La plateforme immobilière premium qui célèbre la beauté d\'Alger'}
-            </p>
+            {user ? (
+              <>
+                Votre espace<br />
+                <span className="text-teal-300">immobilier</span>
+              </>
+            ) : (
+              <>
+                Trouvez votre<br />
+                <span className="text-teal-300">chez-vous idéal</span>
+              </>
+            )}
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10"
+          >
+            {user 
+              ? 'Gérez vos annonces et trouvez votre futur bien en toute simplicité'
+              : 'Des milliers d\'annonces vérifiées pour acheter ou louer en Algérie'}
+          </motion.p>
+
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="max-w-3xl mx-auto"
+          >
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault()
+                if (searchQuery.trim()) {
+                  window.location.href = `/properties?q=${encodeURIComponent(searchQuery.trim())}`
+                }
+              }}
+              className="flex flex-col sm:flex-row items-stretch gap-3 p-3 bg-white rounded-2xl shadow-2xl"
+              role="search"
+              aria-label="Rechercher des propriétés"
+            >
+              <div className="flex items-center flex-1 gap-3 px-4">
+                <Search className="w-5 h-5 text-slate-400 shrink-0" aria-hidden="true" />
+                <Input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Appartement, Villa, Terrain..."
+                  className="flex-1 border-none bg-transparent h-12 text-base placeholder:text-slate-400 focus:ring-0"
+                  aria-label="Rechercher des propriétés"
+                />
+              </div>
+              <Button type="submit" size="lg" className="h-12 px-8 rounded-xl">
+                <Search className="w-4 h-4 mr-2" aria-hidden="true" />
+                Rechercher
+              </Button>
+            </form>
           </motion.div>
 
-          {/* Search bar glassmorphism - Style "Alger Vibrante" */}
+          {/* Quick Actions */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-8 flex flex-wrap justify-center gap-3"
           >
-            {/* Search bar principale glassmorphism moderne */}
-            <div className="relative">
-              {/* Container glassmorphism */}
-              <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center bg-white/95 backdrop-blur-xl rounded-3xl shadow-xl p-3 sm:p-4 gap-3 sm:gap-0 border border-white/50">
-                
-                {/* Input section */}
-                <div className="flex items-center flex-1 px-4">
-                  <Search className="w-6 h-6 text-blue-electric shrink-0 mr-3" />
-                  
-                  <Input 
-                    type="text" 
-                    value={searchQuery} 
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Appartement à Alger, Villa à Oran, Terrain à Constantine..." 
-                    className="flex-1 border-none bg-transparent h-12 text-base sm:text-lg placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none font-medium"
-                  />
-                </div>
-                
-                {/* Button recherche - Bleu électrique du design system */}
-                <Button 
-                  onClick={() => console.log('Search:', searchQuery)}
-                  variant="default"
-                  size="lg"
-                  className="h-14 px-10 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  <Search className="w-5 h-5 mr-2" />
-                  Rechercher
-                </Button>
-              </div>
-            </div>
-
-            {/* Quick filters / Actions rapides */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-8 flex flex-wrap justify-center gap-3"
-            >
-              {user ? (
-                // Actions rapides pour utilisateurs connectés
-                userRole === 'Professionnel' ? (
-                  <>
-                    <Link href="/pro">
-                      <Button variant="default" className="rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200">
-                        <LayoutDashboard className="w-4 h-4 mr-2" />
-                        Mon Dashboard Pro
-                      </Button>
-                    </Link>
-                    <Link href="/pro/properties/new">
-                      <Button variant="outline" className="rounded-full bg-white/80 backdrop-blur-md border-white/50 text-gray-900 font-semibold hover:bg-white hover:scale-105 transition-all duration-200">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Créer une annonce
-                      </Button>
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link href="/particulier">
-                      <Button variant="default" className="rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200">
-                        <LayoutDashboard className="w-4 h-4 mr-2" />
-                        Mon Espace
-                      </Button>
-                    </Link>
-                    <Link href="/favorites">
-                      <Button variant="outline" className="rounded-full bg-white/80 backdrop-blur-md border-white/50 text-gray-900 font-semibold hover:bg-white hover:scale-105 transition-all duration-200">
-                        <Home className="w-4 h-4 mr-2" />
-                        Mes Favoris
-                      </Button>
-                    </Link>
-                  </>
-                )
-              ) : (
-                // Quick filters pour utilisateurs non connectés
-                [
+            {user ? (
+              <>
+                <Link href={userRole === 'Professionnel' ? '/pro' : '/particulier'}>
+                  <Button variant="secondary" className="rounded-full">
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Mon Dashboard
+                  </Button>
+                </Link>
+                <Link href="/properties">
+                  <Button variant="outline" className="rounded-full bg-white/10 border-white/30 text-white hover:bg-white/20">
+                    <Search className="w-4 h-4 mr-2" />
+                    Explorer
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                {[
                   { icon: Home, label: 'Appartements', href: '/properties?type=apartment' },
                   { icon: Home, label: 'Villas', href: '/properties?type=villa' },
                   { icon: MapPin, label: 'Alger', href: '/properties?city=alger' },
                   { icon: MapPin, label: 'Oran', href: '/properties?city=oran' },
                 ].map((filter, index) => (
                   <Link key={index} href={filter.href}>
-                    <button className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-turquoise-mer border border-white/50 hover:border-turquoise-mer hover:shadow-md transition-all duration-200">
-                      <filter.icon className="w-4 h-4 text-gray-600 group-hover:text-white transition-colors" />
-                      <span className="text-sm font-semibold text-gray-700 group-hover:text-white transition-colors">
-                        {filter.label}
-                      </span>
+                    <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-all duration-200">
+                      <filter.icon className="w-4 h-4" />
+                      {filter.label}
                     </button>
                   </Link>
-                ))
-              )}
-            </motion.div>
+                ))}
+              </>
+            )}
           </motion.div>
 
-          {/* Stats en bas - VERSION moderne épurée */}
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto"
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
           >
             {[
               { value: 'Nouveau', label: 'Plateforme en lancement' },
@@ -213,23 +174,30 @@ const HeroSection = ({ user, userRole }: HeroSectionProps) => {
               { value: '100%', label: 'Annonces vérifiées' },
               { value: 'Gratuit', label: 'Publication d\'annonces' },
             ].map((stat, index) => (
-              <motion.div 
+              <div
                 key={index}
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.2 }}
-                className="text-center p-5 sm:p-6 rounded-2xl bg-white border border-white/50 hover:border-turquoise-mer/30 hover:shadow-lg transition-all duration-200 backdrop-blur-sm"
+                className="text-center p-5 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10"
               >
-                <div className="text-2xl sm:text-3xl font-bold text-turquoise-mer mb-1">
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600 font-medium">
+                <div className="text-xs sm:text-sm text-white/70">
                   {stat.label}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
-
         </div>
+      </div>
+
+      {/* Bottom Wave */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+            fill="white"
+          />
+        </svg>
       </div>
     </section>
   )
