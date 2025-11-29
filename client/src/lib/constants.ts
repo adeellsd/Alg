@@ -113,6 +113,14 @@ export const PropertyTypeIcons: Record<PropertyTypeEnum, LucideIcon> = {
 // Add this constant at the end of the file
 export const NAVBAR_HEIGHT = 90; // in pixels
 
+// Site configuration
+export const SITE_CONFIG = {
+  name: "RentAlg",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://rentalg.dz",
+  description: "Trouvez votre bien idéal en Algérie. Des milliers d'annonces vérifiées pour acheter, louer ou investir.",
+  locale: "fr_DZ",
+};
+
 // Test users for development
 export const testUsers = {
   tenant: {
