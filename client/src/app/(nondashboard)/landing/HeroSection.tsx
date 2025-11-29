@@ -91,22 +91,33 @@ const HeroSection = ({ user, userRole }: HeroSectionProps) => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="max-w-3xl mx-auto"
           >
-            <div className="flex flex-col sm:flex-row items-stretch gap-3 p-3 bg-white rounded-2xl shadow-2xl">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault()
+                if (searchQuery.trim()) {
+                  window.location.href = `/properties?q=${encodeURIComponent(searchQuery.trim())}`
+                }
+              }}
+              className="flex flex-col sm:flex-row items-stretch gap-3 p-3 bg-white rounded-2xl shadow-2xl"
+              role="search"
+              aria-label="Rechercher des propriétés"
+            >
               <div className="flex items-center flex-1 gap-3 px-4">
-                <Search className="w-5 h-5 text-slate-400 shrink-0" />
+                <Search className="w-5 h-5 text-slate-400 shrink-0" aria-hidden="true" />
                 <Input
-                  type="text"
+                  type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Appartement, Villa, Terrain..."
                   className="flex-1 border-none bg-transparent h-12 text-base placeholder:text-slate-400 focus:ring-0"
+                  aria-label="Rechercher des propriétés"
                 />
               </div>
-              <Button size="lg" className="h-12 px-8 rounded-xl">
-                <Search className="w-4 h-4 mr-2" />
+              <Button type="submit" size="lg" className="h-12 px-8 rounded-xl">
+                <Search className="w-4 h-4 mr-2" aria-hidden="true" />
                 Rechercher
               </Button>
-            </div>
+            </form>
           </motion.div>
 
           {/* Quick Actions */}
