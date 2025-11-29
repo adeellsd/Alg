@@ -22,6 +22,9 @@ const notoSansArabic = Noto_Sans_Arabic({
   display: "swap",
 });
 
+// Base URL for metadata (must be defined before metadata export)
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rentalg.dz";
+
 export const metadata: Metadata = {
   title: {
     default: "RentAlg - Plateforme immobilière algérienne",
@@ -47,11 +50,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://rentalg.dz"),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: "RentAlg - Plateforme immobilière algérienne",
     description: "Trouvez votre bien idéal en Algérie. Des milliers d'annonces vérifiées pour acheter, louer ou investir.",
-    url: "https://rentalg.dz",
+    url: siteUrl,
     siteName: "RentAlg",
     locale: "fr_DZ",
     type: "website",
