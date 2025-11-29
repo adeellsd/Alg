@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Appartement", "code": "APARTMENT" },
+  { "id": 2, "name": "Villa", "code": "VILLA" },
+  { "id": 3, "name": "Maison", "code": "HOUSE" },
+  { "id": 4, "name": "Terrain", "code": "TERRAIN" },
+  { "id": 5, "name": "Local commercial", "code": "LOCAL_COMMERCIAL" },
+  { "id": 6, "name": "Garage", "code": "GARAGE" },
+  { "id": 7, "name": "Ferme", "code": "FARM" },
+  { "id": 8, "name": "Bungalow", "code": "BUNGALOW" },
+  { "id": 9, "name": "Studio", "code": "STUDIO" },
+  { "id": 10, "name": "Duplex", "code": "DUPLEX" }
+]

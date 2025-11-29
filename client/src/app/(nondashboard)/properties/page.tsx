@@ -50,10 +50,11 @@ import {
   useLazySearchPropertiesQuery, 
   useGetCommunesByWilayaQuery 
 } from "@/state/api";
-import { FiltersConfig, SearchFilters, PropertyFrontend } from "@/types/property-frontend";
-import { FilterSidebar } from "@/components/ui/filter-sidebar";
+import { FiltersConfig, SearchFilters, PropertyFrontend, FilterContext } from "@/types/property-frontend";
+import { FilterSidebarIntelligent } from "@/components/ui/filter-sidebar-intelligent";
 import { PropertyCardVintage } from "@/components/ui/property-card-vintage";
 import { Slider } from "@/components/ui/slider";
+import { getActiveContext, getContextualAmenities, shouldShowFilter as checkFilter } from "@/lib/filter-config";
 
 // =============================================================================
 // SORT OPTIONS
@@ -103,6 +104,21 @@ function PropertiesPageContent() {
     sortBy: searchParams.get("sort") || "date_desc",
   });
 
+  // ===== CONTEXTE ACTIF - Détermine quels filtres afficher =====
+  const activeContext = useMemo<FilterContext | null>(() => {
+    return getActiveContext(filters.propertyTypes);
+  }, [filters.propertyTypes]);
+
+  // ===== AMENITIES CONTEXTUELLES =====
+  const contextualAmenities = useMemo(() => {
+    return getContextualAmenities(activeContext);
+  }, [activeContext]);
+
+  // ===== FONCTION DE VÉRIFICATION DE FILTRE =====
+  const shouldShowFilter = (filterName: string): boolean => {
+    return checkFilter(filterName, activeContext);
+  };
+
   // Fetch filters config
   const { data: filtersConfigData } = useGetFiltersConfigQuery();
   
@@ -148,8 +164,64 @@ function PropertiesPageContent() {
     });
   }, [filters, triggerSearch]);
 
+  // ===== HANDLER AVEC RESET INTELLIGENT =====
   const handleFiltersChange = (newFilters: Partial<SearchFilters>) => {
-    setFilters((prev) => ({ ...prev, ...newFilters }));
+    setFilters((prev) => {
+      const updated = { ...prev, ...newFilters };
+
+      // RESET INTELLIGENT si type de bien change
+      if (newFilters.propertyTypes && 
+          JSON.stringify(newFilters.propertyTypes) !== JSON.stringify(prev.propertyTypes)) {
+        
+        const oldContext = getActiveContext(prev.propertyTypes);
+        const newContext = getActiveContext(newFilters.propertyTypes);
+        
+        // Si changement de contexte, réinitialiser les filtres incompatibles
+        if (oldContext?.category !== newContext?.category) {
+          return {
+            ...updated,
+            // Reset dimensions spécifiques
+            minFloor: undefined,
+            maxFloor: undefined,
+            hasElevator: undefined,
+            excludeGroundFloor: undefined,
+            excludeTopFloor: undefined,
+            minLandArea: undefined,
+            maxLandArea: undefined,
+            // Reset pièces si passage vers terrain/commerce
+            minRooms: newContext?.category === 'LAND' || newContext?.category === 'COMMERCIAL' ? undefined : updated.minRooms,
+            minBedrooms: newContext?.category === 'LAND' || newContext?.category === 'COMMERCIAL' ? undefined : updated.minBedrooms,
+            minBathrooms: newContext?.category === 'LAND' || newContext?.category === 'COMMERCIAL' ? undefined : updated.minBathrooms,
+            // Reset amenities car contexte change
+            amenities: [],
+            // Reset vue si garage
+            viewTypes: newContext?.category === 'GARAGE' ? undefined : updated.viewTypes,
+          };
+        }
+      }
+
+      // RESET si transaction change RENT ↔ SALE
+      if (newFilters.transactionGroup !== undefined && newFilters.transactionGroup !== prev.transactionGroup) {
+        if (newFilters.transactionGroup === "RENT" && prev.transactionGroup !== "RENT") {
+          // Passage vers LOCATION
+          return {
+            ...updated,
+            isNegotiable: undefined, // N'existe pas en location
+            transactionType: "", // Reset pour permettre sélection période
+          };
+        } else if (newFilters.transactionGroup === "SALE" && prev.transactionGroup === "RENT") {
+          // Passage vers VENTE
+          return {
+            ...updated,
+            minRentDuration: undefined,
+            maxRentDeposit: undefined,
+            transactionType: "SALE",
+          };
+        }
+      }
+
+      return updated;
+    });
   };
 
   const handleResetFilters = () => {
@@ -310,6 +382,62 @@ function PropertiesPageContent() {
                       </div>
                     </button>
                   </div>
+
+                  {/* ============================================================ */}
+                  {/* NIVEAU 2: PÉRIODE DE LOCATION - CONDITIONNEL */}
+                  {/* ============================================================ */}
+                  <AnimatePresence mode="wait">
+                    {filters.transactionGroup === "RENT" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="space-y-2 pt-1">
+                          <label className="text-xs font-bold text-[#6B8E23] uppercase tracking-wide px-1">
+                            Période de location
+                          </label>
+                          <div className="grid grid-cols-3 gap-2">
+                            <button
+                              onClick={() => handleFiltersChange({ transactionType: "RENT_DAILY" })}
+                              className={cn(
+                                "py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200",
+                                filters.transactionType === "RENT_DAILY"
+                                  ? "bg-linear-to-br from-[#0891B2] to-[#40E0D0] text-white shadow-md scale-105"
+                                  : "bg-white/60 text-[#6B8E23] hover:bg-white border border-[#E8D5B7]"
+                              )}
+                            >
+                              Journalière
+                            </button>
+                            <button
+                              onClick={() => handleFiltersChange({ transactionType: "RENT_MONTHLY" })}
+                              className={cn(
+                                "py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200",
+                                filters.transactionType === "RENT_MONTHLY"
+                                  ? "bg-linear-to-br from-[#0891B2] to-[#40E0D0] text-white shadow-md scale-105"
+                                  : "bg-white/60 text-[#6B8E23] hover:bg-white border border-[#E8D5B7]"
+                              )}
+                            >
+                              Mensuelle
+                            </button>
+                            <button
+                              onClick={() => handleFiltersChange({ transactionType: "RENT_YEARLY" })}
+                              className={cn(
+                                "py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200",
+                                filters.transactionType === "RENT_YEARLY"
+                                  ? "bg-linear-to-br from-[#0891B2] to-[#40E0D0] text-white shadow-md scale-105"
+                                  : "bg-white/60 text-[#6B8E23] hover:bg-white border border-[#E8D5B7]"
+                              )}
+                            >
+                              Annuelle
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Rent period removed per product decision */}
                   <div className="relative">
@@ -790,10 +918,12 @@ function PropertiesPageContent() {
                       </div>
                     </SheetHeader>
                     <div className="flex-1 overflow-y-auto px-6 py-6">
-                      <FilterSidebar
+                      <FilterSidebarIntelligent
                         filters={filters}
                         filtersConfig={filtersConfig}
                         onFiltersChange={handleFiltersChange}
+                        activeContext={activeContext}
+                        contextualAmenities={contextualAmenities}
                         onReset={handleResetFilters}
                       />
                     </div>
@@ -912,9 +1042,9 @@ function PropertiesPageContent() {
       {/* ================================================================== */}
       <div className="relative z-10 container mx-auto px-4 py-8 sm:py-10">
         <div className="flex gap-8 lg:gap-10">
-          {/* Desktop Sidebar - Casbah Edition */}
+          {/* Desktop Sidebar - Casbah Edition - 360px */}
           {viewMode !== "map" && (
-            <aside className="hidden lg:block w-[280px] xl:w-[300px] shrink-0">
+            <aside className="hidden lg:block shrink-0" style={{ width: '360px' }}>
               <div 
                 className="bg-white/70 backdrop-blur-2xl rounded-[24px] border-2 border-[#E8D5B7]/50 p-6 xl:p-7 sticky shadow-[0_8px_32px_0_rgba(232,213,183,0.4)] overflow-hidden group hover:shadow-[0_16px_48px_0_rgba(205,92,92,0.2)] transition-all duration-500"
                 style={{ top: NAVBAR_HEIGHT + 20 }}
@@ -931,10 +1061,12 @@ function PropertiesPageContent() {
                 />
                 
                 <div className="relative z-10">
-                  <FilterSidebar
+                  <FilterSidebarIntelligent
                     filters={filters}
                     filtersConfig={filtersConfig}
                     onFiltersChange={handleFiltersChange}
+                    activeContext={activeContext}
+                    contextualAmenities={contextualAmenities}
                     onReset={handleResetFilters}
                   />
                 </div>

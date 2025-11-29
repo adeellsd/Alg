@@ -1,24 +1,152 @@
 [
-  { "name": "Ascenseur", "category": "Équipement", "icon": "elevator" },
-  { "name": "Balcon", "category": "Extérieur", "icon": "balcony" },
-  { "name": "Terrasse", "category": "Extérieur", "icon": "terrace" },
-  { "name": "Cave", "category": "Rangement", "icon": "warehouse" },
-  { "name": "Parking", "category": "Stationnement", "icon": "parking" },
-  { "name": "Garage", "category": "Stationnement", "icon": "warehouse" },
-  { "name": "Jardin", "category": "Extérieur", "icon": "flower" },
-  { "name": "Piscine", "category": "Extérieur", "icon": "pool" },
-  { "name": "Climatisation", "category": "Confort", "icon": "snowflake" },
-  { "name": "Chauffage Central", "category": "Confort", "icon": "flame" },
-  { "name": "Chauffage Individuel", "category": "Confort", "icon": "flame" },
-  { "name": "Cuisine équipée", "category": "Intérieur", "icon": "chef-hat" },
-  { "name": "Meublé", "category": "Intérieur", "icon": "sofa" },
-  { "name": "Internet", "category": "Services", "icon": "wifi" },
-  { "name": "Gaz de ville", "category": "Services", "icon": "flame" },
-  { "name": "Eau", "category": "Services", "icon": "droplet" },
-  { "name": "Électricité", "category": "Services", "icon": "zap" },
-  { "name": "Gardien", "category": "Sécurité", "icon": "shield" },
-  { "name": "Interphone", "category": "Sécurité", "icon": "phone" },
-  { "name": "Alarme", "category": "Sécurité", "icon": "bell" },
-  { "name": "Portail électrique", "category": "Sécurité", "icon": "door-open" },
-  { "name": "Vidéosurveillance", "category": "Sécurité", "icon": "camera" }
+  {
+    "name": "Ascenseur",
+    "category": "Équipement",
+    "icon": "elevator"
+  },
+  {
+    "name": "Balcon",
+    "category": "Extérieur",
+    "icon": "balcony"
+  },
+  {
+    "name": "Terrasse",
+    "category": "Extérieur",
+    "icon": "terrace"
+  },
+  {
+    "name": "Cave",
+    "category": "Rangement",
+    "icon": "warehouse"
+  },
+  {
+    "name": "Parking",
+    "category": "Stationnement",
+    "icon": "parking"
+  },
+  {
+    "name": "Garage",
+    "category": "Stationnement",
+    "icon": "warehouse"
+  },
+  {
+    "name": "Jardin",
+    "category": "Extérieur",
+    "icon": "flower"
+  },
+  {
+    "name": "Piscine",
+    "category": "Extérieur",
+    "icon": "pool"
+  },
+  {
+    "name": "Climatisation",
+    "category": "Confort",
+    "icon": "snowflake"
+  },
+  {
+    "name": "Gaz de ville",
+    "category": "Services",
+    "icon": "flame"
+  },
+  {
+    "name": "Eau",
+    "category": "Services",
+    "icon": "droplet"
+  },
+  {
+    "name": "Électricité",
+    "category": "Services",
+    "icon": "zap"
+  },
+  {
+    "name": "Portail électrique",
+    "category": "Sécurité",
+    "icon": "door-open"
+  },
+  {
+    "name": "Assainissement",
+    "category": "Services",
+    "icon": "droplet"
+  },
+  {
+    "name": "Vitrine",
+    "category": "Commerce",
+    "icon": "store"
+  },
+  {
+    "name": "Parking client",
+    "category": "Commerce",
+    "icon": "parking"
+  },
+  {
+    "name": "Sécurisé",
+    "category": "Sécurité",
+    "icon": "shield"
+  },
+  {
+    "name": "Vidéo surveillance",
+    "category": "Sécurité",
+    "icon": "camera"
+  },
+  {
+    "name": "Serre agricole",
+    "category": "Agriculture",
+    "icon": "leaf"
+  },
+  {
+    "name": "Écurie",
+    "category": "Agriculture",
+    "icon": "barn"
+  },
+  {
+    "name": "Hangar",
+    "category": "Rangement",
+    "icon": "warehouse"
+  },
+  {
+    "name": "Terrasse privative",
+    "category": "Extérieur",
+    "icon": "terrace"
+  },
+  {
+    "name": "Jardin privatif",
+    "category": "Extérieur",
+    "icon": "flower"
+  },
+  {
+    "name": "Mezzanine",
+    "category": "Architecture",
+    "icon": "stairs"
+  },
+  {
+    "name": "Entrée indépendante",
+    "category": "Architecture",
+    "icon": "door-open"
+  },
+  {
+    "name": "Meublé",
+    "category": "Équipement",
+    "icon": "sofa"
+  },
+  {
+    "name": "Chauffage central",
+    "category": "Confort",
+    "icon": "flame"
+  },
+  {
+    "name": "Double vitrage",
+    "category": "Confort",
+    "icon": "window"
+  },
+  {
+    "name": "Cuisine équipée",
+    "category": "Équipement",
+    "icon": "chef-hat"
+  },
+  {
+    "name": "Interphone",
+    "category": "Sécurité",
+    "icon": "phone"
+  }
 ]

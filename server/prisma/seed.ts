@@ -97,6 +97,7 @@ async function deleteAllData(orderedModelNames: string[]) {
 
 function transformItem(modelName: string, item: any): any {
   const transformed = { ...item };
+  
 
   // ===== COMMUNE =====
   if (modelName === "Commune") {
