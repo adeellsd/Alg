@@ -1,538 +1,577 @@
-# 🎨 RentAlg Design System v5.0 — "Alger Authentique"
+# RentAlg - AI Agent Instructions
 
-> **Inspiré par les magnifiques photos aériennes d'Alger et l'architecture traditionnelle algéroise**
+> **Real estate marketplace for Algeria** - Next.js 14 + Express + PostgreSQL + AWS  
+> Production-ready monorepo with tiered subscription model (FREE/STARTER/PRO/ELITE)
 
 ---
 
-## 🌅 **PALETTE DE COULEURS COMPLÈTE**
+## 🏗️ Architecture Overview
 
-### **1. BLEUS MÉDITERRANÉENS** (Palette étendue)
+**Monorepo Structure:**
+- `client/` - Next.js 14 (App Router) frontend with Tailwind v4, Redux Toolkit, AWS Amplify auth
+- `server/` - Express.js REST API with Prisma ORM, PostgreSQL + PostGIS, AWS S3 integration
 
+**Key Integration Points:**
+- Authentication: AWS Cognito (JWT) → Express middleware validates tokens and fetches user tier from DB
+- Frontend-Backend: RTK Query in `client/src/state/api.ts` auto-injects JWT tokens via `prepareHeaders`
+- Database: Prisma Client generated types are synced to `client/src/types/prismaTypes.d.ts` via postgenerate hook
+- File uploads: Multer → AWS S3 with watermarking via Sharp (backend handles this, not frontend)
+
+**Critical Data Flows:**
+1. User signup → Cognito creates user with `custom:role` → Frontend creates DB record on first API call → AuthMiddleware reads real `accountTier` from DB (source of truth)
+2. Property search → Frontend RTK Query → `/api/properties` → PropertyController builds Prisma query with filters → Returns transformed data with boost priority sorting
+3. Property location privacy → Public coordinates (±500m fuzzy) vs exact coordinates (requires LocationRequest approval)
+
+---
+
+## 🔐 Authentication & Authorization
+
+**Auth Middleware Pattern** (`server/src/middleware/authMiddleware.ts`):
 ```typescript
-const BLUES = {
-  // Mer & Ciel (des photos aériennes)
-  turquoiseMer: '#40E0D0',      // Eau cristalline visible sur photos
-  aquaMarine: '#7FDBDA',        // Reflets lumineux
-  bleuCiel: '#87CEEB',          // Ciel d'Alger ensoleillé
-  bleuElectrique: '#0891B2',    // PRIMARY CTA (conservé)
-  bleuProfond: '#0369A1',       // Hover states (conservé)
-  bleuBright: '#06B6D4',        // Accents (conservé)
-  bleuPale: '#CFFAFE',          // Backgrounds (conservé)
-  bleuNuit: '#1E3A5F',          // Headers, navigation sombre
-  bleuCobalt: '#0047AB',        // Zellige, badges premium
-}
+// Routes protected by tier
+app.use("/particulier", AuthMiddleware(["FREE"]), particulierRoutes);
+app.use("/pro", AuthMiddleware(["STARTER", "PRO", "ELITE"]), proRoutes);
+app.use("/api/properties", propertyRoutes); // Public + optionalAuthMiddleware
 ```
 
-### **2. BEIGES & TERRES** (Architecture Casbah)
+**Important:** 
+- Cognito `custom:role` is ONLY used for initial user creation fallback
+- Database `accountTier` field is the single source of truth for permissions
+- Middleware fetches user from DB on every request to validate tier + account status (ACTIVE/SUSPENDED/BANNED)
+- If user doesn't exist in DB yet, middleware allows through with default tier, frontend will create them
 
+**Frontend Auth Flow** (`client/src/state/api.ts`):
 ```typescript
-const NEUTRALS_WARM = {
-  // Inspiré des façades de la Casbah
-  beigeCasbah: '#E8D5B7',       // Backgrounds chauds, cards
-  beigeChaud: '#D4B896',        // Hover states sur beige
-  terracotta: '#C19A6B',        // Accents chaleureux
-  sable: '#F5E6D3',             // Backgrounds très clairs
-  crème: '#FFF8E7',             // Off-white premium
-  
-  // Toits & Architecture
-  tuileOrange: '#CD5C5C',       // Toits traditionnels (visible photos)
-  pierreClaire: '#F0E6D2',      // Pierres blanches Casbah
-}
-```
-
-### **3. SUNSET PALETTE** (Couchers de soleil méditerranéens)
-
-```typescript
-const SUNSET = {
-  corailVif: '#FF6B4A',         // Couchers de soleil intenses
-  orangeBrulant: '#FF8C42',     // Horizon embrasé
-  pêche: '#FFB88C',             // Lueur chaude
-  ambre: '#FFAB4C',             // Golden hour
-  coral: '#F97316',             // Promotions (conservé)
-  sunshine: '#F59E0B',          // Warnings (conservé)
-}
-```
-
-### **4. VERTS JARDIN** (Végétation luxuriante)
-
-```typescript
-const GREENS = {
-  vertJardin: '#2D5016',        // Cyprès, pins (photos)
-  vertVibrant: '#059669',       // Success (conservé)
-  vertFresh: '#10B981',         // CTA secondaire (conservé)
-  vertEmeraude: '#34D399',      // Zellige vert
-  vertPale: '#D1FAE5',          // Backgrounds (conservé)
-  vertOlive: '#6B8E23',         // Végétation méditerranéenne
-}
-```
-
-### **5. ACCENTS PREMIUM**
-
-```typescript
-const PREMIUM = {
-  // ELITE tier
-  or: '#FFD700',                // Zellige doré, badges ELITE
-  fuchsia: '#DB2777',           // Gradient ELITE (conservé)
-  amethyste: '#9333EA',         // Premium accents
-  
-  // Urgence & Erreurs
-  terracottaFoncé: '#DC2626',   // Errors (conservé)
-  rouge: '#B91C1C',             // Critical
-}
+// getAuthUser tries /pro endpoint first (covers STARTER/PRO/ELITE), 
+// falls back to /particulier (FREE), then creates user if 404
 ```
 
 ---
 
-## 🎭 **PATTERNS ZELLIGE**
+## 🗄️ Database Architecture (Prisma Schema v7.0)
 
-### **Motifs Géométriques Traditionnels**
-
-```css
-/* Pattern 1: Étoile à 8 branches (Khatam) */
-.pattern-khatam {
-  background-image: url('/patterns/zellige-khatam.svg');
-  background-size: 120px 120px;
-  opacity: 0.08;
-}
-
-/* Pattern 2: Motif floral stylisé */
-.pattern-floral {
-  background-image: url('/patterns/zellige-floral.svg');
-  background-size: 80px 80px;
-  opacity: 0.06;
-}
-
-/* Pattern 3: Géométrique simple (bordures) */
-.pattern-border-zellige {
-  border-image: url('/patterns/zellige-border.svg') 30 round;
-}
-
-/* Pattern 4: Mosaïque subtile (cards ELITE) */
-.pattern-mosaic-elite {
-  background-image: url('/patterns/zellige-mosaic.svg');
-  background-size: 200px 200px;
-  opacity: 0.04;
-  mix-blend-mode: multiply;
+**Tier System** (central to all business logic):
+```prisma
+enum AccountTier {
+  FREE      // 3 properties, 8 images, 0 videos
+  STARTER   // 25 properties, 15 images, 1 video
+  PRO       // NEW tier (mid-tier features)
+  ELITE     // Unlimited everything + analytics
 }
 ```
 
-### **Usage des Patterns**
+**Key Models:**
+- `User` - cognitoId (unique), accountTier, autoApprove (PRO fast-track)
+- `Property` - status (DRAFT/PENDING_REVIEW/ACTIVE), coordinates privacy (exact vs public lat/lng)
+- `PropertyBoost` - 3 tiers with differential pricing per account tier
+- `Location` - Uses PostGIS for spatial queries (radius search, clustering)
+- `Conversation` - 1:1 between buyer/seller per property (refactored in v6.0)
+- `LocationRequest` - Privacy workflow for exact address sharing
 
-```tsx
-// Hero Section avec pattern subtil
-<section className="relative bg-gradient-to-br from-[#E8D5B7] to-[#D4B896]">
-  <div className="absolute inset-0 pattern-khatam" />
-  <div className="relative z-10">
-    {/* Contenu */}
-  </div>
-</section>
+**Critical Indexes:**
+- Composite: `(status, propertyType, wilayaId)` on properties for search performance
+- Spatial: `GIST(ST_MakePoint(longitude, latitude))` on locations
+- Unread messages: `(receiverId, readAt)` WHERE readAt IS NULL
 
-// Card ELITE avec bordure Zellige
-<Card className="border-4 pattern-border-zellige bg-white/95 backdrop-blur-sm">
-  <Badge variant="elite" className="pattern-mosaic-elite">
-    ELITE
-  </Badge>
-</Card>
-```
+**Known Issue (P1 from AUDIT_REPORT.md):**
+- Controllers create `new PrismaClient()` each time → Use singleton pattern from `server/src/lib/prisma.ts` instead
 
 ---
 
-## 🏗️ **COMPOSANTS REFONTE COMPLÈTE**
+## 🎨 Design System v6.0 "Alger Nouvelle Vague"
 
-### **1. Hero Section "Alger Vibrante"**
+**Styling Stack:**
+- Tailwind CSS v4 with custom theme in `client/src/app/globals.css`
+- Shadcn/ui components in `client/src/components/ui/` (customized variants)
+- Framer Motion for page transitions and card hovers
+- NO inline hex colors - all colors defined in Tailwind theme (60+ semantic colors)
 
+**Design Principles:**
+- Mediterranean color palette (primary blue #0ea5e9, teal #14b8a6, warm orange #fb923c)
+- Glassmorphism effects: `bg-white/90 backdrop-blur-[20px]`
+- Zellige patterns in `/public/patterns/` (SVG overlays at 3-8% opacity)
+- Responsive breakpoints: Mobile-first, 480/768/1024/1280px
+
+**⭐ IMPORTANT - Vintage Algiers Theme (USE AS DEFAULT):**
 ```tsx
-export const HeroAlgerVibrant = () => {
-  return (
-    <section className="relative min-h-[85vh] overflow-hidden">
-      {/* Background gradient inspiré sunset */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#87CEEB] via-[#40E0D0] to-[#FF8C42]" />
-      
-      {/* Pattern Zellige subtil */}
-      <div className="absolute inset-0 pattern-khatam opacity-[0.03]" />
-      
-      {/* Glassmorphism overlay */}
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
-      
-      {/* Contenu */}
-      <div className="relative z-10 container mx-auto px-6 pt-32">
-        <motion.h1 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-[72px] font-bold text-white drop-shadow-2xl font-display"
-        >
-          Trouvez votre<br />
-          <span className="text-[#FFD700]">chez-vous</span> en Algérie
-        </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-[24px] text-white/90 mt-6 max-w-2xl"
-        >
-          La plateforme immobilière premium qui célèbre la beauté d'Alger
-        </motion.p>
-        
-        {/* Search bar glassmorphism */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mt-12 bg-white/90 backdrop-blur-[20px] rounded-[28px] p-8 shadow-2xl max-w-4xl"
-        >
-          <SearchBarAdvanced />
-        </motion.div>
-      </div>
-      
-      {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#E8D5B7] to-transparent" />
-    </section>
-  );
-};
+// The /properties page has a validated vintage Algiers aesthetic that works exceptionally well
+// USE THIS THEME as the default for all new public-facing pages unless explicitly requested otherwise
+
+APPROVED COLOR PALETTE (use these exact colors):
+Background gradient: bg-linear-to-b from-[#F5E6D3] via-white to-[#E8D5B7]/20
+Decorative divider: bg-linear-to-r from-transparent via-[#CD5C5C] (terracotta)
+Title gradient: from-[#0891B2] to-[#40E0D0] (turquoise)
+Subtitle text: text-[#6B8E23] (olive green)
+Accent gold: #FFD700
+Corner borders: border-[#FFD700]
+
+WHEN TO USE THIS THEME:
+✅ New public pages (landing sections, about, contact, etc.)
+✅ Property-related pages (detail, favorites, saved searches)
+✅ Marketing/promotional content
+✅ Homepage hero sections and feature showcases
+
+WHEN TO USE DIFFERENT COLORS:
+- Dashboard pages (use neutral/professional tones)
+- Admin interfaces (use standard design system)
+- Forms and data-heavy pages (prioritize usability)
+- If user explicitly requests different aesthetic
+
+// Reference implementation: client/src/app/(nondashboard)/properties/page.tsx
+// This theme combines warm Mediterranean tones with modern gradients
 ```
 
-### **2. Property Card "Casbah Edition"**
-
+**Component Patterns:**
 ```tsx
-export const PropertyCardCasbah = ({ property }: { property: Property }) => {
-  return (
-    <motion.article
-      whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-      className="group relative bg-gradient-to-br from-white to-[#F5E6D3] rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl"
-    >
-      {/* Zellige pattern overlay (très subtil) */}
-      <div className="absolute inset-0 pattern-mosaic-elite opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
-      {/* Image avec overlay gradient */}
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <img 
-          src={property.thumbnail} 
-          alt={property.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-        
-        {/* Gradient overlay inspiré sunset */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Badges avec nouveau style */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-10">
-          <Badge 
-            variant={property.transactionType === 'RENT' ? 'rent' : 'sale'}
-            className="bg-[#0891B2]/90 backdrop-blur-md text-white shadow-lg"
-          >
-            {property.transactionType === 'RENT' ? 'À louer' : 'Vente'}
-          </Badge>
-          
-          {property.isBoosted && property.boostTier === 'TIER_3_ULTRA' && (
-            <Badge className="bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF6B4A] text-white shadow-lg pattern-mosaic-elite">
-              ⭐ ULTRA
-            </Badge>
-          )}
-        </div>
-        
-        {/* Favorite button avec effet Zellige */}
-        <button 
-          className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center shadow-lg hover:bg-[#FFD700] hover:scale-110 transition-all duration-200 group/fav"
-        >
-          <Heart className="w-5 h-5 text-gray-600 group-hover/fav:text-white group-hover/fav:fill-white transition-colors" />
-        </button>
-      </div>
-      
-      {/* Content avec nouveau spacing */}
-      <div className="relative z-10 p-6 space-y-4">
-        {/* Prix avec style doré premium */}
-        <div className="flex items-baseline justify-between">
-          <p className="text-3xl font-bold bg-gradient-to-r from-[#0891B2] to-[#40E0D0] bg-clip-text text-transparent">
-            {formatPrice(property.price)}
-          </p>
-          <span className="text-sm text-gray-500 font-medium px-3 py-1 bg-[#F5E6D3] rounded-full">
-            {getPropertyTypeLabel(property.propertyType)}
-          </span>
-        </div>
-        
-        {/* Titre */}
-        <h3 className="text-xl font-semibold text-gray-900 line-clamp-2 group-hover:text-[#0891B2] transition-colors">
-          {property.title}
-        </h3>
-        
-        {/* Location avec icône stylisée */}
-        <div className="flex items-center gap-2 text-gray-600">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#40E0D0] to-[#0891B2] flex items-center justify-center shrink-0">
-            <MapPin className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-sm truncate">
-            {property.commune?.nameFr}, {property.wilaya.nameFr}
-          </span>
-        </div>
-        
-        {/* Features avec nouveau design */}
-        <div className="flex items-center gap-4 pt-4 border-t border-[#E8D5B7]">
-          {property.bedrooms && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-[#F5E6D3] to-[#E8D5B7] rounded-[12px]">
-              <BedDouble className="w-4 h-4 text-[#0891B2]" />
-              <span className="text-sm font-medium text-gray-700">{property.bedrooms}</span>
-            </div>
-          )}
-          {property.bathrooms && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-[#F5E6D3] to-[#E8D5B7] rounded-[12px]">
-              <Bath className="w-4 h-4 text-[#0891B2]" />
-              <span className="text-sm font-medium text-gray-700">{property.bathrooms}</span>
-            </div>
-          )}
-          {property.surface && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-[#F5E6D3] to-[#E8D5B7] rounded-[12px]">
-              <Maximize className="w-4 h-4 text-[#0891B2]" />
-              <span className="text-sm font-medium text-gray-700">{property.surface} m²</span>
-            </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Hover effect border (couleur Zellige) */}
-      <div className="absolute inset-0 rounded-[24px] border-2 border-transparent group-hover:border-[#FFD700] transition-colors duration-300 pointer-events-none" />
-    </motion.article>
-  );
-};
+// ALWAYS use cn() for className merging
+import { cn } from "@/lib/utils";
+<div className={cn("base-classes", conditionalClass && "active-state")} />
+
+// Animations - wave entrance pattern
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+/>
 ```
 
-### **3. Navbar "Alger Glass"**
+**Route Group Layouts:**
+- `(auth)/` - Signin/signup, uses AuthProvider
+- `(dashboard)/` - Protected routes, shared dashboard layout with sidebar
+- `(nondashboard)/` - Public pages (landing, properties list)
 
-```tsx
-export const NavbarAlgerGlass = () => {
-  const [scrolled, setScrolled] = useState(false);
+---
+
+## 📡 API Conventions
+
+**Backend Route Structure:**
+- `/particulier/*` - FREE tier endpoints (protected, single tier)
+- `/pro/*` - STARTER/PRO/ELITE endpoints (protected, multiple tiers)
+- `/api/properties` - Public search + detail (optionalAuthMiddleware for favorites)
+- `/api/config` - Dynamic config (property types, amenities, wilayas) - TODO: Add admin auth
+
+**Request/Response Patterns:**
+```typescript
+// Search filters - URL query params
+GET /api/properties?wilayaId=16&minPrice=5000000&propertyTypes=APARTMENT_F3,APARTMENT_F4
+
+// Response always includes metadata
+{
+  data: Property[],
+  meta: { total: 156, page: 1, limit: 30, hasMore: true },
+  filters: { applied: {...}, available: {...} }
+}
+```
+
+**Image Handling:**
+- Frontend sends File → Backend Multer → Sharp watermark → AWS S3 → Returns URLs
+- Property images stored as JSONB: `{ url, thumbnailUrl, mediumUrl, largeUrl, blurhash }`
+- Extract thumbnail via `extractThumbnailUrl()` helper in PropertyController
+
+**Known Gaps (from AUDIT_REPORT.md):**
+- No rate limiting on public endpoints (P1 priority)
+- Input validation incomplete server-side (P0 priority - add Zod schemas)
+
+---
+
+## 🚀 Development Workflows
+
+**Starting dev servers:**
+```bash
+# Terminal 1 - Frontend (Next.js)
+cd client && npm run dev
+# → http://localhost:3000
+
+# Terminal 2 - Backend (Express)
+cd server && npm run dev
+# → Compiles TS + starts nodemon on http://localhost:4000 (or PORT from .env)
+```
+
+**Database workflows:**
+```bash
+cd server
+
+# Apply migrations
+npx prisma migrate dev --name description_of_change
+
+# Regenerate client (auto-syncs types to frontend via postgenerate hook)
+npm run prisma:generate
+
+# Seed development data (wilayas, communes, config tables)
+npm run seed
+```
+
+**Type Safety:**
+- Backend generates `@prisma/client` types
+- Frontend imports from `@/types/prismaTypes.d.ts` (auto-synced)
+- `strict: true` in both tsconfigs
+- Known issue: 516 ESLint errors in prismaTypes.d.ts → Add to `.eslintignore`
+
+**Environment variables:**
+- Backend: `DATABASE_URL`, AWS credentials, Cognito pool ID/region/issuer
+- Frontend: `NEXT_PUBLIC_API_BASE_URL` (default: http://localhost:4000), Cognito config
+- Never commit `.env` files - use `.env.example` templates
+
+---
+
+## 🎯 Business Logic Patterns
+
+**Property Search Algorithm:**
+1. Build Prisma `where` clause from filters (wilaya, commune, price range, amenities)
+2. Apply boost tier sorting: `TIER_3_ULTRA > TIER_2_PREMIUM > TIER_1_EN_AVANT > NONE`
+3. Secondary sort by date or price
+4. Transform: Extract thumbnail URLs, format prices, add isFavorited if authed
+
+**Tier Limit Enforcement:**
+```typescript
+// Before creating property, check:
+const activeCount = await prisma.property.count({
+  where: { ownerId: userId, status: { in: ['ACTIVE', 'PENDING_REVIEW'] }}
+});
+
+const limits = { FREE: 3, STARTER: 25, PRO: 50, ELITE: Infinity };
+if (activeCount >= limits[user.accountTier]) throw new Error('Limit reached');
+```
+
+**Location Privacy Workflow:**
+1. Property stores `exactLatitude/exactLongitude` + `publicLatitude/publicLongitude` (±500m offset)
+2. Public API returns public coords only
+3. Interested user sends `LocationRequest` → Owner approves → Requester sees exact coords for 24h
+
+**Boost Pricing (per tier):**
+- Defined in `BoostPricingConfig` table (dynamic, not hardcoded)
+- Example: TIER_1 costs 500 DA for FREE users, 400 DA for STARTER users
+- Query pricing: Join Property → User → BoostPricingConfig filtered by tier
+
+---
+
+## 📝 Code Style & Conventions
+
+**Frontend:**
+- Server Components by default (use `"use client"` sparingly - only for hooks/state)
+- File naming: `PascalCase.tsx` for components, `kebab-case.ts` for utils
+- Import alias: `@/` maps to `client/src/`
+- Form validation: React Hook Form + Zod schemas in `lib/schemas.ts`
+
+**Backend:**
+- Controllers: Business logic only, delegate DB calls to separate service layer (TODO: Refactor - currently mixed)
+- Error handling: Use try/catch, return `res.status(code).json({ message, error? })`
+- Prisma queries: ALWAYS use `include` to avoid N+1 (see AUDIT_REPORT.md warning)
+
+**Shared:**
+- Use TypeScript `interface` over `type` for object shapes
+- Async/await over .then() chains
+- Destructure props in function signatures
+- Comments: JSDoc for public APIs, inline for complex logic
+
+---
+
+## 🐛 Known Issues & TODOs
+
+**From AUDIT_REPORT.md (prioritized):**
+1. **P0** - Add Zod validation on all server endpoints (currently client-side only)
+2. **P0** - Fix 516 ESLint errors: Add `src/types/prismaTypes.d.ts` to `.eslintignore`
+3. **P1** - Implement rate limiting (express-rate-limit on public routes)
+4. **P1** - Refactor controllers to use singleton Prisma client from `lib/prisma.ts`
+5. **P1** - Add indexes for N+1 query prevention in PropertyController
+6. **P2** - Add unit/E2E tests (currently zero test coverage)
+7. **P2** - Self-host Google Fonts (privacy/latency issue)
+
+**Feature Gaps:**
+- No admin dashboard for moderation (properties go to PENDING_REVIEW but no UI to approve)
+- Messaging system exists in schema but no frontend implementation
+- Boost system backend ready, payment integration incomplete (Chargily Pay stub)
+
+---
+
+## 🔍 Key Files Reference
+
+**Must-read for context:**
+- `server/prisma/schema.prisma` - Complete data model (2018 lines, 60+ models)
+- `server/src/middleware/authMiddleware.ts` - Auth logic, tier validation
+- `server/src/controllers/propertyController.ts` - Search algorithm, boost sorting
+- `client/src/state/api.ts` - RTK Query endpoints, auth flow
+- `client/src/app/globals.css` - Design system color tokens
+- `AUDIT_REPORT.md` - Technical debt, performance issues, security gaps
+- `README.md` - Full project documentation (stack, features, deployment)
+
+**Quick navigation:**
+- Frontend components: `client/src/components/ui/` (Shadcn), `/dashboard/`, `/auth/`
+- Backend routes: `server/src/routes/*.ts`
+- Seed data: `server/prisma/seedData/*.json` (58 wilayas, 1541 communes, etc.)
+
+---
+
+## 💡 Tips for AI Agents
+
+1. **Before editing server code:** Check if Prisma schema needs migration
+2. **Before adding new endpoint:** Verify tier permissions required, update AuthMiddleware if needed
+3. **When working with properties:** Remember exact vs public coordinates - don't accidentally expose exact location
+4. **Design system changes:** Update `globals.css` theme, not inline styles - keep HEX→Tailwind token conversion
+5. **Database queries:** Always consider tier limits (FREE=3 properties, etc.) - enforce in both frontend UX and backend validation
+6. **Testing changes:** Both servers must be running, check browser network tab for CORS/auth errors
+
+**Common pitfall:** Frontend RTK Query caches aggressively - invalidate tags or use `refetch()` when testing mutations
+
+---
+
+## 🔍 Property Filtering System - Intelligent & Contextual
+
+**Critical Implementation:** The property filtering system must be **intelligent and context-aware** based on property type selected.
+
+### Transaction Type Logic (MANDATORY)
+
+```typescript
+// Level 1: ALWAYS VISIBLE
+[Acheter] [Louer]
+
+// Level 2: CONDITIONAL (only if "Louer" selected)
+IF transactionGroup === "RENT":
+  Show period selector: [Journalière] [Mensuelle] [Annuelle]
   
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
-  return (
-    <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      scrolled 
-        ? "bg-white/80 backdrop-blur-[20px] shadow-lg border-b border-gray-200/50" 
-        : "bg-transparent"
-    )}>
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo avec style doré */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              {/* Pattern Zellige derrière logo */}
-              <div className="absolute inset-0 pattern-khatam opacity-20 scale-125" />
-              <div className="relative w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#0891B2] to-[#40E0D0] flex items-center justify-center shadow-lg">
-                <Home className="w-6 h-6 text-white" />
-              </div>
-            </div>
-            <span className={cn(
-              "text-2xl font-bold font-display transition-colors",
-              scrolled ? "text-gray-900" : "text-white drop-shadow-lg"
-            )}>
-              Rent<span className="text-[#FFD700]">Alg</span>
-            </span>
-          </Link>
-          
-          {/* Navigation links */}
-          <div className="hidden md:flex items-center gap-8">
-            <NavLink href="/properties" scrolled={scrolled}>
-              Explorer
-            </NavLink>
-            <NavLink href="/about" scrolled={scrolled}>
-              À propos
-            </NavLink>
-            <NavLink href="/pricing" scrolled={scrolled}>
-              Tarifs
-            </NavLink>
-          </div>
-          
-          {/* CTA buttons */}
-          <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "hidden md:inline-flex transition-colors",
-                scrolled ? "text-gray-700 hover:text-gray-900" : "text-white hover:bg-white/20"
-              )}
-            >
-              Connexion
-            </Button>
-            <Button 
-              className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-gray-900 font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-            >
-              Publier une annonce
-            </Button>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+State management:
+- "Acheter" → transactionType = "SALE", transactionGroup = undefined
+- "Louer" → transactionType = "", transactionGroup = "RENT"
+- "Mensuelle" → transactionType = "RENT_MONTHLY"
+- "Journalière" → transactionType = "RENT_DAILY"
+- "Annuelle" → transactionType = "RENT_YEARLY"
+```
+
+### Filter Contexts (Property Type-Based)
+
+```typescript
+// Define in lib/filter-config.ts
+APARTMENT: {
+  availableFilters: ['price', 'surface', 'rooms', 'bedrooms', 'bathrooms', 
+                     'floor', 'elevator', 'view', 'amenities', 'buildingAge']
+  // NO landArea, NO terrain-specific filters
+}
+
+VILLA/HOUSE: {
+  availableFilters: ['price', 'surface', 'landArea', 'rooms', 'bedrooms',
+                     'amenities', 'view']
+  // NO floor, NO elevator
+}
+
+TERRAIN: {
+  availableFilters: ['price', 'landArea', 'legalDocs', 'proximities']
+  // NO rooms, NO bedrooms, NO bathrooms
+}
+
+LOCAL_COMMERCIAL: {
+  availableFilters: ['price', 'surface', 'amenities', 'legalDocs']
+  // Specific amenities: vitrine, parking client
+}
+
+GARAGE: {
+  availableFilters: ['price', 'surface', 'amenities']
+  // Minimal filters
+}
+```
+
+### Intelligent Reset Logic
+
+```typescript
+// When propertyType changes:
+IF newPropertyType !== oldPropertyType:
+  RESET incompatible filters:
+  - floor/elevator (if moving away from apartment)
+  - landArea (if moving to apartment)
+  - amenities[] (context changes)
+
+// When transactionGroup changes:
+IF "RENT" → "SALE":
+  RESET: minRentDuration, rentDeposit
+  SHOW: priceNegotiable
+
+IF "SALE" → "RENT":
+  RESET: priceNegotiable
+  SHOW: minRentDuration, rentDeposit
+```
+
+### Sidebar Specifications
+
+**Width:** 360px (FIXED - no text truncation)
+**Position:** `sticky` with `top: NAVBAR_HEIGHT + 20px`
+**Conditional Rendering:** Use `shouldShowFilter(filterName)` based on active context
+
+```typescript
+// Implementation pattern
+const shouldShowFilter = (filterName: string): boolean => {
+  if (!activeContext) return false;
+  return activeContext.availableFilters.includes(filterName);
 };
 
-const NavLink = ({ 
-  href, 
-  children, 
-  scrolled 
-}: { 
-  href: string; 
-  children: React.ReactNode; 
-  scrolled: boolean;
-}) => (
-  <Link 
-    href={href}
-    className={cn(
-      "text-sm font-medium transition-colors relative group",
-      scrolled 
-        ? "text-gray-700 hover:text-[#0891B2]" 
-        : "text-white/90 hover:text-white"
-    )}
+// In sidebar component
+{shouldShowFilter('floor') && (
+  <FloorFilter />
+)}
+```
+
+### Contextual Amenities
+
+```typescript
+// Define in lib/filter-config.ts
+CONTEXTUAL_AMENITIES = {
+  APARTMENT: ['ASCENSEUR', 'BALCON', 'TERRASSE', 'PARKING', 'CAVE'],
+  VILLA: ['JARDIN', 'PISCINE', 'GARAGE', 'PORTAIL_ELECTRIQUE'],
+  TERRAIN: ['EAU', 'ELECTRICITE', 'GAZ', 'ASSAINISSEMENT'],
+  LOCAL_COMMERCIAL: ['VITRINE', 'PARKING_CLIENT', 'CLIMATISATION'],
+  GARAGE: ['SECURISE', 'ELECTRICITE', 'VIDEO_SURVEILLANCE']
+}
+```
+
+### Hero Search Integration
+
+```tsx
+// Hero must update sidebar state bidirectionally
+<HeroSearchSection
+  filters={filters}
+  onFiltersChange={handleFiltersChange} // Shared state
+  activeContext={activeContext}
+/>
+
+// Transaction buttons in hero
+<div className="grid grid-cols-2 gap-3">
+  <Button 
+    onClick={() => handleFiltersChange({ 
+      transactionType: 'SALE', 
+      transactionGroup: undefined 
+    })}
   >
-    {children}
-    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FFD700] group-hover:w-full transition-all duration-300" />
-  </Link>
-);
+    Acheter
+  </Button>
+  <Button 
+    onClick={() => handleFiltersChange({ 
+      transactionType: '', 
+      transactionGroup: 'RENT' 
+    })}
+  >
+    Louer
+  </Button>
+</div>
+
+{/* Conditional rental period */}
+<AnimatePresence>
+  {filters.transactionGroup === 'RENT' && (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+    >
+      {/* Rental period buttons */}
+    </motion.div>
+  )}
+</AnimatePresence>
 ```
 
----
-
-## 📐 **SPACING & LAYOUT AMÉLIORÉS**
+### Complete SearchFilters Interface
 
 ```typescript
-// Nouveau système d'espacement inspiré architecture Casbah
-const SPACING = {
-  // Micro
-  xs: '4px',      // 0.25rem
-  sm: '8px',      // 0.5rem
-  md: '12px',     // 0.75rem
+// types/property-frontend.ts
+export interface SearchFilters {
+  // CORE
+  transactionType: TransactionType | ''
+  transactionGroup?: 'SALE' | 'RENT'
+  propertyTypes: PropertyType[]
+  wilayaId: string
+  communeId: string
   
-  // Standard
-  base: '16px',   // 1rem
-  lg: '24px',     // 1.5rem
-  xl: '32px',     // 2rem
+  // BUDGET
+  minPrice?: number
+  maxPrice?: number
   
-  // Large (sections)
-  '2xl': '48px',  // 3rem
-  '3xl': '64px',  // 4rem
-  '4xl': '96px',  // 6rem
-  '5xl': '128px', // 8rem
+  // DIMENSIONS
+  minSurface?: number
+  maxSurface?: number
+  minLandArea?: number
+  maxLandArea?: number
   
-  // Container
-  container: {
-    sm: '640px',
-    md: '768px',
-    lg: '1024px',
-    xl: '1280px',
-    '2xl': '1400px',  // Nouveau max-width
-  }
+  // ROOMS (residential)
+  minRooms?: number
+  minBedrooms?: number
+  minBathrooms?: number
+  
+  // FLOORS (apartments only)
+  minFloor?: number
+  maxFloor?: number
+  hasElevator?: boolean
+  excludeGroundFloor?: boolean
+  excludeTopFloor?: boolean
+  
+  // CONSTRUCTION
+  maxBuildingAge?: number
+  minConstructionYear?: number
+  
+  // VIEW
+  viewTypes?: ViewType[]
+  
+  // PROXIMITIES (in meters)
+  maxDistanceToSchool?: number
+  maxDistanceToTransport?: number
+  maxDistanceToShops?: number
+  
+  // LEGAL DOCS
+  hasLivretFoncier?: boolean
+  hasActeVente?: boolean
+  hasPermisConstruction?: boolean
+  arePapersComplete?: boolean
+  
+  // AMENITIES (contextual)
+  amenities?: string[]
+  
+  // RENTAL SPECIFIC
+  minRentDuration?: number
+  maxRentDeposit?: number
+  
+  // SALE SPECIFIC
+  isNegotiable?: boolean
+  
+  // SORTING & PAGINATION
+  sortBy: string
+  page?: number
+  limit?: number
 }
 ```
 
----
+### File Structure
 
-## 🎬 **ANIMATIONS MÉDITERRANÉENNES**
+```
+lib/
+  filter-config.ts          # NEW: Context definitions, amenities mapping
 
-```typescript
-// Animations inspirées des mouvements de la mer
-const ANIMATIONS = {
-  // Vagues douces
-  wave: {
-    initial: { opacity: 0, y: 20, scale: 0.95 },
-    animate: { opacity: 1, y: 0, scale: 1 },
-    transition: { 
-      duration: 0.6, 
-      ease: [0.4, 0, 0.2, 1],  // Cubic bezier "méditerranéenne"
-    }
-  },
+components/ui/
+  filter-sidebar-intelligent.tsx  # RENAME from filter-sidebar-vintage.tsx
   
-  // Reflet soleil (hover cards)
-  shimmer: {
-    whileHover: {
-      boxShadow: '0 20px 60px -10px rgba(255, 215, 0, 0.3)',
-      scale: 1.02,
-    },
-    transition: { duration: 0.2 }
-  },
+app/(nondashboard)/properties/
+  page.tsx                  # Refactored with intelligent filtering
   
-  // Mouvement subtil (glassmorphism)
-  float: {
-    animate: {
-      y: [0, -10, 0],
-    },
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
-}
+types/
+  property-frontend.ts      # Extended SearchFilters interface
 ```
 
----
+### Validation Checklist
 
-## 📱 **RESPONSIVE AMÉLIORÉ**
+Before considering implementation complete:
 
-```css
-/* Breakpoints Alger Vibrante */
-@media (max-width: 480px) {
-  /* Mobile portrait - UI tactile optimisée */
-  .hero-title { font-size: 36px; }
-  .search-bar { padding: 16px; border-radius: 20px; }
-  .property-card { border-radius: 16px; }
-}
+**Logic:**
+- ✅ Acheter/Louer works correctly
+- ✅ Rental period appears ONLY when "Louer" selected
+- ✅ Property type change resets incompatible filters
+- ✅ Transaction type change resets correct fields
+- ✅ Amenities filtered by context
+- ✅ Floor/Elevator only for apartments
+- ✅ Land area only for houses/terrain
 
-@media (min-width: 481px) and (max-width: 768px) {
-  /* Mobile landscape / Tablet portrait */
-  .hero-title { font-size: 48px; }
-  .property-grid { grid-template-columns: repeat(2, 1fr); }
-}
+**UI:**
+- ✅ Sidebar 360px width (no text truncation)
+- ✅ All labels readable
+- ✅ Vintage Algiers theme colors preserved
+- ✅ Smooth animations (Framer Motion)
+- ✅ Mobile: Sheet with same logic
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  /* Tablet landscape */
-  .hero-title { font-size: 60px; }
-  .property-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 1025px) {
-  /* Desktop */
-  .hero-title { font-size: 72px; }
-  .property-grid { grid-template-columns: repeat(4, 1fr); }
-  .container { max-width: 1400px; }
-}
-```
-
----
-
-## 🎯 **MISE EN ŒUVRE**
-
-### **Ordre de refonte recommandé** :
-
-1. **Week 1-2** : Mise à jour `globals.css` avec nouvelles couleurs + patterns Zellige SVG
-2. **Week 3** : Refonte composants UI de base (Button, Badge, Input, Card)
-3. **Week 4** : Hero section + Navbar glassmorphism
-4. **Week 5-6** : PropertyCard + PropertyGrid avec nouveaux styles
-5. **Week 7** : Pages complètes (Landing, Properties, Property Detail)
-6. **Week 8** : Dashboard + formulaires
-7. **Week 9-10** : Mobile optimization + animations
-8. **Week 11** : Testing cross-browser + performance
-9. **Week 12** : Polishing + A/B testing
-
-### **Checklist Design System v5** :
-
-- [ ] Créer fichiers SVG patterns Zellige (8 motifs)
-- [ ] Mettre à jour `globals.css` avec 60+ nouvelles couleurs
-- [ ] Créer composants Zellige (ZelligePattern, ZelligeBorder, ZelligeBadge)
-- [ ] Photographier/scanner vrais carrelages algérois pour authenticité
-- [ ] Tester contraste WCAG 2.1 AA sur toutes nouvelles couleurs
-- [ ] Documenter usage patterns dans Storybook
-- [ ] Créer Figma design system complet
-- [ ] A/B test nouveau design vs ancien (conversion rates)
-
----
-
-**Date** : 28 novembre 2025  
-**Version** : 5.0 — Alger Authentique  
-**Statut** : 🎨 DRAFT — Ready for implementation
-
-Ce design system célèbre la beauté unique d'Alger tout en restant moderne et performant. 🇩🇿✨
+**Technical:**
+- ✅ TypeScript types correct and exhaustive
+- ✅ No `any` types
+- ✅ Performance optimized (useMemo, useCallback)
+- ✅ Code commented at critical points

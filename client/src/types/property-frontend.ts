@@ -4,8 +4,8 @@ export interface PropertyFrontend {
   title: string;
   propertyType: string;
   transactionType: string;
-  price: {
-    amount: string;
+  price: number | {
+    amount: number | string;
     isNegotiable: boolean;
   };
   surface: number | null;
@@ -19,9 +19,13 @@ export interface PropertyFrontend {
     quartier: string | null;
     coordinates: { lat: number; lng: number };
   };
+  images: string[] | null;
   thumbnail: string | null;
   isBoosted: boolean;
   boostTier: string | null;
+  isNegotiable?: boolean;
+  hasLivretFoncier?: boolean;
+  pricePerSqm?: number;
   owner: {
     id: string;
     name: string;
@@ -50,6 +54,7 @@ export interface FiltersConfig {
 
 export interface SearchFilters {
   transactionType: string;
+  transactionGroup?: "SALE" | "RENT";
   wilayaId: string;
   communeId: string;
   propertyTypes: string[];
@@ -58,5 +63,14 @@ export interface SearchFilters {
   minSurface: number | undefined;
   maxSurface: number | undefined;
   minRooms: number | undefined;
+  bedrooms: number | undefined;
+  bathrooms: number | undefined;
+  amenities: string[] | undefined;
+  isNegotiable: boolean | undefined;
+  minRentDeposit: number | undefined;
+  hasLivretFoncier: boolean | undefined;
+  hasActeVente: boolean | undefined;
+  hasPermisConstruction: boolean | undefined;
+  arePapersComplete: boolean | undefined;
   sortBy: string;
 }

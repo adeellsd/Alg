@@ -111,10 +111,10 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-3">
           <nav
             className={cn(
-              "flex h-16 items-center justify-between px-6 rounded-2xl transition-all duration-300",
+              "flex h-16 items-center justify-between px-6 rounded-2xl transition-all duration-500 ease-in-out",
               isScrolled
-                ? "bg-white/90 backdrop-blur-xl shadow-lg border border-slate-200/60"
-                : "bg-transparent"
+                ? "bg-white/30 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.12)] border border-white/40"
+                : "bg-white/30 backdrop-blur-xl border border-white/20"
             )}
           >
             {/* Logo */}
@@ -125,10 +125,10 @@ export default function Navbar() {
               <span
                 className={cn(
                   "text-xl font-bold transition-colors duration-200",
-                  isScrolled ? "text-slate-900" : "text-white"
+                  isScrolled ? "text-slate-900" : "text-slate-900"
                 )}
               >
-                Rent<span className="text-primary-500">Alg</span>
+                Rent<span className={cn("transition-colors duration-200", isScrolled ? "text-primary-600" : "text-primary-500")}>Alg</span>
               </span>
             </Link>
 
@@ -140,13 +140,9 @@ export default function Navbar() {
                   href={item.href}
                   className={cn(
                     "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                    isScrolled
-                      ? isActive(item.href)
-                        ? "bg-primary-50 text-primary-600"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                      : isActive(item.href)
-                      ? "bg-white/20 text-white"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                    isActive(item.href)
+                      ? "bg-primary-500/10 text-primary-700 backdrop-blur-sm"
+                      : "text-slate-700 hover:bg-slate-900/5 hover:text-slate-900"
                   )}
                 >
                   {item.label}
@@ -163,11 +159,7 @@ export default function Navbar() {
                       <Link href="/signin">
                         <Button
                           variant="ghost"
-                          className={cn(
-                            isScrolled
-                              ? "text-slate-600 hover:text-slate-900"
-                              : "text-white hover:bg-white/10"
-                          )}
+                          className="text-slate-700 hover:text-slate-900 hover:bg-slate-900/5"
                         >
                           Connexion
                         </Button>
@@ -189,22 +181,12 @@ export default function Navbar() {
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="ghost"
-                            className={cn(
-                              "gap-2 px-2",
-                              isScrolled
-                                ? "hover:bg-slate-100"
-                                : "hover:bg-white/10"
-                            )}
+                            className="gap-2 px-2 hover:bg-slate-900/5"
                           >
                             <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-500 text-sm font-bold text-white">
                               {user.username?.charAt(0).toUpperCase() || "U"}
                             </div>
-                            <ChevronDown
-                              className={cn(
-                                "size-4",
-                                isScrolled ? "text-slate-400" : "text-white/60"
-                              )}
-                            />
+                            <ChevronDown className="size-4 text-slate-600" />
                           </Button>
                         </DropdownMenuTrigger>
 
@@ -270,12 +252,7 @@ export default function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className={cn(
-                  "flex size-10 items-center justify-center rounded-xl transition-all duration-200 lg:hidden",
-                  isScrolled
-                    ? "text-slate-600 hover:bg-slate-100"
-                    : "text-white hover:bg-white/10"
-                )}
+                className="flex size-10 items-center justify-center rounded-xl transition-all duration-200 lg:hidden text-slate-700 hover:bg-slate-900/5"
                 aria-label="Ouvrir le menu"
               >
                 <Menu className="size-5" />

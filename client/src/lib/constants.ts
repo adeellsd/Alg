@@ -142,3 +142,52 @@ export const testUsers = {
   },
   managerRole: "manager",
 };
+
+// Property type groups for filtering
+export const PROPERTY_TYPE_GROUPS: Record<string, { label: string; codes: string[] }> = {
+  APARTMENT: {
+    label: "Type d'appartement",
+    codes: ["APARTMENT_F1", "APARTMENT_F2", "APARTMENT_F3", "APARTMENT_F4", "APARTMENT_F5", "APARTMENT_F6_PLUS", "STUDIO", "DUPLEX", "LOFT"]
+  },
+  HOUSE: {
+    label: "Type de maison",
+    codes: ["VILLA", "TRADITIONAL_HOUSE", "MODERN_VILLA", "RIYADH"]
+  },
+  COMMERCIAL: {
+    label: "Type de local",
+    codes: ["LOCAL_COMMERCIAL", "BUREAU", "ENTREPOT"]
+  },
+  LAND: {
+    label: "Type de terrain",
+    codes: ["TERRAIN_AGRICOLE", "TERRAIN_RESIDENTIAL"]
+  }
+};
+
+// Property subtype labels (French)
+export const PROPERTY_SUBTYPE_LABELS: Record<string, string> = {
+  // Apartments
+  APARTMENT_F1: "F1",
+  APARTMENT_F2: "F2",
+  APARTMENT_F3: "F3",
+  APARTMENT_F4: "F4",
+  APARTMENT_F5: "F5",
+  APARTMENT_F6_PLUS: "F6+",
+  STUDIO: "Studio",
+  DUPLEX: "Duplex",
+  LOFT: "Loft",
+  
+  // Houses
+  VILLA: "Villa",
+  TRADITIONAL_HOUSE: "Maison traditionnelle",
+  MODERN_VILLA: "Villa moderne",
+  RIYADH: "Riyadh",
+  
+  // Commercial
+  LOCAL_COMMERCIAL: "Local commercial",
+  BUREAU: "Bureau",
+  ENTREPOT: "Entrepôt",
+  
+  // Land
+  TERRAIN_AGRICOLE: "Terrain agricole",
+  TERRAIN_RESIDENTIAL: "Terrain résidentiel"
+};

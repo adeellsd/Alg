@@ -86,7 +86,7 @@ export default function MobileMenu({
       {/* Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm transition-opacity duration-300",
+          "fixed inset-0 z-[60] bg-gradient-to-br from-black/60 via-black/40 to-black/60 backdrop-blur-md transition-all duration-500",
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         onClick={onClose}
@@ -96,7 +96,10 @@ export default function MobileMenu({
       {/* Drawer */}
       <div
         className={cn(
-          "fixed right-0 top-0 z-[70] h-full w-full max-w-sm transform bg-white shadow-2xl transition-transform duration-300 ease-out",
+          "fixed right-0 top-0 z-[70] h-full w-full max-w-sm transform transition-all duration-500 ease-out",
+          "bg-gradient-to-br from-white/95 via-white/90 to-slate-50/95 backdrop-blur-2xl",
+          "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border-l border-white/20",
+          "m-2 mr-0 mb-0 mt-0 rounded-l-[32px]",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
         role="dialog"
@@ -104,19 +107,19 @@ export default function MobileMenu({
         aria-label="Menu de navigation mobile"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-200 p-5">
+        <div className="flex items-center justify-between border-b border-slate-200/50 p-6 backdrop-blur-xl bg-white/40">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-teal-500 flex items-center justify-center">
+            <div className="w-11 h-11 rounded-[14px] bg-gradient-to-br from-primary-500 via-primary-400 to-teal-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
               <Home className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-slate-900">
-              Rent<span className="text-primary-500">Alg</span>
+              Rent<span className="bg-gradient-to-r from-primary-500 to-teal-500 bg-clip-text text-transparent">Alg</span>
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="flex size-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"
+            className="flex size-11 items-center justify-center rounded-[14px] text-slate-600 hover:bg-gradient-to-br hover:from-slate-100 hover:to-slate-50 transition-all duration-200 hover:scale-105 active:scale-95"
             aria-label="Fermer le menu"
           >
             <X className="size-5" />
@@ -126,19 +129,24 @@ export default function MobileMenu({
         {/* Content */}
         <div className="flex h-[calc(100%-5rem)] flex-col">
           {/* Navigation Links */}
-          <nav className="flex-1 space-y-1 overflow-y-auto p-4">
+          <nav className="flex-1 space-y-2 overflow-y-auto p-5">
             {/* Home Link */}
             <Link
               href="/"
               onClick={onClose}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                "flex items-center gap-3.5 rounded-[16px] px-5 py-3.5 text-sm font-medium transition-all duration-200",
                 isActive("/")
-                  ? "bg-primary-50 text-primary-600"
-                  : "text-slate-600 hover:bg-slate-100"
+                  ? "bg-gradient-to-br from-primary-500 to-teal-500 text-white shadow-lg shadow-primary-500/30 scale-[1.02]"
+                  : "text-slate-700 hover:bg-white/60 hover:backdrop-blur-xl hover:shadow-md active:scale-95"
               )}
             >
-              <Home className="size-5" />
+              <div className={cn(
+                "p-2 rounded-[10px] transition-colors",
+                isActive("/") ? "bg-white/20" : "bg-slate-100"
+              )}>
+                <Home className="size-4" />
+              </div>
               Accueil
             </Link>
 
@@ -151,13 +159,18 @@ export default function MobileMenu({
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                    "flex items-center gap-3.5 rounded-[16px] px-5 py-3.5 text-sm font-medium transition-all duration-200",
                     isActive(item.href)
-                      ? "bg-primary-50 text-primary-600"
-                      : "text-slate-600 hover:bg-slate-100"
+                      ? "bg-gradient-to-br from-primary-500 to-teal-500 text-white shadow-lg shadow-primary-500/30 scale-[1.02]"
+                      : "text-slate-700 hover:bg-white/60 hover:backdrop-blur-xl hover:shadow-md active:scale-95"
                   )}
                 >
-                  <Icon className="size-5" />
+                  <div className={cn(
+                    "p-2 rounded-[10px] transition-colors",
+                    isActive(item.href) ? "bg-white/20" : "bg-slate-100"
+                  )}>
+                    <Icon className="size-4" />
+                  </div>
                   {item.label}
                 </Link>
               )
@@ -166,8 +179,9 @@ export default function MobileMenu({
             {/* User Menu (Authenticated) */}
             {user && userMenuItems.length > 0 && (
               <>
-                <div className="pt-4 pb-2">
-                  <p className="px-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <div className="pt-6 pb-3 px-2">
+                  <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mb-4" />
+                  <p className="px-3 text-xs font-bold uppercase tracking-wider text-slate-500">
                     Mon Espace
                   </p>
                 </div>
@@ -178,13 +192,18 @@ export default function MobileMenu({
                     href={item.href}
                     onClick={onClose}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                      "flex items-center gap-3.5 rounded-[16px] px-5 py-3.5 text-sm font-medium transition-all duration-200",
                       isActive(item.href)
-                        ? "bg-primary-50 text-primary-600"
-                        : "text-slate-600 hover:bg-slate-100"
+                        ? "bg-gradient-to-br from-primary-500 to-teal-500 text-white shadow-lg shadow-primary-500/30 scale-[1.02]"
+                        : "text-slate-700 hover:bg-white/60 hover:backdrop-blur-xl hover:shadow-md active:scale-95"
                     )}
                   >
-                    <item.icon className="size-5" />
+                    <div className={cn(
+                      "p-2 rounded-[10px] transition-colors",
+                      isActive(item.href) ? "bg-white/20" : "bg-slate-100"
+                    )}>
+                      <item.icon className="size-4" />
+                    </div>
                     {item.label}
                   </Link>
                 ))}
@@ -193,13 +212,18 @@ export default function MobileMenu({
                   href="/profile"
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                    "flex items-center gap-3.5 rounded-[16px] px-5 py-3.5 text-sm font-medium transition-all duration-200",
                     isActive("/profile")
-                      ? "bg-primary-50 text-primary-600"
-                      : "text-slate-600 hover:bg-slate-100"
+                      ? "bg-gradient-to-br from-primary-500 to-teal-500 text-white shadow-lg shadow-primary-500/30 scale-[1.02]"
+                      : "text-slate-700 hover:bg-white/60 hover:backdrop-blur-xl hover:shadow-md active:scale-95"
                   )}
                 >
-                  <User className="size-5" />
+                  <div className={cn(
+                    "p-2 rounded-[10px] transition-colors",
+                    isActive("/profile") ? "bg-white/20" : "bg-slate-100"
+                  )}>
+                    <User className="size-4" />
+                  </div>
                   Profil
                 </Link>
 
@@ -207,13 +231,18 @@ export default function MobileMenu({
                   href="/settings"
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                    "flex items-center gap-3.5 rounded-[16px] px-5 py-3.5 text-sm font-medium transition-all duration-200",
                     isActive("/settings")
-                      ? "bg-primary-50 text-primary-600"
-                      : "text-slate-600 hover:bg-slate-100"
+                      ? "bg-gradient-to-br from-primary-500 to-teal-500 text-white shadow-lg shadow-primary-500/30 scale-[1.02]"
+                      : "text-slate-700 hover:bg-white/60 hover:backdrop-blur-xl hover:shadow-md active:scale-95"
                   )}
                 >
-                  <Settings className="size-5" />
+                  <div className={cn(
+                    "p-2 rounded-[10px] transition-colors",
+                    isActive("/settings") ? "bg-white/20" : "bg-slate-100"
+                  )}>
+                    <Settings className="size-4" />
+                  </div>
                   Paramètres
                 </Link>
               </>
@@ -222,16 +251,19 @@ export default function MobileMenu({
 
           {/* Footer CTA */}
           {!isAuthPage && (
-            <div className="space-y-2 border-t border-slate-200 p-4">
+            <div className="space-y-3 border-t border-white/30 p-6 backdrop-blur-xl bg-gradient-to-br from-white/50 to-slate-50/50">
               {!user ? (
                 <>
                   <Link href="/signin" onClick={onClose} className="block">
-                    <Button variant="outline" className="w-full">
+                    <Button 
+                      variant="outline" 
+                      className="w-full h-12 rounded-[14px] border-2 font-semibold hover:bg-white/60 hover:backdrop-blur-xl transition-all duration-200 hover:scale-[1.02] active:scale-95"
+                    >
                       Connexion
                     </Button>
                   </Link>
                   <Link href="/signup" onClick={onClose} className="block">
-                    <Button className="w-full">
+                    <Button className="w-full h-12 rounded-[14px] bg-gradient-to-r from-primary-500 to-teal-500 font-semibold shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all duration-200 hover:scale-[1.02] active:scale-95">
                       Inscription
                     </Button>
                   </Link>
@@ -243,7 +275,7 @@ export default function MobileMenu({
                     onClick={onClose}
                     className="block"
                   >
-                    <Button className="w-full gap-2">
+                    <Button className="w-full h-12 rounded-[14px] gap-2 bg-gradient-to-r from-primary-500 to-teal-500 font-semibold shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all duration-200 hover:scale-[1.02] active:scale-95">
                       <Plus className="size-4" />
                       Publier une annonce
                     </Button>
@@ -254,7 +286,7 @@ export default function MobileMenu({
                       signOut()
                       onClose()
                     }}
-                    className="w-full gap-2 text-red-600 hover:bg-red-50 hover:text-red-600"
+                    className="w-full h-12 rounded-[14px] gap-2 text-red-600 hover:bg-red-50/80 hover:text-red-700 hover:backdrop-blur-xl font-medium transition-all duration-200 hover:scale-[1.02] active:scale-95"
                   >
                     <LogOut className="size-4" />
                     Déconnexion

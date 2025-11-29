@@ -13,6 +13,7 @@ const authMiddleware_1 = require("./middleware/authMiddleware");
 const particulierRoutes_1 = __importDefault(require("./routes/particulierRoutes"));
 const proRoutes_1 = __importDefault(require("./routes/proRoutes"));
 const propertyRoutes_1 = __importDefault(require("./routes/propertyRoutes"));
+const configRoutes_1 = __importDefault(require("./routes/configRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 app.use("/particulier", (0, authMiddleware_1.AuthMiddleware)(["FREE"]), particulierRoutes_1.default);
 app.use("/pro", (0, authMiddleware_1.AuthMiddleware)(["STARTER", "PRO", "ELITE"]), proRoutes_1.default);
 app.use("/api/properties", propertyRoutes_1.default);
+app.use("/api/config", configRoutes_1.default);
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     console.log(`aw yemchi sur le port ${PORT}`);

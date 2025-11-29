@@ -37,12 +37,18 @@ interface PropertyFilters {
   communeId?: string;
   propertyTypes?: PropertyType[];
   transactionType?: TransactionType;
+  // UI umbrella grouping (e.g., RENT groups DAILY/MONTHLY/YEARLY)
+  transactionGroup?: "RENT" | "SALE";
   minPrice?: number;
   maxPrice?: number;
   minSurface?: number;
   maxSurface?: number;
   minRooms?: number;
   maxRooms?: number;
+  minBedrooms?: number;
+  maxBedrooms?: number;
+  minBathrooms?: number;
+  maxBathrooms?: number;
   amenities?: string[];
   hasParking?: boolean;
   floorMin?: number;
@@ -50,6 +56,14 @@ interface PropertyFilters {
   buildingAge?: number;
   viewType?: string;
   isBoosted?: boolean;
+  // DZ market specifics
+  isNegotiable?: boolean;
+  minRentDeposit?: number;
+  // Legal docs
+  hasLivretFoncier?: boolean;
+  hasActeVente?: boolean;
+  hasPermisConstruction?: boolean;
+  arePapersComplete?: boolean;
   sortBy?: "price_asc" | "price_desc" | "date_desc" | "date_asc" | "surface_desc" | "popular";
   page?: number;
   limit?: number;
@@ -112,6 +126,16 @@ function buildPropertyWhere(filters: PropertyFilters) {
   // Transaction type
   if (filters.transactionType) {
     where.transactionType = filters.transactionType;
+  } else if (filters.transactionGroup) {
+    if (filters.transactionGroup === "SALE") {
+      where.transactionType = TransactionType.SALE;
+    } else if (filters.transactionGroup === "RENT") {
+      where.transactionType = { in: [
+        TransactionType.RENT_DAILY,
+        TransactionType.RENT_MONTHLY,
+        TransactionType.RENT_YEARLY,
+      ] } as unknown as TransactionType; // Prisma accepts nested filter
+    }
   }
 
   // Price range
@@ -133,6 +157,35 @@ function buildPropertyWhere(filters: PropertyFilters) {
     where.totalRooms = {};
     if (filters.minRooms) (where.totalRooms as Record<string, unknown>).gte = filters.minRooms;
     if (filters.maxRooms) (where.totalRooms as Record<string, unknown>).lte = filters.maxRooms;
+  }
+
+  // Bedrooms
+  if (filters.minBedrooms || filters.maxBedrooms) {
+    where.bedrooms = {};
+    if (filters.minBedrooms) (where.bedrooms as Record<string, unknown>).gte = filters.minBedrooms;
+    if (filters.maxBedrooms) (where.bedrooms as Record<string, unknown>).lte = filters.maxBedrooms;
+  }
+
+  // Bathrooms
+  if (filters.minBathrooms || filters.maxBathrooms) {
+    where.bathrooms = {};
+    if (filters.minBathrooms) (where.bathrooms as Record<string, unknown>).gte = filters.minBathrooms;
+    if (filters.maxBathrooms) (where.bathrooms as Record<string, unknown>).lte = filters.maxBathrooms;
+  }
+
+  // Amenities (require ALL selected amenities)
+  if (filters.amenities && filters.amenities.length > 0) {
+    // AND chain: each amenity must be present via relation table
+    (where as any).AND = [
+      ...(((where as any).AND as any[]) || []),
+      ...filters.amenities.map((amenityId) => ({
+        amenities: {
+          some: {
+            amenityId,
+          },
+        },
+      })),
+    ];
   }
 
   // Floor range
@@ -157,6 +210,28 @@ function buildPropertyWhere(filters: PropertyFilters) {
     where.boost = {
       isNot: null,
     };
+  }
+
+  // DZ specifics
+  if (filters.isNegotiable !== undefined) {
+    (where as any).priceNegotiable = filters.isNegotiable;
+  }
+  if (filters.minRentDeposit !== undefined) {
+    (where as any).rentDeposit = { gte: BigInt(filters.minRentDeposit) };
+  }
+
+  // Legal docs
+  if (filters.hasLivretFoncier !== undefined) {
+    where.hasLivretFoncier = filters.hasLivretFoncier;
+  }
+  if (filters.hasActeVente !== undefined) {
+    where.hasActeVente = filters.hasActeVente;
+  }
+  if (filters.hasPermisConstruction !== undefined) {
+    where.hasPermisConstruction = filters.hasPermisConstruction;
+  }
+  if (filters.arePapersComplete !== undefined) {
+    where.arePapersComplete = filters.arePapersComplete;
   }
 
   return where;
@@ -196,19 +271,30 @@ export const searchProperties = async (req: Request, res: Response): Promise<voi
         ? (req.query.propertyTypes as string).split(",") as PropertyType[]
         : undefined,
       transactionType: req.query.transactionType as TransactionType,
+      transactionGroup: req.query.transactionGroup as "RENT" | "SALE" | undefined,
       minPrice: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
       maxPrice: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
       minSurface: req.query.minSurface ? parseInt(req.query.minSurface as string) : undefined,
       maxSurface: req.query.maxSurface ? parseInt(req.query.maxSurface as string) : undefined,
       minRooms: req.query.minRooms ? parseInt(req.query.minRooms as string) : undefined,
       maxRooms: req.query.maxRooms ? parseInt(req.query.maxRooms as string) : undefined,
+      minBedrooms: req.query.minBedrooms ? parseInt(req.query.minBedrooms as string) : undefined,
+      maxBedrooms: req.query.maxBedrooms ? parseInt(req.query.maxBedrooms as string) : undefined,
+      minBathrooms: req.query.minBathrooms ? parseInt(req.query.minBathrooms as string) : undefined,
+      maxBathrooms: req.query.maxBathrooms ? parseInt(req.query.maxBathrooms as string) : undefined,
       amenities: req.query.amenities ? (req.query.amenities as string).split(",") : undefined,
       hasParking: req.query.hasParking === "true" ? true : req.query.hasParking === "false" ? false : undefined,
+      isNegotiable: req.query.isNegotiable === "true" ? true : req.query.isNegotiable === "false" ? false : undefined,
+      minRentDeposit: req.query.minRentDeposit ? parseInt(req.query.minRentDeposit as string) : undefined,
       floorMin: req.query.floorMin ? parseInt(req.query.floorMin as string) : undefined,
       floorMax: req.query.floorMax ? parseInt(req.query.floorMax as string) : undefined,
       buildingAge: req.query.buildingAge ? parseInt(req.query.buildingAge as string) : undefined,
       viewType: req.query.viewType as string,
       isBoosted: req.query.isBoosted === "true",
+      hasLivretFoncier: req.query.hasLivretFoncier === "true" ? true : req.query.hasLivretFoncier === "false" ? false : undefined,
+      hasActeVente: req.query.hasActeVente === "true" ? true : req.query.hasActeVente === "false" ? false : undefined,
+      hasPermisConstruction: req.query.hasPermisConstruction === "true" ? true : req.query.hasPermisConstruction === "false" ? false : undefined,
+      arePapersComplete: req.query.arePapersComplete === "true" ? true : req.query.arePapersComplete === "false" ? false : undefined,
       sortBy: req.query.sortBy as PropertyFilters["sortBy"],
       page: req.query.page ? parseInt(req.query.page as string) : 1,
       limit: req.query.limit ? Math.min(parseInt(req.query.limit as string), 50) : 20,

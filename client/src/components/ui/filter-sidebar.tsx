@@ -1,27 +1,21 @@
-"use client"
+"use client";
 
-import React from "react"
-import { RotateCcw } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { cn } from "@/lib/utils"
-import { FiltersConfig, SearchFilters } from "@/types/property-frontend"
+/**
+ * FilterSidebar - RentAlg Design System v6.0 "Alger Authentique"
+ * Sidebar de filtrage avec esthétique vintage algérienne
+ */
+
+import React from "react";
+import { cn } from "@/lib/utils";
+import { FiltersConfig, SearchFilters } from "@/types/property-frontend";
 
 interface FilterSidebarProps {
-  filters: SearchFilters
-  filtersConfig: FiltersConfig
-  onFiltersChange: (filters: Partial<SearchFilters>) => void
-  onReset: () => void
-  className?: string
-  showHeader?: boolean
+  filters: SearchFilters;
+  filtersConfig: FiltersConfig;
+  onFiltersChange: (newFilters: Partial<SearchFilters>) => void;
+  onReset: () => void;
+  className?: string;
+  showHeader?: boolean;
 }
 
 export function FilterSidebar({
@@ -34,211 +28,186 @@ export function FilterSidebar({
 }: FilterSidebarProps) {
   return (
     <div className={cn("space-y-6", className)}>
-      {/* Header */}
+      {/* Header avec reset */}
       {showHeader && (
         <>
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-900">Filtres</h3>
-            <button
+          <div className="flex items-center justify-between pb-4 border-b-2 border-[#E8D5B7]">
+            <h3 className="text-lg font-bold text-[#6B8E23] font-display">
+              Affinez votre recherche
+            </h3>
+            <button 
               onClick={onReset}
-              className="flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-gray-700"
+              className="text-sm font-bold text-[#CD5C5C] hover:text-[#0891B2] transition-colors"
             >
-              <RotateCcw className="size-3.5" />
               Réinitialiser
             </button>
           </div>
-          <div className="h-px bg-gray-200" />
         </>
       )}
 
-      {/* Transaction Type */}
+      {/* Section Prix */}
       <div className="space-y-3">
-        <h4 className="text-sm font-medium text-gray-700">
-          Type de transaction
-        </h4>
-        <div className="grid grid-cols-2 gap-2">
-          {filtersConfig.transactionTypes.map((type) => (
+        <label className="text-sm font-bold text-[#6B8E23] uppercase tracking-wide flex items-center gap-2">
+          💰 Budget (DA)
+        </label>
+        
+        {/* Inputs min/max */}
+        <div className="grid grid-cols-2 gap-3">
+          <input
+            type="text"
+            placeholder="Min"
+            value={filters.minPrice || ''}
+            onChange={(e) => {
+              const val = parseInt(e.target.value.replace(/\D/g, '')) || undefined;
+              onFiltersChange({ minPrice: val });
+            }}
+            className="h-11 px-3 rounded-xl bg-[#FFF8E7] border-2 border-[#E8D5B7] text-sm font-medium text-gray-700 placeholder:text-[#C19A6B] focus:border-[#0891B2] focus:ring-2 focus:ring-[#0891B2]/10"
+          />
+          <input
+            type="text"
+            placeholder="Max"
+            value={filters.maxPrice || ''}
+            onChange={(e) => {
+              const val = parseInt(e.target.value.replace(/\D/g, '')) || undefined;
+              onFiltersChange({ maxPrice: val });
+            }}
+            className="h-11 px-3 rounded-xl bg-[#FFF8E7] border-2 border-[#E8D5B7] text-sm font-medium text-gray-700 placeholder:text-[#C19A6B] focus:border-[#0891B2] focus:ring-2 focus:ring-[#0891B2]/10"
+          />
+        </div>
+
+        {/* Presets rapides - Pills beiges */}
+        <div className="flex flex-wrap gap-2">
+          {[
+            { label: "< 3M", min: 0, max: 3_000_000 },
+            { label: "3-6M", min: 3_000_000, max: 6_000_000 },
+            { label: "6-10M", min: 6_000_000, max: 10_000_000 },
+            { label: "> 10M", min: 10_000_000, max: 100_000_000 },
+          ].map((preset) => (
             <button
-              key={type.code}
-              onClick={() => onFiltersChange({ transactionType: type.code })}
-              className={cn(
-                "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                filters.transactionType === type.code
-                  ? "bg-cyan-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              )}
+              key={preset.label}
+              onClick={() => onFiltersChange({ minPrice: preset.min, maxPrice: preset.max })}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white/70 border border-[#E8D5B7] text-[#6B8E23] hover:bg-white hover:border-[#0891B2] transition-all"
             >
-              {type.nameFr}
+              {preset.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Property Types */}
+      {/* Divider ornamental */}
+      <div className="h-px bg-linear-to-r from-transparent via-[#D4B896] to-transparent" />
+
+      {/* Section Surface */}
       <div className="space-y-3">
-        <h4 className="text-sm font-medium text-gray-700">Type de bien</h4>
+        <label className="text-sm font-bold text-[#6B8E23] uppercase tracking-wide flex items-center gap-2">
+          📐 Surface (m²)
+        </label>
+        
+        {/* Même pattern que Prix */}
+        <div className="grid grid-cols-2 gap-3">
+          <input
+            type="number"
+            placeholder="Min"
+            value={filters.minSurface || ''}
+            onChange={(e) => onFiltersChange({ minSurface: parseInt(e.target.value) || undefined })}
+            className="h-11 px-3 rounded-xl bg-[#FFF8E7] border-2 border-[#E8D5B7] text-sm font-medium text-gray-700 placeholder:text-[#C19A6B] focus:border-[#0891B2] focus:ring-2 focus:ring-[#0891B2]/10"
+          />
+          <input
+            type="number"
+            placeholder="Max"
+            value={filters.maxSurface || ''}
+            onChange={(e) => onFiltersChange({ maxSurface: parseInt(e.target.value) || undefined })}
+            className="h-11 px-3 rounded-xl bg-[#FFF8E7] border-2 border-[#E8D5B7] text-sm font-medium text-gray-700 placeholder:text-[#C19A6B] focus:border-[#0891B2] focus:ring-2 focus:ring-[#0891B2]/10"
+          />
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-linear-to-r from-transparent via-[#D4B896] to-transparent" />
+
+      {/* Section Commodités */}
+      <div className="space-y-3">
+        <label className="text-sm font-bold text-[#6B8E23] uppercase tracking-wide">
+          ✨ Commodités
+        </label>
+        
         <div className="space-y-2">
-          {filtersConfig.propertyTypes.map((type) => {
-            const isSelected = filters.propertyTypes.includes(type.code)
+          {(filtersConfig.amenities || []).map((amenity) => {
+            const isSelected = filters.amenities?.includes(amenity.id) || false;
             return (
-              <label
-                key={type.code}
-                className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors",
-                  isSelected
-                    ? "border-cyan-200 bg-cyan-50"
-                    : "border-gray-200 bg-white hover:bg-gray-50"
-                )}
+              <label 
+                key={amenity.id}
+                className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#FFF8E7] cursor-pointer transition-colors group"
               >
-                <Checkbox
+                <input
+                  type="checkbox"
                   checked={isSelected}
-                  onCheckedChange={(checked) => {
-                    const newTypes = checked
-                      ? [...filters.propertyTypes, type.code]
-                      : filters.propertyTypes.filter((t) => t !== type.code)
-                    onFiltersChange({ propertyTypes: newTypes })
+                  onChange={(e) => {
+                    const current = new Set(filters.amenities || []);
+                    if (e.target.checked) current.add(amenity.id);
+                    else current.delete(amenity.id);
+                    onFiltersChange({ amenities: Array.from(current) });
                   }}
+                  className="w-5 h-5 rounded-md border-2 border-[#E8D5B7] text-[#0891B2] focus:ring-2 focus:ring-[#0891B2]/20"
                 />
-                {type.icon && <span className="text-base">{type.icon}</span>}
-                <span
-                  className={cn(
-                    "flex-1 text-sm font-medium",
-                    isSelected ? "text-cyan-700" : "text-gray-700"
-                  )}
-                >
-                  {type.nameFr}
+                <span className="text-sm font-medium text-gray-700 group-hover:text-[#0891B2]">
+                  {amenity.name}
                 </span>
               </label>
-            )
+            );
           })}
         </div>
       </div>
 
-      {/* Wilaya */}
-      <div className="space-y-3">
-        <h4 className="text-sm font-medium text-gray-700">Localisation</h4>
-        <Select
-          value={filters.wilayaId || "all"}
-          onValueChange={(value) =>
-            onFiltersChange({
-              wilayaId: value === "all" ? "" : value,
-              communeId: "",
-            })
-          }
-        >
-          <SelectTrigger className="h-11">
-            <SelectValue placeholder="Toutes les wilayas" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Toutes les wilayas</SelectItem>
-            {filtersConfig.wilayas.map((wilaya) => (
-              <SelectItem key={wilaya.id} value={wilaya.id}>
-                <div className="flex w-full items-center justify-between gap-2">
-                  <span>{wilaya.nameFr}</span>
-                  <Badge variant="secondary" className="text-xs">
-                    {wilaya.propertyCount}
-                  </Badge>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      {/* Divider */}
+      <div className="h-px bg-linear-to-r from-transparent via-[#D4B896] to-transparent" />
 
-      {/* Price Range */}
+      {/* Section Documents légaux */}
       <div className="space-y-3">
-        <h4 className="text-sm font-medium text-gray-700">Budget (DA)</h4>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-1.5">
-            <label className="block text-xs text-gray-500">Min</label>
-            <Input
-              type="number"
-              placeholder="0"
-              value={filters.minPrice || ""}
-              onChange={(e) =>
-                onFiltersChange({
-                  minPrice: parseInt(e.target.value) || undefined,
-                })
-              }
-              className="h-10"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <label className="block text-xs text-gray-500">Max</label>
-            <Input
-              type="number"
-              placeholder="Illimité"
-              value={filters.maxPrice || ""}
-              onChange={(e) =>
-                onFiltersChange({
-                  maxPrice: parseInt(e.target.value) || undefined,
-                })
-              }
-              className="h-10"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Surface */}
-      <div className="space-y-3">
-        <h4 className="text-sm font-medium text-gray-700">Surface (m²)</h4>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-1.5">
-            <label className="block text-xs text-gray-500">Min</label>
-            <Input
-              type="number"
-              placeholder="0"
-              value={filters.minSurface || ""}
-              onChange={(e) =>
-                onFiltersChange({
-                  minSurface: parseInt(e.target.value) || undefined,
-                })
-              }
-              className="h-10"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <label className="block text-xs text-gray-500">Max</label>
-            <Input
-              type="number"
-              placeholder="Illimité"
-              value={filters.maxSurface || ""}
-              onChange={(e) =>
-                onFiltersChange({
-                  maxSurface: parseInt(e.target.value) || undefined,
-                })
-              }
-              className="h-10"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Rooms */}
-      <div className="space-y-3">
-        <h4 className="text-sm font-medium text-gray-700">Pièces minimum</h4>
-        <div className="flex flex-wrap gap-2">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <button
-              key={num}
-              onClick={() =>
-                onFiltersChange({
-                  minRooms: filters.minRooms === num ? undefined : num,
-                })
-              }
-              className={cn(
-                "flex size-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors",
-                filters.minRooms === num
-                  ? "bg-cyan-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              )}
-            >
-              {num}+
-            </button>
-          ))}
+        <label className="text-sm font-bold text-[#6B8E23] uppercase tracking-wide">
+          📄 Documents légaux
+        </label>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <ToggleButton
+            active={!!filters.hasLivretFoncier}
+            onClick={() => onFiltersChange({ hasLivretFoncier: !filters.hasLivretFoncier ? true : undefined })}
+            label="Livret foncier"
+          />
+          <ToggleButton
+            active={!!filters.hasActeVente}
+            onClick={() => onFiltersChange({ hasActeVente: !filters.hasActeVente ? true : undefined })}
+            label="Acte notarié"
+          />
+          <ToggleButton
+            active={!!filters.hasPermisConstruction}
+            onClick={() => onFiltersChange({ hasPermisConstruction: !filters.hasPermisConstruction ? true : undefined })}
+            label="Permis const."
+          />
+          <ToggleButton
+            active={!!filters.arePapersComplete}
+            onClick={() => onFiltersChange({ arePapersComplete: !filters.arePapersComplete ? true : undefined })}
+            label="Dossier complet"
+          />
         </div>
       </div>
     </div>
-  )
+  );
+}
+
+// Helper component
+function ToggleButton({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "px-3 py-2 rounded-lg text-xs font-bold border transition-all",
+        active 
+          ? "bg-[#0891B2] text-white border-transparent shadow-md" 
+          : "bg-white/70 text-[#6B8E23] border-[#E8D5B7] hover:bg-white hover:border-[#0891B2]"
+      )}
+    >
+      {label}
+    </button>
+  );
 }

@@ -10,6 +10,7 @@ import { AuthMiddleware } from './middleware/authMiddleware';
 import particulierRoutes from './routes/particulierRoutes';
 import proRoutes from './routes/proRoutes';
 import propertyRoutes from './routes/propertyRoutes';
+import configRoutes from './routes/configRoutes';
 
 
 /*Configuration*/
@@ -36,6 +37,9 @@ app.use("/pro", AuthMiddleware(["STARTER", "PRO", "ELITE"]), proRoutes);
 
 // Property routes (public and protected)
 app.use("/api/properties", propertyRoutes);
+
+// Config routes (temporary admin; unsecured for now)
+app.use("/api/config", configRoutes);
 
 /* Server */
 const PORT = process.env.PORT || 3002;
