@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { PrismaClient, PropertyType, TransactionType, PropertyStatus } from "@prisma/client";
+import { PropertyType, TransactionType, PropertyStatus } from "@prisma/client";
+import prisma from "../lib/prisma";
 import {
   getPropertyTypes,
   getTransactionTypes,
@@ -12,8 +13,6 @@ import {
   getFlooringTypes,
   getSearchFilters,
 } from "../utils/configHelpers";
-
-const prisma = new PrismaClient();
 
 // =============================================================================
 // TYPES

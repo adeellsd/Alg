@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma';
 
 // Cache en mémoire (évite requêtes DB répétées)
 const configCache = new Map<string, any>();

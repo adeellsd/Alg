@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Prisma generated types - too many lint errors from auto-generated code
+    "src/types/prismaTypes.d.ts",
   ]),
 ]);
 
