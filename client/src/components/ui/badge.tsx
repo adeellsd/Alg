@@ -1,72 +1,50 @@
 /**
- * Badge Component - Alger Authentique v5.1 Refined
- * 
- * Variants de base:
- * - default: Bleu électrique (blue-electric)
- * - success: Vert jardin (green-vibrant)
- * - warning: Sunshine (sunshine)
- * - destructive: Terracotta (terracotta-fonce)
- * - secondary: Gris neutre
- * - outline: Bordure grise
- * 
- * Variants immobiliers:
- * - rent: Vert (À louer)
- * - sale: Bleu (Vente)
- * - new: Corail avec pulse (Nouveau)
- * - urgent: Terracotta avec pulse (Urgent)
- * 
- * Variants tiers (abonnements):
- * - free: Bleu pâle
- * - starter: Bleu électrique
- * - pro: Bleu électrique
- * - elite: Gradient bleu Méditerranée (blue-electric → turquoise-mer) + pattern Zellige
- * 
- * Border-radius: rounded-[8px] (badges)
+ * Badge Component - RentAlg Design System v6.0
+ * Fresh, Modern & Clean
  */
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center gap-1 rounded-[8px] border px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap transition-colors [&>svg]:size-3 [&>svg]:shrink-0",
+  "inline-flex items-center justify-center gap-1 rounded-md border px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap transition-colors [&>svg]:size-3 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-blue-electric text-white shadow-blue",
+          "border-transparent bg-primary-600 text-white",
         secondary:
-          "border-transparent bg-gray-100 text-gray-700",
+          "border-transparent bg-slate-100 text-slate-700",
         destructive:
-          "border-transparent bg-terracotta-fonce text-white",
+          "border-transparent bg-red-600 text-white",
         success:
-          "border-transparent bg-green-vibrant text-white shadow-green",
+          "border-transparent bg-green-600 text-white",
         warning:
-          "border-transparent bg-sunshine text-white shadow-coral",
+          "border-transparent bg-orange-500 text-white",
         outline:
-          "border-gray-200 bg-transparent text-gray-700",
+          "border-slate-200 bg-white text-slate-700",
         
-        // Variants immobiliers v5.0
+        // Real estate specific variants
         rent:
-          "border-transparent bg-green-vibrant text-white shadow-green font-bold",
+          "border-transparent bg-teal-600 text-white font-bold",
         sale:
-          "border-transparent bg-blue-electric text-white shadow-blue font-bold",
+          "border-transparent bg-primary-600 text-white font-bold",
         new:
-          "border-transparent bg-corail-vif text-white shadow-coral font-bold animate-pulse",
+          "border-transparent bg-orange-500 text-white font-bold animate-pulse",
         urgent:
-          "border-transparent bg-terracotta-fonce text-white shadow-sm font-bold animate-pulse",
+          "border-transparent bg-red-600 text-white font-bold animate-pulse",
         
         // Tier badges
         free:
-          "border-blue-sky bg-blue-pale text-blue-deep",
+          "border-primary-200 bg-primary-50 text-primary-700",
         starter:
-          "border-transparent bg-blue-electric text-white shadow-blue",
+          "border-transparent bg-primary-600 text-white",
         pro:
-          "border-transparent bg-blue-electric text-white shadow-blue",
+          "border-transparent bg-gradient-to-r from-primary-600 to-teal-600 text-white",
         elite:
-          "border-transparent bg-gradient-to-r from-blue-electric to-turquoise-mer text-white shadow-blue font-bold relative overflow-hidden",
+          "border-transparent bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold",
       },
     },
     defaultVariants: {
@@ -93,10 +71,6 @@ function Badge({
   )
 }
 
-/**
- * BadgeElite - Badge ELITE avec pattern Zellige
- * Usage: <BadgeElite>ELITE</BadgeElite>
- */
 function BadgeElite({
   className,
   children,
@@ -105,14 +79,11 @@ function BadgeElite({
   return (
     <span
       className={cn(
-        "relative inline-flex items-center justify-center gap-1 rounded-[8px] border-transparent bg-gradient-to-r from-blue-electric to-turquoise-mer text-white shadow-blue font-bold px-2.5 py-0.5 text-xs overflow-hidden",
+        "inline-flex items-center justify-center gap-1 rounded-md border-transparent bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-2.5 py-0.5 text-xs",
         className
       )}
       {...props}
     >
-      {/* Pattern Zellige subtil en arrière-plan */}
-      <span className="absolute inset-0 pattern-mosaic-elite opacity-[0.15] pointer-events-none" />
-      {/* Contenu */}
       <span className="relative z-10">{children}</span>
     </span>
   )

@@ -1,3 +1,8 @@
+/**
+ * Landing Page - RentAlg Design System v6.0
+ * Fresh, Modern & Clean Landing Experience
+ */
+
 "use client";
 
 import React from 'react'
@@ -11,6 +16,7 @@ import CTASection from './CTASection'
 import { PropertyCard } from "@/components/ui/property-card"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 const Landing = () => {
   const { user } = useAuthenticator((context) => [context.user]);
@@ -38,7 +44,7 @@ const Landing = () => {
       <FeaturesSection />
       <DiscoverSection />
       
-      {/* Properties Preview - Modern & Clean */}
+      {/* Properties Preview */}
       <section className="py-20 sm:py-24 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {/* Header */}
@@ -49,10 +55,10 @@ const Landing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
-                Dernières <span className="text-blue-electric">annonces</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
+                Dernières <span className="text-primary-600">annonces</span>
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-slate-600">
                 Découvrez les biens les plus récents
               </p>
             </motion.div>
@@ -64,13 +70,12 @@ const Landing = () => {
               transition={{ duration: 0.5 }}
               className="hidden sm:block"
             >
-              <Button 
-                variant="outline" 
-                className="h-12 px-6 border-2 border-gray-200 text-gray-700 hover:border-blue-electric hover:text-blue-electric font-semibold rounded-xl transition-all"
-              >
-                Voir tout
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              <Link href="/properties">
+                <Button variant="outline" className="gap-2">
+                  Voir tout
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
             </motion.div>
           </div>
           
@@ -100,7 +105,7 @@ const Landing = () => {
             ))}
           </div>
           
-          {/* CTA mobile */}
+          {/* Mobile CTA */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,18 +113,16 @@ const Landing = () => {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="mt-10 sm:hidden"
           >
-            <Button 
-              variant="outline" 
-              className="w-full h-12 border-2 border-gray-200 text-gray-700 hover:border-blue-electric hover:text-blue-electric font-semibold rounded-xl transition-all"
-            >
-              Voir tout
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+            <Link href="/properties">
+              <Button variant="outline" className="w-full gap-2">
+                Voir tout
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
       
-      {/* Masquer la section CTA si l'utilisateur est connecté */}
       {!user && <CTASection />}
     </div>
   )

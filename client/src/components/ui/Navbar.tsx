@@ -1,26 +1,6 @@
 /**
- * NavbarAlgerGlass - Navigation "Alger Authentique v5.1 Refined"
- * 
- * @features
- * - Glassmorphism pur (effet verre dépoli)
- * - Logo avec icône bleue Méditerranée
- * - RentAlg branding simple et élégant
- * - Navigation links sobres
- * - CTA button bleu électrique (pas de gradient)
- * - User dropdown menu raffiné
- * - Mobile menu integration
- * 
- * @states
- * - Default: Transparent
- * - Scrolled: Glass blanc avec blur 20px
- * 
- * @palette
- * - 🌊 Bleu: blue-electric (principal), turquoise-mer (accents)
- * - 🏛️ Beige: beige-casbah (hover backgrounds)
- * - 🌿 Vert: green-vibrant (success states)
- * - NO gradients dorés
- * 
- * @version 5.1 - Refined & Elegant
+ * Navbar Component - RentAlg Design System v6.0
+ * Fresh, Modern & Clean Navigation
  */
 "use client"
 
@@ -124,121 +104,124 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Fixed Navbar moderne - Blanc au scroll */}
       <header
-        className="fixed left-0 top-0 z-50 w-full px-6 pt-4"
+        className="fixed left-0 top-0 z-50 w-full"
         style={{ height: `${NAVBAR_HEIGHT}px` }}
       >
-        <nav className={cn(
-          "mx-auto flex h-full max-w-[1400px] items-center px-8 transition-all duration-500 rounded-4xl",
-          isScrolled ? "bg-white/70 backdrop-blur-xl shadow-lg border border-gray-200/60" : "bg-transparent"
-        )}>
-          <div className="flex h-20 w-full items-center justify-between">
-            
-            {/* LEFT: Navigation Links (Desktop) */}
-            <div className="hidden items-center gap-8 lg:flex">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-3">
+          <nav
+            className={cn(
+              "flex h-16 items-center justify-between px-6 rounded-2xl transition-all duration-300",
+              isScrolled
+                ? "bg-white/90 backdrop-blur-xl shadow-lg border border-slate-200/60"
+                : "bg-transparent"
+            )}
+          >
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-teal-500 flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-105">
+                <Home className="w-5 h-5 text-white" />
+              </div>
+              <span
+                className={cn(
+                  "text-xl font-bold transition-colors duration-200",
+                  isScrolled ? "text-slate-900" : "text-white"
+                )}
+              >
+                Rent<span className="text-primary-500">Alg</span>
+              </span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative text-sm font-medium transition-all duration-200 group",
-                    isScrolled ? "text-gray-700 hover:text-blue-electric" : "text-white/90 hover:text-white",
-                    isActive(item.href) && "font-semibold text-blue-electric"
+                    "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                    isScrolled
+                      ? isActive(item.href)
+                        ? "bg-primary-50 text-primary-600"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                      : isActive(item.href)
+                      ? "bg-white/20 text-white"
+                      : "text-white/80 hover:bg-white/10 hover:text-white"
                   )}
                 >
                   {item.label}
-                  {/* Underline bleu électrique */}
-                  <span className={cn(
-                    "absolute -bottom-1 left-0 h-0.5 bg-blue-electric transition-all duration-300",
-                    isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
-                  )} />
                 </Link>
               ))}
             </div>
 
-            {/* CENTER: Logo moderne avec forme arrondie */}
-            <Link
-              href="/"
-              className="flex items-center gap-3 group"
-            >
-              {/* Logo bleu Méditerranée avec forme circulaire parfaite */}
-              <div className="w-11 h-11 rounded-full bg-linear-to-br from-blue-electric to-turquoise-mer flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-110 ring-4 ring-white/10">
-                <Home className="w-5 h-5 text-white" />
-              </div>
-              {/* Branding RentAlg moderne et minimaliste */}
-              <span className={cn(
-                "text-xl font-bold font-display transition-colors duration-300",
-                isScrolled ? "text-gray-900" : "text-white"
-              )}>
-                Rent<span className="text-blue-electric">Alg</span>
-              </span>
-            </Link>
-
-            {/* RIGHT: Auth & Actions */}
-            <div className="flex items-center gap-4">
+            {/* Right Section */}
+            <div className="flex items-center gap-3">
               {!isAuthPage && (
-                <div className="hidden items-center gap-4 md:flex">
+                <div className="hidden md:flex items-center gap-3">
                   {!user ? (
                     <>
                       <Link href="/signin">
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           className={cn(
-                            "transition-colors",
-                            isScrolled ? "text-gray-700 hover:text-gray-900 hover:bg-beige-casbah/50" : "text-white hover:bg-white/20"
+                            isScrolled
+                              ? "text-slate-600 hover:text-slate-900"
+                              : "text-white hover:bg-white/10"
                           )}
                         >
                           Connexion
                         </Button>
                       </Link>
                       <Link href="/signup">
-                        <Button variant="default" className="bg-blue-electric hover:bg-blue-deep text-white font-semibold shadow-blue">
-                          Inscription
-                        </Button>
+                        <Button>Inscription</Button>
                       </Link>
                     </>
                   ) : (
                     <>
-                      {/* CTA Publier bleu électrique */}
                       <Link href={getPublishLink()}>
-                        <Button variant="default" className="gap-2 bg-blue-electric hover:bg-blue-deep text-white font-semibold shadow-blue">
+                        <Button className="gap-2">
                           <Plus className="size-4" />
-                          Publier une annonce
+                          Publier
                         </Button>
                       </Link>
 
-                      {/* User Dropdown avec style raffiné */}
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="ghost"
                             className={cn(
-                              "gap-2 px-3 transition-colors",
-                              isScrolled ? "hover:bg-beige-casbah/50" : "hover:bg-white/20"
+                              "gap-2 px-2",
+                              isScrolled
+                                ? "hover:bg-slate-100"
+                                : "hover:bg-white/10"
                             )}
                           >
-                            <div className="flex size-10 items-center justify-center rounded-full bg-blue-electric text-sm font-bold text-white shadow-md">
+                            <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-500 text-sm font-bold text-white">
                               {user.username?.charAt(0).toUpperCase() || "U"}
                             </div>
-                            <ChevronDown className={cn(
-                              "size-4 transition-colors",
-                              isScrolled ? "text-gray-500" : "text-white/80"
-                            )} />
+                            <ChevronDown
+                              className={cn(
+                                "size-4",
+                                isScrolled ? "text-slate-400" : "text-white/60"
+                              )}
+                            />
                           </Button>
                         </DropdownMenuTrigger>
-                        
-                        <DropdownMenuContent align="end" className="w-56 glass-white-strong border-gray-200 shadow-xl rounded-lg">
-                          <DropdownMenuLabel className="font-semibold text-gray-900">
+
+                        <DropdownMenuContent
+                          align="end"
+                          className="w-56 bg-white border-slate-200 shadow-xl rounded-xl"
+                        >
+                          <DropdownMenuLabel className="font-semibold text-slate-900">
                             Mon compte
                           </DropdownMenuLabel>
-                          <DropdownMenuSeparator className="bg-gray-200" />
+                          <DropdownMenuSeparator />
 
                           {userMenuItems.map((item) => (
-                            <DropdownMenuItem key={item.href} asChild className="rounded-sm focus:bg-beige-casbah/50">
+                            <DropdownMenuItem key={item.href} asChild>
                               <Link
                                 href={item.href}
-                                className="flex cursor-pointer items-center gap-3 text-gray-700 hover:text-blue-electric"
+                                className="flex cursor-pointer items-center gap-3 text-slate-600 hover:text-primary-600"
                               >
                                 <item.icon className="size-4" />
                                 {item.label}
@@ -246,33 +229,33 @@ export default function Navbar() {
                             </DropdownMenuItem>
                           ))}
 
-                          <DropdownMenuSeparator className="bg-gray-200" />
+                          <DropdownMenuSeparator />
 
-                          <DropdownMenuItem asChild className="rounded-sm focus:bg-beige-casbah/50">
+                          <DropdownMenuItem asChild>
                             <Link
                               href="/profile"
-                              className="flex cursor-pointer items-center gap-3 text-gray-700 hover:text-blue-electric"
+                              className="flex cursor-pointer items-center gap-3 text-slate-600 hover:text-primary-600"
                             >
                               <User className="size-4" />
                               Profil
                             </Link>
                           </DropdownMenuItem>
 
-                          <DropdownMenuItem asChild className="rounded-sm focus:bg-beige-casbah/50">
+                          <DropdownMenuItem asChild>
                             <Link
                               href="/settings"
-                              className="flex cursor-pointer items-center gap-3 text-gray-700 hover:text-blue-electric"
+                              className="flex cursor-pointer items-center gap-3 text-slate-600 hover:text-primary-600"
                             >
                               <Settings className="size-4" />
                               Paramètres
                             </Link>
                           </DropdownMenuItem>
 
-                          <DropdownMenuSeparator className="bg-gray-200" />
+                          <DropdownMenuSeparator />
 
                           <DropdownMenuItem
                             onClick={handleSignOut}
-                            className="cursor-pointer rounded-sm text-terracotta-fonce focus:bg-red-50 focus:text-terracotta-fonce hover:bg-red-50"
+                            className="cursor-pointer text-red-600 focus:bg-red-50 focus:text-red-600"
                           >
                             <LogOut className="mr-3 size-4" />
                             Déconnexion
@@ -284,22 +267,22 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* Mobile Menu Button sobre */}
+              {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className={cn(
-                  "flex size-12 items-center justify-center rounded-full transition-all duration-200 lg:hidden",
-                  isScrolled 
-                    ? "text-gray-700 hover:bg-beige-casbah/50 hover:text-blue-electric" 
-                    : "text-white hover:bg-white/20"
+                  "flex size-10 items-center justify-center rounded-xl transition-all duration-200 lg:hidden",
+                  isScrolled
+                    ? "text-slate-600 hover:bg-slate-100"
+                    : "text-white hover:bg-white/10"
                 )}
                 aria-label="Ouvrir le menu"
               >
-                <Menu className="size-6" />
+                <Menu className="size-5" />
               </button>
             </div>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </header>
 
       {/* Mobile Menu */}
